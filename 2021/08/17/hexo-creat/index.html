@@ -16,7 +16,7 @@
 <meta property="og:description" content="缘起 一直想着要搭建一个属于自己的博客，感觉这样子很酷很酷，也是正好记录一下自己学习中遇到的问题，就当做一个笔记本来用吧！">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-17T07:19:40.000Z">
-<meta property="article:modified_time" content="2021-08-17T08:44:29.857Z">
+<meta property="article:modified_time" content="2021-08-17T08:50:22.900Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="DIY">
 <meta property="article:tag" content="兴趣">
@@ -188,67 +188,54 @@
 <p><a href="">fan-pengfei.top</a></p>
 </blockquote>
 <p>前两天闲来无事，就又想折腾一下搭建自己博客的事；找了很多资料，终于还是将这个博客搭建起来了，挺简约的，自己很喜欢，毕竟博客就是用来记录自己学习到的知识，所以博客的内容应该更加重要。</p>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="一、配置Github"><a href="#一、配置Github" class="headerlink" title="一、配置Github"></a>一、配置Github</h2><ol>
-<li>首先注册、登录： <a target="_blank" rel="noopener" href="https://github.com/%EF%BC%9B">https://github.com/；</a></li>
-<li>记住自己的Username（很重要）；</li>
-<li>然后右上角选择 Create a new repository；</li>
-<li>Repository name -&gt;填自己的名字, <code>yourname.github.io</code>-&gt;这个就是你博客的域名了(yourname与你的注册用户名一致)；</li>
-<li>例如，我的域名是github.com/fan-pengfei，就填入fan-pengfei.github.io；</li>
-</ol>
-<h2 id="二、配置环境"><a href="#二、配置环境" class="headerlink" title="二、配置环境"></a>二、配置环境</h2><ol>
-<li><p>安装 Node.js <a target="_blank" rel="noopener" href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
-</li>
-<li><p>安装 Git <a target="_blank" rel="noopener" href="https://github.com/waylau/git-for-win">https://github.com/waylau/git-for-win</a></p>
-</li>
-<li><p>安装完成后，在开始菜单里找到Git-&gt;Git Bash，并打开：</p>
-<p>依次执行以下命令</p>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="一、配置Github"><a href="#一、配置Github" class="headerlink" title="一、配置Github"></a>一、配置Github</h2><p>首先注册、登录： <a target="_blank" rel="noopener" href="https://github.com/%EF%BC%9B">https://github.com/；</a></p>
+<p>记住自己的Username（很重要）；</p>
+<p>然后右上角选择 Create a new repository；</p>
+<p>Repository name -&gt;填自己的名字, <code>yourname.github.io</code>-&gt;这个就是你博客的域名了(yourname与你的注册用户名一致)；</p>
+<p>例如，我的域名是github.com/fan-pengfei，就填入fan-pengfei.github.io；</p>
+<h2 id="二、配置环境"><a href="#二、配置环境" class="headerlink" title="二、配置环境"></a>二、配置环境</h2><p>安装 Node.js <a target="_blank" rel="noopener" href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
+<p>安装 Git <a target="_blank" rel="noopener" href="https://github.com/waylau/git-for-win">https://github.com/waylau/git-for-win</a></p>
+<p>安装完成后，在开始菜单里找到Git-&gt;Git Bash，并打开：</p>
+<p>依次执行以下命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;username&quot;</span><br><span class="line">git config --global user.email &quot;useremail&quot;</span><br></pre></td></tr></table></figure>
 
-<p>名称和邮箱都是Github上自己的名字和邮箱；</p>
-</li>
-<li><p>安装 Hexo。所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo:</p>
+<p>其中名称和邮箱都是Github注册时自己的名字和邮箱；</p>
+<p>安装 Hexo，所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>至此环境安装完毕（推荐使用cmder,超级好用的）;</p>
-</li>
-</ol>
-<h2 id="三、电脑设置"><a href="#三、电脑设置" class="headerlink" title="三、电脑设置"></a>三、电脑设置</h2><ol>
-<li><p>在电脑F盘（自己随意）目录下新建文件夹 test，进入test，按住Shift键点击鼠标右键，<code>Cmder Here</code>；因为我有安装Cmder，没有安装的点击“在此处打开命令窗口”，输入：</p>
+<p>至此环境安装完毕（推荐使用cmder，超级好用的）;</p>
+<h2 id="三、电脑设置"><a href="#三、电脑设置" class="headerlink" title="三、电脑设置"></a>三、电脑设置</h2><p>在电脑E盘（自己随意）目录下新建文件夹my_blog，进入my_blog，按住Shift键点击鼠标右键，选择<code>Cmder Here</code>；因为我有安装Cmder，没有安装的点击“在此处打开命令窗口”，输入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
 
 <p>稍微等待下，速度有点慢，成功后将提示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Start blogging with Hexo!</span><br></pre></td></tr></table></figure></li>
-<li><p>重新打开CMD，输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;</span><br></pre></td></tr></table></figure></li>
-<li><p>一路Enter过来就好，得到信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your public key has been saved in /c/Users/user/.ssh/id_rsa.pub.</span><br></pre></td></tr></table></figure></li>
-<li><p>找到该文件，打开（sublime text），Ctrl + a复制里面的所有内容，然后进入Sign in to GitHub：<a target="_blank" rel="noopener" href="https://github.com/settings/ssh%EF%BC%9B">https://github.com/settings/ssh；</a></p>
-</li>
-<li><p>New SSH key -&gt;Title，blog -&gt;Key：输入刚才复制的—— Add SSH key</p>
-</li>
-</ol>
-<h2 id="四、配置博客"><a href="#四、配置博客" class="headerlink" title="四、配置博客"></a>四、配置博客</h2><ol>
-<li><p>在blog目录下，用Notepad++或者电脑自带的记事本打开_config.yml文件（我的路径是E:\my_blog\blog），修改参数信息；</p>
-</li>
-<li><p>特别注意的是，在每个参数之后的：之后都要加上一个空格，否则一定会报错；</p>
-</li>
-<li><p>修改网站相关信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: 小飞的博客</span><br><span class="line">subtitle: 副标题</span><br><span class="line">description: 网页描述</span><br><span class="line">author: 小飞</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: Asia/Changsha</span><br></pre></td></tr></table></figure></li>
-<li><p>配置部署（我的是fan-pengfei，修改成自己的）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/fan-pengfei/fan-pengfei.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="五、发表文章"><a href="#五、发表文章" class="headerlink" title="五、发表文章"></a>五、发表文章</h2><ol>
-<li><p>在命令行窗口中输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;测试文章&quot;</span><br><span class="line">INFO  Created: E:\my_blog\blog\source\_posts\测试文章.md</span><br></pre></td></tr></table></figure></li>
-<li><p>找到该文章，打开，使用Markdown语法编辑即可；</p>
-</li>
-<li><p>保存，然后执行下列步骤：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">E:\my_blog\blog</span><br><span class="line">$ hexo clean</span><br><span class="line">INFO  Deleted database.</span><br><span class="line">INFO  Deleted public folder.</span><br><span class="line"></span><br><span class="line">E:\my_blog\blog</span><br><span class="line">$ hexo generate</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Files loaded in 1.48 s</span><br><span class="line">#省略</span><br><span class="line">INFO  29 files generated in 4.27 s</span><br></pre></td></tr></table></figure></li>
-<li><p>最后一步，发布到网上，执行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">F:\test\blog</span><br><span class="line">$ hexo deploy</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">#省略</span><br></pre></td></tr></table></figure></li>
-<li><p>其中会跳出Github登录，直接登录即可；</p>
-</li>
-</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Start blogging with Hexo!</span><br></pre></td></tr></table></figure>
+
+<p>重新打开CMD，输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;</span><br></pre></td></tr></table></figure>
+
+<p>一路Enter过来就好，得到信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your public key has been saved in /c/Users/user/.ssh/id_rsa.pub.</span><br></pre></td></tr></table></figure>
+
+<p>找到该文件，打开（sublime text），Ctrl + a复制里面的所有内容，然后进入Sign in to GitHub：<a target="_blank" rel="noopener" href="https://github.com/settings/ssh%EF%BC%9B">https://github.com/settings/ssh；</a></p>
+<p>New SSH key -&gt;Title，blog -&gt;Key：输入刚才复制的—— Add SSH key</p>
+<h2 id="四、配置博客"><a href="#四、配置博客" class="headerlink" title="四、配置博客"></a>四、配置博客</h2><p>在blog目录下，用Notepad++或者电脑自带的记事本打开_config.yml文件（我的路径是E:\my_blog\blog），修改参数信息；</p>
+<p>特别注意的是，在每个参数之后的：之后都要加上一个空格，否则一定会报错；</p>
+<p>修改网站相关信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: 小飞的博客</span><br><span class="line">subtitle: 副标题</span><br><span class="line">description: 网页描述</span><br><span class="line">author: 小飞</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: Asia/Changsha</span><br></pre></td></tr></table></figure>
+
+<p>配置部署（我的是fan-pengfei，修改成自己的）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/fan-pengfei/fan-pengfei.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、发表文章"><a href="#五、发表文章" class="headerlink" title="五、发表文章"></a>五、发表文章</h2><p>在命令行窗口中输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;测试文章&quot;</span><br><span class="line">INFO  Created: E:\my_blog\blog\source\_posts\测试文章.md</span><br></pre></td></tr></table></figure>
+
+<p>找到该文章，打开，使用Markdown语法编辑即可；</p>
+<p>保存，然后执行下列步骤：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">E:\my_blog\blog</span><br><span class="line">$ hexo clean</span><br><span class="line">INFO  Deleted database.</span><br><span class="line">INFO  Deleted public folder.</span><br><span class="line"></span><br><span class="line">E:\my_blog\blog</span><br><span class="line">$ hexo generate</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Files loaded in 1.48 s</span><br><span class="line">#省略</span><br><span class="line">INFO  29 files generated in 4.27 s</span><br></pre></td></tr></table></figure>
+
+<p>最后一步，发布到网上，执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">F:\test\blog</span><br><span class="line">$ hexo deploy</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">#省略</span><br></pre></td></tr></table></figure>
+
+<p>其中会跳出Github登录，直接登录即可；</p>
 <h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>发布文章的步骤：</p>
 <p>1、hexo new 创建文章</p>
 <p>2、Markdown语法编辑文章</p>
@@ -262,13 +249,9 @@
 <p>如果在执行 hexo deploy 后,出现<code>error deployer not found:github</code>的错误，执行：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
-<h2 id="七、其他"><a href="#七、其他" class="headerlink" title="七、其他"></a>七、其他</h2><p>1、若想让让博客更美观，可以更换其他主题，我使用的Yilia主题具体安装步骤请参考：</p>
-<blockquote>
-<p><a href="">https://github.com/litten/hexo-theme-yilia</a></p>
+<h2 id="七、其他"><a href="#七、其他" class="headerlink" title="七、其他"></a>七、其他</h2><blockquote>
+<p>若想让让博客更美观，可以更换其他主题，我使用的Yilia主题具体安装步骤请参考：<a href="">https://github.com/litten/hexo-theme-yilia</a></p>
 </blockquote>
-<p>2、</p>
-<p>3、</p>
-<p>4、</p>
 
       
 
