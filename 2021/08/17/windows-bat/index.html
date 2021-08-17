@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Windows10 Bat脚本 | 樊鹏飞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Windows bat脚本： 依次执行多条命令，并且执行完执行完毕并不退出： 12345&#x2F;*upload.bat:博客自动上传脚本*&#x2F;call hexo clean &#x2F;&#x2F;call hexo g &#x2F;&#x2F;博客生成call hexo d &#x2F;&#x2F;博客上传pause &#x2F;&#x2F;页面暂停">
+  <meta name="description" content="Windows bat脚本： 依次执行多条命令，并且执行完执行完毕并不退出：  12345&#x2F;*upload.bat:博客自动上传脚本*&#x2F;call hexo clean &#x2F;&#x2F;call hexo g &#x2F;&#x2F;博客生成call hexo d &#x2F;&#x2F;博客上传pause &#x2F;&#x2F;页面暂停   同时执行多条命令，并且执行完执行完毕并不退出（以下例子仅仅说明语法，并不代表可用）：  12345&#x2F;*upload.bat:博">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows10 Bat脚本">
 <meta property="og:url" content="http://example.com/2021/08/17/windows-bat/index.html">
 <meta property="og:site_name" content="樊鹏飞的博客">
-<meta property="og:description" content="Windows bat脚本： 依次执行多条命令，并且执行完执行完毕并不退出： 12345&#x2F;*upload.bat:博客自动上传脚本*&#x2F;call hexo clean &#x2F;&#x2F;call hexo g &#x2F;&#x2F;博客生成call hexo d &#x2F;&#x2F;博客上传pause &#x2F;&#x2F;页面暂停">
+<meta property="og:description" content="Windows bat脚本： 依次执行多条命令，并且执行完执行完毕并不退出：  12345&#x2F;*upload.bat:博客自动上传脚本*&#x2F;call hexo clean &#x2F;&#x2F;call hexo g &#x2F;&#x2F;博客生成call hexo d &#x2F;&#x2F;博客上传pause &#x2F;&#x2F;页面暂停   同时执行多条命令，并且执行完执行完毕并不退出（以下例子仅仅说明语法，并不代表可用）：  12345&#x2F;*upload.bat:博">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="e:/录屏和截屏/2021-08-17-20-46-43.png">
+<meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817205649.png">
 <meta property="article:published_time" content="2021-08-17T12:41:10.000Z">
-<meta property="article:modified_time" content="2021-08-17T12:50:16.977Z">
+<meta property="article:modified_time" content="2021-08-17T13:00:37.178Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="Windows">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="e:/录屏和截屏/2021-08-17-20-46-43.png">
+<meta name="twitter:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817205649.png">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -175,11 +175,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Windows bat脚本：</p>
+        <h2 id="Windows-bat脚本："><a href="#Windows-bat脚本：" class="headerlink" title="Windows bat脚本："></a>Windows bat脚本：</h2><blockquote>
 <p>依次执行多条命令，并且执行完执行完毕并不退出：</p>
+</blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*upload.bat:博客自动上传脚本*/</span><br><span class="line">call hexo clean //</span><br><span class="line">call hexo g //博客生成</span><br><span class="line">call hexo d //博客上传</span><br><span class="line">pause //页面暂停</span><br></pre></td></tr></table></figure>
 
-<img src="E:\录屏和截屏\2021-08-17-20-46-43.png" alt="2021-08-17-20-46-43" style="zoom:50%;" />
+<blockquote>
+<p>同时执行多条命令，并且执行完执行完毕并不退出（以下例子仅仅说明语法，并不代表可用）：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*upload.bat:博客自动上传脚本*/</span><br><span class="line">start hexo clean //</span><br><span class="line">start hexo g //博客生成</span><br><span class="line">start hexo d //博客上传</span><br><span class="line">pause //页面暂停</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817205649.png" alt="2021-08-17-20-46-43"></p>
 
       
 
@@ -294,6 +300,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/08/17/typora-picgo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          typora图片上传出错
+        
+      </div>
+    </a>
   
   
     <a href="/2021/08/17/hexo-creat/" id="article-nav-older" class="article-nav-link-wrap">
@@ -466,15 +481,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">md语法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">图床</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">感悟</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
             
             <div class="clearfix"></div>
