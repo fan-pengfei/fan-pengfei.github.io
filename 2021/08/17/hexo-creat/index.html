@@ -16,7 +16,7 @@
 <meta property="og:description" content="缘起 一直想着要搭建一个属于自己的博客，感觉这样子很酷很酷，也是正好记录一下自己学习中遇到的问题，就当做一个笔记本来用吧！">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-17T07:19:40.000Z">
-<meta property="article:modified_time" content="2021-08-17T07:56:04.859Z">
+<meta property="article:modified_time" content="2021-08-17T08:17:04.643Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="DIY">
 <meta property="article:tag" content="兴趣">
@@ -174,21 +174,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><blockquote>
+        <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><blockquote>
 <p>一直想着要搭建一个属于自己的博客，感觉这样子很酷很酷，也是正好记录一下自己学习中遇到的问题，就当做一个笔记本来用吧！<span id="more"></span></p>
 </blockquote>
 <p>原先想着用树莓派做服务器就可以搭建自己的的个人网站用来写博客，先在阿里云上购买了域名，其实最后是买了两个：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fan-pengfei.top</span><br><span class="line">fan-pengfei.xyz</span><br></pre></td></tr></table></figure>
 <p>为啥买了两个呢？</p>
-<h2 id="波折"><a href="#波折" class="headerlink" title="波折"></a>波折</h2><blockquote>
+<h1 id="波折"><a href="#波折" class="headerlink" title="波折"></a>波折</h1><blockquote>
 <p>其实是我自己太粗心大意了，在二月份的时候自己就买了.xyz这一个域名，后来忙其他的事就把这件事搁置了；注册新域名的时候发现这个已经被注册了（没想到是自己之前注册的），所以没办法，只能感慨与自己同名同姓的人真多，然后就注册了.top域名;</p>
 </blockquote>
 <p>注册完才发现，自己的域名控制台上竟然有两个域名，这才让我想起尘封已久的记忆，不过头一个快过期了，就用第二个搭建了这个个人网站；</p>
 <blockquote>
-<p><a href="fan-pengfei.top">我的个人博客</a></p>
+<p><a href="">fan-pengfei.top</a></p>
 </blockquote>
-<p>前两天闲来无事，就又想折腾一下搭建自己博客的事；找了很多资料，终于还是将这个博客搭建起来了，挺简约的，自己很喜欢，毕竟博客就是用来记录自己的的知识的，所以博客的内容应该更加重要。</p>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2>
+<p>前两天闲来无事，就又想折腾一下搭建自己博客的事；找了很多资料，终于还是将这个博客搭建起来了，挺简约的，自己很喜欢，毕竟博客就是用来记录自己学习到的知识，所以博客的内容应该更加重要。</p>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="一、配置Github"><a href="#一、配置Github" class="headerlink" title="一、配置Github"></a>一、配置Github</h2><ol>
+<li>首先注册、登录： <a target="_blank" rel="noopener" href="https://github.com/%EF%BC%9B">https://github.com/；</a></li>
+<li>记住自己的Username（很重要）；</li>
+<li>然后右上角选择 Create a new repository；</li>
+<li>Repository name -&gt;填自己的名字, <code>yourname.github.io</code>-&gt;这个就是你博客的域名了(yourname与你的注册用户名一致)；</li>
+<li>例如，我的域名是github.com/fan-pengfei，就填入fan-pengfei.github.io；</li>
+</ol>
+<h2 id="二、配置环境"><a href="#二、配置环境" class="headerlink" title="二、配置环境"></a>二、配置环境</h2><ol>
+<li><p>安装 Node.js <a target="_blank" rel="noopener" href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
+</li>
+<li><p>安装 Git <a target="_blank" rel="noopener" href="https://github.com/waylau/git-for-win">https://github.com/waylau/git-for-win</a></p>
+</li>
+<li><p>安装完成后，在开始菜单里找到Git-&gt;Git Bash，并打开：</p>
+<p>依次执行以下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;username&quot;</span><br><span class="line">git config --global user.email &quot;useremail&quot;</span><br></pre></td></tr></table></figure>
+
+<p>名称和邮箱都是Github上自己的名字和邮箱；</p>
+</li>
+<li><p>安装 Hexo。所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p>至此环境安装完毕（推荐使用cmder,超级好用的）;</p>
+</li>
+</ol>
+<h2 id="三、电脑设置"><a href="#三、电脑设置" class="headerlink" title="三、电脑设置"></a>三、电脑设置</h2><h2 id="四、配置博客"><a href="#四、配置博客" class="headerlink" title="四、配置博客"></a>四、配置博客</h2><h2 id="五、发表文章"><a href="#五、发表文章" class="headerlink" title="五、发表文章"></a>五、发表文章</h2><h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2>
       
 
       
