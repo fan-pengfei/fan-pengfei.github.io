@@ -16,7 +16,7 @@
 <meta property="og:description" content="Git相关的知识；">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-18T04:29:14.000Z">
-<meta property="article:modified_time" content="2021-08-18T05:03:22.525Z">
+<meta property="article:modified_time" content="2021-08-18T05:21:58.039Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
@@ -269,8 +269,35 @@
 
 <h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">### 显示存储库中所有提交的列表 该命令显示有关提交的所有信息，例如提交ID，作者，日期和提交消息</span><br><span class="line">git log</span><br><span class="line">### 提交列表仅显示提交消息和更改</span><br><span class="line">git log -p</span><br><span class="line">### 包含您要查找的特定字符串的提交列表</span><br><span class="line">git log -S &#x27;project&#x27;</span><br><span class="line">### 作者提交的清单</span><br><span class="line">git log --author &#x27;wupx&#x27;</span><br><span class="line">### 显示存储库中提交列表的摘要。显示提交ID和提交消息的较短版本。</span><br><span class="line">git log --oneline</span><br><span class="line">### 显示昨天以来仓库中的提交列表</span><br><span class="line">git log --since=yesterday</span><br><span class="line">### 显示作者日志，并在提交消息中搜索特定术语</span><br><span class="line">git log --grep &quot;project&quot; --author &quot;wupx&quot;</span><br></pre></td></tr></table></figure>
 
+<h3 id="每次提交不用重复输入账号和密码"><a href="#每次提交不用重复输入账号和密码" class="headerlink" title="每次提交不用重复输入账号和密码"></a>每次提交不用重复输入账号和密码</h3><blockquote>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/81334170">https://zhuanlan.zhihu.com/p/81334170</a></p>
+</blockquote>
+<p>1、验证是否真的使用的是https方式</p>
+<blockquote>
+<p>使用命令：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>确定是https方式；</p>
+</blockquote>
+<p>2、修改https的方式为ssh方式</p>
+<blockquote>
+<p>移除当前关联的远程仓库</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>添加新的ssh地址</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin ssh地址</span><br></pre></td></tr></table></figure>
+
+<p>3、再次提交</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这次没有再提示输入密码</p>
+</blockquote>
 <h2 id="报错解决办法"><a href="#报错解决办法" class="headerlink" title="报错解决办法"></a>报错解决办法</h2><blockquote>
 <p>当出错：! [rejected] master -&gt; master (fetch first) error: failed to push some refs to ‘ 。。。’</p>
 </blockquote>
@@ -559,11 +586,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
+                <a href="javascript:void(0)" class="js-tag color3">感悟</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,7 +602,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">感悟</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
