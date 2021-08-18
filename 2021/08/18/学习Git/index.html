@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Git," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Git相关的知识；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习Git">
+<meta property="og:url" content="https://fan-pengfei.top/2021/08/18/%E5%AD%A6%E4%B9%A0Git/index.html">
+<meta property="og:site_name" content="樊鹏飞的博客">
+<meta property="og:description" content="Git相关的知识；">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-18T04:29:14.000Z">
+<meta property="article:modified_time" content="2021-08-18T05:21:58.039Z">
+<meta property="article:author" content="樊鹏飞">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fan-pengfei.top/2021/08/18/学习Git/"/>
+
+
+
+
+
+  <title>学习Git | 樊鹏飞的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">樊鹏飞的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录生活中的点点滴滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fan-pengfei.top/2021/08/18/%E5%AD%A6%E4%B9%A0Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="樊鹏飞的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学习Git</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-18T12:29:14+08:00">
+                2021-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Git相关的知识；<span id="more"></span></p>
+</blockquote>
+<blockquote>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/94008510">https://zhuanlan.zhihu.com/p/94008510</a></p>
+</blockquote>
+<h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><blockquote>
+<p>初次使用时，在命令行中配置本地仓库的账号和邮箱：</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="keyword">config</span> --<span class="keyword">global</span> user<span class="variable">.name</span> <span class="string">&quot;username&quot;</span>  </span><br><span class="line">$ git <span class="keyword">config</span> --<span class="keyword">global</span> user<span class="variable">.email</span> <span class="string">&quot;useremail&quot;</span>  </span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>初始化Git,使用 cd 命令导航到要在终端中设置版本控制的目录，现在你可以像这样初始化 Git 存储库：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>要开始对现有文件进行版本控制，你应该先跟踪这些文件并进行初始提交。要做到这一点，你首先需要将文件添加到 Git 中，并将它们附加到 Git 项目中。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m <span class="string">&#x27;first commit&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>还有一些更高级的方法可以将文件添加到 Git 中，从而使你的工作流程更高效。我们可以执行以下操作，而不是试图查找所有有更改的文件并逐个添加它们：</p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 逐个添加文件</span></span><br><span class="line">git <span class="builtin-name">add</span> filename</span><br><span class="line"><span class="comment"># 添加当前目录中的所有文件</span></span><br><span class="line">git <span class="builtin-name">add</span> -A</span><br><span class="line"><span class="comment"># 添加当前目录中的所有文件更改</span></span><br><span class="line">git <span class="builtin-name">add</span> .</span><br><span class="line"><span class="comment"># 选择要添加的更改（你可以 Y 或 N 完成所有更改）</span></span><br><span class="line">git <span class="builtin-name">add</span> -p</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>远程备份文件（Github）,因此，首先转到 <a href="https://link.zhihu.com/?target=http://github.com">http://github.com</a> 并创建一个存储库。然后，使用存储库的链接将其添加为本地 git 项目的来源，即该代码的存储位置；</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin \</span><br><span class="line">https:<span class="comment">//github.com/fan-pengfei/bash_learning.git</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>远程备份代码：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>git status 命令用于确定哪些文件处于哪种状态，它使你可以查看哪些文件已提交，哪些文件尚未提交。如果在所有文件都已提交并推送后运行此命令，则应该看到类似以下内容：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># <span class="function">On branch master</span></span><br><span class="line"><span class="function">nothing to <span class="title">commit</span> <span class="params">(working directory clean)</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>我们可以使用 <code>git commit -m &#39;提交信息&#39;</code> 来将文件提交到 Git。对于提交简短消息来说，这一切都很好，但是如果你想做一些更精细的事情，你需要来学习更多的操作:</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">### 提交暂存文件，通常用于较短的提交消息</span><br><span class="line">git commit -m &#x27;commit message&#x27;</span><br><span class="line">### 添加文件并提交一次</span><br><span class="line">git commit filename -m &#x27;commit message&#x27;</span><br><span class="line">### 添加文件并提交暂存文件</span><br><span class="line">git commit -am &#x27;insert commit message&#x27;</span><br><span class="line">### 更改你的最新提交消息</span><br><span class="line">git commit --amend &#x27;new commit message&#x27; </span><br><span class="line"># 将一系列提交合并为一个提交，你可能会用它来组织混乱的提交历史记录</span><br><span class="line">git rebase -i</span><br><span class="line">### 这将为你提供核心编辑器上的界面：</span><br><span class="line"># Commands:</span><br><span class="line">#  p, pick = use commit</span><br><span class="line">#  r, reword = use commit, but edit the commit message</span><br><span class="line">#  e, edit = use commit, but stop for amending</span><br><span class="line">#  s, squash = use commit, but meld into previous commit</span><br><span class="line">#  f, fixup = like &quot;squash&quot;, but discard this commit&#x27;s log message</span><br><span class="line">#  x, exec = run command (the rest of the line) using shell</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>GitHub存储库的master分支应始终包含有效且稳定的代码。但是，你可能还希望备份一些当前正在处理的代码，但这些代码并不完全稳定。也许你要添加一个新功能，你正在尝试和破坏很多代码，但是你仍然希望保留备份以保存进度！</p>
+</blockquote>
+<blockquote>
+<p>分支使你可以在不影响master分支的情况下处理代码的单独副本。首次创建分支时，将以新名称创建master分支的完整克隆。然后，你可以独立地在此新分支中修改代码，包括提交文件等。一旦你的新功能已完全集成并且代码稳定，就可以将其合并到master分支中！</p>
+</blockquote>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">### 创建一个本地分支</span><br><span class="line">git checkout -b branchname</span><br><span class="line">### 在<span class="number">2</span>个分支之间切换</span><br><span class="line">git checkout prc/dev-wupx</span><br><span class="line">git checkout master</span><br><span class="line">### 将新的本地分支作为备份</span><br><span class="line">git push -u origin branch_2</span><br><span class="line">### 删除本地分支，这不会让你删除尚未合并的分支</span><br><span class="line">git branch -d branch_2</span><br><span class="line">### 删除本地分支，即使尚未合并，这也会删除该分支！</span><br><span class="line">git branch -D branch_2</span><br><span class="line">### Viewing all current branches for the repository, including both ### local and remote branches. Great to see <span class="keyword">if</span> you already have a ### branch for a particular feature addition, especially on bigger ### projects</span><br><span class="line">### 查看存储库的所有当前分支，包括本地和远程分支。</span><br><span class="line">git branch -a</span><br><span class="line">### 查看已合并到您当前分支中的所有分支，包括本地和远程。 非常适合查看所有代码的来源！</span><br><span class="line">git branch -a --merged</span><br><span class="line">### 查看尚未合并到当前分支中的所有分支，包括本地和远程</span><br><span class="line">git branch -a --no-merged</span><br><span class="line">### 查看所有本地分支</span><br><span class="line">git branch</span><br><span class="line">### 查看所有远程分支</span><br><span class="line">git branch -r</span><br><span class="line"># 将主分支重新设置为本地分支</span><br><span class="line">$ git rebase origin/master</span><br><span class="line"># 将分支推送到远程存储库源并对其进行跟踪</span><br><span class="line">$ git push origin branchname</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>将新功能添加到分支中之后，你需要将其合并回master分支，以便您的master具有所有最新的代码功能。</p>
+</blockquote>
+<blockquote>
+<p>方法如下：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">### 首先确保你正在查看 master 分支</span><br><span class="line">git checkout master</span><br><span class="line">### 现在将你的分支合并到 master </span><br><span class="line">git merge prc/dev-wupx</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>你可能必须修复分支与主服务器之间的任何代码冲突，但是 Git 将向你展示在键入该 merge 命令后如何执行所有这些操作。</p>
+</blockquote>
+<blockquote>
+<p>当有错误发生时，Git 提供了你所需的一切，以防你在所推送的代码中犯错，改写某些内容或者只是想对所推送的内容进行更正。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">### 切换到最新提交的代码版本</span><br><span class="line">git reset HEAD </span><br><span class="line">git reset HEAD -- filename # for a specific file</span><br><span class="line">### 切换到最新提交之前的代码版本</span><br><span class="line">git reset HEAD^ -- filename</span><br><span class="line">git reset HEAD^ -- filename # for a specific file</span><br><span class="line">### 切换回3或5次提交</span><br><span class="line">git reset HEAD~3 -- filename</span><br><span class="line">git reset HEAD~3 -- filename # for a specific file</span><br><span class="line">git reset HEAD~5 -- filename</span><br><span class="line">git reset HEAD~5 -- filename # for a specific file</span><br><span class="line">### 切换回特定的提交，其中 0766c053 为提交 ID</span><br><span class="line">git reset 0766c053 -- filename</span><br><span class="line">git reset 0766c053 -- filename # for a specific file</span><br><span class="line">### 先前的命令是所谓的软重置。 你的代码已重置，但是git仍会保留其他代码的副本，以备你需要时使用。 另一方面，--hard 标志告诉Git覆盖工作目录中的所有更改。</span><br><span class="line">git reset --hard 0766c053</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="有用的技巧"><a href="#有用的技巧" class="headerlink" title="有用的技巧"></a>有用的技巧</h2><h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">### 搜索目录中的字符串部分</span><br><span class="line">git grep &#x27;project&#x27;</span><br><span class="line">### 在目录中搜索部分字符串，-n 打印出 git 找到匹配项的行号</span><br><span class="line">git grep -n &#x27;project&#x27;</span><br><span class="line">### git grep -C &lt;行数&gt; &#x27;something&#x27; 搜索带有某些上下文的字符串部分（某些行在我们正在寻找的字符串之前和之后）</span><br><span class="line">git grep -C&lt;number of lines&gt; &#x27;project&#x27;</span><br><span class="line">### 搜索字符串的一部分，并在字符串之前显示行</span><br><span class="line">git grep -B&lt;number of lines&gt; &#x27;project&#x27;</span><br><span class="line">### 搜索字符串的一部分，并在字符串之后显示行</span><br><span class="line">git grep -A&lt;number of lines&gt; &#x27;something&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="看谁写了什么"><a href="#看谁写了什么" class="headerlink" title="看谁写了什么"></a>看谁写了什么</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">### 显示带有作者姓名的文件的更改历史记录</span><br><span class="line">git blame &#x27;filename&#x27;</span><br><span class="line">### 显示带有作者姓名和 git commit ID 的文件的更改历史记录</span><br><span class="line">git blame &#x27;filename&#x27; -l</span><br></pre></td></tr></table></figure>
+
+<h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">### 显示存储库中所有提交的列表 该命令显示有关提交的所有信息，例如提交ID，作者，日期和提交消息</span><br><span class="line">git log</span><br><span class="line">### 提交列表仅显示提交消息和更改</span><br><span class="line">git log -p</span><br><span class="line">### 包含您要查找的特定字符串的提交列表</span><br><span class="line">git log -S &#x27;project&#x27;</span><br><span class="line">### 作者提交的清单</span><br><span class="line">git log --author &#x27;wupx&#x27;</span><br><span class="line">### 显示存储库中提交列表的摘要。显示提交ID和提交消息的较短版本。</span><br><span class="line">git log --oneline</span><br><span class="line">### 显示昨天以来仓库中的提交列表</span><br><span class="line">git log --since=yesterday</span><br><span class="line">### 显示作者日志，并在提交消息中搜索特定术语</span><br><span class="line">git log --grep &quot;project&quot; --author &quot;wupx&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="每次提交不用重复输入账号和密码"><a href="#每次提交不用重复输入账号和密码" class="headerlink" title="每次提交不用重复输入账号和密码"></a>每次提交不用重复输入账号和密码</h3><blockquote>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/81334170">https://zhuanlan.zhihu.com/p/81334170</a></p>
+</blockquote>
+<p>1、验证是否真的使用的是https方式</p>
+<blockquote>
+<p>使用命令：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>确定是https方式；</p>
+</blockquote>
+<p>2、修改https的方式为ssh方式</p>
+<blockquote>
+<p>移除当前关联的远程仓库</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>添加新的ssh地址</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin ssh地址</span><br></pre></td></tr></table></figure>
+
+<p>3、再次提交</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这次没有再提示输入密码</p>
+</blockquote>
+<h2 id="报错解决办法"><a href="#报错解决办法" class="headerlink" title="报错解决办法"></a>报错解决办法</h2><blockquote>
+<p>当出错：! [rejected] master -&gt; master (fetch first) error: failed to push some refs to ‘ 。。。’</p>
+</blockquote>
+<p>出现这个问题是因为github中的README.md文件不在本地代码目录中，可以通过如下命令进行代码合并</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull <span class="comment">--rebase origin master</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/08/17/typora-picgo/" rel="next" title="typora图片上传出错">
+                <i class="fa fa-chevron-left"></i> typora图片上传出错
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">Git 常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E7%94%A8%E7%9A%84%E6%8A%80%E5%B7%A7"><span class="nav-number">2.</span> <span class="nav-text">有用的技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2"><span class="nav-number">2.1.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%8B%E8%B0%81%E5%86%99%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">2.2.</span> <span class="nav-text">看谁写了什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97"><span class="nav-number">2.3.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%AC%A1%E6%8F%90%E4%BA%A4%E4%B8%8D%E7%94%A8%E9%87%8D%E5%A4%8D%E8%BE%93%E5%85%A5%E8%B4%A6%E5%8F%B7%E5%92%8C%E5%AF%86%E7%A0%81"><span class="nav-number">2.4.</span> <span class="nav-text">每次提交不用重复输入账号和密码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">报错解决办法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">樊鹏飞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

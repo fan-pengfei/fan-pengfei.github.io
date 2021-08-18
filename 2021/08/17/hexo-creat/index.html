@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DIY,兴趣," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="缘起 一直想着要搭建一个属于自己的博客，感觉这样子很酷很酷，也是正好记录一下自己学习中遇到的问题，就当做一个笔记本来用吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo+Yilia搭建自己的博客">
+<meta property="og:url" content="https://fan-pengfei.top/2021/08/17/hexo-creat/index.html">
+<meta property="og:site_name" content="樊鹏飞的博客">
+<meta property="og:description" content="缘起 一直想着要搭建一个属于自己的博客，感觉这样子很酷很酷，也是正好记录一下自己学习中遇到的问题，就当做一个笔记本来用吧！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/QQ图片20210817202532.png">
+<meta property="article:published_time" content="2021-08-17T07:19:40.000Z">
+<meta property="article:modified_time" content="2021-08-17T12:30:40.103Z">
+<meta property="article:author" content="樊鹏飞">
+<meta property="article:tag" content="DIY">
+<meta property="article:tag" content="兴趣">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/QQ图片20210817202532.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fan-pengfei.top/2021/08/17/hexo-creat/"/>
+
+
+
+
+
+  <title>Hexo+Yilia搭建自己的博客 | 樊鹏飞的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">樊鹏飞的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录生活中的点点滴滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fan-pengfei.top/2021/08/17/hexo-creat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="樊鹏飞的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hexo+Yilia搭建自己的博客</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-17T15:19:40+08:00">
+                2021-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DIY/" itemprop="url" rel="index">
+                    <span itemprop="name">DIY</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><blockquote>
+<p>一直想着要搭建一个属于自己的博客，感觉这样子很酷很酷，也是正好记录一下自己学习中遇到的问题，就当做一个笔记本来用吧！<span id="more"></span></p>
+</blockquote>
+<p>原先想着用树莓派做服务器就可以搭建自己的的个人网站用来写博客，先在阿里云上购买了域名，其实最后是买了两个：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fan-pengfei.<span class="built_in">top</span></span><br><span class="line">fan-pengfei.xyz</span><br></pre></td></tr></table></figure>
+<p>为啥买了两个呢？</p>
+<h1 id="波折"><a href="#波折" class="headerlink" title="波折"></a>波折</h1><blockquote>
+<p>其实是我自己太粗心大意了，在二月份的时候自己就买了.xyz这一个域名，后来忙其他的事就把这件事搁置了；注册新域名的时候发现这个已经被注册了（没想到是自己之前注册的），所以没办法，只能感慨与自己同名同姓的人真多，然后就注册了.top域名;</p>
+</blockquote>
+<p>注册完才发现，自己的域名控制台上竟然有两个域名，这才让我想起尘封已久的记忆，不过头一个快过期了，就用第二个搭建了这个个人网站；</p>
+<blockquote>
+<p><a href="https://fan-pengfei.top/">https://fan-pengfei.top</a></p>
+</blockquote>
+<p>前两天闲来无事，就又想折腾一下搭建自己博客的事；找了很多资料，终于还是将这个博客搭建起来了，挺简约的，自己很喜欢，毕竟博客就是用来记录自己学习到的知识，所以博客的内容应该更加重要。</p>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="一、配置Github"><a href="#一、配置Github" class="headerlink" title="一、配置Github"></a>一、配置Github</h2><p>首先注册、登录： <a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a></p>
+<p>记住自己的Username（很重要）；</p>
+<p>然后右上角选择 Create a new repository；</p>
+<p><code>Repository name</code> -&gt;填自己的名字, <code>yourname.github.io</code>-&gt;这个就是你博客的域名了(yourname与你的注册用户名一致)；</p>
+<p>例如，我的域名是<code>github.com/fan-pengfei</code>，就填入<code>fan-pengfei.github.io</code>；</p>
+<h2 id="二、配置环境"><a href="#二、配置环境" class="headerlink" title="二、配置环境"></a>二、配置环境</h2><p>安装 Node.js： <a target="_blank" rel="noopener" href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
+<p>安装 Git： <a target="_blank" rel="noopener" href="https://github.com/waylau/git-for-win">https://github.com/waylau/git-for-win</a></p>
+<p>安装完成后，在开始菜单里找到Git-&gt;Git Bash，打开，并依次执行以下命令：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">config</span> --<span class="keyword">global</span> user<span class="variable">.name</span> <span class="string">&quot;username&quot;</span></span><br><span class="line">git <span class="keyword">config</span> --<span class="keyword">global</span> user<span class="variable">.email</span> <span class="string">&quot;useremail&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中名称和邮箱都是Github注册时自己的名字和邮箱；</p>
+<p>安装 Hexo，所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo:</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
+<p>至此环境安装完毕（推荐使用cmder，超级好用的）;</p>
+<h2 id="三、电脑设置"><a href="#三、电脑设置" class="headerlink" title="三、电脑设置"></a>三、电脑设置</h2><p>在电脑E盘（自己随意）目录下新建文件夹my_blog，进入my_blog，按住Shift键点击鼠标右键，选择<code>Cmder Here</code>；因为我有安装Cmder，没有安装的点击“在此处打开命令窗口”，输入：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">init</span> blog</span><br></pre></td></tr></table></figure>
+
+<p>稍微等待下，速度有点慢，成功后将提示：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INFO</span>  <span class="keyword">Start</span> blogging <span class="keyword">with</span> Hexo!</span><br></pre></td></tr></table></figure>
+
+<p>重新打开CMD，输入：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -<span class="built_in">t</span> rsa -C <span class="string">&quot;Github的注册邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>一路Enter过来就好，得到信息：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your <span class="keyword">public</span> key has been saved in <span class="regexp">/c/U</span>sers<span class="regexp">/user/</span>.ssh/id_rsa.pub.</span><br></pre></td></tr></table></figure>
+
+<p>找到该文件，打开（sublime text），Ctrl + a复制里面的所有内容，然后进入Sign in to GitHub：<a target="_blank" rel="noopener" href="https://github.com/settings/ssh">https://github.com/settings/ssh</a></p>
+<p>New SSH key -&gt;Title，blog -&gt;Key：输入刚才复制的—— Add SSH key；</p>
+<h2 id="四、配置博客"><a href="#四、配置博客" class="headerlink" title="四、配置博客"></a>四、配置博客</h2><p>在blog目录下，用Notepad++或者电脑自带的记事本打开_config.yml文件（我的路径是E:\my_blog\blog），修改参数信息；</p>
+<p>特别注意的是，在每个参数之后的：之后都要加上一个空格，否则一定会报错；</p>
+<p>修改网站相关信息：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">title:</span> 小飞的博客</span><br><span class="line"><span class="symbol">subtitle:</span> 副标题</span><br><span class="line"><span class="symbol">description:</span> 网页描述</span><br><span class="line"><span class="symbol">author:</span> 小飞</span><br><span class="line"><span class="symbol">language:</span> <span class="built_in">zh</span>-CN</span><br><span class="line"><span class="symbol">timezone:</span> Asia/Changsha</span><br></pre></td></tr></table></figure>
+
+<p>配置部署（我的是fan-pengfei，修改成自己的）：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">deploy:</span> </span><br><span class="line"><span class="symbol">  type:</span> git</span><br><span class="line"><span class="symbol">  repo:</span> https:<span class="comment">//github.com/fan-pengfei/fan-pengfei.github.io.git</span></span><br><span class="line"><span class="symbol">  branch:</span> main</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、发表文章"><a href="#五、发表文章" class="headerlink" title="五、发表文章"></a>五、发表文章</h2><p>在命令行窗口中输入：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;测试文章&quot;</span><br><span class="line">INFO  Created: E:<span class="symbol">\m</span>y_blog<span class="symbol">\b</span>log<span class="symbol">\s</span>ource<span class="symbol">\_</span>posts<span class="symbol">\测</span>试文章.md</span><br></pre></td></tr></table></figure>
+
+<p>找到该文章，打开，使用Markdown语法编辑即可；</p>
+<p>保存，然后执行下列步骤：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">E:\my_blog\blog</span><br><span class="line">$ hexo clean</span><br><span class="line"><span class="builtin-name">INFO</span>  Deleted database.</span><br><span class="line"><span class="builtin-name">INFO</span>  Deleted public folder.</span><br><span class="line"></span><br><span class="line">E:\my_blog\blog</span><br><span class="line">$ hexo generate</span><br><span class="line"><span class="builtin-name">INFO</span>  Start processing</span><br><span class="line"><span class="builtin-name">INFO</span>  Files loaded <span class="keyword">in</span> 1.48 s</span><br><span class="line"><span class="comment">#省略</span></span><br><span class="line"><span class="builtin-name">INFO</span>  29 files generated <span class="keyword">in</span> 4.27 s</span><br></pre></td></tr></table></figure>
+
+<p>最后一步，发布到网上，执行：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">F:\test\blog</span><br><span class="line">$ hexo deploy</span><br><span class="line"><span class="builtin-name">INFO</span>  Deploying: git</span><br><span class="line"><span class="builtin-name">INFO</span>  Clearing .deploy_git folder<span class="built_in">..</span>.</span><br><span class="line"><span class="builtin-name">INFO</span>  Copying files <span class="keyword">from</span> public folder<span class="built_in">..</span>.</span><br><span class="line"><span class="comment">#省略</span></span><br></pre></td></tr></table></figure>
+
+<p>其中会跳出Github登录，直接登录即可；</p>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>发布文章的步骤：</p>
+<p>1、hexo new 创建文章；</p>
+<p>2、Markdown语法编辑文章；</p>
+<p>3、部署（所有打开CMD都是在blog目录下）；</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="meta">#清除缓存 网页正常情况下可以忽略此条命令</span></span><br><span class="line">hexo generate <span class="meta">#生成</span></span><br><span class="line">hexo <span class="keyword">server</span> <span class="meta">#启动服务预览，非必要，可本地浏览网页</span></span><br><span class="line">hexo deploy <span class="meta">#部署发布</span></span><br></pre></td></tr></table></figure>
+
+<p>常用命令简写Tips：</p>
+<blockquote>
+<p>hexo n “我的博客” == hexo new “我的博客” #新建文章<br>hexo g == hexo generate#生成<br>hexo s == hexo server #启动服务预览<br>hexo d == hexo deploy#部署</p>
+</blockquote>
+<p>如果在执行 hexo deploy 后,出现<code>error deployer not found:github</code>的错误，执行：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="七、其他"><a href="#七、其他" class="headerlink" title="七、其他"></a>七、其他</h2><blockquote>
+<p>若想让让博客更美观，可以更换其他主题，我使用的Yilia主题具体安装步骤请参考：<a target="_blank" rel="noopener" href="https://github.com/litten/hexo-theme-yilia%E3%80%81">https://github.com/litten/hexo-theme-yilia、</a></p>
+</blockquote>
+<p>我的博客截图：</p>
+<img src="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/QQ图片20210817202532.png" alt="QQ图片20210817202532" style="zoom:50%;" />
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DIY/" rel="tag"># DIY</a>
+          
+            <a href="/tags/%E5%85%B4%E8%B6%A3/" rel="tag"># 兴趣</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/08/17/linux-licheepi-zero/" rel="next" title="构建荔枝派zero完整系统以及运行QT程序">
+                <i class="fa fa-chevron-left"></i> 构建荔枝派zero完整系统以及运行QT程序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/08/17/windows-bat/" rel="prev" title="Windows10 Bat脚本">
+                Windows10 Bat脚本 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%98%E8%B5%B7"><span class="nav-number">1.</span> <span class="nav-text">缘起</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A2%E6%8A%98"><span class="nav-number">2.</span> <span class="nav-text">波折</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%85%8D%E7%BD%AEGithub"><span class="nav-number">3.1.</span> <span class="nav-text">一、配置Github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="nav-number">3.2.</span> <span class="nav-text">二、配置环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%94%B5%E8%84%91%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.3.</span> <span class="nav-text">三、电脑设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2"><span class="nav-number">3.4.</span> <span class="nav-text">四、配置博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%8F%91%E8%A1%A8%E6%96%87%E7%AB%A0"><span class="nav-number">3.5.</span> <span class="nav-text">五、发表文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">3.6.</span> <span class="nav-text">六、总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%85%B6%E4%BB%96"><span class="nav-number">3.7.</span> <span class="nav-text">七、其他</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">樊鹏飞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

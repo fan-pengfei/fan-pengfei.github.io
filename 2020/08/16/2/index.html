@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DIY,51单片机," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="自从前几个月学了51单片机和stm32，我就一直想着做一个自己的作品，后来思来想去，就产生了做一个小型钟表的想法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的第一个作品——小一">
+<meta property="og:url" content="https://fan-pengfei.top/2020/08/16/2/index.html">
+<meta property="og:site_name" content="樊鹏飞的博客">
+<meta property="og:description" content="自从前几个月学了51单片机和stm32，我就一直想着做一个自己的作品，后来思来想去，就产生了做一个小型钟表的想法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817221117.png">
+<meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817221142.png">
+<meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817220906.png">
+<meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817220918.png">
+<meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817220929.png">
+<meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817221347.png">
+<meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817221301.png">
+<meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817221309.png">
+<meta property="article:published_time" content="2020-08-16T12:15:20.000Z">
+<meta property="article:modified_time" content="2021-08-17T14:21:22.150Z">
+<meta property="article:author" content="樊鹏飞">
+<meta property="article:tag" content="DIY">
+<meta property="article:tag" content="51单片机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817221117.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fan-pengfei.top/2020/08/16/2/"/>
+
+
+
+
+
+  <title>我的第一个作品——小一 | 樊鹏飞的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">樊鹏飞的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录生活中的点点滴滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fan-pengfei.top/2020/08/16/2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="樊鹏飞的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">我的第一个作品——小一</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-16T20:15:20+08:00">
+                2020-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DIY/" itemprop="url" rel="index">
+                    <span itemprop="name">DIY</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DIY/51%E5%8D%95%E7%89%87%E6%9C%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">51单片机</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>自从前几个月学了51单片机和stm32，我就一直想着做一个自己的作品，后来思来想去，就产生了做一个小型钟表的想法。<span id="more"></span>既然是自己的作品，那么从设计电路板，到焊接电子元件，再到程序的编写，再到最后的调试和Debug，都应该是自己独立完成。想法有了，然后就开始动手制作。</p>
+</blockquote>
+<p>因为之前在焊洞洞板的时候，发现精细的电路是很难用洞洞板焊接的，所以就开始在网上找资料学习画PCB电路板，刚开始是找的凡亿教育的视频来看，虽然讲的很好，但是好像不太适合我这种刚入门的小白，在我苦苦盯着视频研究了大半天却一脸懵之后，我最后决定还是自己摸索，不懂的，直接问度娘，不得不说，度娘真的帮了我好多。</p>
+<p>然后又花了半天时间发现问题，解决问题，然后就突然什么都明白了，也理解了元件库，封装库，原理图和pcb文件之间的关系，也学会了自己画封装库和元件库，一切好像都是水到渠成。最后就又花了几天的时间绘制并打样了我的第一块电路板（不得不说，嘉立创的五元包邮的板子真的太香了）。</p>
+<div align=center>
+<img src="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817221117.png" alt="1" style="zoom:50%;" />
+</div>
+
+
+<center>3D模型</center>
+
+<div align=center><img src="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817221142.png" style="zoom: 50%;" />
+</div>
+
+
+<center>用iic接口OLED屏幕测试板子</center>
+
+<blockquote>
+<p>这个板子很简单，却为小一的诞生奠定了基础。</p>
+</blockquote>
+<p>画了这个小核心板之后，就开始画小一了，因为需要先确定下所使用的芯片，所以在画板子之前，我开始选择所需要的芯片，最后决定主控芯片选择宏晶公司的stc15w408as，因为这个芯片小体积价格便宜却有着强大的功能，而且外围电路也极其简单。</p>
+<div align=center><img src="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817220906.png" alt="1" style="zoom:80%;" />
+</div>
+
+<center>根据Datasheet进行芯片选型</center>
+
+<p>考虑到我想要实现的功能，又选择了Ds1302时钟芯片，LM75a温度测量芯片，微型蜂鸣器，纽扣电池，以及实现程序下载的CH340G芯片。</p>
+<p>画了很久才终于画出了pcb电路图，主要是布线和器件布局太麻烦，一动不动画了好几个下午，最后终于成功了，便把pcb文件发给嘉立创，几天后，元件和电路板几乎同时到了，让我很不开心的是，等我收到板子之后，才发现板子有很多的错误，比如开关选择的型号不对；电路板上丝印很不清晰，甚至都重合在一起，无法辨识；有些线还连接有错误，我很是沮丧，最后我只好用来练习焊接贴片元件，物尽其用。</p>
+<p>然后就是修改原理图和pcb文件，然后把pcb文件又一次发个嘉立创，又过了几天，板子才到。我迫不及待的开始焊接，好难啊，即使我已经买了936焊台，但是因为我贴片元件焊接的经验实在是太少了，所以还是焊了好长的时间，最后终于焊好了，我在内心祈祷着，很怕电源一接通，就会短路，板子会烧掉。结果还好，电源指示灯成功点亮，然后就开始尝试下载程序，结果却是失败，最后又找了好久才发现问题所在。原因是我没有考虑到单片机下载程序时需要冷启动，最后又飞了好几根线，才终于下载成功。开心爆了！！！</p>
+<p>然后又依次下载了一些测试程序，结果又发现了一些问题，比如走时不太准，纽扣电池掉电太快，又想了好久才解决这些问题。走时不准是因为我的手上有静电，会使走时受到干扰；纽扣电池掉电太快，是因为有一根线连错了，然后又飞了一根线，加了两个电容，然后终于可以了，可以实现所有的功能了。这些事情说着简单，其实真的很难，那些问题都太奇怪了，网上根本找不到资料，都是一点点试出来的，太难了。然后就是漫长的软件开发过程了，这可是比硬件更难的啊。</p>
+<div align=center><img src="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817220918.png" style="zoom:50%;" />
+    </div>
+
+<center>用飞线下载程序</center>
+
+<div align=center><img src="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817220929.png" style="zoom:67%;" /></div>
+
+<center>板子正面</center>
+
+<div align=center><img src="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817221347.png" style="zoom:57%;" /></div>
+
+<center>板子背面</center>
+
+<p>软件开发又花了好长的时间，写了好久，然后终于可以写好了，现在当然还是有一些bug，不过都是小问题，大概的已经OK了。程序加起来有好几千行，一个模块是一个C文件和H文件，模块化程序，可以让以后移植程序变得很方便。最后大概实现以下功能：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">实时时钟（可以实现掉电不掉时）</span><br><span class="line"><span class="section">温度测量（分辨率0.125℃，测量范围:-55℃～+125℃）</span></span><br><span class="line">可设置闹钟（也可作为定时器，可设置的时间范 围:1s～24小时，到设定时间有蜂鸣器提醒）</span><br><span class="line">秒表（最小精度1ms，可中途暂停，可清零）</span><br><span class="line"><span class="section">电压表（范围:0～5V,精确度:10位精度AD转换）（改程序ing，因为有bug）</span></span><br></pre></td></tr></table></figure>
+
+<div align=center><img src="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817221301.png" style="zoom:50%;" /></div>
+
+<center>最后的成品</center>
+
+<div align=center><img src="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20210817221309.png" style="zoom:50%;" /></div>
+
+<center>UI界面显示</center>
+
+<p>基本不可能有其他功能了，因为STC15W408AS只有8kflash,而现在的程序文件已经7.56k了，只能等以后换用更强大的芯片，才能有更多的功能了。演示视频我放在下面了，也算是比较成功吧，我还是超级满意的呀。</p>
+<p>因为飞线很不美观，所以我打算升级小一，PCB电路图已经画好了，应该是不会再有前两版的那些错误了，而且加入了新的功能，比如可以用锂电池供电，给锂电池充电等功能。</p>
+<p>哈哈，超开心，小一是我真正意义上的第一件作品，希望我以后会有更多的作品，小一会有更多的兄弟姐妹，也会升级小一，给他更强大的大脑，拥有更多的功能。</p>
+<iframe width="100%" height="450" src="//player.bilibili.com/player.html?aid=249993749&bvid=BV1qv411N7x1&cid=390488048&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+<blockquote>
+<p>有兴趣的兄弟姐妹，可以跟我交流，我可以帮你们解决一些我力所能及的问题。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DIY/" rel="tag"># DIY</a>
+          
+            <a href="/tags/51%E5%8D%95%E7%89%87%E6%9C%BA/" rel="tag"># 51单片机</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/08/16/First_blog/" rel="prev" title="First_blog">
+                First_blog <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">樊鹏飞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
