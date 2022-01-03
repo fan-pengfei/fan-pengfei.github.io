@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://fan-pengfei.top">
-  <title>Tag: Git | 樊鹏飞的博客</title>
+  <title>LVGL开发 | 樊鹏飞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="网页描述">
-<meta property="og:type" content="website">
-<meta property="og:title" content="樊鹏飞的博客">
-<meta property="og:url" content="http://fan-pengfei.top/tags/Git/index.html">
+  <meta name="description" content="最近要做一个GUI界面，自己开发各种功能是极其麻烦的(对的，我之前是做过的)，需要注意很多问题，而且开发起来很多功能基本上是实现不了的，所以只能想其他办法了，因为之前用LVGL做过一个很简单的GUI界面，所以这次也打算用LVGL来做，也算是再复习一下这个界面的使用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LVGL开发">
+<meta property="og:url" content="http://fan-pengfei.top/2022/01/03/LVGL%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="樊鹏飞的博客">
-<meta property="og:description" content="网页描述">
+<meta property="og:description" content="最近要做一个GUI界面，自己开发各种功能是极其麻烦的(对的，我之前是做过的)，需要注意很多问题，而且开发起来很多功能基本上是实现不了的，所以只能想其他办法了，因为之前用LVGL做过一个很简单的GUI界面，所以这次也打算用LVGL来做，也算是再复习一下这个界面的使用。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-03T05:17:26.000Z">
+<meta property="article:modified_time" content="2022-01-03T05:28:49.560Z">
 <meta property="article:author" content="樊鹏飞">
+<meta property="article:tag" content="LVGL">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
@@ -150,72 +153,348 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="stm32f401-LVGL开发" class="article article-type-stm32f401 " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/08/18/%E5%AD%A6%E4%B9%A0Git/" class="archive-article-date">
-  	<time datetime="2021-08-18T04:29:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/18/%E5%AD%A6%E4%B9%A0Git/">学习Git</a>
+    <h1 class="article-title" itemprop="name">
+      LVGL开发
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2022/01/03/LVGL%E5%BC%80%E5%8F%91/" class="archive-article-date">
+  	<time datetime="2022-01-03T05:17:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>最近要做一个GUI界面，自己开发各种功能是极其麻烦的(对的，我之前是做过的)，需要注意很多问题，而且开发起来很多功能基本上是实现不了的，所以只能想其他办法了，因为之前用LVGL做过一个很简单的GUI界面，所以这次也打算用LVGL来做，也算是再复习一下这个界面的使用。<span id="more"></span></p>
+</blockquote>
+<blockquote>
+<p>以下是关于LVGL的简介以及特点：</p>
+</blockquote>
+<blockquote>
+<p>LVGL(Light and Versatile Graphics Library，轻巧而多功能的图形库)是一个免费的开放源代码图形库，它提供创建具有易于使用的图形元素，精美的视觉效果和低内存占用的嵌入式GUI所需的一切。</p>
+</blockquote>
+<h2 id="LVGL主要特性"><a href="#LVGL主要特性" class="headerlink" title="LVGL主要特性"></a>LVGL主要特性</h2><ol>
+<li>功能强大的构建块，例如按钮，图表，列表，滑块，图像等.</li>
+<li>带有动画，抗锯齿，不透明，平滑滚动的高级图形.</li>
+<li>各种输入设备，例如触摸板，鼠标，键盘，编码器等.</li>
+<li>支持UTF-8编码的多语言.</li>
+<li>多显示器支持，如TFT，单色显示器.</li>
+<li>完全可定制的图形元素.</li>
+<li>独立于任何微控制器或显示器使用的硬件.</li>
+<li>可扩展以使用很少的内存(64 kB闪存，16 kB RAM)进行操作.</li>
+<li>操作系统，支持外部存储器和GPU，但不是必需的.</li>
+<li>单帧缓冲区操作，即使具有高级图形效果.</li>
+<li>用C语言编写，以实现最大的兼容性(与C ++兼容).</li>
+<li>模拟器可在没有嵌入式硬件的PC上进行嵌入式GUI设计.</li>
+<li>可移植到MicroPython.</li>
+<li>可快速上手的教程、示例、主题.</li>
+<li>丰富的文档教程.</li>
+<li>在MIT许可下免费和开源.</li>
+</ol>
+<h2 id="LVGL硬件要求"><a href="#LVGL硬件要求" class="headerlink" title="LVGL硬件要求"></a>LVGL硬件要求</h2><p>基本上，每个现代控制器(肯定必须要能够驱动显示器)都适合运行LVGL。LVGL的最低运行要求很低：</p>
+<ul>
+<li>16、32或64位微控制器或处理器.</li>
+<li>最低 16 MHz 时钟频率.</li>
+<li>Flash/ROM:：对于非常重要的组件要求 &gt;64 kB(建议 &gt; 180 kB).</li>
+<li>RAM<ul>
+<li>静态 RAM 使用量：~2 kB，取决于所使用的功能和对象类型.</li>
+<li>堆栈： &gt; 2kB(建议 &gt; 8 kB).</li>
+<li>动态数据(堆)：&gt; 2 KB(如果使用多个对象，则建议 &gt; 16 kB)。由 lv_conf.h 中的 LV_MEM_SIZE 宏进行设置.</li>
+<li>显示缓冲区：&gt; “水平分辨率”像素(建议 &gt; 10× “水平分辨率” ).</li>
+<li>MCU 或外部显示控制器中的一帧缓冲区.</li>
+</ul>
+</li>
+<li>C99或更高版本的编译器.</li>
+<li>具备基本的C(或C ++)知识：指针，结构，回调…</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请注意，内存使用情况可能会因具体的体系结构、编译器和构建选项而异。</span><br></pre></td></tr></table></figure>
+
+<p>Bash</p>
+<h2 id="LVGL源码布局"><a href="#LVGL源码布局" class="headerlink" title="LVGL源码布局"></a>LVGL源码布局</h2><ul>
+<li><strong>./lvgl</strong> 库本身.</li>
+<li><strong>./lv_drivers</strong> 显示和输入设备驱动程序.</li>
+<li><strong>./lv_examples</strong> 示例和演示.</li>
+<li>lvgl官方文档网站(<a target="_blank" rel="noopener" href="https://docs.lvgl.io/">https://docs.lvgl.io</a>).</li>
+<li>lvgl官方博客博客站点(<a target="_blank" rel="noopener" href="https://blog.lvgl.io/">https://blog.lvgl.io</a>).</li>
+<li>sim在线模拟器网站(<a target="_blank" rel="noopener" href="https://sim.lvgl.io/">https://sim.lvgl.io</a>).</li>
+<li>lv_sim _… 适用于各种 IDE 和平台的模拟器项目.</li>
+<li>lv_port _… 移植到其他开发板.</li>
+<li>lv_binding _… 绑定到其他语言.</li>
+<li>lv _…移植到其他平台.</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">其中，lvgl，lv_examples和lv_drivers是最受维护、关注的核心存储库。</span><br></pre></td></tr></table></figure>
+
+<h2 id="LVGL更新发行规则"><a href="#LVGL更新发行规则" class="headerlink" title="LVGL更新发行规则"></a>LVGL更新发行规则</h2><ul>
+<li>lvgl核心存储库遵循语义版本控制规则：<ul>
+<li>不兼容的API的主要版本更改。例如。 v5.0.0，v6.0.0</li>
+<li>次要版本，用于新的但向后兼容的功能。例如。 v6.1.0，v6.2.0</li>
+<li>修补程序版本，用于向后兼容的错误修复。例如。 v6.1.1，v6.1.2</li>
+</ul>
+</li>
+</ul>
+<h2 id="LVGL仓库分支说明"><a href="#LVGL仓库分支说明" class="headerlink" title="LVGL仓库分支说明"></a>LVGL仓库分支说明</h2><p>核心存储库至少具有以下分支：</p>
+<ul>
+<li><code>master</code> 分支，最新版本，补丁直接在这里合并。</li>
+<li><code>dev</code> 分支，开发人员在此处合并新功能，直到将它们合并到 <code>master</code> 分支为止。</li>
+<li><code>release/vX</code> 分支，主要版本的稳定版本</li>
+</ul>
+<h2 id="LVGL发布周期"><a href="#LVGL发布周期" class="headerlink" title="LVGL发布周期"></a>LVGL发布周期</h2><p>LVGL有2周的发布周期。在每月的第一个和第三个 <strong>星期二</strong> ：</p>
+<ol>
+<li>(基于新功能)从 <code>master</code> 分支创建 主要、次要或错误修复 的版本</li>
+<li>将 <code>master</code> 分支合并到 <code>release/vX</code> 中</li>
+<li>发布后立即将 <code>dev</code> 分支合并到 <code>master</code> 分支</li>
+<li>在接下来的2周内，测试 <code>master</code> 分支的新功能</li>
+<li>错误修复直接合并到 <code>master</code> 中</li>
+<li>2周后，再从第一步重新开始迭代</li>
+</ol>
+<h2 id="LVGL版本标签"><a href="#LVGL版本标签" class="headerlink" title="LVGL版本标签"></a>LVGL版本标签</h2><p>每个版本都会创建 vx.Y.Z 之类的标签，如： v7.9.0 。</p>
+<h2 id="LVGL变更日志"><a href="#LVGL变更日志" class="headerlink" title="LVGL变更日志"></a>LVGL变更日志</h2><p>版本更改记录在 ./lvgl/CHANGELOG.md 中。</p>
+<h2 id="LVGL版本兼容"><a href="#LVGL版本兼容" class="headerlink" title="LVGL版本兼容"></a>LVGL版本兼容</h2><p>在核心存储库中，每个主要版本都有一个分支(例如 release/v6 )。该主要版本的所有次要版本和修补程序版本都在此处合并</p>
+<p>这样就可以添加稳定的较旧版本，而无需打扰较新的版本</p>
+<p>所有主要版本的官方支持周期为1年。</p>
+<h1 id="关于项目"><a href="#关于项目" class="headerlink" title="关于项目"></a>关于项目</h1><blockquote>
+<p>关于我所使用的：</p>
+<p>MCU用的是STM32F401CCU6， 256Kbytes ROM，64Kbytes RAM</p>
+<p>屏幕为SPI接口的1.54寸IPS屏幕，16位色彩，分辨率为240*240</p>
+<p>LVGL版本为7.10.1</p>
+</blockquote>
+
+      
+        <!-- 《添加版权声明 -->
+        
+            <!-- 《添加版权声明 -->
+<!--添加版权声明https://github.com/JoeyBling/hexo-theme-yilia-plus/commit/c1215e132f6d5621c5fea83d3c4f7ccbcca074a3-->
+
+
+<!-- #版权基础设定：0-关闭声明； 1-文章对应的md文件里有declare: true属性，才有版权声明； 2-所有文章均有版权声明 -->
+
+  <div class="declare" hidden="hidden"></div>
+
+<!-- 添加版权声明》 -->
+
+        
+        <!-- 添加版权声明》 -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝可乐<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LVGL</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        			<a href="/categories/LVGL//" class="article-tag-list-link color5">LVGL</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://fan-pengfei.top/2022/01/03/LVGL%E5%BC%80%E5%8F%91/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/12/22/%E5%B0%8F%E4%B8%80%E5%8D%87%E7%BA%A7%E7%89%88%E6%9D%A5%E4%BA%86%EF%BC%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">小一升级版来了！</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#LVGL%E4%B8%BB%E8%A6%81%E7%89%B9%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">LVGL主要特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVGL%E7%A1%AC%E4%BB%B6%E8%A6%81%E6%B1%82"><span class="toc-number">2.</span> <span class="toc-text">LVGL硬件要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVGL%E6%BA%90%E7%A0%81%E5%B8%83%E5%B1%80"><span class="toc-number">3.</span> <span class="toc-text">LVGL源码布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVGL%E6%9B%B4%E6%96%B0%E5%8F%91%E8%A1%8C%E8%A7%84%E5%88%99"><span class="toc-number">4.</span> <span class="toc-text">LVGL更新发行规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVGL%E4%BB%93%E5%BA%93%E5%88%86%E6%94%AF%E8%AF%B4%E6%98%8E"><span class="toc-number">5.</span> <span class="toc-text">LVGL仓库分支说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVGL%E5%8F%91%E5%B8%83%E5%91%A8%E6%9C%9F"><span class="toc-number">6.</span> <span class="toc-text">LVGL发布周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVGL%E7%89%88%E6%9C%AC%E6%A0%87%E7%AD%BE"><span class="toc-number">7.</span> <span class="toc-text">LVGL版本标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVGL%E5%8F%98%E6%9B%B4%E6%97%A5%E5%BF%97"><span class="toc-number">8.</span> <span class="toc-text">LVGL变更日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVGL%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9"><span class="toc-number">9.</span> <span class="toc-text">LVGL版本兼容</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E9%A1%B9%E7%9B%AE"><span class="toc-number"></span> <span class="toc-text">关于项目</span></a>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
 
     
+      <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  var notify = 'true' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+      // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+      av: AV,
+      el: '.valine_comment',
+      emoticon_url: 'https://cloud.panjunwen.com/alu',
+      emoticon_list: ["狂汗.png","不说话.png","汗.png","坐等.png","献花.png","不高兴.png","中刀.png","害羞.png","皱眉.png","小眼睛.png","暗地观察.png"],
+      app_id: 'npG1XmP1ddhLsT2R6u4nXdKz-gzGzoHsz',
+      app_key: 'fqEEJWxiAlwQyoAo7nXcqPyO',
+      placeholder: '有话要说？在此输入'
+    });
+</script>
+
+    
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="LVGL开发" data-title="LVGL开发" data-url="http://fan-pengfei.top/2022/01/03/LVGL%E5%BC%80%E5%8F%91/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -249,9 +528,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
