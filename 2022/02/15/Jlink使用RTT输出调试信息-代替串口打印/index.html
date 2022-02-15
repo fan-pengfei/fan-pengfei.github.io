@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://fan-pengfei.top">
   <title>Jlink使用RTT输出调试信息(代替串口打印) | 樊鹏飞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用Jlink的 RTT功能 :这个功能是不需要另外接其他引脚的，如果使用SW连接方式，仅仅两根线就可以， RTT 是Jlink的一种实时终端的方式连接输出调试信息，网上有很多说明之间按照做就可以，我仅仅是记录一下自己的步骤.  就是下载RTT软件包，下载RTT文件： http:&#x2F;&#x2F;download.segger.com&#x2F;J-Link&#x2F;RTT&#x2F;RTT_Implementation_140925.z">
+  <meta name="description" content="使用Jlink的 RTT功能 :这个功能是不需要另外接其他引脚的，如果使用SW连接方式，仅仅两根线就可以。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jlink使用RTT输出调试信息(代替串口打印)">
 <meta property="og:url" content="http://fan-pengfei.top/2022/02/15/Jlink%E4%BD%BF%E7%94%A8RTT%E8%BE%93%E5%87%BA%E8%B0%83%E8%AF%95%E4%BF%A1%E6%81%AF-%E4%BB%A3%E6%9B%BF%E4%B8%B2%E5%8F%A3%E6%89%93%E5%8D%B0/index.html">
 <meta property="og:site_name" content="樊鹏飞的博客">
-<meta property="og:description" content="使用Jlink的 RTT功能 :这个功能是不需要另外接其他引脚的，如果使用SW连接方式，仅仅两根线就可以， RTT 是Jlink的一种实时终端的方式连接输出调试信息，网上有很多说明之间按照做就可以，我仅仅是记录一下自己的步骤.  就是下载RTT软件包，下载RTT文件： http:&#x2F;&#x2F;download.segger.com&#x2F;J-Link&#x2F;RTT&#x2F;RTT_Implementation_140925.z">
+<meta property="og:description" content="使用Jlink的 RTT功能 :这个功能是不需要另外接其他引脚的，如果使用SW连接方式，仅仅两根线就可以。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20220215121413.png">
 <meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20220215121424.png">
@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20220215121622.png">
 <meta property="og:image" content="https://gitee.com/fan_-pengfei/blogpicture/raw/master/images/20220215121631.png">
 <meta property="article:published_time" content="2022-02-15T04:02:47.000Z">
-<meta property="article:modified_time" content="2022-02-15T04:16:48.611Z">
+<meta property="article:modified_time" content="2022-02-15T06:01:25.603Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="DIY">
 <meta property="article:tag" content="stm32">
@@ -188,7 +188,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="使用Jlink的-RTT功能"><a href="#使用Jlink的-RTT功能" class="headerlink" title="使用Jlink的 RTT功能 :"></a><strong>使用Jlink的 RTT功能 :</strong></h2><p>这个功能是不需要另外接其他引脚的，如果使用SW连接方式，仅仅两根线就可以，</p>
+        <h2 id="使用Jlink的-RTT功能"><a href="#使用Jlink的-RTT功能" class="headerlink" title="使用Jlink的 RTT功能 :"></a><strong>使用Jlink的 RTT功能 :</strong></h2><p>这个功能是不需要另外接其他引脚的，如果使用SW连接方式，仅仅两根线就可以。<span id="more"></span></p>
 <p>RTT 是Jlink的一种实时终端的方式连接输出调试信息，网上有很多说明之间按照做就可以，我仅仅是记录一下自己的步骤.</p>
 <blockquote>
 <p>就是下载RTT软件包，下载RTT文件： <a target="_blank" rel="noopener" href="http://download.segger.com/J-Link/RTT/RTT_Implementation_140925.zip">http://download.segger.com/J-Link/RTT/RTT_Implementation_140925.zip</a>  ；</p>
@@ -552,15 +552,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">感悟</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -576,11 +576,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
