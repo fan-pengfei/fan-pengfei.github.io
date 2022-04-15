@@ -16,7 +16,7 @@
 <meta property="og:description" content="Git相关的知识；">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-18T04:29:14.000Z">
-<meta property="article:modified_time" content="2021-08-31T13:29:14.868Z">
+<meta property="article:modified_time" content="2022-04-07T02:02:51.457Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
@@ -247,7 +247,7 @@
 <blockquote>
 <p>分支使你可以在不影响master分支的情况下处理代码的单独副本。首次创建分支时，将以新名称创建master分支的完整克隆。然后，你可以独立地在此新分支中修改代码，包括提交文件等。一旦你的新功能已完全集成并且代码稳定，就可以将其合并到master分支中！</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">### 创建一个本地分支</span><br><span class="line">git checkout -b branchname</span><br><span class="line">### 在2个分支之间切换</span><br><span class="line">git checkout prc/dev-wupx</span><br><span class="line">git checkout master</span><br><span class="line">### 将新的本地分支作为备份</span><br><span class="line">git push -u origin branch_2</span><br><span class="line">### 删除本地分支，这不会让你删除尚未合并的分支</span><br><span class="line">git branch -d branch_2</span><br><span class="line">### 删除本地分支，即使尚未合并，这也会删除该分支！</span><br><span class="line">git branch -D branch_2</span><br><span class="line">### Viewing all current branches for the repository, including both ### local and remote branches. Great to see if you already have a ### branch for a particular feature addition, especially on bigger ### projects</span><br><span class="line">### 查看存储库的所有当前分支，包括本地和远程分支。</span><br><span class="line">git branch -a</span><br><span class="line">### 查看已合并到您当前分支中的所有分支，包括本地和远程。 非常适合查看所有代码的来源！</span><br><span class="line">git branch -a --merged</span><br><span class="line">### 查看尚未合并到当前分支中的所有分支，包括本地和远程</span><br><span class="line">git branch -a --no-merged</span><br><span class="line">### 查看所有本地分支</span><br><span class="line">git branch</span><br><span class="line">### 查看所有远程分支</span><br><span class="line">git branch -r</span><br><span class="line"># 将主分支重新设置为本地分支</span><br><span class="line">$ git rebase origin/master</span><br><span class="line"># 将分支推送到远程存储库源并对其进行跟踪</span><br><span class="line">$ git push origin branchname</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 创建一个本地分支</span></span><br><span class="line">git checkout -b branchname</span><br><span class="line"><span class="comment">### 在2个分支之间切换</span></span><br><span class="line">git checkout prc/dev-wupx</span><br><span class="line">git checkout master</span><br><span class="line"><span class="comment">### 将新的本地分支作为备份</span></span><br><span class="line">git push -u origin branch_2</span><br><span class="line"><span class="comment">### 删除本地分支，这不会让你删除尚未合并的分支</span></span><br><span class="line">git branch -d branch_2</span><br><span class="line"><span class="comment">### 删除本地分支，即使尚未合并，这也会删除该分支！</span></span><br><span class="line">git branch -D branch_2</span><br><span class="line"><span class="comment">### Viewing all current branches for the repository, including both ### local and remote branches. Great to see if you already have a ### branch for a particular feature addition, especially on bigger ### projects</span></span><br><span class="line"><span class="comment">### 查看存储库的所有当前分支，包括本地和远程分支。</span></span><br><span class="line">git branch -a</span><br><span class="line"><span class="comment">### 查看已合并到您当前分支中的所有分支，包括本地和远程。 非常适合查看所有代码的来源！</span></span><br><span class="line">git branch -a --merged</span><br><span class="line"><span class="comment">### 查看尚未合并到当前分支中的所有分支，包括本地和远程</span></span><br><span class="line">git branch -a --no-merged</span><br><span class="line"><span class="comment">### 查看所有本地分支</span></span><br><span class="line">git branch</span><br><span class="line"><span class="comment">### 查看所有远程分支</span></span><br><span class="line">git branch -r</span><br><span class="line"><span class="comment"># 将主分支重新设置为本地分支</span></span><br><span class="line">$ git rebase origin/master</span><br><span class="line"><span class="comment"># 将分支推送到远程存储库源并对其进行跟踪</span></span><br><span class="line">$ git push origin branchname</span><br></pre></td></tr></table></figure>
 
 
 
@@ -257,7 +257,7 @@
 <blockquote>
 <p>方法如下：</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">### 首先确保你正在查看 master 分支</span><br><span class="line">git checkout master</span><br><span class="line">### 现在将你的分支合并到 master </span><br><span class="line">git merge prc/dev-wupx</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 首先确保你正在查看 master 分支</span></span><br><span class="line">git checkout master</span><br><span class="line"><span class="comment">### 现在将你的分支合并到 master </span></span><br><span class="line">git merge prc/dev-wupx</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>你可能必须修复分支与主服务器之间的任何代码冲突，但是 Git 将向你展示在键入该 merge 命令后如何执行所有这些操作。</p>
@@ -265,7 +265,7 @@
 <blockquote>
 <p>当有错误发生时，Git 提供了你所需的一切，以防你在所推送的代码中犯错，改写某些内容或者只是想对所推送的内容进行更正。</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">### 切换到最新提交的代码版本</span><br><span class="line">git reset HEAD </span><br><span class="line">git reset HEAD -- filename # for a specific file</span><br><span class="line">### 切换到最新提交之前的代码版本</span><br><span class="line">git reset HEAD^ -- filename</span><br><span class="line">git reset HEAD^ -- filename # for a specific file</span><br><span class="line">### 切换回3或5次提交</span><br><span class="line">git reset HEAD~3 -- filename</span><br><span class="line">git reset HEAD~3 -- filename # for a specific file</span><br><span class="line">git reset HEAD~5 -- filename</span><br><span class="line">git reset HEAD~5 -- filename # for a specific file</span><br><span class="line">### 切换回特定的提交，其中 0766c053 为提交 ID</span><br><span class="line">git reset 0766c053 -- filename</span><br><span class="line">git reset 0766c053 -- filename # for a specific file</span><br><span class="line">### 先前的命令是所谓的软重置。 你的代码已重置，但是git仍会保留其他代码的副本，以备你需要时使用。 另一方面，--hard 标志告诉Git覆盖工作目录中的所有更改。</span><br><span class="line">git reset --hard 0766c053</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 切换到最新提交的代码版本</span></span><br><span class="line">git reset HEAD </span><br><span class="line">git reset HEAD -- filename <span class="comment"># for a specific file</span></span><br><span class="line"><span class="comment">### 切换到最新提交之前的代码版本</span></span><br><span class="line">git reset HEAD^ -- filename</span><br><span class="line">git reset HEAD^ -- filename <span class="comment"># for a specific file</span></span><br><span class="line"><span class="comment">### 切换回3或5次提交</span></span><br><span class="line">git reset HEAD~3 -- filename</span><br><span class="line">git reset HEAD~3 -- filename <span class="comment"># for a specific file</span></span><br><span class="line">git reset HEAD~5 -- filename</span><br><span class="line">git reset HEAD~5 -- filename <span class="comment"># for a specific file</span></span><br><span class="line"><span class="comment">### 切换回特定的提交，其中 0766c053 为提交 ID</span></span><br><span class="line">git reset 0766c053 -- filename</span><br><span class="line">git reset 0766c053 -- filename <span class="comment"># for a specific file</span></span><br><span class="line"><span class="comment">### 先前的命令是所谓的软重置。 你的代码已重置，但是git仍会保留其他代码的副本，以备你需要时使用。 另一方面，--hard 标志告诉Git覆盖工作目录中的所有更改。</span></span><br><span class="line">git reset --hard 0766c053</span><br></pre></td></tr></table></figure>
 
 
 
@@ -644,6 +644,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
@@ -652,19 +656,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">感悟</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">感悟</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,10 +685,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
