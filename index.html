@@ -285,10 +285,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="图片PNG文件转JPG文件"><a href="#图片PNG文件转JPG文件" class="headerlink" title="图片PNG文件转JPG文件"></a>图片PNG文件转JPG文件</h2><p><strong>使用方法：将该脚本放置于png文件所在的文件夹中，然后运行该脚本，即可将png文件转化为jpg文件，并放置于JPG文件夹下；</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">dirname_read = <span class="string">&quot;./&quot;</span>  								<span class="comment"># 源文件文件夹</span></span><br><span class="line">dirname_write = <span class="string">&quot;./JPG/&quot;</span>  							<span class="comment"># 目标文件文件夹</span></span><br><span class="line">names = os.listdir(dirname_read)</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">    portion = os.path.splitext(name)  				<span class="comment"># 分离文件名和扩展名</span></span><br><span class="line">    <span class="keyword">if</span> portion[<span class="number">1</span>] == <span class="string">&quot;.png&quot;</span>:          				<span class="comment"># 判断扩展名是否为png</span></span><br><span class="line">        img = Image.<span class="built_in">open</span>(dirname_read+name) 		<span class="comment"># 打开该文件</span></span><br><span class="line">        name = portion[<span class="number">0</span>] + <span class="string">&quot;.jpg&quot;</span> 					<span class="comment"># 重命名文件</span></span><br><span class="line">        to_save_path = dirname_write + name 		<span class="comment"># 设置保存路径</span></span><br><span class="line">        img = img.convert(<span class="string">&#x27;RGB&#x27;</span>)</span><br><span class="line">        <span class="comment"># RGBA意思是红色，绿色，蓝色,Alpha指透明度。而JPG不支持透明度，所以要么丢弃Alpha,要么保存为.png文件</span></span><br><span class="line">        img.save(to_save_path, quality=<span class="number">95</span>)  		<span class="comment"># 保存</span></span><br><span class="line">        count += <span class="number">1</span>  								<span class="comment"># 计数加一</span></span><br><span class="line">        <span class="built_in">print</span>(to_save_path, <span class="string">&quot;------conut:&quot;</span>, count)  <span class="comment"># 输出信息</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Count_Sum:&quot;</span>, count)  						<span class="comment"># 输出总数</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
+        <h2 id="图片PNG文件转JPG文件"><a href="#图片PNG文件转JPG文件" class="headerlink" title="图片PNG文件转JPG文件"></a>图片PNG文件转JPG文件
+        
+          <a class="article-more-a" href="/2022/04/22/%E5%B8%B8%E7%94%A8%E8%84%9A%E6%9C%AC%E6%B1%87%E6%80%BB/#more">more >></a>
+        
       
         <!-- 《添加版权声明 -->
         
@@ -1297,19 +1297,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">感悟</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1321,11 +1321,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1337,15 +1337,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
