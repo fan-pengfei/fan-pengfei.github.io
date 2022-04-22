@@ -15,14 +15,11 @@
 <meta property="og:site_name" content="樊鹏飞的博客">
 <meta property="og:description" content="​        最近接了一个项目，是做一个绕线机，一般用来绕变压器线圈，已经基本做好了，原理并不难，就是根据你输入的一些参数，比如漆包线的直径以及每一层的圈数还有就是一共要绕多少圈，然后由控制器控制步进电机根据光电传感器的信号来回运动，已达到均匀绕线的目的。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:/Users/xiaofei/Desktop/指针.bmp">
-<meta property="og:image" content="c:/Users/xiaofei/Desktop/无指针.BMP">
 <meta property="article:published_time" content="2021-12-22T01:47:01.000Z">
-<meta property="article:modified_time" content="2022-04-07T02:03:47.824Z">
+<meta property="article:modified_time" content="2022-04-22T01:10:21.096Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="DIY">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/xiaofei/Desktop/指针.bmp">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -194,8 +191,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_GPIO_EXTI_Callback</span><span class="params">(<span class="keyword">uint16_t</span> GPIO_Pin)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">uint32_t</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (GPIO_Pin == guangdian_Pin)</span><br><span class="line">    &#123;</span><br><span class="line">        i = <span class="number">65535</span>;</span><br><span class="line">        <span class="keyword">while</span> (i--)</span><br><span class="line">            ;</span><br><span class="line">        i = <span class="number">6553</span>;</span><br><span class="line">        <span class="keyword">while</span> (i--)</span><br><span class="line">            ;</span><br><span class="line">        <span class="keyword">if</span> (HAL_GPIO_ReadPin(guangdian_GPIO_Port, guangdian_Pin) == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (flag_stop == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (cnt_sum == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    flag_dir = N0;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (cnt_sum % N2 == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    flag_dir = !flag_dir;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (time_k1_temp &lt; (time_k1 / <span class="number">2</span>))</span><br><span class="line">                &#123;</span><br><span class="line">                    cnt_sum--;</span><br><span class="line">                    <span class="keyword">if</span> (cnt_sum &lt; <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        cnt_sum = <span class="number">0</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    cnt_sum++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (flag_dir == <span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    cnt_round = cnt_sum % N2;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    cnt_round = N2 - cnt_sum % N2;</span><br><span class="line">                &#125;</span><br><span class="line">                time_k1 = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            HAL_GPIO_TogglePin(User_led_GPIO_Port, User_led_Pin);</span><br><span class="line">        &#125;</span><br><span class="line">        __HAL_GPIO_EXTI_CLEAR_IT(guangdian_Pin);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (GPIO_Pin == guangdian2_Pin)</span><br><span class="line">    &#123;</span><br><span class="line">        i = <span class="number">65535</span>;</span><br><span class="line">        <span class="keyword">while</span> (i--)</span><br><span class="line">            ;</span><br><span class="line">        i = <span class="number">6553</span>;</span><br><span class="line">        <span class="keyword">while</span> (i--)</span><br><span class="line">            ;</span><br><span class="line">        <span class="keyword">if</span> (HAL_GPIO_ReadPin(guangdian2_GPIO_Port, guangdian2_Pin) == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (flag_stop == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                time_k1_temp = time_k1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        __HAL_GPIO_EXTI_CLEAR_IT(guangdian2_Pin);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>基本上判断正反转的关键的代码都在这个中断程序里边了，这个程序已经验证过了，确保是没有问题的。</p>
-<p>不得不说，这个甲方很好！<img src="C:\Users\xiaofei\Desktop\指针.bmp" alt="指针"></p>
-<p><img src="C:\Users\xiaofei\Desktop\无指针.BMP" alt="无指针"></p>
+<p>不得不说，这个甲方很好！</p>
 
       
         <!-- 《添加版权声明 -->
@@ -530,10 +526,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
@@ -543,6 +535,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,11 +570,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
