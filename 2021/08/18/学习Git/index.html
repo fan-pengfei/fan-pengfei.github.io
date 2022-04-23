@@ -16,7 +16,7 @@
 <meta property="og:description" content="Git相关的知识；">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-18T04:29:14.000Z">
-<meta property="article:modified_time" content="2022-04-22T02:00:43.733Z">
+<meta property="article:modified_time" content="2022-04-23T11:57:27.300Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
@@ -188,56 +188,56 @@
 <h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><blockquote>
 <p>初次使用时，在命令行中配置本地仓库的账号和邮箱：</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;username&quot;  </span><br><span class="line">$ git config --global user.email &quot;useremail&quot;  </span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;username&quot;</span>  </span><br><span class="line">$ git config --global user.email <span class="string">&quot;useremail&quot;</span>  </span><br></pre></td></tr></table></figure>
 
 
 
 <blockquote>
 <p>初始化Git,使用 cd 命令导航到要在终端中设置版本控制的目录，现在你可以像这样初始化 Git 存储库：</p>
 </blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
 
 
 
 <blockquote>
 <p>要开始对现有文件进行版本控制，你应该先跟踪这些文件并进行初始提交。要做到这一点，你首先需要将文件添加到 Git 中，并将它们附加到 Git 项目中。</p>
 </blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br></pre></td></tr></table></figure>
 
 
 
 <blockquote>
 <p>还有一些更高级的方法可以将文件添加到 Git 中，从而使你的工作流程更高效。我们可以执行以下操作，而不是试图查找所有有更改的文件并逐个添加它们：</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 逐个添加文件</span><br><span class="line">git add filename</span><br><span class="line"># 添加当前目录中的所有文件</span><br><span class="line">git add -A</span><br><span class="line"># 添加当前目录中的所有文件更改</span><br><span class="line">git add .</span><br><span class="line"># 选择要添加的更改（你可以 Y 或 N 完成所有更改）</span><br><span class="line">git add -p</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 逐个添加文件</span></span><br><span class="line">git add filename</span><br><span class="line"><span class="comment"># 添加当前目录中的所有文件</span></span><br><span class="line">git add -A</span><br><span class="line"><span class="comment"># 添加当前目录中的所有文件更改</span></span><br><span class="line">git add .</span><br><span class="line"><span class="comment"># 选择要添加的更改（你可以 Y 或 N 完成所有更改）</span></span><br><span class="line">git add -p</span><br></pre></td></tr></table></figure>
 
 
 
 <blockquote>
 <p>远程备份文件（Github）,因此，首先转到 <a href="https://link.zhihu.com/?target=http://github.com">http://github.com</a> 并创建一个存储库。然后，使用存储库的链接将其添加为本地 git 项目的来源，即该代码的存储位置；</p>
 </blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin \</span><br><span class="line">https:<span class="comment">//github.com/fan-pengfei/bash_learning.git</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin \</span><br><span class="line">https://github.com/fan-pengfei/bash_learning.git</span><br></pre></td></tr></table></figure>
 
 
 
 <blockquote>
 <p>远程备份代码：</p>
 </blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
 
 
 
 <blockquote>
 <p>git status 命令用于确定哪些文件处于哪种状态，它使你可以查看哪些文件已提交，哪些文件尚未提交。如果在所有文件都已提交并推送后运行此命令，则应该看到类似以下内容：</p>
 </blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># <span class="function">On branch master</span></span><br><span class="line"><span class="function">nothing to <span class="title">commit</span> <span class="params">(working directory clean)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line"><span class="comment"># On branch master</span></span><br><span class="line">nothing to commit (working directory clean)</span><br></pre></td></tr></table></figure>
 
 
 
 <blockquote>
 <p>我们可以使用 <code>git commit -m &#39;提交信息&#39;</code> 来将文件提交到 Git。对于提交简短消息来说，这一切都很好，但是如果你想做一些更精细的事情，你需要来学习更多的操作:</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">### 提交暂存文件，通常用于较短的提交消息</span><br><span class="line">git commit -m &#x27;commit message&#x27;</span><br><span class="line">### 添加文件并提交一次</span><br><span class="line">git commit filename -m &#x27;commit message&#x27;</span><br><span class="line">### 添加文件并提交暂存文件</span><br><span class="line">git commit -am &#x27;insert commit message&#x27;</span><br><span class="line">### 更改你的最新提交消息</span><br><span class="line">git commit --amend &#x27;new commit message&#x27; </span><br><span class="line"># 将一系列提交合并为一个提交，你可能会用它来组织混乱的提交历史记录</span><br><span class="line">git rebase -i</span><br><span class="line">### 这将为你提供核心编辑器上的界面：</span><br><span class="line"># Commands:</span><br><span class="line">#  p, pick = use commit</span><br><span class="line">#  r, reword = use commit, but edit the commit message</span><br><span class="line">#  e, edit = use commit, but stop for amending</span><br><span class="line">#  s, squash = use commit, but meld into previous commit</span><br><span class="line">#  f, fixup = like &quot;squash&quot;, but discard this commit&#x27;s log message</span><br><span class="line">#  x, exec = run command (the rest of the line) using shell</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 提交暂存文件，通常用于较短的提交消息</span></span><br><span class="line">git commit -m <span class="string">&#x27;commit message&#x27;</span></span><br><span class="line"><span class="comment">### 添加文件并提交一次</span></span><br><span class="line">git commit filename -m <span class="string">&#x27;commit message&#x27;</span></span><br><span class="line"><span class="comment">### 添加文件并提交暂存文件</span></span><br><span class="line">git commit -am <span class="string">&#x27;insert commit message&#x27;</span></span><br><span class="line"><span class="comment">### 更改你的最新提交消息</span></span><br><span class="line">git commit --amend <span class="string">&#x27;new commit message&#x27;</span> </span><br><span class="line"><span class="comment"># 将一系列提交合并为一个提交，你可能会用它来组织混乱的提交历史记录</span></span><br><span class="line">git rebase -i</span><br><span class="line"><span class="comment">### 这将为你提供核心编辑器上的界面：</span></span><br><span class="line"><span class="comment"># Commands:</span></span><br><span class="line"><span class="comment">#  p, pick = use commit</span></span><br><span class="line"><span class="comment">#  r, reword = use commit, but edit the commit message</span></span><br><span class="line"><span class="comment">#  e, edit = use commit, but stop for amending</span></span><br><span class="line"><span class="comment">#  s, squash = use commit, but meld into previous commit</span></span><br><span class="line"><span class="comment">#  f, fixup = like &quot;squash&quot;, but discard this commit&#x27;s log message</span></span><br><span class="line"><span class="comment">#  x, exec = run command (the rest of the line) using shell</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -676,11 +676,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -692,15 +692,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
