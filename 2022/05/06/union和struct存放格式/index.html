@@ -16,7 +16,7 @@
 <meta property="og:description" content="union、struct所占的空间大小">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-06T08:55:37.000Z">
-<meta property="article:modified_time" content="2022-05-06T08:56:54.001Z">
+<meta property="article:modified_time" content="2022-05-06T09:03:42.186Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="C语言">
 <meta name="twitter:card" content="summary">
@@ -201,23 +201,23 @@
 <table>
 <thead>
 <tr>
-<th><strong>a</strong></th>
-<th></th>
-<th></th>
-<th></th>
+<th align="center"><strong>a</strong></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>b</strong></td>
-<td><strong>b</strong></td>
-<td><strong>b</strong></td>
-<td><strong>b</strong></td>
+<td align="center"><strong>b</strong></td>
+<td align="center"><strong>b</strong></td>
+<td align="center"><strong>b</strong></td>
+<td align="center"><strong>b</strong></td>
 </tr>
 <tr>
-<td><strong>c</strong></td>
-<td><strong>c</strong></td>
-<td></td>
-<td></td>
+<td align="center"><strong>c</strong></td>
+<td align="center"><strong>c</strong></td>
+<td align="center"></td>
+<td align="center"></td>
 </tr>
 </tbody></table>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例如：</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">short</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//则sizeof(A)大小应该是4+4=8字节</span></span><br></pre></td></tr></table></figure>
@@ -225,17 +225,17 @@
 <table>
 <thead>
 <tr>
-<th><strong>a</strong></th>
-<th><strong>c</strong></th>
-<th><strong>c</strong></th>
-<th></th>
+<th align="center"><strong>a</strong></th>
+<th align="center"><strong>c</strong></th>
+<th align="center"><strong>c</strong></th>
+<th align="center"></th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>b</strong></td>
-<td><strong>b</strong></td>
-<td><strong>b</strong></td>
-<td><strong>b</strong></td>
+<td align="center"><strong>b</strong></td>
+<td align="center"><strong>b</strong></td>
+<td align="center"><strong>b</strong></td>
+<td align="center"><strong>b</strong></td>
 </tr>
 </tbody></table>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例如：</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">char</span> b[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">4</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//则sizeof(A)大小应该是1+2+4=7字节</span></span><br></pre></td></tr></table></figure>
@@ -243,13 +243,13 @@
 <table>
 <thead>
 <tr>
-<th>a</th>
-<th>b</th>
-<th>b</th>
-<th>c</th>
-<th>c</th>
-<th>c</th>
-<th>c</th>
+<th align="center">a</th>
+<th align="center">b</th>
+<th align="center">b</th>
+<th align="center">c</th>
+<th align="center">c</th>
+<th align="center">c</th>
+<th align="center">c</th>
 </tr>
 </thead>
 </table>
@@ -595,19 +595,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,15 +615,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,11 +635,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,10 +656,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
