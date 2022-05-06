@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://fan-pengfei.top">
   <title>union和struct存放格式 | 樊鹏飞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="union、struct所占的空间大小">
+  <meta name="description" content="union、struct所占的空间大小；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="union和struct存放格式">
 <meta property="og:url" content="http://fan-pengfei.top/2022/05/06/union%E5%92%8Cstruct%E5%AD%98%E6%94%BE%E6%A0%BC%E5%BC%8F/index.html">
 <meta property="og:site_name" content="樊鹏飞的博客">
-<meta property="og:description" content="union、struct所占的空间大小">
+<meta property="og:description" content="union、struct所占的空间大小；">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-06T08:55:37.000Z">
-<meta property="article:modified_time" content="2022-05-06T09:03:42.186Z">
+<meta property="article:modified_time" content="2022-05-06T09:07:49.910Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="C语言">
 <meta name="twitter:card" content="summary">
@@ -179,7 +179,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="union、struct所占的空间大小"><a href="#union、struct所占的空间大小" class="headerlink" title="union、struct所占的空间大小"></a>union、struct所占的空间大小<span id="more"></span></h1><h2 id="union"><a href="#union" class="headerlink" title="union:"></a><strong>union:</strong></h2><p>​        <strong>当多个数据需要共享内存或者多个数据每次只取其一时，可以利用联合体(union)。在C Programming Language 一书中对于联合体是这么描述的：</strong></p>
+        <blockquote>
+<p>union、struct所占的空间大小；<span id="more"></span></p>
+</blockquote>
+<h2 id="union"><a href="#union" class="headerlink" title="union:"></a><strong>union:</strong></h2><p>​        <strong>当多个数据需要共享内存或者多个数据每次只取其一时，可以利用联合体(union)。在C Programming Language 一书中对于联合体是这么描述的：</strong></p>
 <blockquote>
 <p><strong>联合体是一个结构；</strong></p>
 <p><strong>它的所有成员相对于基地址的偏移量都为0；</strong></p>
@@ -428,7 +431,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#union%E3%80%81struct%E6%89%80%E5%8D%A0%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.</span> <span class="toc-text">union、struct所占的空间大小</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#union"><span class="toc-number">1.1.</span> <span class="toc-text">union:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struct"><span class="toc-number">1.2.</span> <span class="toc-text">struct:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#union"><span class="toc-number">1.</span> <span class="toc-text">union:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struct"><span class="toc-number">2.</span> <span class="toc-text">struct:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">总结：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -627,6 +630,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
@@ -635,19 +642,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IAP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -656,6 +651,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
