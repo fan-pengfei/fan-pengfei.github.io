@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://fan-pengfei.top">
-  <title>Tag: Git | 樊鹏飞的博客</title>
+  <title>markdown绘制简单流程图 | 樊鹏飞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="网页描述">
-<meta property="og:type" content="website">
-<meta property="og:title" content="樊鹏飞的博客">
-<meta property="og:url" content="http://fan-pengfei.top/tags/Git/index.html">
+  <meta name="description" content="Markdown绘制简单流程图；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="markdown绘制简单流程图">
+<meta property="og:url" content="http://fan-pengfei.top/2022/05/07/markdown%E7%BB%98%E5%88%B6%E7%AE%80%E5%8D%95%E6%B5%81%E7%A8%8B%E5%9B%BE/index.html">
 <meta property="og:site_name" content="樊鹏飞的博客">
-<meta property="og:description" content="网页描述">
+<meta property="og:description" content="Markdown绘制简单流程图；">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-07T09:26:35.000Z">
+<meta property="article:modified_time" content="2022-05-07T10:19:19.861Z">
 <meta property="article:author" content="樊鹏飞">
+<meta property="article:tag" content="markdown">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
@@ -150,72 +153,281 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-markdown绘制简单流程图" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/08/18/%E5%AD%A6%E4%B9%A0Git/" class="archive-article-date">
-  	<time datetime="2021-08-18T04:29:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/18/%E5%AD%A6%E4%B9%A0Git/">Git学习记录</a>
+    <h1 class="article-title" itemprop="name">
+      markdown绘制简单流程图
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2022/05/07/markdown%E7%BB%98%E5%88%B6%E7%AE%80%E5%8D%95%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="archive-article-date">
+  	<time datetime="2022-05-07T09:26:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>  Markdown绘制简单流程图；<span id="more"></span></p>
+</blockquote>
+<h1 id="Typora流程图："><a href="#Typora流程图：" class="headerlink" title="Typora流程图："></a>Typora流程图：</h1><ul>
+<li><p><strong>输入```，然后输入flow即可</strong></p>
+<p>  <strong>如下图：</strong></p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    </span><br></pre></td></tr></table></figure></li>
+<li><p><strong>一些例子：</strong></p>
+<ul>
+<li><p><strong>例子1</strong></p>
+<ul>
+<li>```text<br>  st=&gt;start: Start<br>  i=&gt;inputoutput: 输入年份n<br>  cond1=&gt;condition: n能否被4整除？<br>  cond2=&gt;condition: n能否被100整除？<br>  cond3=&gt;condition: n能否被400整除？<br>  o1=&gt;inputoutput: 输出非闰年<br>  o2=&gt;inputoutput: 输出非闰年<br>  o3=&gt;inputoutput: 输出闰年<br>  o4=&gt;inputoutput: 输出闰年<br>  e=&gt;end<br>  st-&gt;i-&gt;cond1<br>  cond1(no)-&gt;o1-&gt;e<br>  cond1(yes)-&gt;cond2<br>  cond2(no)-&gt;o3-&gt;e<br>  cond2(yes)-&gt;cond3<br>  cond3(yes)-&gt;o2-&gt;e<br>  cond3(no)-&gt;o4-&gt;e  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```flow</span><br><span class="line">st=&gt;start: Start</span><br><span class="line">i=&gt;inputoutput: 输入年份n</span><br><span class="line">cond1=&gt;condition: n能否被4整除？</span><br><span class="line">cond2=&gt;condition: n能否被100整除？</span><br><span class="line">cond3=&gt;condition: n能否被400整除？</span><br><span class="line">o1=&gt;inputoutput: 输出非闰年</span><br><span class="line">o2=&gt;inputoutput: 输出非闰年</span><br><span class="line">o3=&gt;inputoutput: 输出闰年</span><br><span class="line">o4=&gt;inputoutput: 输出闰年</span><br><span class="line">e=&gt;end</span><br><span class="line">st-&gt;i-&gt;cond1</span><br><span class="line">cond1(no)-&gt;o1-&gt;e</span><br><span class="line">cond1(yes)-&gt;cond2</span><br><span class="line">cond2(no)-&gt;o3-&gt;e</span><br><span class="line">cond2(yes)-&gt;cond3</span><br><span class="line">cond3(yes)-&gt;o2-&gt;e</span><br><span class="line">cond3(no)-&gt;o4-&gt;e</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>例子2</strong></p>
+<ul>
+<li>```text<br>  st=&gt;start: start:&gt;<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a><br>  op1=&gt;operation: 操作1<br>  cond1=&gt;condition: YES or NO?<br>  sub=&gt;subroutine: 子程序<br>  e=&gt;end  st-&gt;op1-&gt;cond1<br>  cond1(yes)-&gt;e<br>  cond1(no)-&gt;sub(right)-&gt;op1    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">```flow</span><br><span class="line">st=&gt;start: start:&gt;http://www.baidu.com</span><br><span class="line">op1=&gt;operation: 操作1</span><br><span class="line">cond1=&gt;condition: YES or NO?</span><br><span class="line">sub=&gt;subroutine: 子程序</span><br><span class="line">e=&gt;end</span><br><span class="line"></span><br><span class="line">st-&gt;op1-&gt;cond1</span><br><span class="line">cond1(yes)-&gt;e</span><br><span class="line">cond1(no)-&gt;sub(right)-&gt;op1  </span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>例子3</strong></p>
+<ul>
+<li>```text<br>  st=&gt;start: Start|past:&gt;<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a><br>  e=&gt;end:  Ende|future:&gt;<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a><br>  op1=&gt;operation:  My Operation<br>  op2=&gt;operation:  Stuff|current<br>  sub1=&gt;subroutine:  My Subroutine|invalid<br>  cond=&gt;condition:  Yes or No|approved:&gt;<a target="_blank" rel="noopener" href="http://www.google.com/">http://www.google.com</a><br>  c2=&gt;condition:  Good idea|rejected<br>  io=&gt;inputoutput:  catch something…|future<br>  st-&gt;op1(right)-&gt;cond<br>  cond(yes, right)-&gt;c2<br>  cond(no)-&gt;sub1(left)-&gt;op1<br>  c2(yes)-&gt;io-&gt;e<br>  c2(no)-&gt;op2-&gt;e  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```flow</span><br><span class="line">st=&gt;start: Start|past:&gt;http://www.baidu.com</span><br><span class="line">e=&gt;end:  Ende|future:&gt;http://www.baidu.com</span><br><span class="line">op1=&gt;operation:  My Operation</span><br><span class="line">op2=&gt;operation:  Stuff|current</span><br><span class="line">sub1=&gt;subroutine:  My Subroutine|invalid</span><br><span class="line">cond=&gt;condition:  Yes or No|approved:&gt;http://www.google.com</span><br><span class="line">c2=&gt;condition:  Good idea|rejected</span><br><span class="line">io=&gt;inputoutput:  catch something...|future</span><br><span class="line">st-&gt;op1(right)-&gt;cond</span><br><span class="line">cond(yes, right)-&gt;c2</span><br><span class="line">cond(no)-&gt;sub1(left)-&gt;op1</span><br><span class="line">c2(yes)-&gt;io-&gt;e</span><br><span class="line">c2(no)-&gt;op2-&gt;e</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+        <!-- 《添加版权声明 -->
+        
+            <!-- 《添加版权声明 -->
+<!--添加版权声明https://github.com/JoeyBling/hexo-theme-yilia-plus/commit/c1215e132f6d5621c5fea83d3c4f7ccbcca074a3-->
+
+
+<!-- #版权基础设定：0-关闭声明； 1-文章对应的md文件里有declare: true属性，才有版权声明； 2-所有文章均有版权声明 -->
+
+  <div class="declare" hidden="hidden"></div>
+
+<!-- 添加版权声明》 -->
+
+        
+        <!-- 添加版权声明》 -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝可乐<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        			<a href="/categories/markdown//" class="article-tag-list-link color4">markdown</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://fan-pengfei.top/2022/05/07/markdown%E7%BB%98%E5%88%B6%E7%AE%80%E5%8D%95%E6%B5%81%E7%A8%8B%E5%9B%BE/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2022/05/07/python%E5%90%91bin%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0CRC32%E6%A0%A1%E9%AA%8C%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python向bin文件添加CRC32校验码</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Typora%E6%B5%81%E7%A8%8B%E5%9B%BE%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">Typora流程图：</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
 
     
+      <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  var notify = 'true' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+      // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+      av: AV,
+      el: '.valine_comment',
+      emoticon_url: 'https://cloud.panjunwen.com/alu',
+      emoticon_list: ["狂汗.png","不说话.png","汗.png","坐等.png","献花.png","不高兴.png","中刀.png","害羞.png","皱眉.png","小眼睛.png","暗地观察.png"],
+      app_id: 'npG1XmP1ddhLsT2R6u4nXdKz-gzGzoHsz',
+      app_key: 'fqEEJWxiAlwQyoAo7nXcqPyO',
+      placeholder: '有话要说？在此输入'
+    });
+</script>
+
+    
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="markdown绘制简单流程图" data-title="markdown绘制简单流程图" data-url="http://fan-pengfei.top/2022/05/07/markdown%E7%BB%98%E5%88%B6%E7%AE%80%E5%8D%95%E6%B5%81%E7%A8%8B%E5%9B%BE/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -249,9 +461,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
