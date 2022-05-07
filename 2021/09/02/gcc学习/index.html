@@ -281,11 +281,11 @@
 </ul>
 <p>一般头文件或库文件的位置在：</p>
 <ul>
-<li>/usr/include及其子目录底下的include文件夹</li>
-<li>/usr/local/include及其子目录底下的include文件夹</li>
-<li>/usr/lib</li>
-<li>/usr/local/lib</li>
-<li>/lib</li>
+<li>&#x2F;usr&#x2F;include及其子目录底下的include文件夹</li>
+<li>&#x2F;usr&#x2F;local&#x2F;include及其子目录底下的include文件夹</li>
+<li>&#x2F;usr&#x2F;lib</li>
+<li>&#x2F;usr&#x2F;local&#x2F;lib</li>
+<li>&#x2F;lib</li>
 </ul>
 <h2 id="7-生成静态库"><a href="#7-生成静态库" class="headerlink" title="7. 生成静态库"></a>7. 生成静态库</h2><p>为了生成.a文件，我们需要先生成.o文件。下面这行命令将我们的hello.o打包成静态库libhello.a：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar rcs libhello.a hello.o</span><br></pre></td></tr></table></figure>
@@ -307,9 +307,9 @@
 <p>该命令与使用静态库的命令相同，但是在共享库与静态库共存的情况下，优先使用共享库。</p>
 <p>共享库有时候并不不在当前的目录下，为了让gcc能够找得到共享库，有下面几种方法：</p>
 <ol>
-<li>拷贝.so文件到系统共享库路径下，一般指/usr/lib</li>
-<li>在~/.bash_profile文件中，配置LD_LIBRARY_PATH变量</li>
-<li>配置/etc/ld.so.conf，配置完成后调用ldconfig更新ld.so.cache</li>
+<li>拷贝.so文件到系统共享库路径下，一般指&#x2F;usr&#x2F;lib</li>
+<li>在~&#x2F;.bash_profile文件中，配置LD_LIBRARY_PATH变量</li>
+<li>配置&#x2F;etc&#x2F;ld.so.conf，配置完成后调用ldconfig更新ld.so.cache</li>
 </ol>
 <p>其中，shared选项表示生成共享库格式。fPIC表示产生位置无关码（position independent code），位置无关码表示它的运行、加载与内存位置无关，可以在任何内存地址进行加载。</p>
 <h2 id="9-库的搜索路径"><a href="#9-库的搜索路径" class="headerlink" title="9. 库的搜索路径"></a>9. 库的搜索路径</h2><p>库的搜索路径遵循几个搜索原则：从左到右搜索-I -l指定的目录，如果在这些目录中找不到，那么gcc会从由<strong>环境 变量指定的目录</strong>进行查找。头文件的环境变量是<strong>C_INCLUDE_PATH</strong>,库的环境变量是<strong>LIBRARY_PATH</strong>.如果还是找不到，那么会从<strong>系统指定指定的目录</strong>进行搜索。</p>
@@ -695,11 +695,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,10 +712,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -246,12 +246,12 @@
 
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 定义将要通过任务参数传递的字符串。定义为const，且不是在栈空间上，以保证任务执行时也有效。 */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> *pcTextForTask1 = “Task <span class="number">1</span> is running\r\n”;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> *pcTextForTask2 = “Task <span class="number">2</span> is running\t\n”;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* Create one of the two tasks. */</span></span><br><span class="line">    xTaskCreate( vTaskFunction, <span class="comment">/* 指向任务函数的指针. */</span></span><br><span class="line">                <span class="string">&quot;Task 1&quot;</span>, <span class="comment">/* 任务名. */</span></span><br><span class="line">                <span class="number">1000</span>, <span class="comment">/* 栈深度. */</span></span><br><span class="line">                (<span class="keyword">void</span>*)pcTextForTask1, <span class="comment">/* 通过任务参数传入需要打印输出的文本. */</span></span><br><span class="line">                <span class="number">1</span>, <span class="comment">/* 此任务运行在优先级1上. */</span></span><br><span class="line">                <span class="literal">NULL</span> ); <span class="comment">/* 不会用到此任务的句柄. */</span></span><br><span class="line">    <span class="comment">/* 同样的方法创建另一个任务。至此，由相同的任务代码(vTaskFunction)创建了多个任务，仅仅是传入</span></span><br><span class="line"><span class="comment">    的参数不同。同一个任务创建了两个实例。 */</span></span><br><span class="line">    xTaskCreate( vTaskFunction, <span class="string">&quot;Task 2&quot;</span>, <span class="number">1000</span>, (<span class="keyword">void</span>*)pcTextForTask2, <span class="number">1</span>, <span class="literal">NULL</span> );</span><br><span class="line">    <span class="comment">/* Start the scheduler so our tasks start executing. */</span></span><br><span class="line">    vTaskStartScheduler();</span><br><span class="line">    <span class="comment">/* If all is well then main() will never reach here as the scheduler will</span></span><br><span class="line"><span class="comment">    now be running the tasks. If main() does reach here then it is likely that</span></span><br><span class="line"><span class="comment">    there was insufficient heap memory available for the idle task to be created.</span></span><br><span class="line"><span class="comment">    CHAPTER 5 provides more information on memory management. */</span></span><br><span class="line">    <span class="keyword">for</span>( ;; );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="任务优先级："><a href="#任务优先级：" class="headerlink" title="任务优先级："></a>任务优先级：</h4><p>​        xTaskCreate() API 函数的参数 uxPriority 为创建的任务赋予了一个初始优先级。这个优先级可以在调度器启动后调用 vTaskPrioritySet() API 函数进行修改。<br>​        应 用 程 序 在 文 件 FreeRTOSConfig.h 中 设 定 的 编 译 时 配 置 常 量configMAX_PRIORITIES 的值，即是最多可具有的优先级数目。 FreeRTOS 本身并没有限定这个常量的最大值，但这个值越大，则内核花销的内存空间就越多。所以总是建议将此常量设为能够用到的最小值  。</p>
+<h4 id="任务优先级："><a href="#任务优先级：" class="headerlink" title="任务优先级："></a>任务优先级：</h4><p>​		xTaskCreate() API 函数的参数 uxPriority 为创建的任务赋予了一个初始优先级。这个优先级可以在调度器启动后调用 vTaskPrioritySet() API 函数进行修改。<br>​		应 用 程 序 在 文 件 FreeRTOSConfig.h 中 设 定 的 编 译 时 配 置 常 量configMAX_PRIORITIES 的值，即是最多可具有的优先级数目。 FreeRTOS 本身并没有限定这个常量的最大值，但这个值越大，则内核花销的内存空间就越多。所以总是建议将此常量设为能够用到的最小值  。</p>
 <blockquote>
 <p>低优先级号表示任务的优先级低，优先级号 0 表示最低优先级。有效的优先级号范围从 0 到(configMAX_PRIORITES – 1)  .</p>
 </blockquote>
-<p>​        时间片的长度通过心跳中断的频率进行设定，心跳中断频率由FreeRTOSConfig.h 中的编译时配置常量 configTICK_RATE_HZ 进行配置。比如说，如果 configTICK_RATE_HZ 设为100(HZ)，则时间片长度为 10ms。  </p>
-<p>​        需要说明的是， FreeRTOS API 函数调用中指定的时间总是以心跳中断为单位（通常的提法为心跳”ticks”)。常量portTICK_RATE_MS 用于将以心跳为单位的时间值转化为以毫秒为单位的时间值。有效精度依赖于系统心跳频率。</p>
+<p>​		时间片的长度通过心跳中断的频率进行设定，心跳中断频率由FreeRTOSConfig.h 中的编译时配置常量 configTICK_RATE_HZ 进行配置。比如说，如果 configTICK_RATE_HZ 设为100(HZ)，则时间片长度为 10ms。  </p>
+<p>​		需要说明的是， FreeRTOS API 函数调用中指定的时间总是以心跳中断为单位（通常的提法为心跳”ticks”)。常量portTICK_RATE_MS 用于将以心跳为单位的时间值转化为以毫秒为单位的时间值。有效精度依赖于系统心跳频率。</p>
 <blockquote>
 <p>调度器总是选择具有最高优先级的可运行任务来执行。  </p>
 </blockquote>
@@ -287,11 +287,10 @@
 </li>
 </ul>
 </li>
-</ul>
+<li><p>就绪状态</p>
 <ul>
-<li>就绪状态<ul>
 <li>如果任务处于非运行状态，但既没有阻塞也没有挂起，则这个任务处于就绪(ready，准备或就绪)状态。</li>
-<li>处于就绪态的任务能够被运行，但只是”准备(ready)”运行，而当前尚未运行。  </li>
+<li>处于就绪态的任务能够被运行，但只是”准备(ready)”运行，而当前尚未运行。</li>
 </ul>
 </li>
 </ul>
@@ -312,17 +311,17 @@
 <p>但处理器总是需要代码来执行——所以至少要有一个任务处于运行态。为了保证这一点，当调用vTaskStartScheduler()时，调度器会自动创建一个空闲任务。空闲任务是一个非常短小的循环——和最早的示例任务十分相似，总是可以运行。</p>
 <p>空闲任务拥有最低优先级(优先级 0)以保证其不会妨碍具有更高优先级的应用任务进入运行态——当然，没有任何限制说是不能把应用任务创建在与空闲任务相同的优先级上；如果需要的话，你一样可以和空闲任务一起共享优先级  ；</p>
 </blockquote>
-<p>​        通过空闲任务钩子函数(或称回调， hook, or call-back)，可以直接在空闲任务中添加应用程序相关的功能。空闲任务钩子函数会被空闲任务每循环一次就自动调用一次。  </p>
+<p>​		通过空闲任务钩子函数(或称回调， hook, or call-back)，可以直接在空闲任务中添加应用程序相关的功能。空闲任务钩子函数会被空闲任务每循环一次就自动调用一次。  </p>
 <p>通常钩子函数被用于：</p>
 <ul>
 <li>执行低优先级，后台或需要不停处理的功能代码。</li>
 <li>测试处系统处理裕量(空闲任务只会在所有其它任务都不运行时才有机会执行，所以测量出空闲任务占用的处理时间就可以清楚的知道系统有多少富余的处理时间)。</li>
-<li>将处理器配置到低功耗模式——提供一种自动省电方法，使得在没有任何应用功能需要处理的时候，系统自动进入省电模式。  </li>
+<li>将处理器配置到低功耗模式——提供一种自动省电方法，使得在没有任何应用功能需要处理的时候，系统自动进入省电模式。</li>
 </ul>
 <p>钩子函数必须遵循的规则：</p>
 <ul>
 <li>绝不能阻塞或挂起。空闲任务只会在其它任务都不运行时才会被执行(除非有应用任务共享空闲任务优先级)。以任何方式阻塞空闲任务都可能导致没有任务能够进入运行态！</li>
-<li>如果应用程序用到了 vTaskDelete() API函数，则空闲钩子函数必须能够尽快返回。因为在任务被删除后，空闲任务负责回收内核资源。如果空闲任务一直运行在钩子函数中，则无法进行回收工作。  </li>
+<li>如果应用程序用到了 vTaskDelete() API函数，则空闲钩子函数必须能够尽快返回。因为在任务被删除后，空闲任务负责回收内核资源。如果空闲任务一直运行在钩子函数中，则无法进行回收工作。</li>
 </ul>
 <p>钩子函数的函数原型：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vApplicationIdleHook</span><span class="params">( <span class="keyword">void</span> )</span></span>;  </span><br><span class="line"></span><br><span class="line"><span class="comment">//举例</span></span><br><span class="line"><span class="comment">/* Declare a variable that will be incremented by the hook function. */</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> ulIdleCycleCount = <span class="number">0UL</span>;</span><br><span class="line"><span class="comment">/* 空闲钩子函数必须命名为vApplicationIdleHook(),无参数也无返回值。 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vApplicationIdleHook</span><span class="params">( <span class="keyword">void</span> )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* This hook function does nothing but increment a counter. */</span></span><br><span class="line">    ulIdleCycleCount++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -356,7 +355,7 @@
 <li>为一种通用规则，完成硬实时功能的任务优先级会高于完成软件时功能任务的优先级。但其它一些因素，比如执行时间和处理器利用率，都必须纳入考虑范围，以保证应用程序不会超过硬实时的需求限制。  </li>
 <li>单调速率调度(Rate Monotonic Scheduling, RMS)是一种常用的优先级分配技术。其根据任务周期性执行的速率来分配一个唯一的优先级。具有最高周期执行频率的任务赋予高最优先级；具有最低周期执行频率的任务赋予最低优先级。  <ul>
 <li>这种优先级分配方式被证明了可以最大化整个应用程序的可调度性(schedulability)；</li>
-<li>但是运行时间不定以及并非所有任务都具有周期性，会使得对这种方式的全面计算变得相当复杂。  </li>
+<li>但是运行时间不定以及并非所有任务都具有周期性，会使得对这种方式的全面计算变得相当复杂。</li>
 </ul>
 </li>
 </ul>
@@ -407,7 +406,7 @@
 <p>同读队列一样，任务也可以在写队列时指定一个阻塞超时时间。这个时间是当被写队列已满时，任务进入阻塞态以等待队列空间有效的最长时间 ;</p>
 </blockquote>
 <blockquote>
-<p>由于队列可以被多个任务写入，所以对单个队列而言，也可能有多个任务处于阻塞状态以等待队列空间有效。这种情况下，一旦队列空间有效，只会有一个任务会被解除阻塞，这个任务就是所有等待任务中优先级最高的任务。而如果所有等待任务的优先级相同，那么被解除阻塞的任务将是等待最久的任务。  </p>
+<p>由于队列可以被多个任务写入，所以对单个队列而言，也可能有多个任务处于阻塞状态以等待队列空间有效。这种情况下，一旦队列空间有效，只会有一个任务会被解除阻塞，这个任务就是所有等待任务中优先级最高的任务。而如果所有等待任务的优先级相同，那么被解除阻塞的任务将是等待最久的任务。</p>
 </blockquote>
 </li>
 </ul>
@@ -518,7 +517,7 @@
 </li>
 <li>指针指向的内存空间必须有效 ；<ul>
 <li>如果指针指向的内存空间是动态分配的，只应该有一个任务负责对其进行内存释放。当这段内存空间被释放之后，就不应该有任何一个任务再访问这段空间。</li>
-<li>切忌用指针访问任务栈上分配的空间。因为当栈帧发生改变后，栈上的数据将不再有效。  </li>
+<li>切忌用指针访问任务栈上分配的空间。因为当栈帧发生改变后，栈上的数据将不再有效。</li>
 </ul>
 </li>
 </ul>
@@ -538,7 +537,7 @@
 <h4 id="二值信号量创建："><a href="#二值信号量创建：" class="headerlink" title="二值信号量创建："></a>二值信号量创建：</h4><blockquote>
 <p>vSemaphoreCreateBinary() API 函数</p>
 </blockquote>
-<p>​        FreeRTOS 中各种信号量的句柄都存储在xSemaphoreHandle 类型的变量中。在 使 用 信 号 量 之 前 ， 必 须 先 创 建 它 。 创 建二值信号量使用vSemaphoreCreateBinary()API 函数  ；</p>
+<p>​		FreeRTOS 中各种信号量的句柄都存储在xSemaphoreHandle 类型的变量中。在 使 用 信 号 量 之 前 ， 必 须 先 创 建 它 。 创 建二值信号量使用vSemaphoreCreateBinary()API 函数  ；</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vSemaphoreCreateBinary</span><span class="params">( xSemaphoreHandle xSemaphore )</span></span>;</span><br></pre></td></tr></table></figure>
 
 <table>
@@ -552,8 +551,8 @@
 <blockquote>
 <p>xSemaphoreTake() API 函数  </p>
 </blockquote>
-<p>​        “带走(Taking)”一个信号量意为”获取(Obtain)”或”接收(Receive)”信号量。只有当信号量有效的时候才可以被获取。在经典信号量术中， xSemaphoreTake()等同于一次 P()操作。</p>
-<p>​        除互斥信号量(Recursive Semaphore，直译为递归信号量，按通常的说法译为互斥信号量)外，所有类型的信号量都可以调用函数 xSemaphoreTake()来获取。但 xSemaphoreTake()不能在中断服务例程中调用。  </p>
+<p>​		“带走(Taking)”一个信号量意为”获取(Obtain)”或”接收(Receive)”信号量。只有当信号量有效的时候才可以被获取。在经典信号量术中， xSemaphoreTake()等同于一次 P()操作。</p>
+<p>​		除互斥信号量(Recursive Semaphore，直译为递归信号量，按通常的说法译为互斥信号量)外，所有类型的信号量都可以调用函数 xSemaphoreTake()来获取。但 xSemaphoreTake()不能在中断服务例程中调用。  </p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">portBASE_TYPE <span class="title">xSemaphoreTake</span><span class="params">( xSemaphoreHandle xSemaphore, portTickType xTicksToWait )</span></span>;</span><br></pre></td></tr></table></figure>
 
 <table>
@@ -602,7 +601,7 @@
 <li>中断产生。</li>
 <li>中断服务例程启动，给出信号量以使延迟处理任务解除阻塞。 </li>
 <li>当中断服务例程退出时，延迟处理任务得到执行。延迟处理任务做的第一件事便是获取信号量。</li>
-<li>延迟处理任务完成中断事件处理后，试图再次获取信号量——如果此时信号量无效，任务将切入阻塞待等待事件发生。  </li>
+<li>延迟处理任务完成中断事件处理后，试图再次获取信号量——如果此时信号量无效，任务将切入阻塞待等待事件发生。</li>
 </ul>
 <h4 id="计数信号量："><a href="#计数信号量：" class="headerlink" title="计数信号量："></a>计数信号量：</h4><blockquote>
 <p>一个二值信号量最多只可以锁存一个中断事件。在锁存的事<br>件还未被处理之前，如果还有中断事件发生，那么后续发生的中断事件将会丢失。如果用计数信号量代替二值信号量，那么，这种丢中断的情形将可以避免。<br>就如同我们可以把二值信号量看作是只有一个数据单元的队列一样，计数信号量可以看作是深度大于 1 的队列。任务其实对队列中存储的具体数据并不感兴趣——其只关心队列是空还是非空。<br>计数信号量每次被给出(Given)，其队列中的另一个空间将会被使用。队列中的有效数据单元个数就是信号量的”计数(Count)”值。  </p>
@@ -611,7 +610,7 @@
 <ul>
 <li>事件计数；<ul>
 <li>在这种用法中，每次事件发生时，中断服务例程都会“给出(Give)”信号量——信号量在每次被给出时其计数值加 1。延迟处理任务每处理一个任务都会”获取(Take)”一次<br>  信号量——信号量在每次被获取时其计数值减 1。信号量的计数值其实就是已发生事件的数目与已处理事件的数目之间的差值。  </li>
-<li>用于事件计数的计数信号量，在被创建时其计数值被初始化为 0。  </li>
+<li>用于事件计数的计数信号量，在被创建时其计数值被初始化为 0。</li>
 </ul>
 </li>
 <li>资源管理；<ul>
@@ -686,7 +685,7 @@
 <blockquote>
 <p>建立一个全面的中断嵌套模型需要设置configMAX_SYSCALL_INTERRUPT_PRIRITY为比 configKERNEL_INTERRUPT_PRIORITY更高的优先级。  </p>
 </blockquote>
-<p>==在任务优先级和中断优先级之间常常会产生一些混淆。中断优先级是由微控制器架构体系所定义的。中断优先级是硬件控制的优先级，中断服务例程的执行会与之关联。任务并非运行在中断服务中，所以赋予任务的软件优先级与赋予中断源的硬件优先级之间没有任何关系;==</p>
+<p>&#x3D;&#x3D;在任务优先级和中断优先级之间常常会产生一些混淆。中断优先级是由微控制器架构体系所定义的。中断优先级是硬件控制的优先级，中断服务例程的执行会与之关联。任务并非运行在中断服务中，所以赋予任务的软件优先级与赋予中断源的硬件优先级之间没有任何关系;&#x3D;&#x3D;</p>
 <p><img src="https://s2.loli.net/2022/05/06/wp2vsQ6FoMjrn98.png" alt="f1bc90e982af100396b5aabb12d69dd"></p>
 <ul>
 <li>处于中断优先级 1 到 3(含)的中断会被内核或处于临界区的应用程序阻塞执行， 但是它们可以调用中断安全版本的 FreeRTOS API 函数；</li>
@@ -720,12 +719,12 @@
 <ul>
 <li>函数体内使用了静态的数据结构；（static）</li>
 <li>函数体内调用了malloc()或者free()函数；</li>
-<li>函数体内调用了标准I/O函数。</li>
+<li>函数体内调用了标准I&#x2F;O函数。</li>
 <li>函数体内访问了全局变量</li>
 </ul>
 <p><strong>3、其他</strong></p>
 <ul>
-<li><p>在许多的处理器/编译器中，浮点一般都是不可重入的。</p>
+<li><p>在许多的处理器&#x2F;编译器中，浮点一般都是不可重入的。</p>
 </li>
 <li><p>printf()经常有重入和性能上的问题。</p>
 </li>
@@ -792,7 +791,7 @@
 <p>互斥量和二值信号量区别：</p>
 <ul>
 <li>用于互斥的信号量必须归还；</li>
-<li>用于同步的信号量通常是完成同步之后便丢弃，不再归还；  </li>
+<li>用于同步的信号量通常是完成同步之后便丢弃，不再归还；</li>
 </ul>
 <p><strong>xSemaphoreCreateMutex() API 函数</strong><br>        互斥量是一种信号量。 FreeRTOS 中所有种类的信号量句柄都保存在类型为xSemaphoreHandle 的变量中。<br>        互 斥 量 在 使 用 前 必 须 先 创 建 。创 建一个互斥 量 类 型 的 信 号 量 需 要 使 用xSemaphoreCreateMutex() API 函数。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">xSemaphoreHandle <span class="title">xSemaphoreCreateMutex</span><span class="params">( <span class="keyword">void</span> )</span></span>;</span><br></pre></td></tr></table></figure>
@@ -831,22 +830,22 @@
 <li>任务 A 执行，并成功获得了互斥量 X。</li>
 <li>任务 A 被任务 B 抢占。</li>
 <li>任务 B 成功获得了互斥量 Y，之后又试图获取互斥量 X——但互斥量 X 已经被任务 A 持有，所以对任务 B 无效。任务 B 选择进入阻塞态以等待互斥量 X 被释放。</li>
-<li>任务 A 得以继续执行。其试图获取互斥量 Y——但互斥量 Y 已经被任务 B持有而对任务 A 无效。任务 A 也选择进入阻塞态以等待互斥量 Y 被释放。  </li>
+<li>任务 A 得以继续执行。其试图获取互斥量 Y——但互斥量 Y 已经被任务 B持有而对任务 A 无效。任务 A 也选择进入阻塞态以等待互斥量 Y 被释放。</li>
 </ul>
-<p>​        这种情形的最终结局是，任务 A 在等待一个被任务 B 持有的互斥量，而任务 B 也在等待一个被任务 A 持有的互斥量。死锁于是发生，因为两个任务都不可能再执行下去了。  </p>
+<p>​		这种情形的最终结局是，任务 A 在等待一个被任务 B 持有的互斥量，而任务 B 也在等待一个被任务 A 持有的互斥量。死锁于是发生，因为两个任务都不可能再执行下去了。  </p>
 <blockquote>
-<p>​        和优先级反转一样，避免死锁的最好方法就是在设计阶段就考虑到这种潜在风险，这样设计出来的系统就不应该会出现死锁的情况。于实践经验而言，对于一个小型嵌入式系统，死锁并不是一个大问题，因为系统设计者对整个应用程序都非常清楚，所以能够找出发生死锁的代码区域，并消除死锁问题。  </p>
+<p>​		和优先级反转一样，避免死锁的最好方法就是在设计阶段就考虑到这种潜在风险，这样设计出来的系统就不应该会出现死锁的情况。于实践经验而言，对于一个小型嵌入式系统，死锁并不是一个大问题，因为系统设计者对整个应用程序都非常清楚，所以能够找出发生死锁的代码区域，并消除死锁问题。  </p>
 </blockquote>
 <h5 id="守护任务："><a href="#守护任务：" class="headerlink" title="守护任务："></a>守护任务：</h5><blockquote>
 <p>守护任务提供了一种干净利落的方法来实现互斥功能，而不用担心会发生优先级反转和死锁。<br>守护任务是对某个资源具有唯一所有权的任务。只有守护任务才可以直接访问其守护的资源——其它任务要访问该资源只能间接地通过守护任务提供的服务。</p>
 </blockquote>
 <p><strong>例子：</strong></p>
-<p>​        下例提供了 vPrintString()的另一种实现方法，这里采用了一个守护任务来管理对标准输出的访问。当一个任务想要往终端写信息的时候，其不能直接调用打印函数，而是将消息发送到守护任务。<br>守护任务使用了一个 FreeRTOS 队列来对终端实现串行化访问。该任务内部实现；不必考虑互斥，因为它是唯一能够直接访问终端的任务。<br>​        守护任务大部份时间都在阻塞态等待队列中有信息到来。当一个信息到达时，守护任务仅仅简单地将收到的信息写到标准输出上，然后又返回阻塞态，继续等待下一条信息地到来。守护任务的具体实现参见程序。<br>中断中可以写队列，所以中断服务例程也可以安全地使用守护任务提供的服务，从而把信息输出到终端。在本例中，一个心跳中断钩子函数用于每 200 心跳周期就输出一个消息。  </p>
+<p>​		下例提供了 vPrintString()的另一种实现方法，这里采用了一个守护任务来管理对标准输出的访问。当一个任务想要往终端写信息的时候，其不能直接调用打印函数，而是将消息发送到守护任务。<br>守护任务使用了一个 FreeRTOS 队列来对终端实现串行化访问。该任务内部实现；不必考虑互斥，因为它是唯一能够直接访问终端的任务。<br>​		守护任务大部份时间都在阻塞态等待队列中有信息到来。当一个信息到达时，守护任务仅仅简单地将收到的信息写到标准输出上，然后又返回阻塞态，继续等待下一条信息地到来。守护任务的具体实现参见程序。<br>中断中可以写队列，所以中断服务例程也可以安全地使用守护任务提供的服务，从而把信息输出到终端。在本例中，一个心跳中断钩子函数用于每 200 心跳周期就输出一个消息。  </p>
 <blockquote>
 <p>心跳钩子函数(或称回调函数)由内核在每次心跳中断时调用。要挂接一个心跳钩子函数，需要做以下配置：</p>
 <ul>
 <li>设置 FreeRTOSConfig.h 中的常量 configUSE_TICK_HOOK 为 1。</li>
-<li>提供钩子函数的具体实现，要使用固定的函数名和原型(void vApplicationTickHook( void );  )。  </li>
+<li>提供钩子函数的具体实现，要使用固定的函数名和原型(void vApplicationTickHook( void );  )。</li>
 </ul>
 <blockquote>
 <p>心跳钩子函数在系统心跳中断的上下文上执行，所以必须保证非常短小，适度占用栈空间，并且不要调用任何名字不带后缀  ”FromISR ”的 FreeRTOS API 函数。  </p>
@@ -871,7 +870,7 @@
 <li>这两个函数通常不具备线程安全特性。</li>
 <li>这两个函数具有不确定性。每次调用时的时间开销都可能不同。</li>
 <li>这两个函数会产生内存碎片。</li>
-<li>这两个函数会使得链接器配置得复杂  </li>
+<li>这两个函数会使得链接器配置得复杂</li>
 </ul>
 <blockquote>
 <p>当内核请求内存时，其调用 pvPortMalloc()而不是直接调用 malloc()；当释放内存时，调用 vPortFree()而不是直接调用 free()。 pvPortMalloc()具有与 malloc()相同的函数原型；vPortFree()也具有与 free()相同的函数原型。  </p>
@@ -882,15 +881,15 @@
 <h4 id="Heap-1-c"><a href="#Heap-1-c" class="headerlink" title="Heap_1.c :"></a>Heap_1.c :</h4><blockquote>
 <p>Heap_1.c 实现了一个非常基本的 pvPortMalloc()版本，而且没有实现 vPortFree()。<br>如果应用程序不需要删除任务，队列或者信号量，则具有使用 heap_1 的潜质。 Heap_1总是具有确定性。<br>这种分配方案是将 FreeRTOS 的内存堆空间看作一个简单的数组。当调用pvPortMalloc()时，则将数组又简单地细分为更小的内存块 。</p>
 </blockquote>
-<p>​        数组的总大小(字节为单位)在 FreeRTOSConfig.h 中由 configTOTAL_HEAP_SIZE定义。以这种方式定义一个巨型数组会让整个应用程序看起来耗费了许多内存——即使是在数组没有进行任何实际分配之前 ；</p>
-<p>​        需要为每个创建的任务在堆空间上分配一个任务控制块(TCB)和一个栈空间。</p>
+<p>​		数组的总大小(字节为单位)在 FreeRTOSConfig.h 中由 configTOTAL_HEAP_SIZE定义。以这种方式定义一个巨型数组会让整个应用程序看起来耗费了许多内存——即使是在数组没有进行任何实际分配之前 ；</p>
+<p>​		需要为每个创建的任务在堆空间上分配一个任务控制块(TCB)和一个栈空间。</p>
 <p><img src="https://s2.loli.net/2022/05/06/YNifnK4zS3MTy5G.png" alt="64deb16955358931d63d1f1b96180c0"></p>
 <h4 id="Heap-2-c："><a href="#Heap-2-c：" class="headerlink" title="Heap_2.c："></a>Heap_2.c：</h4><blockquote>
 <p>Heap_2.c 也是使用了一个由 configTOTAL_HEAP_SIZE 定义大小的简单数组。不同于 heap_1 的是， heap_2 采用了一个最佳匹配算法来分配内存，并且支持内存释放。<br>由于声明了一个静态数组，所以会让整个应用程序看起来耗费了许多内存——即使是在数组没有进行任何实际分配之前。<br>最佳匹配算法保证 pvPortMalloc()会使用最接近请求大小的空闲内存块。比如，考虑以下情形：</p>
 <ul>
 <li>堆空间中包含了三个空闲内存块，分别为 5 字节， 25 字节和 100 字节大小。</li>
 <li>pvPortMalloc()被调用以请求分配 20 字节大小的内存空间。</li>
-<li>匹配请求字节数的最小空闲内存块是具有25字节大小的内存块——所以pvPortMalloc()会将这个 25 字节块再分为一个 20 字节块和一个 5 字节块 ，然后返回一个指向 20 字节块的指针。剩下的 5 字节块则保留下来，留待以后调用 pvPortMalloc()时使用。  </li>
+<li>匹配请求字节数的最小空闲内存块是具有25字节大小的内存块——所以pvPortMalloc()会将这个 25 字节块再分为一个 20 字节块和一个 5 字节块 ，然后返回一个指向 20 字节块的指针。剩下的 5 字节块则保留下来，留待以后调用 pvPortMalloc()时使用。</li>
 </ul>
 </blockquote>
 <p><img src="https://s2.loli.net/2022/05/06/whEIuzmKPCO6jqf.png" alt="b4b183ef41b29a4898d438c9d152215"></p>
@@ -940,21 +939,21 @@
 </li>
 </ul>
 <p><strong>运行时栈侦测：方法 1</strong>  </p>
-<p>​        当 configCHECK_FOR_STACK_OVERFLOW 设置为 1 时选用方法 1。</p>
-<p>​        任务被交换出去的时候，该任务的整个上下文被保存到它自己的栈空间中。这时任务栈的使用应当达到了一个峰值。当 configCHECK_FOR_STACK_OVERFLOW 设为1 时，内核会在任务上下文保存后检查栈指针是否还指向有效栈空间。一旦检测到栈指针的指向已经超出任务栈的有效范围，栈溢出钩子函数就会被调用。</p>
+<p>​		当 configCHECK_FOR_STACK_OVERFLOW 设置为 1 时选用方法 1。</p>
+<p>​		任务被交换出去的时候，该任务的整个上下文被保存到它自己的栈空间中。这时任务栈的使用应当达到了一个峰值。当 configCHECK_FOR_STACK_OVERFLOW 设为1 时，内核会在任务上下文保存后检查栈指针是否还指向有效栈空间。一旦检测到栈指针的指向已经超出任务栈的有效范围，栈溢出钩子函数就会被调用。</p>
 <blockquote>
 <p>方法 1 具有较快的执行速度，但栈溢出有可能发生在两次上下文保存之间，这种情况不会被侦测到。  </p>
 </blockquote>
 <p><strong>运行时栈侦测：方法 2</strong>  </p>
-<p>​        将 configCHECK_FOR_STACK_OVERFLOW 设为 2 就可以选用方法 2。</p>
-<p>​        方法 2在方法 1 的基础上进行了一些补充。当创建任务时，任务栈空间中就预置了一个标记。方法 2 会检查任务栈的最后 20个字节，查看预置在这里的标记数据是否被覆盖。如果最后 20 个字节的标记数据与预设值不同，则栈溢出钩子函数就会被调用。</p>
+<p>​		将 configCHECK_FOR_STACK_OVERFLOW 设为 2 就可以选用方法 2。</p>
+<p>​		方法 2在方法 1 的基础上进行了一些补充。当创建任务时，任务栈空间中就预置了一个标记。方法 2 会检查任务栈的最后 20个字节，查看预置在这里的标记数据是否被覆盖。如果最后 20 个字节的标记数据与预设值不同，则栈溢出钩子函数就会被调用。</p>
 <blockquote>
 <p>方法 2 没有方法 1 的执行速度快，但测试仅仅 20 个字节相对来说也是很快的。这种方法应该可以侦测到任何时候发生的栈溢出，虽然理论上还是有可能漏掉一些情况，但这些情况几乎是不可能发生的。</p>
 </blockquote>
 <h4 id="其他错误："><a href="#其他错误：" class="headerlink" title="其他错误："></a>其他错误：</h4><blockquote>
 <p>问题现象：在一个 Demo 应用程序中增加了一个简单的任务，导致应用程序崩溃：</p>
 </blockquote>
-<p>​        任务创建时需要在内存堆中分配空间。许多 Demo 应用程序定义的堆空间大小只够用于创建 Demo 任务——所以当任务创建完成后，就没有足够的剩余空间来增加其它的任务，队列或信号量。空闲任务是在 vTaskStartScheduler()调用中自动创建的。如果由于内存不足而无法创建空闲任务， vTaskStartScheduler()会直接返回。在调用 vTaskStartScheduler()后加上一条空循环[for(;;)]可以使这种错误更加容易调试。如果要添加更多的任务，可以增加内存堆空间大小，或是删掉一些已存在的 Demo任务。  </p>
+<p>​		任务创建时需要在内存堆中分配空间。许多 Demo 应用程序定义的堆空间大小只够用于创建 Demo 任务——所以当任务创建完成后，就没有足够的剩余空间来增加其它的任务，队列或信号量。空闲任务是在 vTaskStartScheduler()调用中自动创建的。如果由于内存不足而无法创建空闲任务， vTaskStartScheduler()会直接返回。在调用 vTaskStartScheduler()后加上一条空循环[for(;;)]可以使这种错误更加容易调试。如果要添加更多的任务，可以增加内存堆空间大小，或是删掉一些已存在的 Demo任务。  </p>
 <blockquote>
 <p>问题现象：在中断中调用一个 API 函数，导致应用程序崩溃:</p>
 </blockquote>
@@ -962,29 +961,29 @@
 <blockquote>
 <p>问题现象：有时候应用程序会在中断服务例程中崩溃：</p>
 </blockquote>
-<p>​        需要做的第一件事是检查中断是否导致了栈溢出。在不同的移植平台和不同的编译器上，中断的定义和使用方法是不尽相同的——所<br>以，需要做的第二件事是检查在中断服务例程中使用的语法，宏和调用约定是否符合Demo 程序的文档描述，以及是否和 Demp 程序中提供的中断服务例程范例相同。</p>
-<p>​        如果应用程序工作在 Cotex M3 上，需要确定给中断指派优先级时，使用低优先级号数值表示逻辑上的高优先级中断，因为这种方式不太直观，所以很容易被忘记。</p>
-<p>​        一个比较常见的错误就是，在优先级高于configMAX_SYSCALL_INTERRUPT_PRIORITY的中断中调用了 FreeRTOS API 函数。  </p>
+<p>​		需要做的第一件事是检查中断是否导致了栈溢出。在不同的移植平台和不同的编译器上，中断的定义和使用方法是不尽相同的——所<br>以，需要做的第二件事是检查在中断服务例程中使用的语法，宏和调用约定是否符合Demo 程序的文档描述，以及是否和 Demp 程序中提供的中断服务例程范例相同。</p>
+<p>​		如果应用程序工作在 Cotex M3 上，需要确定给中断指派优先级时，使用低优先级号数值表示逻辑上的高优先级中断，因为这种方式不太直观，所以很容易被忘记。</p>
+<p>​		一个比较常见的错误就是，在优先级高于configMAX_SYSCALL_INTERRUPT_PRIORITY的中断中调用了 FreeRTOS API 函数。  </p>
 <blockquote>
 <p>问题现象：在启动第一个任务时，调度器就崩溃了：</p>
 </blockquote>
-<p>​        如果使用的是 ARM7，那么请确定调用 vTaskStartScheduler()时处理器处于管理模式(Supervisor mode)。最简单的方式就是在 main() 之前的 C 启动态码中将处理器设置为管理模式。 ARM7 的 Demo 应用程序就是这么做的。如果处理器不在管理模式下，调度器是无法启动的。</p>
+<p>​		如果使用的是 ARM7，那么请确定调用 vTaskStartScheduler()时处理器处于管理模式(Supervisor mode)。最简单的方式就是在 main() 之前的 C 启动态码中将处理器设置为管理模式。 ARM7 的 Demo 应用程序就是这么做的。如果处理器不在管理模式下，调度器是无法启动的。</p>
 <blockquote>
 <p>问题现象：临界区无法正确嵌套：</p>
 </blockquote>
-<p>​        除了 taskENTER_CRITICA()和 taskEXIT_CRITICAL()，千万不要在其它地方修改控制器的中断使能位或优先级标志。这两个宏维护了一个嵌套深度计数，所以只有当所有的嵌套调用都退出后计数值才会为 0，也才会使能中断。</p>
+<p>​		除了 taskENTER_CRITICA()和 taskEXIT_CRITICAL()，千万不要在其它地方修改控制器的中断使能位或优先级标志。这两个宏维护了一个嵌套深度计数，所以只有当所有的嵌套调用都退出后计数值才会为 0，也才会使能中断。</p>
 <blockquote>
 <p>问题现象：在调度器启动前应用程序就崩溃了：</p>
 </blockquote>
-<p>​        如果一个中断会产生上下文切换，则这个中断不能在调度器启动之前使能。这同样适用于那些需要读写队列或信号量的中断。在调度器启动之前，不能进行上下文切换。还有一些 API 函数不能在调度器启动之前调用。在调用 vTaskStartScheduler()之前，最好是限定只使用创建任务，队列和信号量的 API 函数。</p>
+<p>​		如果一个中断会产生上下文切换，则这个中断不能在调度器启动之前使能。这同样适用于那些需要读写队列或信号量的中断。在调度器启动之前，不能进行上下文切换。还有一些 API 函数不能在调度器启动之前调用。在调用 vTaskStartScheduler()之前，最好是限定只使用创建任务，队列和信号量的 API 函数。</p>
 <blockquote>
 <p>问题现象：在调度器挂起时调用 API 函数，导致应用程序崩溃；</p>
 </blockquote>
-<p>​        调用 vTaskSuspendAll()使得调度器挂起，而唤醒调度器调用 xTaskResumeAll()。<br>千万不要在调度器挂起时调用其它 API 函数。</p>
+<p>​		调用 vTaskSuspendAll()使得调度器挂起，而唤醒调度器调用 xTaskResumeAll()。<br>千万不要在调度器挂起时调用其它 API 函数。</p>
 <blockquote>
 <p>问题现象：函数原型 pxPortInitialiseStack()导致编译失败；</p>
 </blockquote>
-<p>​        每种移植都需要定义一个对应的宏，以把正确的内核头文件加入到工程中。如果编译函数原型 pxPortInitialiseStack()时出错，这种现象基本上可以确定是因为没有正确定义相应的宏。请参见附录 4 以获得更多信息。可以基本相应平台的 Demo 工程建立新的应用程序。这种方式就不用担心没有包含正确的文件，也不必担心没有正确地配置编译器选项。  </p>
+<p>​		每种移植都需要定义一个对应的宏，以把正确的内核头文件加入到工程中。如果编译函数原型 pxPortInitialiseStack()时出错，这种现象基本上可以确定是因为没有正确定义相应的宏。请参见附录 4 以获得更多信息。可以基本相应平台的 Demo 工程建立新的应用程序。这种方式就不用担心没有包含正确的文件，也不必担心没有正确地配置编译器选项。  </p>
 
       
         <!-- 《添加版权声明 -->
@@ -1375,11 +1374,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1388,10 +1391,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">

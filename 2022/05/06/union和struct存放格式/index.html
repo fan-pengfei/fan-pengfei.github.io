@@ -261,11 +261,11 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">union</span>&#123;</span></span><br><span class="line">	<span class="keyword">long</span> i;</span><br><span class="line">    <span class="keyword">int</span> k[<span class="number">5</span>];</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">&#125;UDATE;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> cat;</span><br><span class="line">    UDATE cow;</span><br><span class="line">    <span class="keyword">double</span> dog;</span><br><span class="line">&#125;too;</span><br><span class="line">UDATE temp;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d,%d&quot;</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(temp),<span class="built_in"><span class="keyword">sizeof</span></span>(too));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>结果是：24，40；</strong></p>
-<p><strong>前一个结果，联合体，最大单元为8，8对齐，4*5=20，最接近20的8的倍数为24；</strong></p>
-<p><strong>后一个结果，8+24+8=40；</strong></p>
-<p><strong>cat占用4个，cow占用24个，cow对齐方式为8字节，所以cat后边要填充4个字节，即cat和cow共占用8+24=32个，再加上dog占的8个字节，所以一共是40个字节。</strong></p>
-<h2 id="packed"><a href="#packed" class="headerlink" title="__packed"></a><strong>__packed</strong></h2><p>​        像union和struct这样的数据结构，总有一些字节是浪费掉的，这样做的目的很简单，就是因为在大多数计算机体系结构中，对内存操作时按整字存取才能达到最高效率，相当于是以空间换取时间。</p>
-<p>​        当然在某些计算机体系结构中，比如ARM，是支持非对齐字传输的，也就是说变量并不一定要按照字长对齐，尽管这样可能会降低效率，但换来的是存储空间上的节约。在mdk中加上__packed关键字，可以得到非对齐字的紧凑型结构体，则会强制编译器将结构体成员按1字节对齐，则以下结构体占用空间仍为15字节。</p>
+<p><strong>前一个结果，联合体，最大单元为8，8对齐，4*5&#x3D;20，最接近20的8的倍数为24；</strong></p>
+<p><strong>后一个结果，8+24+8&#x3D;40；</strong></p>
+<p><strong>cat占用4个，cow占用24个，cow对齐方式为8字节，所以cat后边要填充4个字节，即cat和cow共占用8+24&#x3D;32个，再加上dog占的8个字节，所以一共是40个字节。</strong></p>
+<h2 id="packed"><a href="#packed" class="headerlink" title="__packed"></a><strong>__packed</strong></h2><p>​		像union和struct这样的数据结构，总有一些字节是浪费掉的，这样做的目的很简单，就是因为在大多数计算机体系结构中，对内存操作时按整字存取才能达到最高效率，相当于是以空间换取时间。</p>
+<p>​		当然在某些计算机体系结构中，比如ARM，是支持非对齐字传输的，也就是说变量并不一定要按照字长对齐，尽管这样可能会降低效率，但换来的是存储空间上的节约。在mdk中加上__packed关键字，可以得到非对齐字的紧凑型结构体，则会强制编译器将结构体成员按1字节对齐，则以下结构体占用空间仍为15字节。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> __packed <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;   	 <span class="comment">//1byte</span></span><br><span class="line">    <span class="keyword">int</span> b;   	 <span class="comment">//4byte</span></span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">2</span>]    <span class="comment">//2byte</span></span><br><span class="line">    <span class="keyword">double</span> d;    <span class="comment">//8byte</span></span><br><span class="line">&#125;Test;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -283,17 +283,17 @@
 <blockquote>
 <p>运行结果：4</p>
 </blockquote>
-<p>m、n、p 的类型都是 unsigned int，sizeof 的结果为 4 个字节（Byte），也即 32 个位（Bit）。m、n、p 的位宽之和为 6+12+4 = 22，小于 32，所以它们会挨着存储，中间没有缝隙。</p>
+<p>m、n、p 的类型都是 unsigned int，sizeof 的结果为 4 个字节（Byte），也即 32 个位（Bit）。m、n、p 的位宽之和为 6+12+4 &#x3D; 22，小于 32，所以它们会挨着存储，中间没有缝隙。</p>
 <blockquote>
 <p>sizeof(struct bs) 的大小之所以为 4，而不是 3，是因为要将内存对齐到 4 个字节，以便提高存取效率；</p>
 </blockquote>
-<p>如果将成员 m 的位宽改为 22，那么输出结果将会是 8，因为 22+12 = 34，大于 32，n 会从新的位置开始存储，相对 m 的偏移量是 sizeof(unsigned int)，也即 4 个字节。</p>
+<p>如果将成员 m 的位宽改为 22，那么输出结果将会是 8，因为 22+12 &#x3D; 34，大于 32，n 会从新的位置开始存储，相对 m 的偏移量是 sizeof(unsigned int)，也即 4 个字节。</p>
 <p>如果再将成员 p 的位宽也改为 22，那么输出结果将会是 12，三个成员都不会挨着存储。</p>
-<p><strong>2、当相邻成员的类型不同时，不同的编译器有不同的实现方案，GCC会压缩存储，而 VC/VS 不会。</strong></p>
+<p><strong>2、当相邻成员的类型不同时，不同的编译器有不同的实现方案，GCC会压缩存储，而 VC&#x2F;VS 不会。</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bs</span>&#123;</span></span><br><span class="line">        <span class="keyword">unsigned</span> m: <span class="number">12</span>;</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">char</span> ch: <span class="number">4</span>;</span><br><span class="line">        <span class="keyword">unsigned</span> p: <span class="number">4</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(struct bs));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>在 GCC 下的运行结果为 4，三个成员挨着存储；在 VC/VS 下的运行结果为 12，三个成员按照各自的类型存储（与不指定位宽时的存储方式相同）。</p>
+<p>在 GCC 下的运行结果为 4，三个成员挨着存储；在 VC&#x2F;VS 下的运行结果为 12，三个成员按照各自的类型存储（与不指定位宽时的存储方式相同）。</p>
 </blockquote>
 <p><strong>3、如果成员之间穿插着非位域成员，那么不会进行压缩。例如以下：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">bs</span>&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> m: <span class="number">12</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> ch;</span><br><span class="line">    <span class="keyword">unsigned</span> p: <span class="number">4</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -697,11 +697,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,10 +714,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
