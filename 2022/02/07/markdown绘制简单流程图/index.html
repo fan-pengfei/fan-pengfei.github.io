@@ -185,7 +185,7 @@
 <h1 id="Typora流程图："><a href="#Typora流程图：" class="headerlink" title="Typora流程图："></a>Typora流程图：</h1><ul>
 <li><p><strong>输入```，然后输入flow即可</strong></p>
 <p>  <strong>如下图：</strong></p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    </span><br></pre></td></tr></table></figure></li>
+  <div id="flowchart-0" class="flow-chart"></div></li>
 <li><p><strong>一些例子：</strong></p>
 <ul>
 <li><p><strong>例子1</strong></p>
@@ -194,7 +194,7 @@
 </ul>
 </li>
 </ul>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: Start</span><br><span class="line">i=&gt;inputoutput: 输入年份n</span><br><span class="line">cond1=&gt;condition: n能否被4整除？</span><br><span class="line">cond2=&gt;condition: n能否被100整除？</span><br><span class="line">cond3=&gt;condition: n能否被400整除？</span><br><span class="line">o1=&gt;inputoutput: 输出非闰年</span><br><span class="line">o2=&gt;inputoutput: 输出非闰年</span><br><span class="line">o3=&gt;inputoutput: 输出闰年</span><br><span class="line">o4=&gt;inputoutput: 输出闰年</span><br><span class="line">e=&gt;end</span><br><span class="line">st-&gt;i-&gt;cond1</span><br><span class="line">cond1(no)-&gt;o1-&gt;e</span><br><span class="line">cond1(yes)-&gt;cond2</span><br><span class="line">cond2(no)-&gt;o3-&gt;e</span><br><span class="line">cond2(yes)-&gt;cond3</span><br><span class="line">cond3(yes)-&gt;o2-&gt;e</span><br><span class="line">cond3(no)-&gt;o4-&gt;e</span><br></pre></td></tr></table></figure>
+  <div id="flowchart-1" class="flow-chart"></div>
 
 <ul>
 <li><p><strong>例子2</strong></p>
@@ -203,20 +203,54 @@
 </ul>
 </li>
 </ul>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: start:&gt;http://www.baidu.com</span><br><span class="line">op1=&gt;operation: 操作1</span><br><span class="line">cond1=&gt;condition: YES or NO?</span><br><span class="line">sub=&gt;subroutine: 子程序</span><br><span class="line">e=&gt;end</span><br><span class="line"></span><br><span class="line">st-&gt;op1-&gt;cond1</span><br><span class="line">cond1(yes)-&gt;e</span><br><span class="line">cond1(no)-&gt;sub(right)-&gt;op1  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  <div id="flowchart-2" class="flow-chart"></div>
 
 <ul>
 <li><p><strong>例子3</strong></p>
 <ul>
 <li>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: Start|past:&gt;http://www.baidu.com</span><br><span class="line">e=&gt;end:  Ende|future:&gt;http://www.baidu.com</span><br><span class="line">op1=&gt;operation:  My Operation</span><br><span class="line">op2=&gt;operation:  Stuff|current</span><br><span class="line">sub1=&gt;subroutine:  My Subroutine|invalid</span><br><span class="line">cond=&gt;condition:  Yes or No|approved:&gt;http://www.google.com</span><br><span class="line">c2=&gt;condition:  Good idea|rejected</span><br><span class="line">io=&gt;inputoutput:  catch something...|future</span><br><span class="line">st-&gt;op1(right)-&gt;cond</span><br><span class="line">cond(yes, right)-&gt;c2</span><br><span class="line">cond(no)-&gt;sub1(left)-&gt;op1</span><br><span class="line">c2(yes)-&gt;io-&gt;e</span><br><span class="line">c2(no)-&gt;op2-&gt;e</span><br></pre></td></tr></table></figure></li>
 </ul>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: Start|past:&gt;http://www.baidu.com</span><br><span class="line">e=&gt;end:  Ende|future:&gt;http://www.baidu.com</span><br><span class="line">op1=&gt;operation:  My Operation</span><br><span class="line">op2=&gt;operation:  Stuff|current</span><br><span class="line">sub1=&gt;subroutine:  My Subroutine|invalid</span><br><span class="line">cond=&gt;condition:  Yes or No|approved:&gt;http://www.google.com</span><br><span class="line">c2=&gt;condition:  Good idea|rejected</span><br><span class="line">io=&gt;inputoutput:  catch something...|future</span><br><span class="line">st-&gt;op1(right)-&gt;cond</span><br><span class="line">cond(yes, right)-&gt;c2</span><br><span class="line">cond(no)-&gt;sub1(left)-&gt;op1</span><br><span class="line">c2(yes)-&gt;io-&gt;e</span><br><span class="line">c2(no)-&gt;op2-&gt;e</span><br></pre></td></tr></table></figure>
-
-</li>
+  <div id="flowchart-3" class="flow-chart"></div></li>
 </ul>
 </li>
 </ul>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none"> </textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">    st=>start: Start
+    i=>inputoutput: 输入年份n
+    cond1=>condition: n能否被4整除？
+    cond2=>condition: n能否被100整除？
+    cond3=>condition: n能否被400整除？
+    o1=>inputoutput: 输出非闰年
+    o2=>inputoutput: 输出非闰年
+    o3=>inputoutput: 输出闰年
+    o4=>inputoutput: 输出闰年
+    e=>end
+    st->i->cond1
+    cond1(no)->o1->e
+    cond1(yes)->cond2
+    cond2(no)->o3->e
+    cond2(yes)->cond3
+    cond3(yes)->o2->e
+    cond3(no)->o4->e</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script><textarea id="flowchart-2-code" style="display: none">    st=>start: start:>http://www.baidu.com
+    op1=>operation: 操作1
+    cond1=>condition: YES or NO?
+    sub=>subroutine: 子程序
+    e=>end
+    
+    st->op1->cond1
+    cond1(yes)->e
+    cond1(no)->sub(right)->op1</textarea><textarea id="flowchart-2-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-2-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-2-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-2", options);</script><textarea id="flowchart-3-code" style="display: none">        st=>start: Start|past:>http://www.baidu.com
+        e=>end:  Ende|future:>http://www.baidu.com
+        op1=>operation:  My Operation
+        op2=>operation:  Stuff|current
+        sub1=>subroutine:  My Subroutine|invalid
+        cond=>condition:  Yes or No|approved:>http://www.google.com
+        c2=>condition:  Good idea|rejected
+        io=>inputoutput:  catch something...|future
+        st->op1(right)->cond
+        cond(yes, right)->c2
+        cond(no)->sub1(left)->op1
+        c2(yes)->io->e
+        c2(no)->op2->e</textarea><textarea id="flowchart-3-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-3-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-3-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-3", options);</script>
       
         <!-- 《添加版权声明 -->
         
@@ -558,11 +592,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
