@@ -16,7 +16,7 @@
 <meta property="og:description" content="union、struct所占的空间大小；">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-06T08:55:37.000Z">
-<meta property="article:modified_time" content="2022-05-06T09:07:49.910Z">
+<meta property="article:modified_time" content="2022-05-07T02:24:56.040Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="C语言">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
         <blockquote>
 <p>union、struct所占的空间大小；<span id="more"></span></p>
 </blockquote>
-<h2 id="union"><a href="#union" class="headerlink" title="union:"></a><strong>union:</strong></h2><p>​        <strong>当多个数据需要共享内存或者多个数据每次只取其一时，可以利用联合体(union)。在C Programming Language 一书中对于联合体是这么描述的：</strong></p>
+<h2 id="union"><a href="#union" class="headerlink" title="union:"></a>union:</h2><p>​        <strong>当多个数据需要共享内存或者多个数据每次只取其一时，可以利用联合体(union)。在C Programming Language 一书中对于联合体是这么描述的：</strong></p>
 <blockquote>
 <p><strong>联合体是一个结构；</strong></p>
 <p><strong>它的所有成员相对于基地址的偏移量都为0；</strong></p>
@@ -264,6 +264,13 @@
 <p><strong>前一个结果，联合体，最大单元为8，8对齐，4*5=20，最接近20的8的倍数为24；</strong></p>
 <p><strong>后一个结果，8+24+8=40；</strong></p>
 <p><strong>cat占用4个，cow占用24个，cow对齐方式为8字节，所以cat后边要填充4个字节，即cat和cow共占用8+24=32个，再加上dog占的8个字节，所以一共是40个字节。</strong></p>
+<h2 id="packed"><a href="#packed" class="headerlink" title="__packed"></a><strong>__packed</strong></h2><p>​        像union和struct这样的数据结构，总有一些字节是浪费掉的，这样做的目的很简单，就是因为在大多数计算机体系结构中，对内存操作时按整字存取才能达到最高效率，相当于是以空间换取时间。</p>
+<p>​        当然在某些计算机体系结构中，比如ARM，是支持非对齐字传输的，也就是说变量并不一定要按照字长对齐，尽管这样可能会降低效率，但换来的是存储空间上的节约。在mdk中加上__packed关键字，可以得到非对齐字的紧凑型结构体，则会强制编译器将结构体成员按1字节对齐，则以下结构体占用空间仍为15字节。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> __packed <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;   	 <span class="comment">//1byte</span></span><br><span class="line">    <span class="keyword">int</span> b;   	 <span class="comment">//4byte</span></span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">2</span>]    <span class="comment">//2byte</span></span><br><span class="line">    <span class="keyword">double</span> d;    <span class="comment">//8byte</span></span><br><span class="line">&#125;Test;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果编译器不支持__packed关键字，将其定义为空宏即可  #define  __packed.</p>
+</blockquote>
 
       
         <!-- 《添加版权声明 -->
@@ -431,7 +438,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#union"><span class="toc-number">1.</span> <span class="toc-text">union:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struct"><span class="toc-number">2.</span> <span class="toc-text">struct:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">总结：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#union"><span class="toc-number">1.</span> <span class="toc-text">union:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struct"><span class="toc-number">2.</span> <span class="toc-text">struct:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">总结：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#packed"><span class="toc-number">4.</span> <span class="toc-text">__packed</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -598,15 +605,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,10 +629,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -630,15 +637,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,10 +662,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
