@@ -15,11 +15,14 @@
 <meta property="og:site_name" content="樊鹏飞的博客">
 <meta property="og:description" content="Markdown绘制简单流程图；">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/05/07/Rb4wvT6HcKjpLyX.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/07/BqnaHQml5i9exMD.png">
 <meta property="article:published_time" content="2022-02-07T09:26:35.000Z">
-<meta property="article:modified_time" content="2022-05-07T13:46:04.368Z">
+<meta property="article:modified_time" content="2022-05-07T14:11:56.353Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="markdown">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/05/07/Rb4wvT6HcKjpLyX.png">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -182,25 +185,22 @@
         <blockquote>
 <p>  Markdown绘制简单流程图；<span id="more"></span></p>
 </blockquote>
-<h1 id="Typora流程图："><a href="#Typora流程图：" class="headerlink" title="Typora流程图："></a>Typora流程图：</h1><ul>
-<li><p><strong>输入`&#96;&#96;，然后输入mermaid即可</strong></p>
-<p><strong>如下图：</strong></p>
-</li>
+<h1 id="Typora流程图："><a href="#Typora流程图：" class="headerlink" title="Typora流程图："></a>Typora流程图：</h1><h2 id="mermaid效果"><a href="#mermaid效果" class="headerlink" title="mermaid效果"></a>mermaid效果</h2><ul>
+<li><strong>输入`&#96;&#96;，然后输入mermaid即可</strong></li>
 </ul>
-<p>​    </p>
-<pre class="mermaid">graph TD
-   B((开始)) -->C{判断}
-   C --  a=1 -->D[执行语句1]
-   C --  a=2  -->E[执行语句2]
-   C --  a=3 -->F[执行语句3]
-   C -- a=4  -->G[执行语句4]
-   D--> AA((结束))
-   E--> AA
-   F--> AA
-   G--> AA</pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">```mermaid</span><br><span class="line">graph TD</span><br><span class="line">   B((开始)) --&gt;C&#123;判断&#125;</span><br><span class="line">   C --  a=1 --&gt;D[执行语句1]</span><br><span class="line">   C --  a=2  --&gt;E[执行语句2]</span><br><span class="line">   C --  a=3 --&gt;F[执行语句3]</span><br><span class="line">   C -- a=4  --&gt;G[执行语句4]</span><br><span class="line">   D--&gt; AA((结束))</span><br><span class="line">   E--&gt; AA</span><br><span class="line">   F--&gt; AA</span><br><span class="line">   G--&gt; AA   </span><br></pre></td></tr></table></figure>
 
+<p>  <strong>如下图：</strong></p>
+<p>  <img src="https://s2.loli.net/2022/05/07/Rb4wvT6HcKjpLyX.png" alt="a4e80fed35165401f57d392375ac726"></p>
+<h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><blockquote>
+<p>  官网说明文档 <a target="_blank" rel="noopener" href="https://mermaid-js.github.io/mermaid/#/">Mermaid</a> .</p>
+</blockquote>
+<h2 id="flowchar效果"><a href="#flowchar效果" class="headerlink" title="flowchar效果"></a>flowchar效果</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">```flow</span><br><span class="line">st=&gt;start: 开始节点</span><br><span class="line">in=&gt;inputoutput: 输入</span><br><span class="line">e=&gt;end: 结束节点</span><br><span class="line">op=&gt;operation: 操作节点</span><br><span class="line">cond=&gt;condition: 条件节点</span><br><span class="line">sub=&gt;subroutine: 子例程</span><br><span class="line">out=&gt;inputoutput: 输出</span><br><span class="line">st(right)-&gt;in-&gt;op-&gt;cond</span><br><span class="line">cond(yes,right)-&gt;out-&gt;e</span><br><span class="line">cond(no)-&gt;sub</span><br></pre></td></tr></table></figure>
 
-<p>​    </p>
+<p><img src="https://s2.loli.net/2022/05/07/BqnaHQml5i9exMD.png" alt="image-20220507220027459"></p>
+<h3 id="语法：-1"><a href="#语法：-1" class="headerlink" title="语法："></a>语法：</h3><blockquote>
+<p>官网说明文档 <a target="_blank" rel="noopener" href="https://flowchart.js.org/">FlowChar</a> .</p>
+</blockquote>
 
       
         <!-- 《添加版权声明 -->
@@ -368,7 +368,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Typora%E6%B5%81%E7%A8%8B%E5%9B%BE%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">Typora流程图：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Typora%E6%B5%81%E7%A8%8B%E5%9B%BE%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">Typora流程图：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#mermaid%E6%95%88%E6%9E%9C"><span class="toc-number">1.1.</span> <span class="toc-text">mermaid效果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">语法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flowchar%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.</span> <span class="toc-text">flowchar效果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">语法：</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -584,6 +584,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
@@ -593,10 +597,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,15 +616,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
