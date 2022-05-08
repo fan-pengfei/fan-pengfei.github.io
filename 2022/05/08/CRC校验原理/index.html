@@ -15,12 +15,23 @@
 <meta property="og:site_name" content="樊鹏飞的博客">
 <meta property="og:description" content="之前经常用CRC校验，今天解释一下其原理；">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/Hub9TnYoEKFkjJg.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/DXcUHg53inq6SQv.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/zl1XDOVCyASi4E9.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/YPUCXLQ6IkaOEVb.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/82tngcAETPJsID7.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/8V1IBEOS6WrUvXK.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/sjrn3WzmOH5TxoD.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/36E7rPOgdCVSYsn.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/Bk3qjRNtcsvlU6X.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/yhsQcYqXG5ZiBVu.jpg">
 <meta property="article:published_time" content="2022-05-08T02:21:29.000Z">
-<meta property="article:modified_time" content="2022-05-08T02:23:11.454Z">
+<meta property="article:modified_time" content="2022-05-08T09:03:27.443Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="CRC">
 <meta property="article:tag" content="校验">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/05/08/Hub9TnYoEKFkjJg.jpg">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -183,6 +194,409 @@
         <blockquote>
 <p>  之前经常用CRC校验，今天解释一下其原理；<span id="more"></span></p>
 </blockquote>
+<h2 id="简单介绍："><a href="#简单介绍：" class="headerlink" title="简单介绍："></a>简单介绍：</h2><p><strong>循环冗余校验检错方案</strong></p>
+<blockquote>
+<p>  CRC校验原理看起来比较复杂，好难懂，因为大多数书上基本上是以二进制的多项式形式来说明的。其实很简单的问题，其根本思想就是先在要发送的帧后面附加一个数（这个就是用来校验的校验码，但要注意，这里的数也是二进制序列的，下同），生成一个新帧发送给接收端。当然，这个附加的数不是随意的，它  要使所生成的新帧能与发送端和接收端共同选定的某个特定数整除（注意，这里不是直接采用二进制除法，而是采用一种称之为“模2除法”）。到达接收端后，再把接收到的新帧除以（同样采用“模2除法”）这个选定的除数。因为在发送端发送数据帧之前就已通过附加一个数，做了“去余”处理（也就已经能整除了），所以结果应该是没有余数。如果有余数，则表明该帧在传输过程中出现了差错。</p>
+</blockquote>
+<p><strong>【说明】</strong>：“模2除法”与“算术除法”类似，但它既不向上位借位，也不比较除数和被除数的相同位数值的大小，只要以相同位数进行相除即可。模2加法运算为：1+1&#x3D;0，0+1&#x3D;1，0+0&#x3D;0，无进位，也无借位；模2减法运算为：1-1&#x3D;0，0-1&#x3D;1，1-0&#x3D;1，0-0&#x3D;0，也无进位，无借位。相当于二进制中的逻辑异或运算。也就是比较后，两者对应位相同则结果为“0”，不同则结果为“1”。如100101除以1110，结果得到商为11，余数为1，如图5-9左图所示。如11×11&#x3D;101，如右图所示。</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://s2.loli.net/2022/05/08/Hub9TnYoEKFkjJg.jpg" alt="最通俗的CRC校验原理剖析_深入理解计算机网络"></th>
+<th><img src="https://s2.loli.net/2022/05/08/DXcUHg53inq6SQv.jpg" alt="最通俗的CRC校验原理剖析_CRC_02"></th>
+</tr>
+</thead>
+</table>
+<center>“模2除法”和“模2乘法”示例</center>
+
+<blockquote>
+<p>  具体来说，CRC校验原理就是以下几个步骤：</p>
+</blockquote>
+<ul>
+<li><p>先选择（可以随机选择，也可按标准选择，具体在后面介绍）一个用于在接收端进行校验时，对接收的帧进行除法运算的除数（是二进制比较特串，通常是以多项方式表示，所以CRC又称多项式编码方法，这个多项式也称之为“生成多项式”）。</p>
+</li>
+<li><p>看所选定的除数二进制位数（假设为k位），然后在要发送的数据帧（假设为m位）后面加上k-1位“0”，然后以这个加了k-1个“0“的新帧（一共是m+k-1位）以“模2除法”方式除以上面这个除数，所得到的余数（也是二进制的比特串）就是该帧的CRC校验码，也称之为FCS（帧校验序列）。但要注意的是，余数的位数一定要是比除数位数只能少一位，哪怕前面位是0，甚至是全为0（附带好整除时）也都不能省略。</p>
+</li>
+<li><p>再把这个校验码附加在原数据帧（就是m位的帧，注意不是在后面形成的m+k-1位的帧）后面，构建一个新帧发送到接收端；最后在接收端再把这个新帧以“模2除法”方式除以前面选择的除数，如果没有余数，则表明该帧在传输过程中没出错，否则出现了差错。</p>
+</li>
+</ul>
+<blockquote>
+<p>  通过以上介绍，大家一定可以理解CRC校验的原理，并且不再认为很复杂吧。<br>  从上面可以看出，CRC校验中有两个关键点：一是要预先确定一个发送端和接收端都用来作为除数的二进制比特串（或多项式）；二是把原始帧与上面选定的除进行二进制除法运算，计算出FCS。前者可以随机选择，也可按国际上通行的标准选择，但最高位和最低位必须均为“1”，如在IBM的SDLC（同步数据链路控制）规程中使用的CRC-16（也就是这个除数一共是17位）生成多项式g（x）&#x3D; x16 + x15 + x2 +1（对应二进制比特串为：11000000000000101）；而在ISO HDLC（高级数据链路控制）规程、ITU的SDLC、X.25、V.34、V.41、V.42等中使用CCITT-16生成多项式g（x）&#x3D; x16 + x15 + x5 +1（对应二进制比特串为：11000000000100001）。</p>
+</blockquote>
+<p><strong>CRC校验码的计算示例</strong></p>
+<blockquote>
+<p>  由以上分析可知，既然除数是随机，或者按标准选定的，所以CRC校验的关键是如何求出余数，也就是校验码（CRC校验码）。下面以一个例子来具体说明整个过程。现假设选择的CRC生成多项式为G（X） &#x3D; X4 + X3 + 1，要求出二进制序列10110011的CRC校验码。下面是具体的计算过程：</p>
+</blockquote>
+<ul>
+<li><p>首先把生成多项式转换成二进制数，由G（X） &#x3D; X4 + X3 + 1可以知道（，它一共是5位（总位数等于最高位的幂次加1，即4+1&#x3D;5），然后根据多项式各项的含义（多项式只列出二进制值为1的位，也就是这个二进制的第4位、第3位、第0位的二进制均为1，其它位均为0）很快就可得到它的二进制比特串为11001。</p>
+</li>
+<li><p>因为生成多项式的位数为5，根据前面的介绍，得知CRC校验码的位数为4（校验码的位数比生成多项式的位数少1）。因为原数据帧10110011，在它后面再加4个0，得到101100110000，然后把这个数以“模2除法”方式除以生成多项式，得到的余数（即CRC码）为0100，如图所示。注意参考前面介绍的“模2除法”运算法则。</p>
+<p><img src="https://s2.loli.net/2022/05/08/zl1XDOVCyASi4E9.jpg" alt="最通俗的CRC校验原理剖析_王达_03"></p>
+</li>
+</ul>
+<center>CRC校验码计算示例
+
+<ul>
+<li><p>把上步计算得到的CRC校验0100替换原始帧101100110000后面的四个“0”，得到新帧101100110100。再把这个新帧发送到接收端。</p>
+</li>
+<li><p>当以上新帧到达接收端后，接收端会把这个新帧再用上面选定的除数11001以“模2除法”方式去除，验证余数是否为0，如果为0，则证明该帧数据在传输过程中没有出现差错，否则出现了差错。</p>
+</li>
+</ul>
+<blockquote>
+<p>  通过以上CRC校验原理的剖析和CRC校验码的计算示例的介绍，大家应该对这种看似很复杂的CRC校验原理和计算方法应该比较清楚了。</p>
+</blockquote>
+<hr>
+<h2 id="CRC-算法的数学基础"><a href="#CRC-算法的数学基础" class="headerlink" title="CRC 算法的数学基础"></a><em>CRC</em> 算法的数学基础</h2><blockquote>
+<p>  CRC 算法的数学基础就不再多啰嗦了，到处都是，简单提一下。它是以 GF(2) 多项式算术为数学基础的， GF(2) 多项式中只有一个变量 x ，其系数也只有 0 和 1 ，比如：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> *x^<span class="number">6</span> + <span class="number">0</span>*x^<span class="number">5</span> + <span class="number">1</span>*x^<span class="number">4</span> + <span class="number">0</span>*x^<span class="number">3</span> + <span class="number">0</span>*x^<span class="number">2</span> +<span class="number">1</span>*x^<span class="number">1</span> + <span class="number">1</span>*x^<span class="number">0</span></span><br><span class="line">= x^<span class="number">6</span> + x^<span class="number">4</span> + x + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>加减运算不考虑进位和退位。说白了就是下面的运算规则：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> + <span class="number">0</span> = <span class="number">0</span>    <span class="number">0</span> - <span class="number">0</span> = <span class="number">0</span></span><br><span class="line"><span class="number">0</span> + <span class="number">1</span> = <span class="number">1</span>    <span class="number">0</span> - <span class="number">1</span> = <span class="number">1</span></span><br><span class="line"><span class="number">1</span> + <span class="number">0</span> = <span class="number">1</span>    <span class="number">1</span> - <span class="number">0</span> = <span class="number">1</span></span><br><span class="line"><span class="number">1</span> + <span class="number">1</span> = <span class="number">0</span>    <span class="number">1</span> - <span class="number">1</span> = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>看看这个规则，其实就是一个异或运算。</p>
+<p>每个生成多项式的系数只能是 0 或 1 ，因此我们可以把它转化为二进制形式表示， 比如 g(x)&#x3D;x^4 + x + 1 ，那么 g(x) 对应的二进制形式就是 10011 ， 于是我们就把 GF(2) 多项式的除法转换成了二进制形式，和普通除法没有区别，只是加减运算没有进位和退位。</p>
+<p>比如基于上述规则计算 11010&#x2F;1001 ，那么商是 11 ，余数就是 101 ，简单吧。</p>
+<p><strong>计算示例：</strong></p>
+<p>设需要发送的信息为M &#x3D; 1010001101，产生多项式对应的代码为P &#x3D; 110101，R＝5。在M后加5个0，然后对P做模2除法运算，得余数r(x)对应的代码：01110。故实际需要发送的数据是101000110101110。</p>
+<p><img src="https://s2.loli.net/2022/05/08/YPUCXLQ6IkaOEVb.jpg" alt="img"></p>
+<h2 id="CRC-校验的基本过程"><a href="#CRC-校验的基本过程" class="headerlink" title="CRC 校验的基本过程"></a><em>CRC</em> 校验的基本过程</h2><p>采用 CRC 校验时，发送方和接收方用同一个生成多项式 g(x) ， g(x) 是一个 GF(2) 多项式，并且 g(x) 的首位和最后一位的系数必须为 1 。</p>
+<p>CRC 的处理方法是：发送方用发送数据的二进制多项式 t(x) 除以 g(x) ，得到余数 y(x) 作为 CRC 校验码。校验时，以计算的校正结果是否为 0 为据，判断数据帧是否出错。设生成多项式是 r 阶的（最高位是 x^r ）具体步骤如下面的描述。</p>
+<p>发送方：</p>
+<p>1 ）在发送的 m 位数据的二进制多项式 t(x) 后添加 r 个 0 ，扩张到 m+ r 位，以容纳 r 位的校验码，追加 0 后的二进制多项式为 T(x) ；</p>
+<p>2 ）用 T(x) 除以生成多项式 g(x) ，得到 r 位的余数 y(x) ，它就是 CRC 校验码；</p>
+<p>3 ）把 y(x) 追加到 t(x) 后面，此时的数据 s(x) 就是包含了 CRC 校验码的待发送字符串；由于 s(x) &#x3D; t(x) y(x) ，因此 s(x) 肯定能被 g(x) 除尽。</p>
+<p>接收方：</p>
+<p>1 ）接收数据 n(x) ，这个 n(x) 就是包含了 CRC 校验码的 m+r 位数据；</p>
+<p>2 ）计算 n(x) 除以 g(x) ，如果余数为 0 则表示传输过程没有错误，否则表示有错误。从 n(x) 去掉尾部的 r 位数据，得到的就是原始数据。</p>
+<h3 id="数学推理"><a href="#数学推理" class="headerlink" title="数学推理"></a>数学推理</h3><p>1.设欲传输的信息有K位,如图6.1所示</p>
+<p>2.首先将欲传输的数据序列m(x)乘以 XR , 其中R为g(x)的最高次冥。</p>
+<p>3.将得到的多项式XR m(x)除以约定的多项式g(x)</p>
+<p>4.忽略除法结果的“商”，取出其余数，并与XRm(x)相加，形成K+R位的发送序列，即：m’(x) &#x3D; XRm(x) +r(x)</p>
+<p><img src="https://s2.loli.net/2022/05/08/82tngcAETPJsID7.png" alt="img"></p>
+<p>常见CRC参数模型如下</p>
+<blockquote>
+<p>  CRC算法参数模型解释： NAME：参数模型名称。 WIDTH：宽度，即CRC比特数。 POLY：生成项的简写，以16进制表示。例如：CRC-32即是0x04C11DB7，忽略了最高位的”1”，即完整的生成项是0x104C11DB7。 INIT：这是算法开始时寄存器（crc）的初始化预置值，十六进制表示。 REFIN：待测数据的每个字节是否按位反转，True或False。 REFOUT：在计算后之后，异或输出之前，整个数据是否按位反转，True或False。 XOROUT：计算结果与此参数异或后得到最终的CRC值。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">CRC算法名称</th>
+<th align="center">多项式公式</th>
+<th align="center">宽度</th>
+<th align="center">多项式</th>
+<th align="center">初始值</th>
+<th align="center">结果异或值</th>
+<th align="center">输入值反转</th>
+<th align="center">输出值反转</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">CRC-4&#x2F;ITU</td>
+<td align="center">x4 + x + 1</td>
+<td align="center">4</td>
+<td align="center">03</td>
+<td align="center">00</td>
+<td align="center">00</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-5&#x2F;EPC</td>
+<td align="center">x4 + x3 + 1</td>
+<td align="center">5</td>
+<td align="center">09</td>
+<td align="center">09</td>
+<td align="center">00</td>
+<td align="center">false</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">CRC-5&#x2F;ITU</td>
+<td align="center">x5 + x4 + x2 + 1</td>
+<td align="center">5</td>
+<td align="center">15</td>
+<td align="center">00</td>
+<td align="center">00</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-5&#x2F;USB</td>
+<td align="center">x5 + x2 + 1</td>
+<td align="center">5</td>
+<td align="center">05</td>
+<td align="center">1F</td>
+<td align="center">1F</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-6&#x2F;ITU</td>
+<td align="center">x6 + x + 1</td>
+<td align="center">6</td>
+<td align="center">03</td>
+<td align="center">00</td>
+<td align="center">00</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-7&#x2F;MMC</td>
+<td align="center">x7 + x3 + 1</td>
+<td align="center">7</td>
+<td align="center">09</td>
+<td align="center">00</td>
+<td align="center">00</td>
+<td align="center">false</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">CRC-8</td>
+<td align="center">x8 + x2 + x + 1</td>
+<td align="center">8</td>
+<td align="center">07</td>
+<td align="center">00</td>
+<td align="center">00</td>
+<td align="center">false</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">CRC-8&#x2F;ITU</td>
+<td align="center">x8 + x2 + x + 1</td>
+<td align="center">8</td>
+<td align="center">07</td>
+<td align="center">00</td>
+<td align="center">55</td>
+<td align="center">false</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">CRC-8&#x2F;ROHC</td>
+<td align="center">x8 + x2 + x + 1</td>
+<td align="center">8</td>
+<td align="center">07</td>
+<td align="center">FF</td>
+<td align="center">00</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-8&#x2F;MAXIM</td>
+<td align="center">x8 + x5 + x4 + 1</td>
+<td align="center">8</td>
+<td align="center">31</td>
+<td align="center">00</td>
+<td align="center">00</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-16&#x2F;IBM</td>
+<td align="center">x6 + x5 + x2 + 1</td>
+<td align="center">16</td>
+<td align="center">8005</td>
+<td align="center">0000</td>
+<td align="center">0000</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-16&#x2F;MAXIM</td>
+<td align="center">x6 + x5 + x2 + 1</td>
+<td align="center">16</td>
+<td align="center">8005</td>
+<td align="center">0000</td>
+<td align="center">FFFF</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-16&#x2F;USB</td>
+<td align="center">x6 + x5 + x2 + 1</td>
+<td align="center">16</td>
+<td align="center">8005</td>
+<td align="center">FFFF</td>
+<td align="center">FFFF</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-16&#x2F;MODBUS</td>
+<td align="center">x6 + x5 + x2 + 1</td>
+<td align="center">16</td>
+<td align="center">8005</td>
+<td align="center">FFFF</td>
+<td align="center">0000</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-16&#x2F;CCITT</td>
+<td align="center">x6 + x2 + x5 + 1</td>
+<td align="center">16</td>
+<td align="center">1021</td>
+<td align="center">0000</td>
+<td align="center">0000</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-16&#x2F;CCITT-FALSE</td>
+<td align="center">x6 + x2 + x5 + 1</td>
+<td align="center">16</td>
+<td align="center">1021</td>
+<td align="center">FFFF</td>
+<td align="center">0000</td>
+<td align="center">false</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">CRC-16&#x2F;x5</td>
+<td align="center">x6 + x2 + x5 + 1</td>
+<td align="center">16</td>
+<td align="center">1021</td>
+<td align="center">FFFF</td>
+<td align="center">FFFF</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-16&#x2F;XMODEM</td>
+<td align="center">x6 + x2 + x5 + 1</td>
+<td align="center">16</td>
+<td align="center">1021</td>
+<td align="center">0000</td>
+<td align="center">0000</td>
+<td align="center">false</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">CRC-16&#x2F;DNP</td>
+<td align="center">x6 + x3 + x2 + x1 + x0 + x8 + x6 + x5 + x2 + 1</td>
+<td align="center">16</td>
+<td align="center">3D65</td>
+<td align="center">0000</td>
+<td align="center">FFFF</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-32</td>
+<td align="center">x2 + x6 + x3 + x2 + x6 + x2 + x1 + x0 + x8 + x7 + x5 + x4 + x2 + x + 1</td>
+<td align="center">32</td>
+<td align="center">04C11DB7</td>
+<td align="center">FFFFFFFF</td>
+<td align="center">FFFFFFFF</td>
+<td align="center">true</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">CRC-32&#x2F;MPEG-2</td>
+<td align="center">x32 + x6 + x3 + x2 + x6 + x2 + x1 + x0 + x8 + x7 + x5 + x4 + x2 + x + 1</td>
+<td align="center">32</td>
+<td align="center">04C11DB7</td>
+<td align="center">FFFFFFFF</td>
+<td align="center">00000000</td>
+<td align="center">false</td>
+<td align="center">false</td>
+</tr>
+</tbody></table>
+<h2 id="原始的-CRC-校验算法"><a href="#原始的-CRC-校验算法" class="headerlink" title="原始的 CRC 校验算法"></a>原始的 <em>CRC</em> 校验算法</h2><p>根据多项式除法，我们就可以得到原始的 CRC 校验算法。假设生成多项式 g(x) 是 r 阶的，原始数据存放在 data 中，长度为 len 个 bit ， reg 是 r+1 位的变量。 以 CRC-4 为例，生成多项式 g(x)&#x3D;x^4 + x + 1 ，对应了一个 5bits 的二进制数字 10011 ，那么 reg 就是 5 bits 。</p>
+<p>reg[1] 表明 reg 的最低位， reg[r+1] 是 reg 的最高位。</p>
+<p>通过反复的移位和进行除法，那么最终该寄存器中的值去掉最高一位就是我们所要求的余数。所以可以将上述步骤用下面的流程描述：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">reg = <span class="number">0</span>;</span><br><span class="line">data = data追加r个;</span><br><span class="line">pos = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(pos &lt;= len)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(reg[r+<span class="number">1</span>] == <span class="number">1</span>) <span class="comment">// 表明reg可以除以g(x)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 只关心余数，根据上面的算法规则可知就是XOR运算</span></span><br><span class="line">		reg = reg XOR g(x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 移出最高位，移入新数据</span></span><br><span class="line">	reg = (reg&lt;&lt;<span class="number">1</span>) | (data[pos]);</span><br><span class="line">	pos++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> reg; <span class="comment">// reg中的后r位存储的就是余数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="改进一小步——从-r-1-到-r"><a href="#改进一小步——从-r-1-到-r" class="headerlink" title="改进一小步——从 r+1 到 r"></a>改进一小步——从 <em>r+1</em> 到 <em>r</em></h2><p>由于最后只需要 r 位的余数，所以我们可以尝试构造一个 r 位的 reg ，初值为 0 ，数据 data 依次移入 reg[1] ，同时把 reg[r] 移出 reg 。</p>
+<p>根据上面的算法可以知道，只有当移出的数据为 1 时， reg 才和 g(x) 进行 XOR 运算；于是可以使用下面的算法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">reg = <span class="number">0</span>;</span><br><span class="line">data = data追加r个;</span><br><span class="line">pos = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(pos &lt; len)</span><br><span class="line">&#123;</span><br><span class="line">	hi-bit = reg[r];</span><br><span class="line">	<span class="comment">// 移出最高位，移入新数据</span></span><br><span class="line">	reg = (reg&lt;&lt;<span class="number">1</span>) | (data[pos]);</span><br><span class="line">	<span class="keyword">if</span>(hi-bit == <span class="number">1</span>) <span class="comment">// 表明reg可以除以g(x)</span></span><br><span class="line">	&#123;</span><br><span class="line">		reg = reg XOR g(x);</span><br><span class="line">	&#125;</span><br><span class="line">	pos++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> reg; <span class="comment">// reg中存储的就是余数</span></span><br></pre></td></tr></table></figure>
+
+<p>这种算法简单，容易实现，对任意长度生成多项式的 <em>G</em> （ <em>x</em> ）都适用，对应的 <em>CRC-32</em> 的实现就是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以4 byte数据为例</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> POLY 0x04C11DB7L <span class="comment">// CRC32生成多项式</span></span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">CRC32_1</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> p[<span class="number">8</span>];</span><br><span class="line">	<span class="built_in">memset</span>(p, <span class="number">0</span>, <span class="keyword">sizeof</span>(p));</span><br><span class="line">	<span class="built_in">memcpy</span>(p, &amp;data, <span class="number">4</span>);</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> reg = <span class="number">0</span>, idx = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">64</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		idx = i/<span class="number">8</span>;</span><br><span class="line">		<span class="keyword">int</span> hi = (reg&gt;&gt;<span class="number">31</span>)&amp;<span class="number">0x01</span>; <span class="comment">// 取得reg的最高位</span></span><br><span class="line">		<span class="comment">// 把reg左移1bit，并移入新数据到reg0</span></span><br><span class="line">		reg = (reg&lt;&lt;<span class="number">1</span>)| (p[idx]&gt;&gt;<span class="number">7</span>);</span><br><span class="line">		<span class="keyword">if</span>(hi) reg = reg^POLY; <span class="comment">// hi=1就用reg除以g(x)</span></span><br><span class="line">		p[idx]&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> reg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="从-bit-扩张到-byte-的桥梁"><a href="#从-bit-扩张到-byte-的桥梁" class="headerlink" title="从 bit 扩张到 byte 的桥梁"></a>从 <em>bit</em> 扩张到 <em>byte</em> 的桥梁</h2><p>但是如果发送的数据块很长的话，这种方法就不太适合了。它一次只能处理一个 bit 的数据，效率太低。考虑能不能每次处理一个 byte 的数据呢？事实上这也是当前的 CRC-32 实现采用的方法。</p>
+<p>这一步骤是通往基于校验表方法的桥梁，让我们一步一步来分析上面逐 bit 的运算方式，我们把 reg 和 g(x) 都采用 bit 的方式表示如下：</p>
+<p><img src="https://s2.loli.net/2022/05/08/8V1IBEOS6WrUvXK.jpg" alt="img"></p>
+<p>考虑把上面逐 <em>bit</em> 的算法执行 <em>8</em> 次，如果某次移出的不是 <em>1</em> ，那么 <em>reg</em> 不会和 <em>g(x)</em> 执行 <em>XOR</em> 运算，事实上这相当于将 <em>reg</em> 和 <em>0</em> 执行了 <em>XOR</em> 运算。执行过程如下所示，根据 <em>hi-bit</em> 的值，这里的 <em>G</em> 可能是 <em>g(x)</em> 也可能是 <em>0</em> 。</p>
+<p><img src="https://s2.loli.net/2022/05/08/sjrn3WzmOH5TxoD.jpg" alt="img"></p>
+<p>从上面的执行过程清楚的看到，执行 8 次后， old-reg 的高 8bit 被完全移出， new-reg 就是 old-reg 的低 24bit 和数据 data 新移入的 8bit 和 G 一次次执行 XOR 运算所得到的。</p>
+<p>XOR 运算满足结合律，那就是： A XOR B XOR C &#x3D; A XOR (B XOR C) ，于是我们可以考虑把上面的运算分成两步进行：</p>
+<ul>
+<li>先执行 R 高 8bit 与 G 之间的 XOR 运算，将计算结果存入 X 中，如下面的过程所示。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/05/08/36E7rPOgdCVSYsn.jpg" alt="img"></p>
+<ul>
+<li>将 <em>R</em> 左移 <em>8bit</em> ，并移入 <em>8bit</em> 的数据，得到的值就是 <img src="https://s2.loli.net/2022/05/08/Bk3qjRNtcsvlU6X.jpg" alt="img"> ，然后再与 <em>X</em> 做 <em>XOR</em> 运算。</li>
+</ul>
+<blockquote>
+<p>  根据 <em>XOR</em> 运算的结合率，最后的结果就等于上面逐 <em>bit</em> 的算法执行 <em>8</em> 次后的结果，根据这个分解，我们可以修改逐 <em>bit</em> 的方式，写出下面的算法。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以4 byte数据为例</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> POLY 0x04C11DB7L <span class="comment">// CRC32生成多项式</span></span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">CRC32_2</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> p[<span class="number">8</span>];</span><br><span class="line">	<span class="built_in">memset</span>(p, <span class="number">0</span>, <span class="keyword">sizeof</span>(p));</span><br><span class="line">	<span class="built_in">memcpy</span>(p, &amp;data, <span class="number">4</span>);</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> reg = <span class="number">0</span>, sum_poly = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 计算步骤1</span></span><br><span class="line">		sum_poly = reg&amp;<span class="number">0xFF000000</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> hi = sum_poly&amp;<span class="number">0x80000000</span>; <span class="comment">// 测试reg最高位</span></span><br><span class="line">			sum_poly &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(hi) sum_poly = sum_poly^POLY;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 计算步骤2</span></span><br><span class="line">		reg = (reg&lt;&lt;<span class="number">8</span>)|p[i];</span><br><span class="line">		reg = reg ^ sum_poly;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> reg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="初见-Table-Driven"><a href="#初见-Table-Driven" class="headerlink" title="初见 Table-Driven"></a>初见 Table-Driven</h2><blockquote>
+<p>  变换到上面的方法后，我们离 table-driven 的方法只有一步之遥了，我们知道一个字节能表示的正整数范围是 0~255 ，步骤 1 中的计算就是针对 reg 的高 Byte 位进行的，于是可以被提取出来，预先计算并存储到一个有 256 项的表中，于是下面的算法就出炉了，这个和上面的算法本质上并没有什么区别。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> POLY 0x04C11DB7L <span class="comment">// CRC32生成多项式</span></span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> crc_table[<span class="number">256</span>];</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">get_sum_poly</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> sum_poly = data;</span><br><span class="line">	sum_poly &lt;&lt;= <span class="number">24</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> hi = sum_poly&amp;<span class="number">0x80000000</span>; <span class="comment">// 取得reg的最高位</span></span><br><span class="line">		sum_poly &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(hi) sum_poly = sum_poly^POLY;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum_poly;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create_crc_table</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		crc_table[i] = get_sum_poly(i&amp;<span class="number">0xFF</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 以byte数据为例</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">CRC32_3</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> p[<span class="number">8</span>];</span><br><span class="line">	<span class="built_in">memset</span>(p, <span class="number">0</span>, <span class="keyword">sizeof</span>(p));</span><br><span class="line">	<span class="built_in">memcpy</span>(p, &amp;data, <span class="number">4</span>);</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> reg = <span class="number">0</span>, sum_poly = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 计算步骤1</span></span><br><span class="line">		sum_poly = crc_table[(reg&gt;&gt;<span class="number">24</span>)&amp;<span class="number">0xFF</span>];</span><br><span class="line">		<span class="comment">// 计算步骤2</span></span><br><span class="line">		reg = (reg&lt;&lt;<span class="number">8</span>)|p[i];</span><br><span class="line">		reg = reg ^ sum_poly;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> reg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="更进一步"><a href="#更进一步" class="headerlink" title="更进一步"></a>更进一步</h2><blockquote>
+<p>  上面的这个算法已经是一个Table-Driven的CRC-32算法了，但是实际上我们看到的CRC校验代码都是如下的形式：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">r=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(len--)</span><br><span class="line">     r = (r&lt;&lt;<span class="number">8</span>) ^ t[(r &gt;&gt; <span class="number">24</span>) ^ *p++];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  下面我们将看看是做了什么转化而做到这一点的。</p>
+</blockquote>
+<blockquote>
+<p>  首先上述 <em>CRC</em> 算法中，我们需要为原始数据追加 <em>r&#x2F;8Byte</em> 个 <em>0</em> ， <em>CRC-32</em> 就是 <em>4Byte</em> 。或者我们可以再计算原始数据之后，把 <em>0</em> 放在后面单独计算，像这样：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先计算原始数据</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">&#123;</span><br><span class="line">		sum_poly = crc_table[(reg&gt;&gt;<span class="number">24</span>)&amp;<span class="number">0xFF</span>];</span><br><span class="line">		reg = (reg&lt;&lt;<span class="number">8</span>)|p[i];</span><br><span class="line">		reg = reg ^ sum_poly;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 再计算追加的4Byte 0</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">		reg = (reg&lt;&lt;<span class="number">8</span>) ^ crc_table[(reg&gt;&gt;<span class="number">24</span>)&amp;<span class="number">0xFF</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这看起来已经足够好了，而事实上我们可以继续向下进行以免去为了附加的 0 而进行计算。在上面算法中，最后的 4 次循环是为了将输入数据的最后 r&#x2F;8 位都移出 reg ，因为 0 对 reg 的值并没有丝毫影响。</p>
+<p>对于 CRC-32 ，对于任何输入数据 Dn…D8…D5…D4…D1 ，第一个 for 循环将 Dn…D8…D5 都依次移入，执行 XOR 运算再移出 reg ；并将 D4…D1 都移入了 reg ，但是并未移出；因此最后的 4 次循环是为了将 D4…D1 都移出 reg 。</p>
+<p>Di 与 Ri 执行 XOR 运算后值将会更新，设更新后的值表示为 Di’ ，不论执行了多少次 XOR 运算。</p>
+<p>如果 reg 初始值是 0 ，那么第一个 for 循环中开始的 4 次循环干的事情就是，把 Dn…Dn-3 移入到 reg 中（与 0 做 XOR 结果不变），执行 4 次后 reg 的值就是 Dn.Dn-1.Dn-2.Dn-3 ；</p>
+<p>第 5 次循环的结果就是： reg &#x3D; crc_table[Dn] ^ Dn-1.Dn-2.Dn-3.Dn-4 ；</p>
+<p>第 6 次循环的结果就是： reg &#x3D; crc_table[Dn-1’] ^ Dn-2’.Dn-3’.Dn-4 ； Dn 移出 reg 。</p>
+<p>因此上面的计算可以分为 3 个阶段：</p>
+<p>1 ）前 4 次循环，将 Dn.Dn-1.Dn-2.Dn-3 装入 reg ；</p>
+<p>2 ）中间的 n-4 次循环，依次将 Di 移入 reg ，在随后的 4 次循环中，依次计算 Di+4 ， Di+3 ， Di+2 和 Di+1 对 Di 的影响；最后移出 reg ；</p>
+<p>3 ）最后的 4 次循环，实际上是为了计算 D4 ， D3 ， D2 和 D1 都能执行第 2 步的过程；</p>
+<p>具体考察 Di ：</p>
+<p>1 ） Di 移入到 reg 中， R1&#x3D;Di ，接着与 crc_table[R4] 执行 XOR 运算；</p>
+<p>2 ）循环 4 次后， Di 成为 reg 的最高位 R4 ，并且因为受到了 Dn…Di+1 的影响而更新为 Di’ ；</p>
+<p>上面的运算步骤如下面所示，其中 F 是对应得 crc_table[R] 的值。</p>
+<p><img src="https://s2.loli.net/2022/05/08/yhsQcYqXG5ZiBVu.jpg" alt="img"></p>
+<p>可以清晰的看到，最后 reg 的高 Byte 是 Di 和 F 之间一次次 XOR 运算的结果。依然根据 XOR 运算的结合律，我们可以分两步走：</p>
+<p>1） 先执行 F 之间的 XOR 运算，设结果为 FF ，它就是 reg 的首字节；</p>
+<p>2） 然后再直接将 Di 和 FF 进行 XOR 运算，并根据结果查 CRC 表；</p>
+<p>3） 计算出 XOR 运算后， Di…Di-3 已经移入 reg ；因此再将查表结果和 (reg«8) 执行 XOR 运算即可；</p>
+<p>这就是方法 2 ，于是我们的 table-driven 的 CRC-32 校验算法就可以写成如下的方式了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reg = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">&#123;</span><br><span class="line">	reg = (reg&lt;&lt;<span class="number">8</span>) ^ crc_table[(reg&gt;&gt;<span class="number">24</span>)&amp;<span class="number">0xFF</span> ^ p[i]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="郁闷的位逆转"><a href="#郁闷的位逆转" class="headerlink" title="郁闷的位逆转"></a>郁闷的位逆转</h2><p>看起来我们已经得到 CRC-32 算法的最终形式了，可是在实际的应用中，数据传输时是低位先行的；对于一个字节 Byte 来讲，传输将是按照 b1,b2,…,b8 的顺序。而我们上面的算法是按照高位在前的约定，不管是 reg 还是 G(x) ， g32,g31,…,g1 ； b8,b7,…,b1 ； r32,r31,…,r1 。</p>
+<p>先来看看前面从 bit 转换到 Byte 一节中 for 循环的逻辑：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sum_poly = reg&amp;<span class="number">0xFF000000</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> hi = sum_poly&amp;<span class="number">0x80000000</span>; <span class="comment">// 测试reg最高位</span></span><br><span class="line">    sum_poly &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(hi) sum_poly = sum_poly^POLY;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 计算步骤2</span></span><br><span class="line">reg = (reg&lt;&lt;<span class="number">8</span>)|p[i];</span><br><span class="line">reg = reg ^ sum_poly;</span><br></pre></td></tr></table></figure>
+
+<p>在这里的计算中， p[i] 是按照 p8,p7,…,p1 的顺序；如果 p[i] 在这里变成了 p1,p2,…,p8 的顺序；那么 reg 也应该是 r1,r2,…,r32 的顺序，同样 G(x) 和 sum_poly 也要逆转顺序。转换后的 G(x) &#x3D; POLY &#x3D; 0xEDB88320 。</p>
+<p>于是取 reg 的最高位的 sum_poly 的初值就从 sum_poly &#x3D; reg &amp; 0xFF000000 变成了 sum_poly &#x3D; reg &amp; 0xFF ，测试 reg 的最高位就从 sum_poly &amp; 0x80000000 变成了 sum_poly&amp;0x01 ；</p>
+<p>移出最高位也就从 sum_poly«&#x3D;1 变成了 sum_poly»&#x3D;1 ；于是上面的代码就变成了如下的形式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sum_poly = reg&amp;<span class="number">0xFF</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> hi = sum_poly&amp;<span class="number">0x01</span>; <span class="comment">// 测试reg最高位</span></span><br><span class="line">	sum_poly &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(hi) sum_poly = sum_poly^POLY;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 计算步骤2</span></span><br><span class="line">reg = (reg&lt;&lt;<span class="number">8</span>)|p[i];</span><br><span class="line">reg = reg ^ sum_poly;</span><br></pre></td></tr></table></figure>
+
+<p>为了清晰起见，给出完整的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以4 byte数据为例</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> POLY 0xEDB88320L <span class="comment">// CRC32生成多项式</span></span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">CRC32_2</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> p[<span class="number">8</span>];</span><br><span class="line">	<span class="built_in">memset</span>(p, <span class="number">0</span>, <span class="keyword">sizeof</span>(p));</span><br><span class="line">	<span class="built_in">memcpy</span>(p, &amp;data, <span class="number">4</span>);</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> reg = <span class="number">0</span>, sum_poly = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 计算步骤1</span></span><br><span class="line">		sum_poly = reg&amp;<span class="number">0xFF</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> hi = sum_poly&amp;<span class="number">0x01</span>; <span class="comment">// 测试reg最高位</span></span><br><span class="line">			sum_poly &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(hi) sum_poly = sum_poly^POLY;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 计算步骤2</span></span><br><span class="line">		reg = (reg&lt;&lt;<span class="number">8</span>)|p[i];</span><br><span class="line">		reg = reg ^ sum_poly;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> reg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>依旧像上面的思路，把计算 <em>sum_poly</em> 的代码段提取出来，生成 <em>256</em> 个元素的 <em>CRC</em> 校验表，再修改追加 <em>0</em> 的逻辑，最终的代码版本就完成了，为了对比；后面给出了字节序逆转前的完整代码段。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字节逆转后的CRC32算法，字节序为b1,b2,…,b8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> POLY 0xEDB88320L <span class="comment">// CRC32生成多项式</span></span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> crc_table[<span class="number">256</span>];</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">get_sum_poly</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> sum_poly = data;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> hi = sum_poly&amp;<span class="number">0x01</span>; <span class="comment">// 取得reg的最高位</span></span><br><span class="line">		sum_poly &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(hi) sum_poly = sum_poly^POLY;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum_poly;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create_crc_table</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		crc_table[i] = get_sum_poly(i&amp;<span class="number">0xFF</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">CRC32_4</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span>* data, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> reg = <span class="number">0</span>; <span class="comment">// 0xFFFFFFFF，见后面解释</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		reg = (reg&lt;&lt;<span class="number">8</span>) ^ crc_table[(reg&amp;<span class="number">0xFF</span>) ^ data[i]];</span><br><span class="line">		<span class="keyword">return</span> reg;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 最终生成的校验表将是：</span></span><br><span class="line"><span class="comment">// &#123;0x00000000,  0x77073096,  0xEE0E612C,  0x990951BA,</span></span><br><span class="line"><span class="comment">//  0x076DC419,  0x706AF48F,  0xE963A535,  0x9E6495A3,</span></span><br><span class="line"><span class="comment">// … …&#125; </span></span><br><span class="line"><span class="comment">// 字节逆转前的CRC32算法，字节序为b8,b7,…,b1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> POLY 0x04C11DB7L <span class="comment">// CRC32生成多项式</span></span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> crc_table[<span class="number">256</span>];</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">get_sum_poly</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> sum_poly = data;</span><br><span class="line">	sum_poly &lt;&lt;= <span class="number">24</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> hi = sum_poly&amp;<span class="number">0x80000000</span>; <span class="comment">// 取得reg的最高位</span></span><br><span class="line">		sum_poly &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(hi) sum_poly = sum_poly^POLY;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum_poly;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create_crc_table</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		crc_table[i] = get_sum_poly(i&amp;<span class="number">0xFF</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">CRC32_4</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span>* data, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> reg = <span class="number">0</span>;<span class="comment">// 0xFFFFFFFF，见后面解释</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		reg = (reg&lt;&lt;<span class="number">8</span>) ^ crc_table[(reg&gt;&gt;<span class="number">24</span>)&amp;<span class="number">0xFF</span> ^ data[i]];</span><br><span class="line">		<span class="keyword">return</span> reg;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="长征结束了"><a href="#长征结束了" class="headerlink" title="长征结束了"></a>长征结束了</h2><p>到这里长征终于结束了， 事实上，还有最后的一小步，那就是 reg 初始值的问题，上面的算法中 reg 初始值为 0 。在一些传输协议中，发送端并不指出消息长度，而是采用结束标志，考虑下面的这几种可能的差错：</p>
+<ul>
+<li>在消息之前，增加 1 个或多个 0 字节；</li>
+<li>在消息 ( 包括校验码 ) 之后，增加 1 个或多个 0 字节；</li>
+</ul>
+<p>显然，这几种差错都检测不出来，其原因就是如果 reg&#x3D;0 ，处理 0 消息字节 ( 或位 ) ， reg 的值保持不变。解决这种问题也很简单，只要使 reg 的初始值非 0 即可，一般取 0Xffffffff ，就像你在很多 CRC32 实现中发现的那样。</p>
+<p>到这里终于可以松一口气了， CRC32 并不是像想象的那样容易的算法啊！事实上还真不容易！这就叫做<code>简单的前面是优雅，背后是复杂!</code></p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>1、<a target="_blank" rel="noopener" href="https://liuweiqiang.win/2019/08/06/CRC%E6%A0%A1%E9%AA%8C%E5%8E%9F%E7%90%86/">https://liuweiqiang.win/2019/08/06/CRC%E6%A0%A1%E9%AA%8C%E5%8E%9F%E7%90%86/</a></p>
+<p>2、<a target="_blank" rel="noopener" href="https://blog.51cto.com/winda/1063951">https://blog.51cto.com/winda/1063951</a></p>
 
       
         <!-- 《添加版权声明 -->
@@ -358,7 +772,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">简单介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CRC-%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">CRC 算法的数学基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CRC-%E6%A0%A1%E9%AA%8C%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">CRC 校验的基本过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E6%8E%A8%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">数学推理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%9A%84-CRC-%E6%A0%A1%E9%AA%8C%E7%AE%97%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">原始的 CRC 校验算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E4%B8%80%E5%B0%8F%E6%AD%A5%E2%80%94%E2%80%94%E4%BB%8E-r-1-%E5%88%B0-r"><span class="toc-number">5.</span> <span class="toc-text">改进一小步——从 r+1 到 r</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E-bit-%E6%89%A9%E5%BC%A0%E5%88%B0-byte-%E7%9A%84%E6%A1%A5%E6%A2%81"><span class="toc-number">6.</span> <span class="toc-text">从 bit 扩张到 byte 的桥梁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E8%A7%81-Table-Driven"><span class="toc-number">7.</span> <span class="toc-text">初见 Table-Driven</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E8%BF%9B%E4%B8%80%E6%AD%A5"><span class="toc-number">8.</span> <span class="toc-text">更进一步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%81%E9%97%B7%E7%9A%84%E4%BD%8D%E9%80%86%E8%BD%AC"><span class="toc-number">9.</span> <span class="toc-text">郁闷的位逆转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%BF%E5%BE%81%E7%BB%93%E6%9D%9F%E4%BA%86"><span class="toc-number">10.</span> <span class="toc-text">长征结束了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="toc-number">11.</span> <span class="toc-text">参考：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -554,11 +968,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,14 +981,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CRC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">校验</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,11 +1008,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,10 +1032,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -638,7 +1040,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CRC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">校验</a>
               </li>
              
               <li class="article-tag-list-item">
