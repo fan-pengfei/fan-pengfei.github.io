@@ -16,7 +16,7 @@
 <meta property="og:description" content="自制Jlink-ob(带串口)；">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-23T02:14:20.000Z">
-<meta property="article:modified_time" content="2022-05-07T09:25:45.452Z">
+<meta property="article:modified_time" content="2022-05-08T02:33:32.464Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="DIY">
 <meta property="article:tag" content="stm32">
@@ -190,6 +190,19 @@
 
 
 <div id="flowchart-1" class="flow-chart"></div>
+
+
+
+<pre class="mermaid">graph TD
+   B((开始)) -->C{判断}
+   C --  a=1 -->D[执行语句1]
+   C --  a=2  -->E[执行语句2]
+   C --  a=3 -->F[执行语句3]
+   C -- a=4  -->G[执行语句4]
+   D--> AA((结束))
+   E--> AA
+   F--> AA
+   G--> AA</pre>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start
 i=>inputoutput: 输入年份n
@@ -594,6 +607,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CRC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">感悟</a>
               </li>
              
@@ -606,11 +627,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -638,15 +659,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
