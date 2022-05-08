@@ -16,7 +16,7 @@
 <meta property="og:description" content="自制Jlink-ob(带串口)；">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-23T02:14:20.000Z">
-<meta property="article:modified_time" content="2022-05-08T02:33:32.464Z">
+<meta property="article:modified_time" content="2022-05-08T02:36:05.021Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="DIY">
 <meta property="article:tag" content="stm32">
@@ -183,52 +183,7 @@
         <blockquote>
 <p>自制Jlink-ob(带串口)；<span id="more"></span></p>
 </blockquote>
-<div id="flowchart-0" class="flow-chart"></div>
 
-
-
-
-
-<div id="flowchart-1" class="flow-chart"></div>
-
-
-
-<pre class="mermaid">graph TD
-   B((开始)) -->C{判断}
-   C --  a=1 -->D[执行语句1]
-   C --  a=2  -->E[执行语句2]
-   C --  a=3 -->F[执行语句3]
-   C -- a=4  -->G[执行语句4]
-   D--> AA((结束))
-   E--> AA
-   F--> AA
-   G--> AA</pre>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start
-i=>inputoutput: 输入年份n
-cond1=>condition: n能否被4整除？
-cond2=>condition: n能否被100整除？
-cond3=>condition: n能否被400整除？
-o1=>inputoutput: 输出非闰年
-o2=>inputoutput: 输出非闰年
-o3=>inputoutput: 输出闰年
-o4=>inputoutput: 输出闰年
-e=>end
-st->i->cond1
-cond1(no)->o1->e
-cond1(yes)->cond2
-cond2(no)->o3->e
-cond2(yes)->cond3
-cond3(yes)->o2->e
-cond3(no)->o4->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">st=>start: start:>http://www.baidu.com
-op1=>operation: 操作1
-cond1=>condition: YES or NO?
-sub=>subroutine: 子程序
-e=>end
-
-st->op1->cond1
-cond1(yes)->e
-cond1(no)->sub(right)->op1</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script>
       
         <!-- 《添加版权声明 -->
         
@@ -599,19 +554,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CRC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">

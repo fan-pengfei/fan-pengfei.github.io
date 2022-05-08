@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/05/07/Rb4wvT6HcKjpLyX.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/07/BqnaHQml5i9exMD.png">
 <meta property="article:published_time" content="2022-02-07T09:26:35.000Z">
-<meta property="article:modified_time" content="2022-05-07T14:11:56.353Z">
+<meta property="article:modified_time" content="2022-05-08T02:49:44.635Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="markdown">
 <meta name="twitter:card" content="summary">
@@ -185,23 +185,100 @@
         <blockquote>
 <p>  Markdown绘制简单流程图；<span id="more"></span></p>
 </blockquote>
-<h1 id="Typora流程图："><a href="#Typora流程图：" class="headerlink" title="Typora流程图："></a>Typora流程图：</h1><h2 id="mermaid效果"><a href="#mermaid效果" class="headerlink" title="mermaid效果"></a>mermaid效果</h2><ul>
+<h1 id="Typora流程图："><a href="#Typora流程图：" class="headerlink" title="Typora流程图："></a>Typora流程图：</h1><h2 id="mermaid效果（这个可以在Typora编辑器中显示，博客中渲染失败）"><a href="#mermaid效果（这个可以在Typora编辑器中显示，博客中渲染失败）" class="headerlink" title="mermaid效果（这个可以在Typora编辑器中显示，博客中渲染失败）"></a>mermaid效果（这个可以在Typora编辑器中显示，博客中渲染失败）</h2><ul>
 <li><strong>输入`&#96;&#96;，然后输入mermaid即可</strong></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">```mermaid</span><br><span class="line">graph TD</span><br><span class="line">   B((开始)) --&gt;C&#123;判断&#125;</span><br><span class="line">   C --  a=1 --&gt;D[执行语句1]</span><br><span class="line">   C --  a=2  --&gt;E[执行语句2]</span><br><span class="line">   C --  a=3 --&gt;F[执行语句3]</span><br><span class="line">   C -- a=4  --&gt;G[执行语句4]</span><br><span class="line">   D--&gt; AA((结束))</span><br><span class="line">   E--&gt; AA</span><br><span class="line">   F--&gt; AA</span><br><span class="line">   G--&gt; AA   </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">·mermaid</span><br><span class="line">graph TD</span><br><span class="line">   B((开始)) --&gt;C&#123;判断&#125;</span><br><span class="line">   C --  a=1 --&gt;D[执行语句1]</span><br><span class="line">   C --  a=2  --&gt;E[执行语句2]</span><br><span class="line">   C --  a=3 --&gt;F[执行语句3]</span><br><span class="line">   C -- a=4  --&gt;G[执行语句4]</span><br><span class="line">   D--&gt; AA((结束))</span><br><span class="line">   E--&gt; AA</span><br><span class="line">   F--&gt; AA</span><br><span class="line">   G--&gt; AA   </span><br></pre></td></tr></table></figure>
 
 <p>  <strong>如下图：</strong></p>
 <p>  <img src="https://s2.loli.net/2022/05/07/Rb4wvT6HcKjpLyX.png" alt="a4e80fed35165401f57d392375ac726"></p>
 <h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><blockquote>
 <p>  官网说明文档 <a target="_blank" rel="noopener" href="https://mermaid-js.github.io/mermaid/#/">Mermaid</a> .</p>
 </blockquote>
-<h2 id="flowchar效果"><a href="#flowchar效果" class="headerlink" title="flowchar效果"></a>flowchar效果</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">```flow</span><br><span class="line">st=&gt;start: 开始节点</span><br><span class="line">in=&gt;inputoutput: 输入</span><br><span class="line">e=&gt;end: 结束节点</span><br><span class="line">op=&gt;operation: 操作节点</span><br><span class="line">cond=&gt;condition: 条件节点</span><br><span class="line">sub=&gt;subroutine: 子例程</span><br><span class="line">out=&gt;inputoutput: 输出</span><br><span class="line">st(right)-&gt;in-&gt;op-&gt;cond</span><br><span class="line">cond(yes,right)-&gt;out-&gt;e</span><br><span class="line">cond(no)-&gt;sub</span><br></pre></td></tr></table></figure>
+<h2 id="flowchar效果（只有这个可以在博客中显示流程图）"><a href="#flowchar效果（只有这个可以在博客中显示流程图）" class="headerlink" title="flowchar效果（只有这个可以在博客中显示流程图）"></a>flowchar效果（只有这个可以在博客中显示流程图）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">···flow</span><br><span class="line">st=&gt;start: 开始节点</span><br><span class="line">in=&gt;inputoutput: 输入</span><br><span class="line">e=&gt;end: 结束节点</span><br><span class="line">op=&gt;operation: 操作节点</span><br><span class="line">cond=&gt;condition: 条件节点</span><br><span class="line">sub=&gt;subroutine: 子例程</span><br><span class="line">out=&gt;inputoutput: 输出</span><br><span class="line">st(right)-&gt;in-&gt;op-&gt;cond</span><br><span class="line">cond(yes,right)-&gt;out-&gt;e</span><br><span class="line">cond(no)-&gt;sub</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://s2.loli.net/2022/05/07/BqnaHQml5i9exMD.png" alt="image-20220507220027459"></p>
+<p><strong>实际例子1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">···flow</span><br><span class="line">st=&gt;start: Start</span><br><span class="line">i=&gt;inputoutput: 输入年份n</span><br><span class="line">cond1=&gt;condition: n能否被4整除？</span><br><span class="line">cond2=&gt;condition: n能否被100整除？</span><br><span class="line">cond3=&gt;condition: n能否被400整除？</span><br><span class="line">o1=&gt;inputoutput: 输出非闰年</span><br><span class="line">o2=&gt;inputoutput: 输出非闰年</span><br><span class="line">o3=&gt;inputoutput: 输出闰年</span><br><span class="line">o4=&gt;inputoutput: 输出闰年</span><br><span class="line">e=&gt;end</span><br><span class="line">st-&gt;i-&gt;cond1</span><br><span class="line">cond1(no)-&gt;o1-&gt;e</span><br><span class="line">cond1(yes)-&gt;cond2</span><br><span class="line">cond2(no)-&gt;o3-&gt;e</span><br><span class="line">cond2(yes)-&gt;cond3</span><br><span class="line">cond3(yes)-&gt;o2-&gt;e</span><br><span class="line">cond3(no)-&gt;o4-&gt;e</span><br></pre></td></tr></table></figure>
+
+
+
+<div id="flowchart-0" class="flow-chart"></div>
+
+<p><strong>实际例子2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">···flow</span><br><span class="line">st=&gt;start: start:&gt;http://www.baidu.com</span><br><span class="line">op1=&gt;operation: 操作1</span><br><span class="line">cond1=&gt;condition: YES or NO?</span><br><span class="line">sub=&gt;subroutine: 子程序</span><br><span class="line">e=&gt;end</span><br><span class="line"></span><br><span class="line">st-&gt;op1-&gt;cond1</span><br><span class="line">cond1(yes)-&gt;e</span><br><span class="line">cond1(no)-&gt;sub(right)-&gt;op1  </span><br></pre></td></tr></table></figure>
+
+
+
+<div id="flowchart-1" class="flow-chart"></div>
+
+<p><strong>综合例子：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">···flow</span><br><span class="line">st=&gt;start: Improve your</span><br><span class="line">l10n process!</span><br><span class="line">e=&gt;end: Continue to have fun!:&gt;https://youtu.be/YQryHo1iHb8[blank]</span><br><span class="line">op1=&gt;operation: Go to locize.com:&gt;https://locize.com[blank]</span><br><span class="line">sub1=&gt;subroutine: Read the awesomeness</span><br><span class="line">cond(align-next=no)=&gt;condition: Interested to</span><br><span class="line">getting started?</span><br><span class="line">io=&gt;inputoutput: Register:&gt;https://www.locize.io/register[blank]</span><br><span class="line">sub2=&gt;subroutine: Read about improving</span><br><span class="line">your localization workflow</span><br><span class="line">or another source:&gt;https://medium.com/@adrai/8-signs-you-should-improve-your-localization-process-3dc075d53998[blank]</span><br><span class="line">op2=&gt;operation: Login:&gt;https://www.locize.io/login[blank]</span><br><span class="line">cond2=&gt;condition: valid password?</span><br><span class="line">cond3=&gt;condition: reset password?</span><br><span class="line">op3=&gt;operation: send email</span><br><span class="line">sub3=&gt;subroutine: Create a demo project</span><br><span class="line">sub4=&gt;subroutine: Start your real project</span><br><span class="line">io2=&gt;inputoutput: Subscribe</span><br><span class="line"></span><br><span class="line">st-&gt;op1-&gt;sub1-&gt;cond</span><br><span class="line">cond(yes)-&gt;io-&gt;op2-&gt;cond2</span><br><span class="line">cond2(no)-&gt;cond3</span><br><span class="line">cond3(no,bottom)-&gt;op2</span><br><span class="line">cond3(yes)-&gt;op3</span><br><span class="line">op3(right)-&gt;op2</span><br><span class="line">cond2(yes)-&gt;sub3</span><br><span class="line">sub3-&gt;sub4-&gt;io2-&gt;e</span><br><span class="line">cond(no)-&gt;sub2(right)-&gt;op1</span><br><span class="line">st@&gt;op1(&#123;&quot;stroke&quot;:&quot;Red&quot;&#125;)@&gt;sub1(&#123;&quot;stroke&quot;:&quot;Red&quot;&#125;)@&gt;cond(&#123;&quot;stroke&quot;:&quot;Red&quot;&#125;)@&gt;io(&#123;&quot;stroke&quot;:&quot;Red&quot;&#125;)@&gt;op2(&#123;&quot;stroke&quot;:&quot;Red&quot;&#125;)@&gt;cond2(&#123;&quot;stroke&quot;:&quot;Red&quot;&#125;)@&gt;sub3(&#123;&quot;stroke&quot;:&quot;Red&quot;&#125;)@&gt;sub4(&#123;&quot;stroke&quot;:&quot;Red&quot;&#125;)@&gt;io2(&#123;&quot;stroke&quot;:&quot;Red&quot;&#125;)@&gt;e(&#123;&quot;stroke&quot;:&quot;Red&quot;,&quot;stroke-width&quot;:6,&quot;arrow-end&quot;:&quot;classic-wide-long&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<div id="flowchart-2" class="flow-chart"></div>
+
+
+
 <h3 id="语法：-1"><a href="#语法：-1" class="headerlink" title="语法："></a>语法：</h3><blockquote>
 <p>官网说明文档 <a target="_blank" rel="noopener" href="https://flowchart.js.org/">FlowChar</a> .</p>
 </blockquote>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start
+i=>inputoutput: 输入年份n
+cond1=>condition: n能否被4整除？
+cond2=>condition: n能否被100整除？
+cond3=>condition: n能否被400整除？
+o1=>inputoutput: 输出非闰年
+o2=>inputoutput: 输出非闰年
+o3=>inputoutput: 输出闰年
+o4=>inputoutput: 输出闰年
+e=>end
+st->i->cond1
+cond1(no)->o1->e
+cond1(yes)->cond2
+cond2(no)->o3->e
+cond2(yes)->cond3
+cond3(yes)->o2->e
+cond3(no)->o4->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">
+st=>start: start:>http://www.baidu.com
+op1=>operation: 操作1
+cond1=>condition: YES or NO?
+sub=>subroutine: 子程序
+e=>end
 
+st->op1->cond1
+cond1(yes)->e
+cond1(no)->sub(right)->op1</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script><textarea id="flowchart-2-code" style="display: none">
+st=>start: Improve your
+l10n process!
+e=>end: Continue to have fun!:>https://youtu.be/YQryHo1iHb8[blank]
+op1=>operation: Go to locize.com:>https://locize.com[blank]
+sub1=>subroutine: Read the awesomeness
+cond(align-next=no)=>condition: Interested to
+getting started?
+io=>inputoutput: Register:>https://www.locize.io/register[blank]
+sub2=>subroutine: Read about improving
+your localization workflow
+or another source:>https://medium.com/@adrai/8-signs-you-should-improve-your-localization-process-3dc075d53998[blank]
+op2=>operation: Login:>https://www.locize.io/login[blank]
+cond2=>condition: valid password?
+cond3=>condition: reset password?
+op3=>operation: send email
+sub3=>subroutine: Create a demo project
+sub4=>subroutine: Start your real project
+io2=>inputoutput: Subscribe
+ 
+st->op1->sub1->cond
+cond(yes)->io->op2->cond2
+cond2(no)->cond3
+cond3(no,bottom)->op2
+cond3(yes)->op3
+op3(right)->op2
+cond2(yes)->sub3
+sub3->sub4->io2->e
+cond(no)->sub2(right)->op1
+ 
+st@>op1({"stroke":"Red"})@>sub1({"stroke":"Red"})@>cond({"stroke":"Red"})@>io({"stroke":"Red"})@>op2({"stroke":"Red"})@>cond2({"stroke":"Red"})@>sub3({"stroke":"Red"})@>sub4({"stroke":"Red"})@>io2({"stroke":"Red"})@>e({"stroke":"Red","stroke-width":6,"arrow-end":"classic-wide-long"})</textarea><textarea id="flowchart-2-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-2-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-2-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-2", options);</script>
       
         <!-- 《添加版权声明 -->
         
@@ -368,7 +445,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Typora%E6%B5%81%E7%A8%8B%E5%9B%BE%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">Typora流程图：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#mermaid%E6%95%88%E6%9E%9C"><span class="toc-number">1.1.</span> <span class="toc-text">mermaid效果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">语法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flowchar%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.</span> <span class="toc-text">flowchar效果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">语法：</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Typora%E6%B5%81%E7%A8%8B%E5%9B%BE%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">Typora流程图：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#mermaid%E6%95%88%E6%9E%9C%EF%BC%88%E8%BF%99%E4%B8%AA%E5%8F%AF%E4%BB%A5%E5%9C%A8Typora%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E6%98%BE%E7%A4%BA%EF%BC%8C%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%B8%B2%E6%9F%93%E5%A4%B1%E8%B4%A5%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">mermaid效果（这个可以在Typora编辑器中显示，博客中渲染失败）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">语法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flowchar%E6%95%88%E6%9E%9C%EF%BC%88%E5%8F%AA%E6%9C%89%E8%BF%99%E4%B8%AA%E5%8F%AF%E4%BB%A5%E5%9C%A8%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%98%BE%E7%A4%BA%E6%B5%81%E7%A8%8B%E5%9B%BE%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">flowchar效果（只有这个可以在博客中显示流程图）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9A-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">语法：</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -564,19 +641,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CRC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
