@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/JmTABjWLHwurGKt.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/M6upzyHFvTZQDkB.png">
 <meta property="article:published_time" content="2022-05-08T02:14:32.000Z">
-<meta property="article:modified_time" content="2022-05-08T03:20:38.865Z">
+<meta property="article:modified_time" content="2022-05-08T03:22:42.776Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary">
@@ -247,6 +247,7 @@
 </tr>
 </tbody></table>
 <center>表 1 STM32的启动模式<center>
+
 
 <h3 id="确定代码的烧写地址："><a href="#确定代码的烧写地址：" class="headerlink" title="确定代码的烧写地址："></a>确定代码的烧写地址：</h3><p>在STM32中，一般都会有一个片上的Flash和SRAM。Flash用于烧录我们编译后生成的目标代码，SRAM则用于栈空间和保存全局变量， 它们分别对应图1中地址空间的Code段和SRAM段。此外STM32中的Flash一般都映射在<code>0x0800 0000</code>的地址上的， 因此为了保证向量表写在<code>0x0800 0000</code>的位置上，我们必须保证生成的目标代码中一开始就是向量表的内容。</p>
 <p>我们的源文件不止一个，向量表怎么就写在了<code>0x0800 0000</code>的地址上呢？我们打开“Options for Target ‘Project Name’”窗口， 如图3所示，在Linker选项卡下，可以看到链接器的配置。其中”R&#x2F;O Base”一栏中标注了只读代码的起始位置<code>0x0800 0000</code>，”R&#x2F;W Base”一栏标注了可读写的地址空间。 我们只需要保证向量表链接在只读代码段的起始位置就可以了。这一点由链接器的控制参数(Linker control string)和分布文件(Scatter File)实现。 这两项都是由μVision自动生成的，刚刚提到的只读代码段地址和可读写的地址实际上只是为生成分布文件提供了一些数据而已。 我们也可以根据自己的需要重新编辑分布文件，比如实现<code>应用程序自编程</code>时，我们就会对其做些简单的修改。</p>
@@ -667,14 +668,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">can</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
@@ -684,6 +677,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">can</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -711,11 +712,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
