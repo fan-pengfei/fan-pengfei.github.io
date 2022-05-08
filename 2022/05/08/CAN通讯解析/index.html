@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/MoNYvX4phbdsE2H.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/fuGqrLiyJtxlwcM.png">
 <meta property="article:published_time" content="2022-05-08T02:52:45.000Z">
-<meta property="article:modified_time" content="2022-05-08T13:23:36.263Z">
+<meta property="article:modified_time" content="2022-05-08T13:24:04.537Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="can">
 <meta property="article:tag" content="通讯协议">
@@ -331,7 +331,7 @@
 <p>长度小于40m的网络最高支持的比特率高达1百万比特&#x2F;秒。降低比特率可以允许使用更长的网络距离（例如，125千比特&#x2F;秒支持最大500米）。改进的CAN FD标准允许仲裁后升高比特率，可以将数据区块速度增加至仲裁位速率的八倍。</p>
 <h2 id="ID分配："><a href="#ID分配：" class="headerlink" title="ID分配："></a>ID分配：</h2><p>信息ID在单条CAN总线上必须是唯一的，否则两个节点将在仲裁位(ID)传送结束后继续传输，造成错误。</p>
 <p>1990年代早期，为信息选择标志符（ID）的准则仅仅基于数据的种类和发信节点。但是，当标志符同样代表着信息的优先级时，这会带来不好的实时响应。在这种情况下，通常要求CAN总线只能使用大概30%才能保证信息可以在截止时间之前到达。然而，如果信息的标志符根据信息的优先级决定，更低标志符的信息获得更高优先级，那么在不损失数据的前提下，总线的使用率可以达到70%到80%。</p>
-<h2 id="位时序"><a href="#位时序" class="headerlink" title="位时序"></a>位时序</h2><p>CAN网络上的所有节点必须运行在相同的标称比特率下，但噪音、相移、振荡频率容差和振荡频率漂移导致实际的比特率可能与标称比特率不同。[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%8E%A7%E5%88%B6%E5%99%A8%E5%8D%80%E5%9F%9F%E7%B6%B2%E8%B7%AF#cite_note-9">9]</a>由于没有使用一个单独的时钟信号，需要一个同步节点方法。同步在仲裁机制中十分重要，因为仲裁中的节点需要能够同时看到它们传输数据的数据和其他节点的传输数据。 同步在确保节点间震荡时间不同时不发生错误上十分重要。</p>
+<h2 id="位时序"><a href="#位时序" class="headerlink" title="位时序"></a>位时序</h2><p>CAN网络上的所有节点必须运行在相同的标称比特率下，但噪音、相移、振荡频率容差和振荡频率漂移导致实际的比特率可能与标称比特率不同。由于没有使用一个单独的时钟信号，需要一个同步节点方法。同步在仲裁机制中十分重要，因为仲裁中的节点需要能够同时看到它们传输数据的数据和其他节点的传输数据。 同步在确保节点间震荡时间不同时不发生错误上十分重要。</p>
 <p>总线闲置一段时间后，在第一个隐性信号向显性信号转换时（起始位） 进行硬同步。再次同步发生在传输帧期间的每次从隐性向显性转换时。CAN控制器期望在标称位时间内发生多次转换。如果并没有在期望的确定时间发生，控制器将根据这调整标称位时间。</p>
 <p>调整是通过将每一位划分成多个称为量子的时间段,并分配一定数量的量子到位中的四个阶段完成的。这四个阶段分别为：同步、传播、相位段1和相位段2。</p>
 <p><img src="https://s2.loli.net/2022/05/08/P6C7wURKbzBvXuQ.png" alt="img"></p>
@@ -1031,19 +1031,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CRC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据校验</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">can</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CRC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据校验</a>
               </li>
              
               <li class="article-tag-list-item">
