@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/MoNYvX4phbdsE2H.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/fuGqrLiyJtxlwcM.png">
 <meta property="article:published_time" content="2022-05-08T02:52:45.000Z">
-<meta property="article:modified_time" content="2022-05-08T13:10:39.697Z">
+<meta property="article:modified_time" content="2022-05-08T13:17:12.523Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="can">
 <meta property="article:tag" content="通讯协议">
@@ -197,16 +197,18 @@
 <h2 id="架构："><a href="#架构：" class="headerlink" title="架构："></a>架构：</h2><p>CAN是一个用于连接电子控制单元（ECU）的多主机串行总线标准。电子控制单元有时也被称作节点。CAN网络上需要至少两个节点才可进行通信。节点的复杂程度可以只是简单的输入输出设备，也可以是包含有CAN交互器并搭载了软件的嵌入式组件。节点还可能是一个网关，允许普通计算机通过USB或以太网端口与CAN网络上的设备通信。</p>
 <p>所有节点通过两根平行的总线连接在一起。两条电线组成一条双绞线，并且接有120Ω的特性阻抗。</p>
 <p><strong>ISO 11898-2</strong>，也称为高速度CAN。它在总线的两端均接有120Ω电阻。</p>
-<img src="https://s2.loli.net/2022/05/08/tSc5pdbMja7Th9l.png" alt="img" style="zoom:150%;" />
+<div align=center><img src="https://s2.loli.net/2022/05/08/tSc5pdbMja7Th9l.png" alt="img" style="zoom:150%;" />
 
 <center>高速CAN网络 ISO 11898-2</center>
 
 <p>高速CAN总线在传输显性（0）信号时，会将CAN_H端抬向5V高电平，将CAN_L拉向0V低电平。当传输隐性（1)信号时，并不会驱动CAN_H或者CAN_L端。 显性信号CAN_H和CAN_L两端差分标称电压为2V。 终端电阻在没有驱动时，将差分标称电压降回0V。显性信号（0）的共模电压需要在1.5V到3.5V之间。隐性信号（1）的共模电压需要在+&#x2F;-12V。</p>
-<p><img src="https://s2.loli.net/2022/05/08/Y5t4XK6aGMmSvcJ.png" alt="img"></p>
+<div align=center><img src="https://s2.loli.net/2022/05/08/Y5t4XK6aGMmSvcJ.png" alt="img" style="zoom: 80%;" />
+
 <center>高速CAN信令 ISO 11898-2</center>
 
 <p><strong>ISO 11898-3</strong>，也被称作低速或者容错CAN。它使用线性主线，星形主线或者连接到一个线性主线上的多星结构主线著称。每个节点都有终端电阻作为全局终端电阻的一部分。全局终端电阻不应低于100 Ω。</p>
-<p><img src="https://s2.loli.net/2022/05/08/mGK543tlzs2UZOq.png" alt="img"></p>
+<div align=center><img src="https://s2.loli.net/2022/05/08/mGK543tlzs2UZOq.png" alt="img" style="zoom:80%;" />
+
 <center>低速容错CAN网络 ISO 11898-3</center>
 
 <p>低速&#x2F;容错CAN信号在传输显性信号（0）时，驱动CANH端抬向5V，将CANL端降向0V。在传输隐性信号（1）时并不驱动CAN 总线的任何一端。在电源电压Vcc为5V时，显性信号差分电压需要大于2.3V，隐性信号的差分电压需要小于0.6V。CAN总线两端未被驱动时，终端电阻使CANL端回归到RTH电压（当电源电压Vcc为5V时，RTH电压至少为Vcc-0.3V&#x3D;4.7V），同时使CANH端回归至RTL电压（RTL电压最大为0.3V）。两根线需要能够承受-27V至40V的电压而不被损坏。</p>
@@ -595,7 +597,7 @@
 <p>11111<strong>0</strong>0000<strong>1</strong>1111<strong>0</strong>0000<strong>1</strong>…</p>
 <p>填充位本身可能成为五个连续相同位中的第一个，所以在最坏的情况下，每四个原始位有一个填充位。</p>
 <p>长度由下面公式给出：</p>
-<p>$$<br>8n+47+[\frac{34+8n-1}{4}]<br>$$</p>
+<p>$$<br>8n+47+[\frac{34+8n-1}{4}]\tag{1}<br>$$</p>
 <p>其中<code>8n+47</code>是填充前帧的长度，在最坏情况下，原数据除了第一个4位后，在每个4位后增加一位（所以分子减去1），同时由于位的结构，固有的47位中只有34位能够被填充。</p>
 
       
@@ -963,15 +965,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">感悟</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -983,11 +985,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1007,15 +1009,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1027,15 +1021,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">can</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1044,6 +1038,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">can</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
              
               <li class="article-tag-list-item">
