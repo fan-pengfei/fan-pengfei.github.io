@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/Bk3qjRNtcsvlU6X.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/yhsQcYqXG5ZiBVu.jpg">
 <meta property="article:published_time" content="2022-05-08T02:21:29.000Z">
-<meta property="article:modified_time" content="2022-05-08T09:03:27.443Z">
+<meta property="article:modified_time" content="2022-05-08T09:18:15.473Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="CRC">
 <meta property="article:tag" content="校验">
@@ -198,7 +198,7 @@
 <blockquote>
 <p>  CRC校验原理看起来比较复杂，好难懂，因为大多数书上基本上是以二进制的多项式形式来说明的。其实很简单的问题，其根本思想就是先在要发送的帧后面附加一个数（这个就是用来校验的校验码，但要注意，这里的数也是二进制序列的，下同），生成一个新帧发送给接收端。当然，这个附加的数不是随意的，它  要使所生成的新帧能与发送端和接收端共同选定的某个特定数整除（注意，这里不是直接采用二进制除法，而是采用一种称之为“模2除法”）。到达接收端后，再把接收到的新帧除以（同样采用“模2除法”）这个选定的除数。因为在发送端发送数据帧之前就已通过附加一个数，做了“去余”处理（也就已经能整除了），所以结果应该是没有余数。如果有余数，则表明该帧在传输过程中出现了差错。</p>
 </blockquote>
-<p><strong>【说明】</strong>：“模2除法”与“算术除法”类似，但它既不向上位借位，也不比较除数和被除数的相同位数值的大小，只要以相同位数进行相除即可。模2加法运算为：1+1&#x3D;0，0+1&#x3D;1，0+0&#x3D;0，无进位，也无借位；模2减法运算为：1-1&#x3D;0，0-1&#x3D;1，1-0&#x3D;1，0-0&#x3D;0，也无进位，无借位。相当于二进制中的逻辑异或运算。也就是比较后，两者对应位相同则结果为“0”，不同则结果为“1”。如100101除以1110，结果得到商为11，余数为1，如图5-9左图所示。如11×11&#x3D;101，如右图所示。</p>
+<p><strong>【说明】</strong>：“模2除法”与“算术除法”类似，但它既不向上位借位，也不比较除数和被除数的相同位数值的大小，只要以相同位数进行相除即可。模2加法运算为：1+1&#x3D;0，0+1&#x3D;1，0+0&#x3D;0，无进位，也无借位；模2减法6运算为：1-1&#x3D;0，0-1&#x3D;1，1-0&#x3D;1，0-0&#x3D;0，也无进位，无借位。相当于二进制中的逻辑异或运算。也就是比较后，两者对应位相同则结果为“0”，不同则结果为“1”。如100101除以1110，结果得到商为11，余数为1，如图5-9左图所示。如11×11&#x3D;101，如右图所示。</p>
 <table>
 <thead>
 <tr>
@@ -234,7 +234,7 @@
 <p><img src="https://s2.loli.net/2022/05/08/zl1XDOVCyASi4E9.jpg" alt="最通俗的CRC校验原理剖析_王达_03"></p>
 </li>
 </ul>
-<center>CRC校验码计算示例
+<center>CRC校验码计算示例</center>
 
 <ul>
 <li><p>把上步计算得到的CRC校验0100替换原始帧101100110000后面的四个“0”，得到新帧101100110100。再把这个新帧发送到接收端。</p>
@@ -960,6 +960,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
@@ -969,10 +973,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -992,11 +992,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">
