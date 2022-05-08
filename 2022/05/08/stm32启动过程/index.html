@@ -15,11 +15,18 @@
 <meta property="og:site_name" content="樊鹏飞的博客">
 <meta property="og:description" content="了解stm32的启动过程，方便遇到问题时的调试；">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/QVHUSfNkCePGZT7.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/EuhALr4Xb2fCmRF.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/OrmJKFxThv9Inbs.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/wd6NoyLiEefVPWM.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/JmTABjWLHwurGKt.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/08/M6upzyHFvTZQDkB.png">
 <meta property="article:published_time" content="2022-05-08T02:14:32.000Z">
-<meta property="article:modified_time" content="2022-05-08T02:50:57.589Z">
+<meta property="article:modified_time" content="2022-05-08T03:20:38.865Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/05/08/QVHUSfNkCePGZT7.png">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -182,14 +189,117 @@
         <blockquote>
 <p>  了解stm32的启动过程，方便遇到问题时的调试；<span id="more"></span></p>
 </blockquote>
-<p><strong>主要是两个问题：</strong></p>
-<ul>
+<h2 id="主要是两个问题："><a href="#主要是两个问题：" class="headerlink" title="主要是两个问题："></a><strong>主要是两个问题：</strong></h2><ul>
 <li>STM32是如何启动的，如何执行到main函数；</li>
 <li>如何保证编译后的代码可以烧录到正确的地址；</li>
 </ul>
 <p>作为一个计算机系统的核心，CPU的实际工作就是取指令和计算。大体上它可以看做是三个部分组成的：寄存器组、算术逻辑单元(ALU) 、指令队列。 在<code>Cortex-M4</code>的寄存器中有一个特殊的寄存器PC(Program Counter,程序计数器)， 用于控制程序的执行。在每个时钟周期中CPU都会根据PC中的值，从地址空间中取一条指令放到指令队列中， 同时从指令队列中取出一条指令进行解析和运算(实际上ARM采用的是一种流水线的指令处理方式，与这里所讲的内容还是有很大差异的，但大体思想差不多)。 并把上次的运算结果写到寄存器中。</p>
-<p>CPU运算所用的指令和数据都来自地址空间。在<code>Cortex-M4</code>的内存系统中， CPU可以访问4G的地址空间，根据所映射的物理对象不同大体上被划分成了6块。我们烧写到芯片内部的程序一般都在其中的Code段中， 在STM32中这个段对应的是一块FLASH。上电的时候，基本上只有这块FLASH中的内容是确定的，其它地址空间以及CPU内部的寄存器中的值都是随机的。 当然为了防止上电的时候外设产生意外，片上外设(Peripheral)段中的值在上电的时候也会有初始值。</p>
+<p>CPU运算所用的指令和数据都来自地址空间。在<code>Cortex-M4</code>的内存系统中， CPU可以访问4G的地址空间，根据所映射的物理对象不同大体上被划分成了6块。我们烧写到芯片内部的程序一般都在其中的Code段中， 在STM32中这个段对应的是一块FLASH。上电的时候，基本上只有这块FLASH中的内容是确定的，其它地址空间以及CPU内部的寄存器中的值都是随机的。 当然为了防止上电的时候外设产生意外，片上外设(<code>Peripheral</code>)段中的值在上电的时候也会有初始值。</p>
 <p>所以，从处理器的角度来看，启动过程实际上是给各个寄存器赋初值的过程，更具体的是给PC寄存器赋初值的过程。从MCU和系统的角度来看， 启动过程是初始化处理器和外设的过程。</p>
+<h2 id="以STM32F4为例："><a href="#以STM32F4为例：" class="headerlink" title="以STM32F4为例："></a><strong>以STM32F4为例：</strong></h2><h3 id="STM32是如何启动的："><a href="#STM32是如何启动的：" class="headerlink" title="STM32是如何启动的："></a>STM32是如何启动的：</h3><blockquote>
+<p>  上电后系统进行复位，等到时钟稳定后才可以正常工作，这个过程通常需要几个毫秒。 图1中描述了处理器的复位过程，Cortex-M内核会先从地址<code>0x0000</code>处读取栈地址，并写到CPU内部的SP寄存器中。 再从地址<code>0x0004</code>读取<code>Reset Vector</code>到PC寄存器中，进而跳转到<code>Reset Vector</code>所指的地址上开始执行程序。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/05/08/QVHUSfNkCePGZT7.png" alt="cortex_m复位流程"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">图1 Cortex-M复位流程</td>
+</tr>
+</tbody></table>
+<p>栈空间是处理器实现函数调用和中断服务的工具。函数调用和中断服务有一个共同的特点就是，它们都需要先把当前正在处理的内容暂时保存下来，转而执行要调用的函数， 或者中断服务函数，等待新的函数执行完毕返回后，在从原来保存的内容恢复回来继续执行原来的函数。而函数的调用是支持嵌套的，也就是说一个函数中可以调用子函数， 在子函数中又可以调用其它子函数。那么从函数的调用和返回的顺序上来看，最后调用的函数一定先返回。栈这种数据结构的特点就是其中的数据是后进先出的， 与函数调用和返回的顺序是一致的。因而，人们就专门在内存空间中划分出来一块用作栈空间，并从CPU中拿出一个宝贵的寄存器用于指示栈顶， 该寄存器被记为SP (Stack Pointer)。</p>
+<p>所以，前面所说的从CPU的角度看启动过程就是PC寄存器初始化的过程还不完善。虽然对PC寄存器进行初始化后，CPU就可以正常的取指令并进行运算了， 但这时所能完成的功能十分有限，并不能支持对我们很重要的函数和中断。因此，从CPU角度看启动过程是对PC和SP两个寄存器的初始化过程。</p>
+<p><code>Cortex-M4</code>中规定<code>0x0000</code>起始的地址存放的是系统向量表(<code>vector table</code>)。在STM32中<code>0x0000</code>本身并不对应什么物理设备， &#x3D;&#x3D;通过配置引脚BOOT[1:0]我们可以控制<code>0x0000</code>映射到地址空间中的其它地址中，也就实现了不同的启动方式。&#x3D;&#x3D;一共有三种可选的启动方式如表1所示， 从主闪存或者系统存储器启动时，硬件上会把<code>0x0000 0000</code>映射到<code>0x0800 0000</code>或者<code>0x1FFF F000</code>上，这样我们从地址<code>0x0000 0000</code>访问的空间实际上就是主闪存或者系统存储器的空间。 从SRAM启动时，只能在<code>0x2000 0000</code>开始的地址访问SRAM。一般我都是从主闪存启动的，也就是说系统的向量表应当烧写在<code>0x0800 0000</code>的地址上。至于如何从SRAM启动需要查看其他资料<code>todo</code>。</p>
+<table>
+<thead>
+<tr>
+<th align="center">启动模式选择引脚</th>
+<th align="center"></th>
+<th align="center">启动模式</th>
+<th align="center">偏移地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">BOOT1</td>
+<td align="center">BOOT0</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">X</td>
+<td align="center">0</td>
+<td align="center">主闪存(Main Flash Memory)</td>
+<td align="center">0x0800 0000</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">系统存储器(system memory)</td>
+<td align="center">0x1FFF F000</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">内置SRAM(Embedded SRAM)</td>
+<td align="center">0x2000 0000</td>
+</tr>
+</tbody></table>
+<center>表 1 STM32的启动模式<center>
+
+<h3 id="确定代码的烧写地址："><a href="#确定代码的烧写地址：" class="headerlink" title="确定代码的烧写地址："></a>确定代码的烧写地址：</h3><p>在STM32中，一般都会有一个片上的Flash和SRAM。Flash用于烧录我们编译后生成的目标代码，SRAM则用于栈空间和保存全局变量， 它们分别对应图1中地址空间的Code段和SRAM段。此外STM32中的Flash一般都映射在<code>0x0800 0000</code>的地址上的， 因此为了保证向量表写在<code>0x0800 0000</code>的位置上，我们必须保证生成的目标代码中一开始就是向量表的内容。</p>
+<p>我们的源文件不止一个，向量表怎么就写在了<code>0x0800 0000</code>的地址上呢？我们打开“Options for Target ‘Project Name’”窗口， 如图3所示，在Linker选项卡下，可以看到链接器的配置。其中”R&#x2F;O Base”一栏中标注了只读代码的起始位置<code>0x0800 0000</code>，”R&#x2F;W Base”一栏标注了可读写的地址空间。 我们只需要保证向量表链接在只读代码段的起始位置就可以了。这一点由链接器的控制参数(Linker control string)和分布文件(Scatter File)实现。 这两项都是由μVision自动生成的，刚刚提到的只读代码段地址和可读写的地址实际上只是为生成分布文件提供了一些数据而已。 我们也可以根据自己的需要重新编辑分布文件，比如实现<code>应用程序自编程</code>时，我们就会对其做些简单的修改。</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://s2.loli.net/2022/05/08/EuhALr4Xb2fCmRF.png" alt="img"></th>
+<th><img src="https://s2.loli.net/2022/05/08/OrmJKFxThv9Inbs.png" alt="img"></th>
+</tr>
+</thead>
+</table>
+<center>图2 项目工程的连接设置<center>
+
+
+
+<p>Linker control string描述了链接器的工作参数，我们的项目的具体配置信息如下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">--cpu Cortex-M4.fp *.o </span><br><span class="line">--strict --scatter <span class="string">&quot;.\Objects\Particle.sct&quot;</span></span><br><span class="line">--summary_stderr --info summarysizes --map --xref --callgraph --symbols </span><br><span class="line">--info sizes --info totals --info unused --info veneers </span><br><span class="line">--list <span class="string">&quot;.\Listings\Particle.map&quot;</span> </span><br><span class="line">-o .\Objects\Particle.axf</span><br></pre></td></tr></table></figure>
+
+<p>这里把关于Scater File的选项是<code>--strict --scatter &quot;.\Objects\Particle.sct&quot;</code>，按照其描述的路径就可以找到Particle所用的分布文件。 Scater File则是用来告知编译器各段代码在最后生成的可执行文件中的位置。下面是由μVision生成的分布文件内容：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LR_IROM1 <span class="number">0x08000000</span> <span class="number">0x00100000</span>  &#123;    ; load region size_region</span><br><span class="line">	ER_IROM1 <span class="number">0x08000000</span> <span class="number">0x00100000</span>  &#123;  ; load address = execution address</span><br><span class="line">		*.o (RESET, +First)</span><br><span class="line">		*(InRoot$$Sections)</span><br><span class="line">	.ANY (+RO)</span><br><span class="line">&#125;</span><br><span class="line">RW_IRAM1 <span class="number">0x20000000</span> <span class="number">0x00020000</span>  &#123;  ; RW data</span><br><span class="line">	.ANY (+RW +ZI)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>LR_IROM1描述了可以烧录代码的起始地址(<code>0x0800 000</code>)和大小(<code>0x0010 0000</code>)，最后生成的代码分为ER_IROM1和RW_IRAM1两个部分。 这里的起始地址正好就是向量表所要在的位置。</p>
+<p>参考数据手册(Data Sheet)的第四章内存映射内容我们知道从<code>0x0800 0000</code>开始长度为<code>0x0010 0000</code>的这段地址空间是一段片上的FLASH， 系统掉电后它仍保有原来的数据，一般用来保存系统的代码。 所以这里的ER_IROM1就是用来告知链接器把生成的各个*.o工程文件以及只读的代码放置在从<code>0x0800 0000</code>起始的地址空间中。 <code>*.o (RESET, +First)</code>语句告知链接器把RESET代码段放置到起始位置。后面分析启动文件时就会发现RESET代码段一开始就定义了系统的向量表。</p>
+<p>任何可读可写的代码段都被放置到了RW_IRAM1中，RW_IRAM1起始于<code>0x2000 0000</code>对应于一段片上的RAM区域， 这段地址空间中的数据掉电后是不能保留的，通常用作数据段保存系统工作过程中的数据， 一般被抽象为栈空间和堆空间(关于栈和堆以后会有专题介绍)。</p>
+<h3 id="启动文件-s-分析："><a href="#启动文件-s-分析：" class="headerlink" title="启动文件(.s)分析："></a>启动文件(.s)分析：</h3><p>启动文件中定义了系统的向量表、栈空间和堆空间。系统复位后首先就执行该文件中的代码。</p>
+<p>在启动文件中，首先定义了400字节的栈空间和200字节的堆空间。 由于这两段空间是可读可写的(READWRITE)，根据链接器和分布文件的配置，这两段代码将被放置到RW_IRAM1声明的地址空间下，即0x20000000。</p>
+<img src="https://s2.loli.net/2022/05/08/wd6NoyLiEefVPWM.png" alt="img" style="zoom:67%;" />
+
+<p>接着启动文件定义了系统的向量表。 这段代码被定义为只读的(READONLY)，并且被标记为RESET，因此将被映射到ER_IROM1声明的地址空间下的起始位置，而__Vectors标识了向量表的起始位置。 其中的第一个数据就是系统的栈顶向量__initial_sp， 紧接着就是复位处理程序向量Reset_Handler，这正是系统复位时首先读取的两个数据。</p>
+<img src="https://s2.loli.net/2022/05/08/JmTABjWLHwurGKt.png" alt="img" style="zoom:67%;" />
+
+<p>复位处理程序很简单只有几行，它首先执行函数SystemInit，然后执行函数__main。 这两个函数就是那两个空函数，SystemInit和main（main函数在编译过程中会被加两个下划线）。</p>
+<img src="https://s2.loli.net/2022/05/08/M6upzyHFvTZQDkB.png" alt="img" style="zoom:67%;" />
+
+<p>此时我们可以看到，系统在跳转到Reset_Handler所指的代码后，先执行了函数SystemInit。 在官方的库中，这个函数做了一些系统时钟初始化的工作。 然后就开始执行我们的main函数，实际上我们完全可以把SystemInit这个函数删掉，把初始化工作移到main函数中完成。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ul>
+<li><strong>STM32是如何启动的，为什么能够执行到main函数:</strong><ol>
+<li><strong>上电后，系统先后从向量表中读取栈顶地址和复位处理程序地址，并跳转到复位处理程序；</strong></li>
+<li><strong>在复位处理程序中，首先执行一些系统初始化的工作，然后执行main函数。</strong></li>
+</ol>
+</li>
+<li><strong>如何保证编译后的代码能够烧写到芯片的正确地址中：</strong><ol>
+<li><strong>在项目链接选项中指定只读代码段的起始地址，并标记向量表的符号__Vectors作为代码的起始符号；</strong></li>
+<li><strong>在启动文件把向量表定义为只读的代码段并用__Vectors标识。</strong></li>
+</ol>
+</li>
+</ul>
+<p><strong>参考：</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://gaoyichao.com/Xiaotu/?book=stm32&amp;title=STM32%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B">https://gaoyichao.com/Xiaotu/?book=stm32&amp;title=STM32%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/337203514">https://zhuanlan.zhihu.com/p/337203514</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_14114084/3651520">https://blog.51cto.com/u_14114084/3651520</a></li>
+</ul>
 
       
         <!-- 《添加版权声明 -->
@@ -357,7 +467,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E6%98%AF%E4%B8%A4%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">主要是两个问题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A5STM32F4%E4%B8%BA%E4%BE%8B%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">以STM32F4为例：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#STM32%E6%98%AF%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8%E7%9A%84%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">STM32是如何启动的：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E4%BB%A3%E7%A0%81%E7%9A%84%E7%83%A7%E5%86%99%E5%9C%B0%E5%9D%80%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">确定代码的烧写地址：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6-s-%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-number">2.3.</span> <span class="toc-text">启动文件(.s)分析：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">总结：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -545,10 +655,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
@@ -558,6 +664,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">can</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,11 +703,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
