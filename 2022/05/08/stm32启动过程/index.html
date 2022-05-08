@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/JmTABjWLHwurGKt.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/M6upzyHFvTZQDkB.png">
 <meta property="article:published_time" content="2022-05-08T02:14:32.000Z">
-<meta property="article:modified_time" content="2022-05-08T03:31:12.693Z">
+<meta property="article:modified_time" content="2022-05-08T05:20:35.712Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary">
@@ -276,9 +276,24 @@
 <img src="https://s2.loli.net/2022/05/08/JmTABjWLHwurGKt.png" alt="img" style="zoom:67%;" />
 
 <p>复位处理程序很简单只有几行，它首先执行函数SystemInit，然后执行函数__main。 这两个函数就是那两个空函数，SystemInit和main（main函数在编译过程中会被加两个下划线）。</p>
+<blockquote>
+<p>main is your main procedure form main.c file, once <strong>main is an internal procedure created by Keil toolchain which is calling at the end your main, but before it is initializing all variables (copying variables from FLASH to proper positions in RAM). In gcc it is seen explicitly, in Keil you can see it within debug process.</strong></p>
+<p>main 是由 Keil 工具链创建的内部过程，它初始化所有变量（将变量从 FLASH 复制到 RAM 中的适当位置），并在最后调用您的 main，在 gcc 中它是明确可见的，在 Keil 中你可以在调试过程中看到它；</p>
+<p>也就是说，__main 是库自带的东西，在编译时会由编译器链接到二进制程序里；</p>
+</blockquote>
 <img src="https://s2.loli.net/2022/05/08/M6upzyHFvTZQDkB.png" alt="img" style="zoom:67%;" />
 
 <p>此时我们可以看到，系统在跳转到Reset_Handler所指的代码后，先执行了函数SystemInit。 在官方的库中，这个函数做了一些系统时钟初始化的工作。 然后就开始执行我们的main函数，实际上我们完全可以把SystemInit这个函数删掉，把初始化工作移到main函数中完成。</p>
+<blockquote>
+<p>  一些概念：</p>
+<p>  Code （代码段）</p>
+<p>  ZI （Zero-Inintialize Data段）</p>
+<p>  RO （ReadOnly Data段）</p>
+<p>  RW (ReacWrite Data段)</p>
+<p>  占用计算：</p>
+<p>  FLASH 储存：Code + RO + RW</p>
+<p>  RAM 内存： RW + ZI</p>
+</blockquote>
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ul>
 <li><strong>STM32是如何启动的，为什么能够执行到main函数:</strong><ol>
 <li><strong>上电后，系统先后从向量表中读取栈顶地址和复位处理程序地址，并跳转到复位处理程序；</strong></li>
@@ -660,11 +675,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">can</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,7 +683,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+                <a href="javascript:void(0)" class="js-tag color4">can</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
              
               <li class="article-tag-list-item">
