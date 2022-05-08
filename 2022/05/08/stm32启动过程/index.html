@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/JmTABjWLHwurGKt.png">
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/M6upzyHFvTZQDkB.png">
 <meta property="article:published_time" content="2022-05-08T02:14:32.000Z">
-<meta property="article:modified_time" content="2022-05-08T03:28:16.380Z">
+<meta property="article:modified_time" content="2022-05-08T03:31:12.693Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary">
@@ -205,10 +205,9 @@
 <th align="center"><img src="https://s2.loli.net/2022/05/08/QVHUSfNkCePGZT7.png" alt="cortex_m复位流程"></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">图1 Cortex-M复位流程</td>
-</tr>
-</tbody></table>
+</table>
+<center> 图1 Cortex-M复位流程 </center>
+
 <p>栈空间是处理器实现函数调用和中断服务的工具。函数调用和中断服务有一个共同的特点就是，它们都需要先把当前正在处理的内容暂时保存下来，转而执行要调用的函数， 或者中断服务函数，等待新的函数执行完毕返回后，在从原来保存的内容恢复回来继续执行原来的函数。而函数的调用是支持嵌套的，也就是说一个函数中可以调用子函数， 在子函数中又可以调用其它子函数。那么从函数的调用和返回的顺序上来看，最后调用的函数一定先返回。栈这种数据结构的特点就是其中的数据是后进先出的， 与函数调用和返回的顺序是一致的。因而，人们就专门在内存空间中划分出来一块用作栈空间，并从CPU中拿出一个宝贵的寄存器用于指示栈顶， 该寄存器被记为SP (Stack Pointer)。</p>
 <p>所以，前面所说的从CPU的角度看启动过程就是PC寄存器初始化的过程还不完善。虽然对PC寄存器进行初始化后，CPU就可以正常的取指令并进行运算了， 但这时所能完成的功能十分有限，并不能支持对我们很重要的函数和中断。因此，从CPU角度看启动过程是对PC和SP两个寄存器的初始化过程。</p>
 <p><code>Cortex-M4</code>中规定<code>0x0000</code>起始的地址存放的是系统向量表(<code>vector table</code>)。在STM32中<code>0x0000</code>本身并不对应什么物理设备， &#x3D;&#x3D;通过配置引脚BOOT[1:0]我们可以控制<code>0x0000</code>映射到地址空间中的其它地址中，也就实现了不同的启动方式。&#x3D;&#x3D;一共有三种可选的启动方式如表1所示， 从主闪存或者系统存储器启动时，硬件上会把<code>0x0000 0000</code>映射到<code>0x0800 0000</code>或者<code>0x1FFF F000</code>上，这样我们从地址<code>0x0000 0000</code>访问的空间实际上就是主闪存或者系统存储器的空间。 从SRAM启动时，只能在<code>0x2000 0000</code>开始的地址访问SRAM。一般我都是从主闪存启动的，也就是说系统的向量表应当烧写在<code>0x0800 0000</code>的地址上。至于如何从SRAM启动需要查看其他资料<code>todo</code>。</p>
@@ -246,13 +245,8 @@
 <td align="center">0x2000 0000</td>
 </tr>
 </tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">表1 STM32的启动模式</th>
-</tr>
-</thead>
-</table>
+<center>表1 STM32的启动模式 </center>
+
 <h3 id="确定代码的烧写地址："><a href="#确定代码的烧写地址：" class="headerlink" title="确定代码的烧写地址："></a>确定代码的烧写地址：</h3><p>在STM32中，一般都会有一个片上的Flash和SRAM。Flash用于烧录我们编译后生成的目标代码，SRAM则用于栈空间和保存全局变量， 它们分别对应图1中地址空间的Code段和SRAM段。此外STM32中的Flash一般都映射在<code>0x0800 0000</code>的地址上的， 因此为了保证向量表写在<code>0x0800 0000</code>的位置上，我们必须保证生成的目标代码中一开始就是向量表的内容。</p>
 <p>我们的源文件不止一个，向量表怎么就写在了<code>0x0800 0000</code>的地址上呢？我们打开“Options for Target ‘Project Name’”窗口， 如图3所示，在Linker选项卡下，可以看到链接器的配置。其中”R&#x2F;O Base”一栏中标注了只读代码的起始位置<code>0x0800 0000</code>，”R&#x2F;W Base”一栏标注了可读写的地址空间。 我们只需要保证向量表链接在只读代码段的起始位置就可以了。这一点由链接器的控制参数(Linker control string)和分布文件(Scatter File)实现。 这两项都是由μVision自动生成的，刚刚提到的只读代码段地址和可读写的地址实际上只是为生成分布文件提供了一些数据而已。 我们也可以根据自己的需要重新编辑分布文件，比如实现<code>应用程序自编程</code>时，我们就会对其做些简单的修改。</p>
 <table>
@@ -263,17 +257,10 @@
 </tr>
 </thead>
 </table>
-<table>
-<thead>
-<tr>
-<th align="center">图2 项目工程的连接设置</th>
-</tr>
-</thead>
-</table>
 <center>图2 项目工程的连接设置</center>
 
 <p>Linker control string描述了链接器的工作参数，我们的项目的具体配置信息如下。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">--cpu Cortex-M4.fp *.o </span><br><span class="line">--strict --scatter <span class="string">&quot;.\Objects\Particle.sct&quot;</span></span><br><span class="line">--summary_stderr --info summarysizes --map --xref --callgraph --symbols </span><br><span class="line">--info sizes --info totals --info unused --info veneers </span><br><span class="line">--list <span class="string">&quot;.\Listings\Particle.map&quot;</span> </span><br><span class="line">-o .\Objects\Particle.axf</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">--cpu Cortex-M4.fp *.o </span><br><span class="line">--strict --scatter &quot;.\Objects\Particle.sct&quot;</span><br><span class="line">--summary_stderr --info summarysizes --map --xref --callgraph --symbols </span><br><span class="line">--info sizes --info totals --info unused --info veneers </span><br><span class="line">--list &quot;.\Listings\Particle.map&quot; </span><br><span class="line">-o .\Objects\Particle.axf</span><br></pre></td></tr></table></figure>
 
 <p>这里把关于Scater File的选项是<code>--strict --scatter &quot;.\Objects\Particle.sct&quot;</code>，按照其描述的路径就可以找到Particle所用的分布文件。 Scater File则是用来告知编译器各段代码在最后生成的可执行文件中的位置。下面是由μVision生成的分布文件内容：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LR_IROM1 <span class="number">0x08000000</span> <span class="number">0x00100000</span>  &#123;    ; load region size_region</span><br><span class="line">	ER_IROM1 <span class="number">0x08000000</span> <span class="number">0x00100000</span>  &#123;  ; load address = execution address</span><br><span class="line">		*.o (RESET, +First)</span><br><span class="line">		*(InRoot$$Sections)</span><br><span class="line">	.ANY (+RO)</span><br><span class="line">&#125;</span><br><span class="line">RW_IRAM1 <span class="number">0x20000000</span> <span class="number">0x00020000</span>  &#123;  ; RW data</span><br><span class="line">	.ANY (+RW +ZI)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -673,10 +660,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">can</a>
               </li>
              
@@ -689,11 +672,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">感悟</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,6 +681,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">感悟</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
               </li>
              
               <li class="article-tag-list-item">
