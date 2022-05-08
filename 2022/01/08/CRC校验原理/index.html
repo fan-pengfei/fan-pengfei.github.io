@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/Lv24MrPEmQD6htI.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/05/08/OqkYjLHgcU5SRwB.png">
 <meta property="article:published_time" content="2022-01-08T02:21:29.000Z">
-<meta property="article:modified_time" content="2022-05-08T11:42:23.926Z">
+<meta property="article:modified_time" content="2022-05-08T12:42:02.805Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="CRC">
 <meta property="article:tag" content="数据校验">
@@ -228,14 +228,14 @@
 </li>
 </ul>
 <blockquote>
-<p>  通过以上介绍，大家一定可以理解CRC校验的原理，并且不再认为很复杂吧。<br>  从上面可以看出，CRC校验中有两个关键点：一是要预先确定一个发送端和接收端都用来作为除数的二进制比特串（或多项式）；二是把原始帧与上面选定的除进行二进制除法运算，计算出FCS。前者可以随机选择，也可按国际上通行的标准选择，但最高位和最低位必须均为“1”，如在IBM的SDLC（同步数据链路控制）规程中使用的CRC-16（也就是这个除数一共是17位）生成多项式g（x）&#x3D; x^16^ + x^15^ + x^2^ +1（对应二进制比特串为：11000000000000101）；而在ISO HDLC（高级数据链路控制）规程、ITU的SDLC、X.25、V.34、V.41、V.42等中使用CCITT-16生成多项式g（x）&#x3D; x^16^ + x^15^ + x^5^ +1（对应二进制比特串为：11000000000100001）。</p>
+<p>  通过以上介绍，大家一定可以理解CRC校验的原理，并且不再认为很复杂吧。<br>  从上面可以看出，CRC校验中有两个关键点：一是要预先确定一个发送端和接收端都用来作为除数的二进制比特串（或多项式）；二是把原始帧与上面选定的除进行二进制除法运算，计算出FCS。前者可以随机选择，也可按国际上通行的标准选择，但最高位和最低位必须均为“1”，如在IBM的SDLC（同步数据链路控制）规程中使用的CRC-16（也就是这个除数一共是17位）生成多项式g（x）&#x3D; x^16 + x^15 + x^2 +1（对应二进制比特串为：11000000000000101）；而在ISO HDLC（高级数据链路控制）规程、ITU的SDLC、X.25、V.34、V.41、V.42等中使用CCITT-16生成多项式g（x）&#x3D; x^16+ x^15 + x^5 +1（对应二进制比特串为：11000000000100001）。</p>
 </blockquote>
 <p><strong>CRC校验码的计算示例</strong></p>
 <blockquote>
-<p>  由以上分析可知，既然除数是随机，或者按标准选定的，所以CRC校验的关键是如何求出余数，也就是校验码（CRC校验码）。下面以一个例子来具体说明整个过程。现假设选择的CRC生成多项式为G（X） &#x3D; X^4^ + X^3^ + 1，要求出二进制序列10110011的CRC校验码。下面是具体的计算过程：</p>
+<p>  由以上分析可知，既然除数是随机，或者按标准选定的，所以CRC校验的关键是如何求出余数，也就是校验码（CRC校验码）。下面以一个例子来具体说明整个过程。现假设选择的CRC生成多项式为G（X） &#x3D; X^4 + X^3 + 1，要求出二进制序列10110011的CRC校验码。下面是具体的计算过程：</p>
 </blockquote>
 <ul>
-<li><p>首先把生成多项式转换成二进制数，由G（X） &#x3D; X^4^ + X^3^ + 1可以知道，它一共是5位（总位数等于最高位的幂次加1，即4+1&#x3D;5），然后根据多项式各项的含义（多项式只列出二进制值为1的位，也就是这个二进制的第4位、第3位、第0位的二进制均为1，其它位均为0）很快就可得到它的二进制比特串为11001。</p>
+<li><p>首先把生成多项式转换成二进制数，由G（X） &#x3D; X^4+ X^3 + 1可以知道，它一共是5位（总位数等于最高位的幂次加1，即4+1&#x3D;5），然后根据多项式各项的含义（多项式只列出二进制值为1的位，也就是这个二进制的第4位、第3位、第0位的二进制均为1，其它位均为0）很快就可得到它的二进制比特串为11001。</p>
 </li>
 <li><p>因为生成多项式的位数为5，根据前面的介绍，得知CRC校验码的位数为4（校验码的位数比生成多项式的位数少1）。因为原数据帧10110011，在它后面再加4个0，得到101100110000，然后把这个数以“模2除法”方式除以生成多项式，得到的余数（即CRC码）为0100，如图所示。注意参考前面介绍的“模2除法”运算法则。</p>
 <p><img src="https://s2.loli.net/2022/05/08/zl1XDOVCyASi4E9.jpg" alt="最通俗的CRC校验原理剖析_王达_03"></p>
@@ -252,11 +252,11 @@
 <blockquote>
 <p>  通过以上CRC校验原理的剖析和CRC校验码的计算示例的介绍，大家应该对这种看似很复杂的CRC校验原理和计算方法应该比较清楚了。</p>
 </blockquote>
-<h2 id="算法原理："><a href="#算法原理：" class="headerlink" title="算法原理："></a>算法原理：</h2><p>假设数据传输过程中需要发送15位的二进制信息g&#x3D;101001110100001，这串二进制码可表示为代数多项式g(x) &#x3D; x^14^ + x^12^ + x^9^ + x^8^ + x^7^ + x^5^+ 1，其中g中第k位的值，对应g(x)中x^k^ 的系数。将g(x)乘以x^m^，既将g后加m个0，然后除以m阶多项式h(x)，得到的(m-1)阶余项r(x)对应的二进制码r就是CRC编码。</p>
+<h2 id="算法原理："><a href="#算法原理：" class="headerlink" title="算法原理："></a>算法原理：</h2><p>假设数据传输过程中需要发送15位的二进制信息g&#x3D;101001110100001，这串二进制码可表示为代数多项式g(x) &#x3D; x^14 + x^12 + x^9 + x^8 + x^7 + x^5+ 1，其中g中第k位的值，对应g(x)中x^k 的系数。将g(x)乘以x^m，既将g后加m个0，然后除以m阶多项式h(x)，得到的(m-1)阶余项r(x)对应的二进制码r就是CRC编码。</p>
 <p>h(x)可以自由选择或者使用国际通行标准，一般按照h(x)的阶数m，将CRC算法称为CRC-m，比如CRC-32、CRC-64等。国际通行标准可以参看<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Cyclic_redundancy_check">标准</a>；</p>
 <p>g(x)和h(x)的除运算，可以通过g和h做xor（异或）运算。比如将11001与10101做xor运算：</p>
 <p>   <img src="https://s2.loli.net/2022/05/08/12mHX9MuwxkPgoU.gif" alt="img"></p>
-<p>明白了xor运算法则后，举一个例子使用CRC-8算法求101001110100001的效验码。CRC-8标准的h(x) &#x3D; x^8^ + x^7^ + x^6^ + x^4^ + x^2^ + 1，既h是9位的二进制串111010101。 </p>
+<p>明白了xor运算法则后，举一个例子使用CRC-8算法求101001110100001的效验码。CRC-8标准的h(x) &#x3D; x^8 + x^7 + x^6 + x^4 + x^2 + 1，既h是9位的二进制串111010101。 </p>
 <p>   <img src="https://s2.loli.net/2022/05/08/pdlYFVS259frZD6.gif" alt="img"></p>
 <p>经过迭代运算后，最终得到的r是10001100，这就是CRC效验码。</p>
 <p>通过示例，可以发现一些规律，依据这些规律调整算法：</p>
@@ -291,10 +291,10 @@
 <blockquote>
 <p>  B23 xor b1 xor b2 xor b3 xor b4 &#x3D; B23 xor (b1 xor b2 xor b3 xor b4) &#x3D; B23 xor b’</p>
 </blockquote>
-<p>b1是由B1的第1位决定的，b2是由B1迭代1次后的第2位决定（既是由B1的第1和第2位决定），同理，b3和b4都是由B1决定。通过B1就可以计算出b’。另外，B1由4位组成，其一共2^4^有种可能值。于是我们就可以想到一种更快捷的算法，事先将b’所有可能的值，16个值可以看成一个表；这样就可以不必进行那4次迭代，而是用B1查表得到b’值，将B1移出，B3移入，与b’计算，然后是下一次迭代。</p>
+<p>b1是由B1的第1位决定的，b2是由B1迭代1次后的第2位决定（既是由B1的第1和第2位决定），同理，b3和b4都是由B1决定。通过B1就可以计算出b’。另外，B1由4位组成，其一共2^4有种可能值。于是我们就可以想到一种更快捷的算法，事先将b’所有可能的值，16个值可以看成一个表；这样就可以不必进行那4次迭代，而是用B1查表得到b’值，将B1移出，B3移入，与b’计算，然后是下一次迭代。</p>
 <p>   <img src="https://s2.loli.net/2022/05/08/N8EBroeKwSd9tVg.gif" alt="img"></p>
 <p>可看到每次迭代，寄存器中的数据以4位为单位移入和移出，关键是通过寄存器前4位查表获得，这样的算法可以大大提高运算速度。</p>
-<p>上面的方法是半字节查表法，另外还有单字节和双字节查表法，原理都是一样的——事先计算出2^8^或2^16^个b’的可能值，迭代中使用寄存器前8位或16位查表获得b’。</p>
+<p>上面的方法是半字节查表法，另外还有单字节和双字节查表法，原理都是一样的——事先计算出2^8或2^16个b’的可能值，迭代中使用寄存器前8位或16位查表获得b’。</p>
 <h2 id="反向算法："><a href="#反向算法：" class="headerlink" title="反向算法："></a><strong>反向算法：</strong></h2><p>之前讨论的算法可以称为正向CRC算法，意思是将g左边的位看作是高位，右边的位看作低位。G的右边加m个0，然后迭代计算是从高位开始，逐步将低位加入到寄存器中。在实际的数据传送过程中，是一边接收数据，一边计算CRC码，正向算法将新接收的数据看作低位。</p>
 <p>逆向算法顾名思义就是将左边的数据看作低位，右边的数据看作高位。这样的话需要在g的左边加m个0，h也要逆向，例如正向CRC-16算法h&#x3D;0x4c11db8，逆向CRC-16算法h&#x3D;0xedb88320。b的选择0还是h，由寄存器中右边第1位决定，而不是左边第1位。寄存器仍旧是向左位移，就是说迭代变成从低位到高位。</p>
 <p><img src="https://s2.loli.net/2022/05/08/K7mwRVS98eaFsQb.gif" alt="img"></p>
@@ -718,10 +718,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
@@ -734,11 +730,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">can</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,11 +746,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -803,6 +795,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">can</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
              
               <li class="article-tag-list-item">
