@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://fan-pengfei.top">
-  <title>Category: md语法 | 樊鹏飞的博客</title>
+  <title>基本的正则表达式 | 樊鹏飞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="网页描述">
-<meta property="og:type" content="website">
-<meta property="og:title" content="樊鹏飞的博客">
-<meta property="og:url" content="http://fan-pengfei.top/categories/md%E8%AF%AD%E6%B3%95/index.html">
+  <meta name="description" content="基本的正则表达式，记录一下，方便之后查询；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基本的正则表达式">
+<meta property="og:url" content="http://fan-pengfei.top/2022/06/05/%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
 <meta property="og:site_name" content="樊鹏飞的博客">
-<meta property="og:description" content="网页描述">
+<meta property="og:description" content="基本的正则表达式，记录一下，方便之后查询；">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-05T11:28:34.000Z">
+<meta property="article:modified_time" content="2022-06-05T11:30:45.063Z">
 <meta property="article:author" content="樊鹏飞">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="正则表达式">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
@@ -150,76 +154,427 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-基本的正则表达式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/08/17/typora-picgo/" class="archive-article-date">
-  	<time datetime="2021-08-17T13:00:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/17/typora-picgo/">typora图片上传出错</a>
+    <h1 class="article-title" itemprop="name">
+      基本的正则表达式
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2022/06/05/%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2022-06-05T11:28:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>  基本的正则表达式，记录一下，方便之后查询；<span id="more"></span></p>
+</blockquote>
+<h2 id="基本的正则表达式："><a href="#基本的正则表达式：" class="headerlink" title="基本的正则表达式："></a>基本的正则表达式：</h2><p><strong><a target="_blank" rel="noopener" href="https://regex101.com/r/DOc5Nu/1">在线练习</a></strong></p>
+<h3 id="1-基本匹配"><a href="#1-基本匹配" class="headerlink" title="1. 基本匹配"></a><strong>1. 基本匹配</strong></h3><p>正则表达式其实就是在执行搜索时的格式，它由一些字母和数字组合而成。 例如：一个正则表达式 <code>the</code>，它表示一个规则：由字母<code>t</code>开始，接着是<code>h</code>，再接着是<code>e</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;the&quot; =&gt; The fat cat sat on the mat.</span><br></pre></td></tr></table></figure>
+
+<p>正则表达式<code>123</code>匹配字符串<code>123</code>。它逐个字符的与输入的正则表达式做比较。</p>
+<p>正则表达式是大小写敏感的，所以<code>The</code>不会匹配<code>the</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;The&quot; =&gt; The fat cat sat on the mat.</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-元字符"><a href="#2-元字符" class="headerlink" title="2. 元字符"></a><strong>2. 元字符</strong></h3><p>正则表达式主要依赖于元字符。 元字符不代表他们本身的字面意思，他们都有特殊的含义。一些元字符写在方括号中的时候有一些特殊的意思。以下是一些元字符的介绍：</p>
+<p><strong>元字符描述</strong>.句号匹配任意单个字符除了换行符。[ ]字符种类。匹配方括号内的任意字符。[^ ]否定的字符种类。匹配除了方括号里的任意字符<em>匹配&gt;&#x3D;0 个重复的在</em>号之前的字符。+匹配&gt;&#x3D;1 个重复的+号前的字符。?标记?之前的字符为可选.{n,m}匹配 num 个大括号之间的字符 (n &lt;&#x3D; num &lt;&#x3D; m).(xyz)字符集，匹配与 xyz 完全相等的字符串.|或运算符，匹配符号前或后的字符.\转义字符,用于匹配一些保留的字符 <code> &#123; &#125; . * + ? ^ $ \ |</code>^从开始行开始匹配.$从末端开始匹配.</p>
+<h4 id="2-1-点运算符"><a href="#2-1-点运算符" class="headerlink" title="2.1 点运算符 ."></a><strong>2.1 点运算符 <code>.</code></strong></h4><p><code>.</code>是元字符中最简单的例子。 <code>.</code>匹配任意单个字符，但不匹配换行符。 例如，表达式<code>.ar</code>匹配一个任意字符后面跟着是<code>a</code>和<code>r</code>的字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;.ar&quot; =&gt; The car parked in the garage.</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-字符集"><a href="#2-2-字符集" class="headerlink" title="2.2 字符集"></a><strong>2.2 字符集</strong></h4><p>字符集也叫做字符类。 方括号用来指定一个字符集。 在方括号中使用连字符来指定字符集的范围。 在方括号中的字符集不关心顺序。 例如，表达式<code>[Tt]he</code> 匹配 <code>the</code> 和 <code>The</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;[Tt]he&quot; =&gt; The car parked in the garage.</span><br></pre></td></tr></table></figure>
+
+<p>方括号的句号就表示句号。 表达式 <code>ar[.]</code> 匹配 <code>ar.</code>字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;ar[.]&quot; =&gt; A garage is a good place to park a car.</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-1-否定字符集"><a href="#2-2-1-否定字符集" class="headerlink" title="2.2.1 否定字符集"></a><strong>2.2.1 否定字符集</strong></h4><p>一般来说 <code>^</code> 表示一个字符串的开头，但它用在一个方括号的开头的时候，它表示这个字符集是否定的。 例如，表达式<code>[^c]ar</code> 匹配一个后面跟着<code>ar</code>的除了<code>c</code>的任意字符。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;[^c]ar&quot; =&gt; The car parked in the garage.</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-重复次数"><a href="#2-3-重复次数" class="headerlink" title="2.3 重复次数"></a><strong>2.3 重复次数</strong></h4><p>后面跟着元字符 <code>+</code>，<code>*</code> or <code>?</code> 的，用来指定匹配子模式的次数。 这些元字符在不同的情况下有着不同的意思。</p>
+<h5 id="2-3-1-号"><a href="#2-3-1-号" class="headerlink" title="2.3.1 * 号"></a><strong>2.3.1 <code>*</code> 号</strong></h5><p><code>*</code>号匹配 在<code>*</code>之前的字符出现<code>大于等于0</code>次。 例如，表达式 <code>a*</code> 匹配 0 或更多个以 a 开头的字符。表达式<code>[a-z]*</code> 匹配一个行中所有以小写字母开头的字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;[a-z]*&quot; =&gt; The car parked in the garage #21.</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>*</code>字符和<code>.</code>字符搭配可以匹配所有的字符<code>.*</code>。 <code>*</code>和表示匹配空格的符号<code>\s</code>连起来用，如表达式<code>\s*cat\s*</code>匹配 0 或更多个空格开头和 0 或更多个空格结尾的 cat 字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;\s*cat\s*&quot; =&gt; The fat cat sat on the concatenation.</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-3-2-号"><a href="#2-3-2-号" class="headerlink" title="2.3.2 + 号"></a><strong>2.3.2 <code>+</code> 号</strong></h5><p><code>+</code>号匹配<code>+</code>号之前的字符出现 &gt;&#x3D;1 次。 例如表达式<code>c.+t</code> 匹配以首字母<code>c</code>开头以<code>t</code>结尾，中间跟着至少一个字符的字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;c.+t&quot; =&gt; The fat cat sat on the mat.</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-3-3-号"><a href="#2-3-3-号" class="headerlink" title="2.3.3 ? 号"></a><strong>2.3.3 <code>?</code> 号</strong></h5><p>在正则表达式中元字符 <code>?</code> 标记在符号前面的字符为可选，即出现 0 或 1 次。 例如，表达式 <code>[T]?he</code> 匹配字符串 <code>he</code> 和 <code>The</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;[T]he&quot; =&gt; The car is parked in the garage.</span><br><span class="line">&quot;[T]?he&quot; =&gt; The car is parked in the garage.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-4-号"><a href="#2-4-号" class="headerlink" title="2.4 {} 号"></a><strong>2.4 <code>&#123;&#125;</code> 号</strong></h4><p>在正则表达式中 <code>&#123;&#125;</code> 是一个量词，常用来一个或一组字符可以重复出现的次数。 例如， 表达式 <code>[0-9]&#123;2,3&#125;</code> 匹配最少 2 位最多 3 位 0~9 的数字。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;[0-9]&#123;2,3&#125;&quot; =&gt; The number was 9.9997 but we rounded it off to 10.0.</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们可以省略第二个参数。 例如，<code>[0-9]&#123;2,&#125;</code> 匹配至少两位 0~9 的数字。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;[0-9]&#123;2,&#125;&quot; =&gt; The number was 9.9997 but we rounded it off to 10.0.</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果逗号也省略掉则表示重复固定的次数。 例如，<code>[0-9]&#123;3&#125;</code> 匹配 3 位数字</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;[0-9]&#123;3&#125;&quot; =&gt; The number was 9.9997 but we rounded it off to 10.0.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-5-特征标群"><a href="#2-5-特征标群" class="headerlink" title="2.5 (...) 特征标群"></a><strong>2.5 <code>(...)</code> 特征标群</strong></h4><p>特征标群是一组写在 <code>(...)</code> 中的子模式。例如之前说的 <code>&#123;&#125;</code> 是用来表示前面一个字符出现指定次数。但如果在 <code>&#123;&#125;</code> 前加入特征标群则表示整个标群内的字符重复 N 次。例如，表达式 <code>(ab)*</code> 匹配连续出现 0 或更多个 <code>ab</code>。</p>
+<p>我们还可以在 <code>()</code> 中用或字符 <code>|</code> 表示或。例如，<code>(c|g|p)ar</code> 匹配 <code>car</code> 或 <code>gar</code> 或 <code>par</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;(c|g|p)ar&quot; =&gt; The car is parked in the garage.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-6-或运算符"><a href="#2-6-或运算符" class="headerlink" title="2.6 | 或运算符"></a><strong>2.6 <code>|</code> 或运算符</strong></h4><p>或运算符就表示或，用作判断条件。</p>
+<p>例如 <code>(T|t)he|car</code> 匹配 <code>(T|t)he</code> 或 <code>car</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;(T|t)he|car&quot; =&gt; The car is parked in the garage.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-7-转码特殊字符"><a href="#2-7-转码特殊字符" class="headerlink" title="2.7 转码特殊字符"></a><strong>2.7 转码特殊字符</strong></h4><p>反斜线 <code>\</code> 在表达式中用于转码紧跟其后的字符。用于指定 <code>&#123; &#125; [ ] / \ + * . $ ^ | ?</code> 这些特殊字符。如果想要匹配这些特殊字符则要在其前面加上反斜线 <code>\</code>。</p>
+<p>例如 <code>.</code> 是用来匹配除换行符外的所有字符的。如果想要匹配句子中的 <code>.</code> 则要写成 <code>\.</code> 以下这个例子 <code>\.?</code>是选择性匹配<code>.</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;(f|c|m)at\.?&quot; =&gt; The fat cat sat on the mat.</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-8-锚点"><a href="#2-8-锚点" class="headerlink" title="2.8 锚点"></a><strong>2.8 锚点</strong></h4><p>在正则表达式中，想要匹配指定开头或结尾的字符串就要使用到锚点。<code>^</code> 指定开头，<code>$</code> 指定结尾。</p>
+<h5 id="2-8-1-号"><a href="#2-8-1-号" class="headerlink" title="2.8.1 ^ 号"></a><strong>2.8.1 <code>^</code> 号</strong></h5><p><code>^</code> 用来检查匹配的字符串是否在所匹配字符串的开头。</p>
+<p>例如，在 <code>abc</code> 中使用表达式 <code>^a</code> 会得到结果 <code>a</code>。但如果使用 <code>^b</code> 将匹配不到任何结果。因为在字符串 <code>abc</code> 中并不是以 <code>b</code> 开头。</p>
+<p>例如，<code>^(T|t)he</code> 匹配以 <code>The</code> 或 <code>the</code> 开头的字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;(T|t)he&quot; =&gt; The car is parked in the garage.</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;^(T|t)he&quot; =&gt; The car is parked in the garage.</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-8-2-号"><a href="#2-8-2-号" class="headerlink" title="2.8.2 $ 号"></a><strong>2.8.2 <code>$</code> 号</strong></h5><p>同理于 <code>^</code> 号，<code>$</code> 号用来匹配字符是否是最后一个。</p>
+<p>例如，<code>(at\.)$</code> 匹配以 <code>at.</code> 结尾的字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;(at\.)&quot; =&gt; The fat cat. sat. on the mat.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;(at\.)$&quot; =&gt; The fat cat. sat. on the mat.</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-简写字符集"><a href="#3-简写字符集" class="headerlink" title="3. 简写字符集"></a><strong>3. 简写字符集</strong></h3><p>正则表达式提供一些常用的字符集简写。如下:</p>
+<p><strong>简写描述</strong>.除换行符外的所有字符\w匹配所有字母数字，等同于 <code>[a-zA-Z0-9_]</code>\W匹配所有非字母数字，即符号，等同于： <code>[^\w]</code>\d匹配数字： <code>[0-9]</code>\D匹配非数字： <code>[^\d]</code>\s匹配所有空格字符，等同于： <code>[\t\n\f\r\p&#123;Z&#125;]</code>\S匹配所有非空格字符： <code>[^\s]</code>\f匹配一个换页符\n匹配一个换行符\r匹配一个回车符\t匹配一个制表符\v匹配一个垂直制表符\p匹配 CR&#x2F;LF（等同于 <code>\r\n</code>），用来匹配 DOS 行终止符</p>
+<h3 id="4-零宽度断言（前后预查）"><a href="#4-零宽度断言（前后预查）" class="headerlink" title="4. 零宽度断言（前后预查）"></a><strong>4. 零宽度断言（前后预查）</strong></h3><p>先行断言和后发断言都属于<strong>非捕获簇</strong>（不捕获文本 ，也不针对组合计进行计数）。 先行断言用于判断所匹配的格式是否在另一个确定的格式之前，匹配结果不包含该确定格式（仅作为约束）。</p>
+<p>例如，我们想要获得所有跟在 <code>$</code> 符号后的数字，我们可以使用正后发断言 <code>(?&lt;=\$)[0-9\.]*</code>。 这个表达式匹配 <code>$</code> 开头，之后跟着 <code>0,1,2,3,4,5,6,7,8,9,.</code> 这些字符可以出现大于等于 0 次。</p>
+<p>零宽度断言如下：</p>
+<p><strong>符号描述</strong>?&#x3D;正先行断言-存在?!负先行断言-排除?&lt;&#x3D;正后发断言-存在?&lt;!负后发断言-排除</p>
+<h4 id="4-1-正先行断言"><a href="#4-1-正先行断言" class="headerlink" title="4.1 ?=... 正先行断言"></a><strong>4.1 <code>?=...</code> 正先行断言</strong></h4><p><code>?=...</code> 正先行断言，表示第一部分表达式之后必须跟着 <code>?=...</code>定义的表达式。</p>
+<p>返回结果只包含满足匹配条件的第一部分表达式。 定义一个正先行断言要使用 <code>()</code>。在括号内部使用一个问号和等号： <code>(?=...)</code>。</p>
+<p>正先行断言的内容写在括号中的等号后面。 例如，表达式 <code>(T|t)he(?=\sfat)</code> 匹配 <code>The</code> 和 <code>the</code>，在括号中我们又定义了正先行断言 <code>(?=\sfat)</code> ，即 <code>The</code> 和 <code>the</code> 后面紧跟着 <code>(空格)fat</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;(T|t)he(?=\sfat)&quot; =&gt; The fat cat sat on the mat.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-2-负先行断言"><a href="#4-2-负先行断言" class="headerlink" title="4.2 ?!... 负先行断言"></a><strong>4.2 <code>?!...</code> 负先行断言</strong></h4><p>负先行断言 <code>?!</code> 用于筛选所有匹配结果，筛选条件为 其后不跟随着断言中定义的格式。 <code>正先行断言</code> 定义和 <code>负先行断言</code> 一样，区别就是 <code>=</code> 替换成 <code>!</code> 也就是 <code>(?!...)</code>。</p>
+<p>表达式 <code>(T|t)he(?!\sfat)</code> 匹配 <code>The</code> 和 <code>the</code>，且其后不跟着 <code>(空格)fat</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;(T|t)he(?!\sfat)&quot; =&gt; The fat cat sat on the mat.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-3-lt-正后发断言"><a href="#4-3-lt-正后发断言" class="headerlink" title="4.3 ?&lt;= ... 正后发断言"></a><strong>4.3 <code>?&lt;= ...</code> 正后发断言</strong></h4><p>正后发断言 记作<code>(?&lt;=...)</code> 用于筛选所有匹配结果，筛选条件为 其前跟随着断言中定义的格式。 例如，表达式 <code>(?&lt;=(T|t)he\s)(fat|mat)</code> 匹配 <code>fat</code> 和 <code>mat</code>，且其前跟着 <code>The</code> 或 <code>the</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;(?&lt;=(T|t)he\s)(fat|mat)&quot; =&gt; The fat cat sat on the mat.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-4-lt-负后发断言"><a href="#4-4-lt-负后发断言" class="headerlink" title="4.4 ?&lt;!... 负后发断言"></a><strong>4.4 <code>?&lt;!...</code> 负后发断言</strong></h4><p>负后发断言 记作 <code>(?&lt;!...)</code> 用于筛选所有匹配结果，筛选条件为 其前不跟随着断言中定义的格式。 例如，表达式 <code>(?&lt;!(T|t)he\s)(cat)</code> 匹配 <code>cat</code>，且其前不跟着 <code>The</code> 或 <code>the</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;(?&lt;!(T|t)he\s)(cat)&quot; =&gt; The cat sat on cat.</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-标志"><a href="#5-标志" class="headerlink" title="5. 标志"></a><strong>5. 标志</strong></h3><p>标志也叫模式修正符，因为它可以用来修改表达式的搜索结果。 这些标志可以任意的组合使用，它也是整个正则表达式的一部分。</p>
+<p><strong>标志描述</strong>i忽略大小写。g全局搜索。m多行修饰符：锚点元字符 <code>^$</code> 工作范围在每行的起始。</p>
+<h4 id="5-1-忽略大小写（Case-Insensitive）"><a href="#5-1-忽略大小写（Case-Insensitive）" class="headerlink" title="5.1 忽略大小写（Case Insensitive）"></a><strong>5.1 忽略大小写（Case Insensitive）</strong></h4><p>修饰语 <code>i</code> 用于忽略大小写。 例如，表达式 <code>/The/gi</code> 表示在全局搜索 <code>The</code>，在后面的 <code>i</code> 将其条件修改为忽略大小写，则变成搜索 <code>the</code> 和 <code>The</code>，<code>g</code> 表示全局搜索。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;The&quot; =&gt; The fat cat sat on the mat.</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;/The/gi&quot; =&gt; The fat cat sat on the mat.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-2-全局搜索（Global-search）"><a href="#5-2-全局搜索（Global-search）" class="headerlink" title="5.2 全局搜索（Global search）"></a><strong>5.2 全局搜索（Global search）</strong></h4><p>修饰符 <code>g</code> 常用于执行一个全局搜索匹配，即（不仅仅返回第一个匹配的，而是返回全部）。 例如，表达式 <code>/.(at)/g</code> 表示搜索 任意字符（除了换行）+ <code>at</code>，并返回全部结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;/.(at)/&quot; =&gt; The fat cat sat on the mat.</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;/.(at)/g&quot; =&gt; The fat cat sat on the mat.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-3-多行修饰符（Multiline）"><a href="#5-3-多行修饰符（Multiline）" class="headerlink" title="5.3 多行修饰符（Multiline）"></a><strong>5.3 多行修饰符（Multiline）</strong></h4><p>多行修饰符 <code>m</code> 常用于执行一个多行匹配。</p>
+<p>像之前介绍的 <code>(^,$)</code> 用于检查格式是否是在待检测字符串的开头或结尾。但我们如果想要它在每行的开头和结尾生效，我们需要用到多行修饰符 <code>m</code>。</p>
+<p>例如，表达式 <code>/at(.)?$/gm</code> 表示小写字符 <code>a</code> 后跟小写字符 <code>t</code> ，末尾可选除换行符外任意字符。根据 <code>m</code> 修饰符，现在表达式匹配每行的结尾。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;/.at(.)?$/&quot; =&gt; The fat</span><br><span class="line">                cat sat</span><br><span class="line">                on the mat.</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;/.at(.)?$/gm&quot; =&gt; The fat</span><br><span class="line">                  cat sat</span><br><span class="line">                  on the mat.</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>6. 贪婪匹配与惰性匹配（Greedy vs lazy matching）</strong></p>
+<p>正则表达式默认采用贪婪匹配模式，在该模式下意味着会匹配尽可能长的子串。我们可以使用 <code>?</code> 将贪婪匹配模式转化为惰性匹配模式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;/(.*at)/&quot; =&gt; The fat cat sat on the mat. </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;/(.*?at)/&quot; =&gt; The fat cat sat on the mat. </span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+      
+        <!-- 《添加版权声明 -->
+        
+            <!-- 《添加版权声明 -->
+<!--添加版权声明https://github.com/JoeyBling/hexo-theme-yilia-plus/commit/c1215e132f6d5621c5fea83d3c4f7ccbcca074a3-->
+
+
+<!-- #版权基础设定：0-关闭声明； 1-文章对应的md文件里有declare: true属性，才有版权声明； 2-所有文章均有版权声明 -->
+
+  <div class="declare" hidden="hidden"></div>
+
+<!-- 添加版权声明》 -->
+
+        
+        <!-- 添加版权声明》 -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝可乐<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">md语法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图床</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">正则表达式</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/md语法//" class="article-tag-list-link color5">md语法</a>
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux/正则表达式//" class="article-tag-list-link color1">正则表达式</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://fan-pengfei.top/2022/06/05/%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2022/06/05/Linux-grep%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux_grep命令使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">基本的正则表达式：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E5%8C%B9%E9%85%8D"><span class="toc-number">1.1.</span> <span class="toc-text">1. 基本匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%83%E5%AD%97%E7%AC%A6"><span class="toc-number">1.2.</span> <span class="toc-text">2. 元字符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E7%82%B9%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 点运算符 .</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 字符集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-%E5%90%A6%E5%AE%9A%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.2.1 否定字符集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-%E9%87%8D%E5%A4%8D%E6%AC%A1%E6%95%B0"><span class="toc-number">1.2.4.</span> <span class="toc-text">2.3 重复次数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-1-%E5%8F%B7"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">2.3.1 * 号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-2-%E5%8F%B7"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">2.3.2 + 号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-3-%E5%8F%B7"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">2.3.3 ? 号</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-%E5%8F%B7"><span class="toc-number">1.2.5.</span> <span class="toc-text">2.4 {} 号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-%E7%89%B9%E5%BE%81%E6%A0%87%E7%BE%A4"><span class="toc-number">1.2.6.</span> <span class="toc-text">2.5 (...) 特征标群</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-%E6%88%96%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.2.7.</span> <span class="toc-text">2.6 | 或运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-7-%E8%BD%AC%E7%A0%81%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="toc-number">1.2.8.</span> <span class="toc-text">2.7 转码特殊字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-%E9%94%9A%E7%82%B9"><span class="toc-number">1.2.9.</span> <span class="toc-text">2.8 锚点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-8-1-%E5%8F%B7"><span class="toc-number">1.2.9.1.</span> <span class="toc-text">2.8.1 ^ 号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-8-2-%E5%8F%B7"><span class="toc-number">1.2.9.2.</span> <span class="toc-text">2.8.2 $ 号</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%AE%80%E5%86%99%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="toc-number">1.3.</span> <span class="toc-text">3. 简写字符集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%9B%B6%E5%AE%BD%E5%BA%A6%E6%96%AD%E8%A8%80%EF%BC%88%E5%89%8D%E5%90%8E%E9%A2%84%E6%9F%A5%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">4. 零宽度断言（前后预查）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E6%AD%A3%E5%85%88%E8%A1%8C%E6%96%AD%E8%A8%80"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 ?&#x3D;... 正先行断言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-%E8%B4%9F%E5%85%88%E8%A1%8C%E6%96%AD%E8%A8%80"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 ?!... 负先行断言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-lt-%E6%AD%A3%E5%90%8E%E5%8F%91%E6%96%AD%E8%A8%80"><span class="toc-number">1.4.3.</span> <span class="toc-text">4.3 ?&lt;&#x3D; ... 正后发断言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-lt-%E8%B4%9F%E5%90%8E%E5%8F%91%E6%96%AD%E8%A8%80"><span class="toc-number">1.4.4.</span> <span class="toc-text">4.4 ?&lt;!... 负后发断言</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%A0%87%E5%BF%97"><span class="toc-number">1.5.</span> <span class="toc-text">5. 标志</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E5%BF%BD%E7%95%A5%E5%A4%A7%E5%B0%8F%E5%86%99%EF%BC%88Case-Insensitive%EF%BC%89"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 忽略大小写（Case Insensitive）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2%EF%BC%88Global-search%EF%BC%89"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 全局搜索（Global search）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-%E5%A4%9A%E8%A1%8C%E4%BF%AE%E9%A5%B0%E7%AC%A6%EF%BC%88Multiline%EF%BC%89"><span class="toc-number">1.5.3.</span> <span class="toc-text">5.3 多行修饰符（Multiline）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"></span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
 
     
+      <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  var notify = 'true' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+      // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+      av: AV,
+      el: '.valine_comment',
+      emoticon_url: 'https://cloud.panjunwen.com/alu',
+      emoticon_list: ["狂汗.png","不说话.png","汗.png","坐等.png","献花.png","不高兴.png","中刀.png","害羞.png","皱眉.png","小眼睛.png","暗地观察.png"],
+      app_id: 'npG1XmP1ddhLsT2R6u4nXdKz-gzGzoHsz',
+      app_key: 'fqEEJWxiAlwQyoAo7nXcqPyO',
+      placeholder: '有话要说？在此输入'
+    });
+</script>
+
+    
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="基本的正则表达式" data-title="基本的正则表达式" data-url="http://fan-pengfei.top/2022/06/05/%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -253,10 +608,10 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
