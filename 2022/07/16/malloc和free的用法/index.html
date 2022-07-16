@@ -6,17 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://fan-pengfei.top">
-  <title>Category: 正则表达式 | 樊鹏飞的博客</title>
+  <title>malloc和free的用法 | 樊鹏飞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="网页描述">
-<meta property="og:type" content="website">
-<meta property="og:title" content="樊鹏飞的博客">
-<meta property="og:url" content="http://fan-pengfei.top/categories/Linux/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+  <meta name="description" content="在C语言中，内存管理是很重要的，最近刷算法题目也用到了malloc和free函数，在此记录一下；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="malloc和free的用法">
+<meta property="og:url" content="http://fan-pengfei.top/2022/07/16/malloc%E5%92%8Cfree%E7%9A%84%E7%94%A8%E6%B3%95/index.html">
 <meta property="og:site_name" content="樊鹏飞的博客">
-<meta property="og:description" content="网页描述">
+<meta property="og:description" content="在C语言中，内存管理是很重要的，最近刷算法题目也用到了malloc和free函数，在此记录一下；">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/07/16/icjpdufFsQEATWe.png">
+<meta property="article:published_time" content="2022-07-16T06:48:25.000Z">
+<meta property="article:modified_time" content="2022-07-16T07:57:24.849Z">
 <meta property="article:author" content="樊鹏飞">
+<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="内存管理">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/07/16/icjpdufFsQEATWe.png">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -150,80 +156,322 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-malloc和free的用法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/05/%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2022-06-05T11:28:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/06/05/%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">基本的正则表达式</a>
+    <h1 class="article-title" itemprop="name">
+      malloc和free的用法
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2022/07/16/malloc%E5%92%8Cfree%E7%9A%84%E7%94%A8%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2022-07-16T06:48:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在C语言中，内存管理是很重要的，最近刷算法题目也用到了malloc和free函数，在此记录一下；<span id="more"></span></p>
+</blockquote>
+<h2 id="一、函数原型及说明："><a href="#一、函数原型及说明：" class="headerlink" title="一、函数原型及说明："></a>一、函数原型及说明：</h2><h3 id="malloc-："><a href="#malloc-：" class="headerlink" title="malloc()："></a><strong>malloc()：</strong></h3><p><strong>函数原型：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">long</span> NumBytes)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  该函数分配了NumBytes个字节，并返回了指向这块内存的指针。如果分配失败，则返回一个空指针（NULL）。</p>
+<p>  关于分配失败的原因，应该有多种，比如说空间不足就是一种。</p>
+</blockquote>
+<h3 id="free-："><a href="#free-：" class="headerlink" title="free()："></a><strong>free()：</strong></h3><p><strong>函数原型：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *FirstByte)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  该函数是将之前用malloc分配的空间还给程序或者是操作系统，也就是释放了这块内存，让它重新得到自由。</p>
+</blockquote>
+<h2 id="二、函数使用注意事项："><a href="#二、函数使用注意事项：" class="headerlink" title="二、函数使用注意事项："></a>二、函数使用注意事项：</h2><p><strong>1、申请了内存空间后，必须检查是否分配成功；</strong></p>
+<p><strong>2、当不需要再使用申请的内存时，记得释放；</strong></p>
+<blockquote>
+<p>  释放后应该把指向这块内存的指针指向NULL，防止程序后面不小心使用了它。</p>
+</blockquote>
+<p><strong>3、这两个函数应该是配对使用；</strong></p>
+<blockquote>
+<p>  如果申请后不释放就是内存泄露；如果无故释放那就是什么也没有做。释放只能一次，如果释放两次及两次以上会出现错误（释放空指针例外，释放空指针其实也等于啥也没做，所以释放空指针释放多少次都没有问题）。</p>
+</blockquote>
+<p>**4、虽然malloc()函数的类型是(void <em>)，任何类型的指针都可以转换成(void <em>)，但是最好还是在前面进行强制类型转换，因为这样可以躲过一些编译器的检查；</em></em></p>
+<h2 id="三、具体例子："><a href="#三、具体例子：" class="headerlink" title="三、具体例子："></a>三、具体例子：</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Code...</span></span><br><span class="line"><span class="keyword">char</span> *Ptr = <span class="literal">NULL</span>;</span><br><span class="line">Ptr = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span> * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">NULL</span> == Ptr)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">exit</span> (<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">gets(Ptr);</span><br><span class="line"><span class="comment">// code...</span></span><br><span class="line"><span class="built_in">free</span>(Ptr);</span><br><span class="line">Ptr = <span class="literal">NULL</span>;</span><br><span class="line"><span class="comment">// code...</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="四、原理部分："><a href="#四、原理部分：" class="headerlink" title="四、原理部分："></a>四、原理部分：</h2><h3 id="1、malloc内存空间的来源："><a href="#1、malloc内存空间的来源：" class="headerlink" title="1、malloc内存空间的来源："></a>1、malloc内存空间的来源：</h3><blockquote>
+<p>  答案是从堆里面获得空间。</p>
+<p>  也就是说函数返回的指针是指向堆里面的一块内存。操作系统中有一个记录空闲内存地址的链表。当操作系统收到程序的申请时，就会遍历该链表，然后就寻找第一个空间大于所申请空间的堆结点，然后就将该结点从空闲结点链表中删除，并将该结点的空间分配给程序。</p>
+</blockquote>
+<p><strong>在使用malloc()分配内存空间后，一定要记得释放内存空间，否则就会出现内存泄漏。</strong></p>
+<h3 id="2、free释放了什么："><a href="#2、free释放了什么：" class="headerlink" title="2、free释放了什么："></a>2、free释放了什么：</h3><blockquote>
+<p>  free()释放的是指针指向的内存。</p>
+<p>  注意！释放的是内存，不是指针！指针并没有被释放，指针仍然指向原来的存储空间。指针是一个变量，只有程序结束时才被销毁。释放了内存空间后，原来指向这块空间的指针还是存在！只不过现在指针指向的内容的垃圾，是未定义的，所以说是垃圾。因此，释放内存后把指针指向NULL，防止指针在后面不小心又被解引用了。</p>
+<p>  free() 不会改变 指针变量本身的值，调用 free() 后它仍然会指向相同的内存空间，但是此时该内存已无效，不能被使用。所以建议将 指针的值设置为 NULL，例如：</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">free</span>(ptr);</span><br><span class="line">ptr = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>free()的源代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mem_control_block</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> is_available;    <span class="comment">//一般来说应该是一个可用空间的首地址，但这里英文单词却显示出空间是否可用的一个标记</span></span><br><span class="line">    <span class="keyword">int</span> size;            <span class="comment">//这是实际空间的大小</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *ptr)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">mem_control_block</span> *<span class="title">free</span>;</span></span><br><span class="line">    <span class="built_in">free</span> = ptr - <span class="keyword">sizeof</span>(struct mem_control_block);</span><br><span class="line">    <span class="built_in">free</span>-&gt;is_available = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="五、直接定义一个数组和使用malloc动态分配的区别："><a href="#五、直接定义一个数组和使用malloc动态分配的区别：" class="headerlink" title="五、直接定义一个数组和使用malloc动态分配的区别："></a>五、直接定义一个数组和使用malloc动态分配的区别：</h2><blockquote>
+<p>  malloc作为一个包含在&lt;stdlib.h&gt;头文件下的函数，用于申请空间。</p>
+</blockquote>
+<p>我们平常定义数组一般习惯性的就直接定义，比如<code>int a[5]</code>，此处就是直接定义了一个数组，数组内的元素都是int型，并且有五个，从一开始就确定了数组a的大小，并且无法被改变。</p>
+<p>并且变量被存放在<strong>栈区</strong>，栈区的变量都是由系统自己开辟空间存储，并自动销毁空间释放的。</p>
+<p>其实，还有一种定义数组的方式，那就是借助人为申请空间的方式定义一个数组。请看如下程序：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> *a = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>[<span class="number">5</span>]));</span><br><span class="line">	a[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	a[<span class="number">1</span>]=<span class="number">2</span>;</span><br><span class="line">	a[<span class="number">2</span>]=<span class="number">3</span>;</span><br><span class="line">	a[<span class="number">3</span>]=<span class="number">4</span>;</span><br><span class="line">	a[<span class="number">4</span>]=<span class="number">5</span>;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">free</span>(a);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  定义的方法是首先得定义一个指针，然后在这个指针的指向下，利用malloc去开辟一个自定义大小的空间。</p>
+</blockquote>
+<p>此方法定义的数组变量被存放在堆区，是由用户自己开辟和释放的。</p>
+<p>下面来看结果运行结果：</p>
+<p><img src="https://s2.loli.net/2022/07/16/icjpdufFsQEATWe.png" alt="img"></p>
+<p>可见结果是理想无误的。</p>
+<p><strong>使用这种先定义指针后开辟空间的方式可以适用于一些开始并不知道数组空间大小的场景。</strong></p>
+
+      
+        <!-- 《添加版权声明 -->
+        
+            <!-- 《添加版权声明 -->
+<!--添加版权声明https://github.com/JoeyBling/hexo-theme-yilia-plus/commit/c1215e132f6d5621c5fea83d3c4f7ccbcca074a3-->
+
+
+<!-- #版权基础设定：0-关闭声明； 1-文章对应的md文件里有declare: true属性，才有版权声明； 2-所有文章均有版权声明 -->
+
+  <div class="declare" hidden="hidden"></div>
+
+<!-- 添加版权声明》 -->
+
+        
+        <!-- 添加版权声明》 -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝可乐<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">正则表达式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">内存管理</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        			<a href="/categories/C语言//" class="article-tag-list-link color4">C语言</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Linux/正则表达式//" class="article-tag-list-link color1">正则表达式</a>
+        			<a href="/categories/C语言/内存管理//" class="article-tag-list-link color5">内存管理</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://fan-pengfei.top/2022/07/16/malloc%E5%92%8Cfree%E7%9A%84%E7%94%A8%E6%B3%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2022/07/13/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9A%84%E7%9F%A5%E8%AF%86%E7%BD%91%E7%AB%99%E8%AE%B0%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">比较好的知识网站记录</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B%E5%8F%8A%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">一、函数原型及说明：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#malloc-%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">malloc()：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#free-%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">free()：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">二、函数使用注意事项：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%85%B7%E4%BD%93%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">三、具体例子：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%8E%9F%E7%90%86%E9%83%A8%E5%88%86%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">四、原理部分：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81malloc%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E7%9A%84%E6%9D%A5%E6%BA%90%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">1、malloc内存空间的来源：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81free%E9%87%8A%E6%94%BE%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9A"><span class="toc-number">4.2.</span> <span class="toc-text">2、free释放了什么：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%9B%B4%E6%8E%A5%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%92%8C%E4%BD%BF%E7%94%A8malloc%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">五、直接定义一个数组和使用malloc动态分配的区别：</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
 
     
+      <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  var notify = 'true' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+      // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+      av: AV,
+      el: '.valine_comment',
+      emoticon_url: 'https://cloud.panjunwen.com/alu',
+      emoticon_list: ["狂汗.png","不说话.png","汗.png","坐等.png","献花.png","不高兴.png","中刀.png","害羞.png","皱眉.png","小眼睛.png","暗地观察.png"],
+      app_id: 'npG1XmP1ddhLsT2R6u4nXdKz-gzGzoHsz',
+      app_key: 'fqEEJWxiAlwQyoAo7nXcqPyO',
+      placeholder: '有话要说？在此输入'
+    });
+</script>
+
+    
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="malloc和free的用法" data-title="malloc和free的用法" data-url="http://fan-pengfei.top/2022/07/16/malloc%E5%92%8Cfree%E7%9A%84%E7%94%A8%E6%B3%95/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -257,10 +505,10 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
