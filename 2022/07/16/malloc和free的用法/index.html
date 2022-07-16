@@ -16,8 +16,9 @@
 <meta property="og:description" content="在C语言中，内存管理是很重要的，最近刷算法题目也用到了malloc和free函数，在此记录一下；">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/07/16/icjpdufFsQEATWe.png">
+<meta property="og:image" content="https://s2.loli.net/2022/07/16/LnD8hcwdVipkBxH.png">
 <meta property="article:published_time" content="2022-07-16T06:48:25.000Z">
-<meta property="article:modified_time" content="2022-07-16T08:24:31.081Z">
+<meta property="article:modified_time" content="2022-07-16T08:37:43.551Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="C语言">
 <meta property="article:tag" content="内存管理">
@@ -242,6 +243,8 @@
 <p><img src="https://s2.loli.net/2022/07/16/icjpdufFsQEATWe.png" alt="img"></p>
 <p>可见结果是理想无误的。</p>
 <p><strong>使用这种先定义指针后开辟空间的方式可以适用于一些开始并不知道数组空间大小的场景。</strong></p>
+<h2 id="六、一个思维导图："><a href="#六、一个思维导图：" class="headerlink" title="六、一个思维导图："></a>六、一个思维导图：</h2><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.51cto.com/panyujie/3669817">链接</a></p>
+<p><img src="https://s2.loli.net/2022/07/16/LnD8hcwdVipkBxH.png" alt="动态内存开辟+柔性数组"></p>
 
       
         <!-- 《添加版权声明 -->
@@ -418,7 +421,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B%E5%8F%8A%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">一、函数原型及说明：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#malloc-%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">malloc()：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#free-%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">free()：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">二、函数使用注意事项：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%85%B7%E4%BD%93%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">三、具体例子：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%8E%9F%E7%90%86%E9%83%A8%E5%88%86%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">四、原理部分：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81malloc%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E7%9A%84%E6%9D%A5%E6%BA%90%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">1、malloc内存空间的来源：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81free%E9%87%8A%E6%94%BE%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9A"><span class="toc-number">4.2.</span> <span class="toc-text">2、free释放了什么：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%9B%B4%E6%8E%A5%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%92%8C%E4%BD%BF%E7%94%A8malloc%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">五、直接定义一个数组和使用malloc动态分配的区别：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B%E5%8F%8A%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">一、函数原型及说明：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#malloc-%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">malloc()：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#free-%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">free()：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">二、函数使用注意事项：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%85%B7%E4%BD%93%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">三、具体例子：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%8E%9F%E7%90%86%E9%83%A8%E5%88%86%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">四、原理部分：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81malloc%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E7%9A%84%E6%9D%A5%E6%BA%90%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">1、malloc内存空间的来源：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81free%E9%87%8A%E6%94%BE%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9A"><span class="toc-number">4.2.</span> <span class="toc-text">2、free释放了什么：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%9B%B4%E6%8E%A5%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%92%8C%E4%BD%BF%E7%94%A8malloc%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">五、直接定义一个数组和使用malloc动态分配的区别：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%B8%80%E4%B8%AA%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">六、一个思维导图：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -606,15 +609,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -658,15 +661,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,11 +685,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,11 +705,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
