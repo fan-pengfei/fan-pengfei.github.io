@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/07/16/icjpdufFsQEATWe.png">
 <meta property="og:image" content="https://s2.loli.net/2022/07/16/LnD8hcwdVipkBxH.png">
 <meta property="article:published_time" content="2022-07-16T06:48:25.000Z">
-<meta property="article:modified_time" content="2022-07-16T08:37:43.551Z">
+<meta property="article:modified_time" content="2022-07-16T08:43:50.972Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="C语言">
 <meta property="article:tag" content="内存管理">
@@ -208,7 +208,7 @@
 <blockquote>
 <p>  如果申请后不释放就是内存泄露；如果无故释放那就是什么也没有做。释放只能一次，如果释放两次及两次以上会出现错误（释放空指针例外，释放空指针其实也等于啥也没做，所以释放空指针释放多少次都没有问题）。</p>
 </blockquote>
-<p>**4、虽然malloc()函数的类型是(void <em>)，任何类型的指针都可以转换成(void <em>)，但是最好还是在前面进行强制类型转换，因为这样可以躲过一些编译器的检查；</em></em></p>
+<p><strong>4、虽然malloc()函数的类型是(void *)，任何类型的指针都可以转换成(void *)，但是最好还是在前面进行强制类型转换，因为这样可以躲过一些编译器的检查；</strong></p>
 <h2 id="三、具体例子："><a href="#三、具体例子：" class="headerlink" title="三、具体例子："></a>三、具体例子：</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Code...</span></span><br><span class="line"><span class="keyword">char</span> *Ptr = <span class="literal">NULL</span>;</span><br><span class="line">Ptr = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span> * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">NULL</span> == Ptr)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">exit</span> (<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">gets(Ptr);</span><br><span class="line"><span class="comment">// code...</span></span><br><span class="line"><span class="built_in">free</span>(Ptr);</span><br><span class="line">Ptr = <span class="literal">NULL</span>;</span><br><span class="line"><span class="comment">// code...</span></span><br></pre></td></tr></table></figure>
 
 
@@ -609,15 +609,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,15 +665,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,11 +717,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
               </li>
              
               <li class="article-tag-list-item">
