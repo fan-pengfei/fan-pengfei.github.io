@@ -19,8 +19,10 @@
 <meta property="og:image" content="https://s2.loli.net/2022/08/16/8iEGX6q5uUYa1zQ.png">
 <meta property="og:image" content="https://s2.loli.net/2022/08/16/t5qNQHgPSWKAsRb.png">
 <meta property="og:image" content="https://s2.loli.net/2022/08/16/8unbH2fcU3prgoR.png">
+<meta property="og:image" content="https://s2.loli.net/2022/08/21/T8gMskRVSDNOJjv.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/08/21/PABbxwItuXL8QyW.jpg">
 <meta property="article:published_time" content="2022-08-10T03:35:34.000Z">
-<meta property="article:modified_time" content="2022-08-16T08:53:25.221Z">
+<meta property="article:modified_time" content="2022-08-21T15:36:03.892Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="FOC">
 <meta name="twitter:card" content="summary">
@@ -242,6 +244,25 @@
 </thead>
 </table>
 <p>等打样的板子收到后看一下功能是不是都正常；</p>
+<h4 id="2022年8月21日："><a href="#2022年8月21日：" class="headerlink" title="2022年8月21日："></a>2022年8月21日：</h4><p>板子已经收到，并且已经焊好各种元件以及安装在配套的无刷云台电机上；</p>
+<p>图片如下所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">板子实物图</th>
+<th align="center">凌乱的桌面</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://s2.loli.net/2022/08/21/T8gMskRVSDNOJjv.jpg" alt="FOC_V1_1"></td>
+<td align="center"><img src="https://s2.loli.net/2022/08/21/PABbxwItuXL8QyW.jpg" alt="desktop"></td>
+</tr>
+</tbody></table>
+<p>板子出现了一个比较大的问题，给单片机芯片以及磁传感器芯片供电的3.3V电压是通过一个线性稳压芯片做的，型号是RT9013-33GB，线性稳压芯片有一个很大的问题就是，当压降比较大时，效率会很低，其计算公式为：<br>$$<br>\eta&#x3D;\frac{I_{OUT}}{(I_{OUT}+I_{GND})}*\frac{V_{OUT}}{V_{IN}}*100%<br>$$<br>该式子前者接近于1，故效率主要取决于后者，输入输出压差越大，效率就越低，耗散的功率绝大部分都转化为热量，所以芯片温度会很高，很容易烧毁芯片造成短路，甚至会对主控芯片和驱动芯片造成损伤；</p>
+<p>而驱动芯片使用的是DRV8313，最低的驱动电压是8V，经过线性稳压芯片输出3.3V，压降比较大，发热很大，下午调试的时候，用的可调电源，从5V往上升，升到10V的时候还是正常，除了发热比较大；再高一点，突然就芯片烧了，不仅是稳压芯片，连带着主控芯片也烧了，万用表一测，正负极直接滴滴响，换了芯片后，调到高一点的电压，还是会烧芯片；</p>
+<p>另一个问题是，当输入电压为8V时，虽然不会直接毁芯片，但是运行一会，温度比较高，影响输出电压，导致磁编码器芯片不能正常工作，这个问题也很头疼，想到的解决办法是使用DC-DC降压电路先降到5V，再用线性稳压芯片降到3.3V，这就等下一版板子进行修改测试；</p>
+<p>除了这些问题之外，其他倒没有什么问题，测试了开环驱动，闭环有一点问题，后续修改一下代码应该就可，角度值也可以正常读取；</p>
+<p><strong>后续：修改板子，先用现有这一版测试闭环驱动，然后调参，然后上平衡车；</strong></p>
 
       
         <!-- 《添加版权声明 -->
@@ -419,7 +440,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">基本思路：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">基本描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">开发过程：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8816%E6%97%A5%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">2022年8月16日：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">基本思路：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">基本描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">开发过程：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8816%E6%97%A5%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">2022年8月16日：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8821%E6%97%A5%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">2022年8月21日：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -651,6 +672,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PID</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
@@ -664,10 +689,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PID</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -703,10 +724,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
@@ -719,11 +736,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">实习</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -739,6 +756,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">实习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DJI</a>
               </li>
              
@@ -751,11 +772,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
