@@ -24,8 +24,10 @@
 <meta property="og:image" content="https://s2.loli.net/2022/08/22/gM9HNB4yOivzoRS.png">
 <meta property="og:image" content="https://s2.loli.net/2022/08/22/AhINrD1XMkJV8gm.png">
 <meta property="og:image" content="https://s2.loli.net/2022/08/22/WVutY7FiAG5fzEn.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/09/03/FVSafHMDtLOZnc1.png">
+<meta property="og:image" content="https://s2.loli.net/2022/09/03/G27cdNneqb6oJxS.jpg">
 <meta property="article:published_time" content="2022-08-10T03:35:34.000Z">
-<meta property="article:modified_time" content="2022-08-22T15:21:54.968Z">
+<meta property="article:modified_time" content="2022-09-03T10:19:35.812Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="FOC">
 <meta name="twitter:card" content="summary">
@@ -292,6 +294,27 @@
 </tbody></table>
 <p>测试了闭环角度控制以及闭环速度控制，效果都还挺好的；</p>
 <p>后续调参数，修改板子；</p>
+<h4 id="2022年9月3日："><a href="#2022年9月3日：" class="headerlink" title="2022年9月3日："></a>2022年9月3日：</h4><p>修改的板子今天已经到了，焊接好了，也测试了，很完美，发热没那么严重了；</p>
+<p>这次使用的LDO是AMS1117(SOT-89封装)，它的输入最高电压是18V，完全够用了，发热虽然还是很大，但封装也更大了，所以还是可以接受的；</p>
+<table>
+<thead>
+<tr>
+<th align="center">AMS1117数据手册说明的的输入电压限制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://s2.loli.net/2022/09/03/FVSafHMDtLOZnc1.png" alt="fcf213d49a6cab89ced651af4a63af8"></td>
+</tr>
+</tbody></table>
+<p>在测试过程中，长时间运转未出现任何问题，闭环控制，开环控制都可以很好运转；</p>
+<p>后续就是开始做平衡车，调参数；</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/09/03/G27cdNneqb6oJxS.jpg" alt="FOC_V1"></th>
+</tr>
+</thead>
+</table>
 
       
         <!-- 《添加版权声明 -->
@@ -469,7 +492,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">基本思路：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">基本描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">开发过程：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8816%E6%97%A5%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">2022年8月16日：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8821%E6%97%A5%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">2022年8月21日：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8822%E6%97%A5%EF%BC%9A"><span class="toc-number">3.3.</span> <span class="toc-text">2022年8月22日：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">基本思路：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">基本描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">开发过程：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8816%E6%97%A5%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">2022年8月16日：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8821%E6%97%A5%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">2022年8月21日：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8822%E6%97%A5%EF%BC%9A"><span class="toc-number">3.3.</span> <span class="toc-text">2022年8月22日：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2022%E5%B9%B49%E6%9C%883%E6%97%A5%EF%BC%9A"><span class="toc-number">3.4.</span> <span class="toc-text">2022年9月3日：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -665,11 +688,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,15 +704,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">感悟</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,19 +724,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -733,15 +756,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,10 +781,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -789,10 +812,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DJI</a>
               </li>
              
@@ -801,7 +820,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -809,7 +828,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -821,7 +844,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">规划</a>
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
