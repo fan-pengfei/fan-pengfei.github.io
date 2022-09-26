@@ -15,23 +15,23 @@
 <meta property="og:site_name" content="樊鹏飞的博客">
 <meta property="og:description" content="大四应该没多少事情了，想继续做一下FOC相关的；">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2022/08/10/j7GLApnWg1b4FK9.png">
-<meta property="og:image" content="https://s2.loli.net/2022/08/16/8iEGX6q5uUYa1zQ.png">
-<meta property="og:image" content="https://s2.loli.net/2022/08/16/t5qNQHgPSWKAsRb.png">
-<meta property="og:image" content="https://s2.loli.net/2022/08/16/8unbH2fcU3prgoR.png">
-<meta property="og:image" content="https://s2.loli.net/2022/08/21/c4kmpPLtdMqYNge.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/08/21/XvUOnZdtBwTjDKR.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/09/03/FVSafHMDtLOZnc1.png">
+<meta property="og:image" content="https://s2.loli.net/2022/09/03/G27cdNneqb6oJxS.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/08/22/gM9HNB4yOivzoRS.png">
 <meta property="og:image" content="https://s2.loli.net/2022/08/22/AhINrD1XMkJV8gm.png">
 <meta property="og:image" content="https://s2.loli.net/2022/08/22/WVutY7FiAG5fzEn.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/09/03/FVSafHMDtLOZnc1.png">
-<meta property="og:image" content="https://s2.loli.net/2022/09/03/G27cdNneqb6oJxS.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/08/21/c4kmpPLtdMqYNge.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/08/21/XvUOnZdtBwTjDKR.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/08/16/8iEGX6q5uUYa1zQ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/08/16/t5qNQHgPSWKAsRb.png">
+<meta property="og:image" content="https://s2.loli.net/2022/08/16/8unbH2fcU3prgoR.png">
+<meta property="og:image" content="https://s2.loli.net/2022/08/10/j7GLApnWg1b4FK9.png">
 <meta property="article:published_time" content="2022-08-10T03:35:34.000Z">
-<meta property="article:modified_time" content="2022-09-12T10:30:13.611Z">
+<meta property="article:modified_time" content="2022-09-26T11:40:55.718Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="FOC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/08/10/j7GLApnWg1b4FK9.png">
+<meta name="twitter:image" content="https://s2.loli.net/2022/09/03/FVSafHMDtLOZnc1.png">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -200,6 +200,93 @@
         <blockquote>
 <p>  大四应该没多少事情了，想继续做一下FOC相关的；<span id="more"></span></p>
 </blockquote>
+<h1 id="开发过程-持续更新-："><a href="#开发过程-持续更新-：" class="headerlink" title="开发过程(持续更新)："></a>开发过程(持续更新)：</h1><h2 id="2022年9月12日："><a href="#2022年9月12日：" class="headerlink" title="2022年9月12日："></a>2022年9月12日：</h2><p>中间好久不更新，这些天对FOC项目做了更多的测试，还有做了一些应用，例如倒立摆，平衡车等等；</p>
+<p>想要加上电流环，刚开始自然的想法是，用合金采样电阻加电流放大器加stm32的AD，这个外围电路比较麻烦，成本也很高；</p>
+<p>昨天查找资料发现了一个芯片：<strong>MP5640</strong>，三相电机驱动芯片，且内部集成了电流检测，只需要用32的AD去读就可以了，今上午画了一个测试板，已经发去打样了，希望能正常工作；</p>
+<p>等板子回来了，我测试一下，在说要不要改用这个芯片；</p>
+<h2 id="2022年9月3日："><a href="#2022年9月3日：" class="headerlink" title="2022年9月3日："></a>2022年9月3日：</h2><p>修改的板子今天已经到了，焊接好了，也测试了，很完美，发热没那么严重了；</p>
+<p>这次使用的LDO是AMS1117(SOT-89封装)，它的输入最高电压是18V，完全够用了，发热虽然还是很大，但封装也更大了，所以还是可以接受的；</p>
+<table>
+<thead>
+<tr>
+<th align="center">AMS1117数据手册说明的的输入电压限制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://s2.loli.net/2022/09/03/FVSafHMDtLOZnc1.png" alt="fcf213d49a6cab89ced651af4a63af8"></td>
+</tr>
+</tbody></table>
+<p>在测试过程中，长时间运转未出现任何问题，闭环控制，开环控制都可以很好运转；</p>
+<p>后续就是开始做平衡车，调参数；</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/09/03/G27cdNneqb6oJxS.jpg" alt="FOC_V1"></th>
+</tr>
+</thead>
+</table>
+<h2 id="2022年8月22日："><a href="#2022年8月22日：" class="headerlink" title="2022年8月22日："></a>2022年8月22日：</h2><p>今天又查看了一下RT9013-33GB的数据手册，发现电压最大为5.5V，看来是要换供电部分的电路了；</p>
+<table>
+<thead>
+<tr>
+<th align="center">输入电压限制</th>
+<th align="center">输出电流限制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://s2.loli.net/2022/08/22/gM9HNB4yOivzoRS.png" alt="rt9013"></td>
+<td align="center"><img src="https://s2.loli.net/2022/08/22/AhINrD1XMkJV8gm.png" alt="rt9013——1"></td>
+</tr>
+</tbody></table>
+<p>下午用飞线将降压芯片换成了AMS1117-3.3V，效果还好，不过还是会出现温度很高的情况；</p>
+<table>
+<thead>
+<tr>
+<th align="center">更换降压芯片后的板子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://s2.loli.net/2022/08/22/WVutY7FiAG5fzEn.jpg" alt="1661157944944"></td>
+</tr>
+</tbody></table>
+<p>测试了闭环角度控制以及闭环速度控制，效果都还挺好的；</p>
+<p>后续调参数，修改板子；</p>
+<h2 id="2022年8月21日："><a href="#2022年8月21日：" class="headerlink" title="2022年8月21日："></a>2022年8月21日：</h2><p>板子已经收到，并且已经焊好各种元件以及安装在配套的无刷云台电机上；</p>
+<p>图片如下所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">板子实物图</th>
+<th align="center">凌乱的桌面</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://s2.loli.net/2022/08/21/c4kmpPLtdMqYNge.jpg" alt="FOC_V1_2"></td>
+<td align="center"><img src="https://s2.loli.net/2022/08/21/XvUOnZdtBwTjDKR.jpg" alt="wx_camera_1661081660489"></td>
+</tr>
+</tbody></table>
+<p>板子出现了一个比较大的问题，给单片机芯片以及磁传感器芯片供电的3.3V电压是通过一个线性稳压芯片做的，型号是RT9013-33GB，线性稳压芯片有一个很大的问题就是，当压降比较大时，效率会很低，其计算公式为：<br>$$<br>\eta&#x3D;\frac{I_{OUT}}{(I_{OUT}+I_{GND})}*\frac{V_{OUT}}{V_{IN}}*100%<br>$$<br>该式子前者接近于1，故效率主要取决于后者，输入输出压差越大，效率就越低，耗散的功率绝大部分都转化为热量，所以芯片温度会很高，很容易烧毁芯片造成短路，甚至会对主控芯片和驱动芯片造成损伤；</p>
+<p>而驱动芯片使用的是DRV8313，最低的驱动电压是8V，经过线性稳压芯片输出3.3V，压降比较大，发热很大，下午调试的时候，用的可调电源，从5V往上升，升到10V的时候还是正常，除了发热比较大；再高一点，突然就芯片烧了，不仅是稳压芯片，连带着主控芯片也烧了，万用表一测，正负极直接滴滴响，换了芯片后，调到高一点的电压，还是会烧芯片；</p>
+<p>另一个问题是，当输入电压为8V时，虽然不会直接毁芯片，但是运行一会，温度比较高，影响输出电压，导致磁编码器芯片不能正常工作，这个问题也很头疼，想到的解决办法是使用DC-DC降压电路先降到5V，再用线性稳压芯片降到3.3V，这就等下一版板子进行修改测试；</p>
+<p>除了这些问题之外，其他倒没有什么问题，测试了开环驱动，闭环有一点问题，后续修改一下代码应该就可，角度值也可以正常读取；</p>
+<p><strong>后续：修改板子，先用现有这一版测试闭环驱动，然后调参，然后上平衡车；</strong></p>
+<h2 id="2022年8月16日："><a href="#2022年8月16日：" class="headerlink" title="2022年8月16日："></a>2022年8月16日：</h2><p><strong>已经发去打板，原理图和PCB图如下所示：</strong></p>
+<table>
+<thead>
+<tr>
+<th><img src="https://s2.loli.net/2022/08/16/8iEGX6q5uUYa1zQ.png" alt="6870438e3b78945b00ad51b3e7f2de9"></th>
+</tr>
+</thead>
+</table>
+<table>
+<thead>
+<tr>
+<th><img src="https://s2.loli.net/2022/08/16/t5qNQHgPSWKAsRb.png" alt="09262f2cd58fc0b64aeda840a0e5e81"></th>
+<th><img src="https://s2.loli.net/2022/08/16/8unbH2fcU3prgoR.png" alt="321909b6de59f7f8b17d46d8f7c4397"></th>
+</tr>
+</thead>
+</table>
+<p>等打样的板子收到后看一下功能是不是都正常；</p>
 <h1 id="基本思路："><a href="#基本思路：" class="headerlink" title="基本思路："></a>基本思路：</h1><p>先把一个电机和单片机，驱动电路集成的出来，测试驱动能力，还有控制算法；</p>
 <p>电流环先不加；</p>
 <p>然后是做一个平衡车；</p>
@@ -232,93 +319,6 @@
 </tr>
 </tbody></table>
 <p>一些关键点，要集成接口，编码所在的板子上留出电机UVW三相的焊接接口；</p>
-<h1 id="开发过程："><a href="#开发过程：" class="headerlink" title="开发过程："></a>开发过程：</h1><h2 id="2022年8月16日："><a href="#2022年8月16日：" class="headerlink" title="2022年8月16日："></a>2022年8月16日：</h2><p><strong>已经发去打板，原理图和PCB图如下所示：</strong></p>
-<table>
-<thead>
-<tr>
-<th><img src="https://s2.loli.net/2022/08/16/8iEGX6q5uUYa1zQ.png" alt="6870438e3b78945b00ad51b3e7f2de9"></th>
-</tr>
-</thead>
-</table>
-<table>
-<thead>
-<tr>
-<th><img src="https://s2.loli.net/2022/08/16/t5qNQHgPSWKAsRb.png" alt="09262f2cd58fc0b64aeda840a0e5e81"></th>
-<th><img src="https://s2.loli.net/2022/08/16/8unbH2fcU3prgoR.png" alt="321909b6de59f7f8b17d46d8f7c4397"></th>
-</tr>
-</thead>
-</table>
-<p>等打样的板子收到后看一下功能是不是都正常；</p>
-<h2 id="2022年8月21日："><a href="#2022年8月21日：" class="headerlink" title="2022年8月21日："></a>2022年8月21日：</h2><p>板子已经收到，并且已经焊好各种元件以及安装在配套的无刷云台电机上；</p>
-<p>图片如下所示：</p>
-<table>
-<thead>
-<tr>
-<th align="center">板子实物图</th>
-<th align="center">凌乱的桌面</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><img src="https://s2.loli.net/2022/08/21/c4kmpPLtdMqYNge.jpg" alt="FOC_V1_2"></td>
-<td align="center"><img src="https://s2.loli.net/2022/08/21/XvUOnZdtBwTjDKR.jpg" alt="wx_camera_1661081660489"></td>
-</tr>
-</tbody></table>
-<p>板子出现了一个比较大的问题，给单片机芯片以及磁传感器芯片供电的3.3V电压是通过一个线性稳压芯片做的，型号是RT9013-33GB，线性稳压芯片有一个很大的问题就是，当压降比较大时，效率会很低，其计算公式为：<br>$$<br>\eta&#x3D;\frac{I_{OUT}}{(I_{OUT}+I_{GND})}*\frac{V_{OUT}}{V_{IN}}*100%<br>$$<br>该式子前者接近于1，故效率主要取决于后者，输入输出压差越大，效率就越低，耗散的功率绝大部分都转化为热量，所以芯片温度会很高，很容易烧毁芯片造成短路，甚至会对主控芯片和驱动芯片造成损伤；</p>
-<p>而驱动芯片使用的是DRV8313，最低的驱动电压是8V，经过线性稳压芯片输出3.3V，压降比较大，发热很大，下午调试的时候，用的可调电源，从5V往上升，升到10V的时候还是正常，除了发热比较大；再高一点，突然就芯片烧了，不仅是稳压芯片，连带着主控芯片也烧了，万用表一测，正负极直接滴滴响，换了芯片后，调到高一点的电压，还是会烧芯片；</p>
-<p>另一个问题是，当输入电压为8V时，虽然不会直接毁芯片，但是运行一会，温度比较高，影响输出电压，导致磁编码器芯片不能正常工作，这个问题也很头疼，想到的解决办法是使用DC-DC降压电路先降到5V，再用线性稳压芯片降到3.3V，这就等下一版板子进行修改测试；</p>
-<p>除了这些问题之外，其他倒没有什么问题，测试了开环驱动，闭环有一点问题，后续修改一下代码应该就可，角度值也可以正常读取；</p>
-<p><strong>后续：修改板子，先用现有这一版测试闭环驱动，然后调参，然后上平衡车；</strong></p>
-<h2 id="2022年8月22日："><a href="#2022年8月22日：" class="headerlink" title="2022年8月22日："></a>2022年8月22日：</h2><p>今天又查看了一下RT9013-33GB的数据手册，发现电压最大为5.5V，看来是要换供电部分的电路了；</p>
-<table>
-<thead>
-<tr>
-<th align="center">输入电压限制</th>
-<th align="center">输出电流限制</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><img src="https://s2.loli.net/2022/08/22/gM9HNB4yOivzoRS.png" alt="rt9013"></td>
-<td align="center"><img src="https://s2.loli.net/2022/08/22/AhINrD1XMkJV8gm.png" alt="rt9013——1"></td>
-</tr>
-</tbody></table>
-<p>下午用飞线将降压芯片换成了AMS1117-3.3V，效果还好，不过还是会出现温度很高的情况；</p>
-<table>
-<thead>
-<tr>
-<th align="center">更换降压芯片后的板子</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><img src="https://s2.loli.net/2022/08/22/WVutY7FiAG5fzEn.jpg" alt="1661157944944"></td>
-</tr>
-</tbody></table>
-<p>测试了闭环角度控制以及闭环速度控制，效果都还挺好的；</p>
-<p>后续调参数，修改板子；</p>
-<h2 id="2022年9月3日："><a href="#2022年9月3日：" class="headerlink" title="2022年9月3日："></a>2022年9月3日：</h2><p>修改的板子今天已经到了，焊接好了，也测试了，很完美，发热没那么严重了；</p>
-<p>这次使用的LDO是AMS1117(SOT-89封装)，它的输入最高电压是18V，完全够用了，发热虽然还是很大，但封装也更大了，所以还是可以接受的；</p>
-<table>
-<thead>
-<tr>
-<th align="center">AMS1117数据手册说明的的输入电压限制</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><img src="https://s2.loli.net/2022/09/03/FVSafHMDtLOZnc1.png" alt="fcf213d49a6cab89ced651af4a63af8"></td>
-</tr>
-</tbody></table>
-<p>在测试过程中，长时间运转未出现任何问题，闭环控制，开环控制都可以很好运转；</p>
-<p>后续就是开始做平衡车，调参数；</p>
-<table>
-<thead>
-<tr>
-<th align="center"><img src="https://s2.loli.net/2022/09/03/G27cdNneqb6oJxS.jpg" alt="FOC_V1"></th>
-</tr>
-</thead>
-</table>
-<h2 id="2022年9月12日："><a href="#2022年9月12日：" class="headerlink" title="2022年9月12日："></a>2022年9月12日：</h2><p>中间好久不更新，这些天对FOC项目做了更多的测试，还有做了一些应用，例如倒立摆，平衡车等等；</p>
-<p>想要加上电流环，刚开始自然的想法是，用合金采样电阻加电流放大器加stm32的AD，这个外围电路比较麻烦，成本也很高；</p>
-<p>昨天查找资料发现了一个芯片：<strong>MP5640</strong>，三相电机驱动芯片，且内部集成了电流检测，只需要用32的AD去读就可以了，今上午画了一个测试板，已经发去打样了，希望能正常工作；</p>
-<p>等板子回来了，我测试一下，在说要不要改用这个芯片；</p>
 
       
         <!-- 《添加版权声明 -->
@@ -496,7 +496,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">基本思路：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">基本描述：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">开发过程：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8816%E6%97%A5%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">2022年8月16日：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8821%E6%97%A5%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">2022年8月21日：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8822%E6%97%A5%EF%BC%9A"><span class="toc-number">3.3.</span> <span class="toc-text">2022年8月22日：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022%E5%B9%B49%E6%9C%883%E6%97%A5%EF%BC%9A"><span class="toc-number">3.4.</span> <span class="toc-text">2022年9月3日：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022%E5%B9%B49%E6%9C%8812%E6%97%A5%EF%BC%9A"><span class="toc-number">3.5.</span> <span class="toc-text">2022年9月12日：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">开发过程(持续更新)：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2022%E5%B9%B49%E6%9C%8812%E6%97%A5%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">2022年9月12日：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022%E5%B9%B49%E6%9C%883%E6%97%A5%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">2022年9月3日：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8822%E6%97%A5%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">2022年8月22日：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8821%E6%97%A5%EF%BC%9A"><span class="toc-number">1.4.</span> <span class="toc-text">2022年8月21日：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2022%E5%B9%B48%E6%9C%8816%E6%97%A5%EF%BC%9A"><span class="toc-number">1.5.</span> <span class="toc-text">2022年8月16日：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">基本思路：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">基本描述：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -708,19 +708,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">感悟</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -752,15 +752,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">gcc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -800,11 +800,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -844,15 +844,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">格言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
