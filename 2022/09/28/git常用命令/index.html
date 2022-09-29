@@ -17,8 +17,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/09/28/K6Ytau9zWBbZ1n8.png">
 <meta property="og:image" content="https://s2.loli.net/2022/09/28/geOUF2QE6rSNjkV.png">
+<meta property="og:image" content="https://s2.loli.net/2022/09/29/bA4oT5NH3vOKSFY.png">
 <meta property="article:published_time" content="2022-09-28T13:12:41.000Z">
-<meta property="article:modified_time" content="2022-09-28T14:10:12.023Z">
+<meta property="article:modified_time" content="2022-09-29T02:40:50.504Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="GIT">
 <meta name="twitter:card" content="summary">
@@ -293,6 +294,149 @@
 <blockquote>
 <p>  从版本库删除某文件；</p>
 <p>  <code>git rm &lt;file&gt; </code> -&gt; commit提交该删除；</p>
+</blockquote>
+<p>14、<code>git branch &lt;分支名&gt;</code></p>
+<blockquote>
+<p>  创建分支；</p>
+<p>  不加参数为列出所有分支，当前分支前有一个<code>*</code>号；</p>
+</blockquote>
+<p>15、<code>git branch -d &lt;分支名&gt;</code></p>
+<blockquote>
+<p>删除某一分支；</p>
+<p>-d，delete；</p>
+</blockquote>
+<p>15、<code>git checkout &lt;分支名&gt;</code></p>
+<blockquote>
+<p>  切换到某一分支；</p>
+<p>  <code>git checkout -b &lt;分支名&gt;</code>，创建并切换到新的分支；</p>
+</blockquote>
+<p>16、<code>git switch &lt;分支名&gt;</code></p>
+<blockquote>
+<p>  切换到某一分支；</p>
+<p>  <code>git switch -c &lt;分支名&gt;</code>，创建并切换到新的分支；</p>
+</blockquote>
+<p>17、<code>git merge</code></p>
+<blockquote>
+<p>用于合并指定分支到当前分支；</p>
+</blockquote>
+<p>18、<code>分支合并</code></p>
+<blockquote>
+<p>  分支1修改-&gt;提交该修改-&gt;分支2修改-&gt;提交该修改-&gt;合并分支-&gt;出现冲突-&gt;解决冲突-&gt;合并分支-&gt;删除某一分支；</p>
+</blockquote>
+<p>19、<code>git log --graph</code></p>
+<blockquote>
+<p>  查看分支合并图；</p>
+</blockquote>
+<p>20、<code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code></p>
+<blockquote>
+<p>合并dev分支，并有合并信息；</p>
+<p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而<code>fast forward</code>合并就看不出来曾经做过合并；</p>
+</blockquote>
+<p>21、<code>分支管理策略</code></p>
+<blockquote>
+<p>首先，<code>master</code>分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；</p>
+<p>那在哪干活呢？干活都在<code>dev</code>分支上，也就是说，<code>dev</code>分支是不稳定的，到某个时候，比如1.0版本发布时，再把<code>dev</code>分支合并到<code>master</code>上，在<code>master</code>分支发布1.0版本；</p>
+<p>你和你的小伙伴们每个人都在<code>dev</code>分支上干活，每个人都有自己的分支，时不时地往<code>dev</code>分支上合并就可以了；</p>
+<p>所以，团队合作的分支看起来就像这样；</p>
+<p><img src="https://s2.loli.net/2022/09/29/bA4oT5NH3vOKSFY.png" alt="git-br-policy"></p>
+</blockquote>
+<p>22、<code>git stash</code></p>
+<blockquote>
+<p>  暂存当前工作区和暂存区的内容，可以等恢复现场后再工作；</p>
+<p>  <code>git stash list</code>，列出当前暂存的内容；</p>
+<p>  <code>git stash apply</code>，恢复当前暂存的内容到工作区；</p>
+<p>  <code>git stash drop</code>，删除暂存的内容；</p>
+<p>  <code>git stash pop</code>，恢复当前暂存的内容到工作区的同时删除暂存的内容；</p>
+<p>  可以多次stash，先用<code>git stash list</code>查看，然后恢复指定的stash，用命令：<code>git stash apply stash@&#123;0&#125;</code>；</p>
+</blockquote>
+<p>23、<code>修复bug</code></p>
+<blockquote>
+<p>在Git中，由于分支是如此的强大，所以，每个bug都可以通过一个新的临时分支来修复，修复后，合并分支，然后将临时分支删除；</p>
+<p>修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；</p>
+<p>当手头工作没有完成时，先把工作现场<code>git stash</code>一下，然后去修复bug，修复后，再<code>git stash pop</code>，回到工作现场；</p>
+<p>在master分支上修复的bug，想要合并到当前dev分支，可以用<code>git cherry-pick &lt;commit&gt;</code>命令，把bug提交的修改“复制”到当前分支，避免重复劳动。</p>
+</blockquote>
+<p>24、<code>修复不同分支上相同的bug</code></p>
+<blockquote>
+<p>Git专门提供了一个<code>cherry-pick</code>命令，让我们能复制一个特定的提交到当前分支；</p>
+<p><code>git cherry-pick 4c805e2</code>；</p>
+</blockquote>
+<p>25、<code>开发新的feature</code></p>
+<blockquote>
+<p>开发一个新feature，最好新建一个分支；</p>
+<p>如果要丢弃一个没有被合并过的分支，可以通过<code>git branch -D &lt;name&gt;</code>强行删除。</p>
+</blockquote>
+<p>26、<code>标签管理</code></p>
+<blockquote>
+<p>发布一个版本时，我们通常先在版本库中打一个标签（tag），这样，就唯一确定了打标签时刻的版本。将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。</p>
+<p>Git的标签虽然是版本库的快照，但其实它就是指向某个commit的指针（跟分支很像对不对？但是分支可以移动，标签不能移动），所以，创建和删除标签都是瞬间完成的。</p>
+<p>在Git中打标签非常简单，首先，切换到需要打标签的分支上-&gt;</p>
+<p>然后，敲命令<code>git tag &lt;name&gt;</code>就可以打一个新标签-&gt;</p>
+<p>可以用命令<code>git tag</code>查看所有标签；</p>
+<p>默认标签是打在最新提交的commit上的。有时候，如果忘了打标签，比如，现在已经是周五了，但应该在周一打的标签没有打，怎么办？</p>
+<p>方法是找到历史提交的commit id，然后打上就可以了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git log --pretty=oneline --abbrev-commit</span><br><span class="line">&gt;12a631b (HEAD -&gt; master, tag: v1.0, origin/master) merged bug fix 101</span><br><span class="line">&gt;4c805e2 fix bug 101</span><br><span class="line">&gt;e1e9c68 merge with no-ff</span><br><span class="line">&gt;f52c633 add merge</span><br><span class="line">&gt;cf810e4 conflict fixed</span><br><span class="line">&gt;5dc6824 &amp; simple</span><br><span class="line">&gt;14096d0 AND simple</span><br><span class="line">&gt;b17d20e branch test</span><br><span class="line">&gt;d46f35e remove test.txt</span><br><span class="line">&gt;b84166e add test.txt</span><br><span class="line">&gt;519219b git tracks changes</span><br><span class="line">&gt;e43a48b understand how stage works</span><br><span class="line">&gt;1094adb append GPL</span><br><span class="line">&gt;e475afc add distributed</span><br><span class="line">&gt;eaadf4e wrote a readme file</span><br></pre></td></tr></table></figure>
+
+</blockquote>
+<blockquote>
+<p>比方说要对<code>add merge</code>这次提交打标签，它对应的commit id是<code>f52c633</code>，敲入命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git tag v0.9 f52c633</span><br></pre></td></tr></table></figure>
+
+<p>再用命令<code>git tag</code>查看标签：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git tag</span><br><span class="line">&gt;v0.9</span><br><span class="line">&gt;v1.0</span><br></pre></td></tr></table></figure>
+
+<p>注意，标签不是按时间顺序列出，而是按字母排序的。可以用<code>git show &lt;tagname&gt;</code>查看标签信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git show v0.9</span><br><span class="line">&gt;commit f52c63349bc3c1593499807e5c8e972b82c8f286 (tag: v0.9)</span><br><span class="line">&gt;Author: Michael Liao &lt;askxuefeng@gmail.com&gt;</span><br><span class="line">&gt;Date:   Fri May 18 21:56:54 2018 +0800</span><br><span class="line"></span><br><span class="line">   add merge</span><br><span class="line"></span><br><span class="line">&gt;diff --git a/readme.txt b/readme.txt</span><br><span class="line">&gt;...</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，<code>v0.9</code>确实打在<code>add merge</code>这次提交上。</p>
+<p>还可以创建带有说明的标签，用<code>-a</code>指定标签名，<code>-m</code>指定说明文字：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git tag -a v0.1 -m &quot;version 0.1 released&quot; 1094adb</span><br></pre></td></tr></table></figure>
+
+<p>用命令<code>git show &lt;tagname&gt;</code>可以看到说明文字：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git show v0.1</span><br><span class="line">&gt;tag v0.1</span><br><span class="line">&gt;Tagger: Michael Liao &lt;askxuefeng@gmail.com&gt;</span><br><span class="line">&gt;Date:   Fri May 18 22:48:43 2018 +0800</span><br><span class="line"></span><br><span class="line">&gt;version 0.1 released</span><br><span class="line"></span><br><span class="line">&gt;commit 1094adb7b9b3807259d8cb349e7df1d4d6477073 (tag: v0.1)</span><br><span class="line">&gt;Author: Michael Liao &lt;askxuefeng@gmail.com&gt;</span><br><span class="line">&gt;Date:   Fri May 18 21:06:15 2018 +0800</span><br><span class="line"></span><br><span class="line">   append GPL</span><br><span class="line"></span><br><span class="line">&gt;diff --git a/readme.txt b/readme.txt</span><br><span class="line">&gt;...</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<ul>
+<li><p><strong>命令<code>git tag &lt;tagname&gt;</code>用于新建一个标签，默认为<code>HEAD</code>，也可以指定一个commit id；</strong></p>
+</li>
+<li><p><strong>命令<code>git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;</code>可以指定标签信息；</strong></p>
+</li>
+<li><p><strong>命令<code>git tag</code>可以查看所有标签；</strong></p>
+</li>
+</ul>
+<p>如果标签打错了，也可以删除：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git tag -d v0.1</span><br><span class="line">&gt;Deleted tag &#x27;v0.1&#x27; (was f15b0dd)</span><br></pre></td></tr></table></figure>
+
+<p>因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。</p>
+</blockquote>
+<p>27、<code>忽略特殊文件</code></p>
+<blockquote>
+<p>在Git工作区的根目录下创建一个特殊的<code>.gitignore</code>文件，然后把要忽略的文件名填进去，Git就会自动忽略这些文件；</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;# Windows:</span><br><span class="line">&gt;Thumbs.db</span><br><span class="line">&gt;ehthumbs.db</span><br><span class="line">&gt;Desktop.ini</span><br><span class="line"></span><br><span class="line">&gt;# Python:</span><br><span class="line">&gt;*.py[cod]</span><br><span class="line">&gt;*.so</span><br><span class="line">&gt;*.egg</span><br><span class="line">&gt;*.egg-info</span><br><span class="line">&gt;dist</span><br><span class="line">&gt;build</span><br><span class="line"></span><br><span class="line">&gt;# My configurations:</span><br><span class="line">&gt;db.ini</span><br><span class="line">&gt;deploy_key_rsa</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>忽略某些文件时，需要编写<code>.gitignore</code>；</strong></li>
+<li><strong><code>.gitignore</code>文件本身要放到版本库里，并且可以对<code>.gitignore</code>做版本管理！</strong></li>
+</ul>
+<p>有些时候，你想添加一个文件到Git，但发现添加不了，原因是这个文件被<code>.gitignore</code>忽略了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git add App.class</span><br><span class="line">&gt;The following paths are ignored by one of your .gitignore files:</span><br><span class="line">&gt;App.class</span><br><span class="line">&gt;Use -f if you really want to add them.</span><br></pre></td></tr></table></figure>
+
+<p>如果你确实想添加该文件，可以用<code>-f</code>强制添加到Git：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git add -f App.class</span><br></pre></td></tr></table></figure>
+
+<p>或者你发现，可能是<code>.gitignore</code>写得有问题，需要找出来到底哪个规则写错了，可以用<code>git check-ignore</code>命令检查：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git check-ignore -v App.class</span><br><span class="line">&gt;.gitignore:3:*.class	App.class</span><br></pre></td></tr></table></figure>
+
+<p>Git会告诉我们，<code>.gitignore</code>的第3行规则忽略了该文件，于是我们就可以知道应该修订哪个规则。</p>
+<p>还有些时候，当我们编写了规则排除了部分文件时：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;# 排除所有.开头的隐藏文件:</span><br><span class="line">&gt;.*</span><br><span class="line">&gt;# 排除所有.class文件:</span><br><span class="line">&gt;*.class</span><br></pre></td></tr></table></figure>
+
+<p>但是我们发现<code>.*</code>这个规则把<code>.gitignore</code>也排除了，并且<code>App.class</code>需要被添加到版本库，但是被<code>*.class</code>规则排除了。</p>
+<p>虽然可以用<code>git add -f</code>强制添加进去，但有强迫症的童鞋还是希望不要破坏<code>.gitignore</code>规则，这个时候，可以添加两条例外规则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;# 排除所有.开头的隐藏文件:</span><br><span class="line">&gt;.*</span><br><span class="line">&gt;# 排除所有.class文件:</span><br><span class="line">&gt;*.class</span><br><span class="line"></span><br><span class="line">&gt;# 不排除.gitignore和App.class:</span><br><span class="line">&gt;!.gitignore</span><br><span class="line">&gt;!App.class</span><br></pre></td></tr></table></figure>
+
+<p>把指定文件排除在<code>.gitignore</code>规则外的写法就是<code>!</code>+文件名，所以，只需把例外文件添加进去即可。</p>
 </blockquote>
 
       
@@ -650,15 +794,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -686,11 +830,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,10 +846,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -714,11 +854,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+                <a href="javascript:void(0)" class="js-tag color4">PID</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UART</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -734,11 +878,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,15 +898,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -771,6 +911,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -790,18 +934,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DJI</a>
               </li>
              
@@ -810,11 +942,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">格言</a>
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -822,7 +962,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">规划</a>
+                <a href="javascript:void(0)" class="js-tag color3">格言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
               </li>
              
               <li class="article-tag-list-item">
