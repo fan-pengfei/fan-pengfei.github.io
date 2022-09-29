@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/09/28/geOUF2QE6rSNjkV.png">
 <meta property="og:image" content="https://s2.loli.net/2022/09/29/bA4oT5NH3vOKSFY.png">
 <meta property="article:published_time" content="2022-09-28T13:12:41.000Z">
-<meta property="article:modified_time" content="2022-09-29T02:54:09.950Z">
+<meta property="article:modified_time" content="2022-09-29T02:55:25.362Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="GIT">
 <meta name="twitter:card" content="summary">
@@ -193,20 +193,17 @@
 <p>  最近在做FOC项目的时候，用到了GIT中的分支功能，因而再复习一下GIT的用法，在此记录一下GIT常用命令；<span id="more"></span></p>
 </blockquote>
 <p><strong>为表简洁，我就直接给出具体的命令以及简短的注释和自己对此的理解；</strong></p>
-<p>1、<code>git init</code></p>
-<blockquote>
+<h4 id="1、git-init"><a href="#1、git-init" class="headerlink" title="1、git init"></a>1、<code>git init</code></h4><blockquote>
 <p>  用于初始化git仓库；</p>
 </blockquote>
-<p>2、<code>git add +文件名</code></p>
-<blockquote>
+<h4 id="2、git-add-文件名"><a href="#2、git-add-文件名" class="headerlink" title="2、git add +文件名"></a>2、<code>git add +文件名</code></h4><blockquote>
 <p>  将指定工作区文件提交到git暂存区；</p>
 <p>  -A，是添加文件夹内的所有文件到暂存区；</p>
 <p>  每次提交，都要<code>git add</code>加入到暂存区，然后再commit提交；</p>
 <p>  第一次修改 -&gt; <code>git add</code> -&gt; 第二次修改 -&gt; <code>git add</code> -&gt; <code>git commit</code>；</p>
 <p>  commit提交的是git add 加入的修改的内容，而不是文件当前的内容；</p>
 </blockquote>
-<p>3、<code>git commit -m +“本次提交的说明”</code></p>
-<blockquote>
+<h5 id="3、git-commit-m-“本次提交的说明”"><a href="#3、git-commit-m-“本次提交的说明”" class="headerlink" title="3、git commit -m +“本次提交的说明”"></a>3、<code>git commit -m +“本次提交的说明”</code></h5><blockquote>
 <p>将暂存区文件提交到仓库；</p>
 <p>-m，后边是关于本次提交的说明；</p>
 <p>该命令执行成功后会显示提交的内容：</p>
@@ -214,20 +211,17 @@
 <p><code>1 file changed</code>：1个文件被改动；</p>
 <p><code>2 insertions</code>：插入了两行内容；</p>
 </blockquote>
-<p>4、<code>git status</code></p>
-<blockquote>
+<h4 id="4、git-status"><a href="#4、git-status" class="headerlink" title="4、git status"></a>4、<code>git status</code></h4><blockquote>
 <p>  显示当前仓库的状态（被修改的文件是否被提交）；</p>
 <p>  例如某个文件被修改却未被提交；</p>
 <p>  包括工作区的文件修改情况和暂存区的文件修改情况；</p>
 </blockquote>
-<p>5、<code>git diff +文件名</code></p>
-<blockquote>
+<h4 id="5、git-diff-文件名"><a href="#5、git-diff-文件名" class="headerlink" title="5、git diff +文件名"></a>5、<code>git diff +文件名</code></h4><blockquote>
 <p>查看文件修改内容；</p>
 <p>常看尚未被提交的文件做了什么修改；</p>
 <p><strong>是工作区和暂存区文件之间的差别；</strong></p>
 </blockquote>
-<p>6、<code>git log</code></p>
-<blockquote>
+<h4 id="6、git-log"><a href="#6、git-log" class="headerlink" title="6、git log"></a>6、<code>git log</code></h4><blockquote>
 <p>  显示从近到远的提交日志；</p>
 <table>
 <thead>
@@ -237,8 +231,7 @@
 </thead>
 </table>
 </blockquote>
-<p>7、<code>git reset --hard HEAD^</code></p>
-<blockquote>
+<h4 id="7、git-reset-hard-HEAD"><a href="#7、git-reset-hard-HEAD" class="headerlink" title="7、git reset --hard HEAD^"></a>7、<code>git reset --hard HEAD^</code></h4><blockquote>
 <p>  回退到上一版本；</p>
 <table>
 <thead>
@@ -257,13 +250,11 @@
 </tr>
 </tbody></table>
 </blockquote>
-<p>8、<code>git reset --hard 1094a</code></p>
-<blockquote>
+<h4 id="8、git-reset-hard-1094a"><a href="#8、git-reset-hard-1094a" class="headerlink" title="8、git reset --hard 1094a"></a>8、<code>git reset --hard 1094a</code></h4><blockquote>
 <p>  回退或者前进到指定版本；</p>
 <p>  –hard，后边的是版本号前几位；</p>
 </blockquote>
-<p>9、<code>git reflog</code></p>
-<blockquote>
+<h4 id="9、git-reflog"><a href="#9、git-reflog" class="headerlink" title="9、git reflog"></a>9、<code>git reflog</code></h4><blockquote>
 <p>  显示历史命令；</p>
 <table>
 <thead>
@@ -273,75 +264,62 @@
 </thead>
 </table>
 </blockquote>
-<p>10、<code>git diff HEAD -- readme.txt</code></p>
-<blockquote>
+<h4 id="10、git-diff-HEAD-readme-txt"><a href="#10、git-diff-HEAD-readme-txt" class="headerlink" title="10、git diff HEAD -- readme.txt"></a>10、<code>git diff HEAD -- readme.txt</code></h4><blockquote>
 <p>  查看<code>readme.txt</code>文件工作区和版本库中最新版本的区别；</p>
 </blockquote>
-<p>11、<code>git checkout -- 文件名</code></p>
-<blockquote>
+<h4 id="11、git-checkout-文件名"><a href="#11、git-checkout-文件名" class="headerlink" title="11、git checkout -- 文件名"></a>11、<code>git checkout -- 文件名</code></h4><blockquote>
 <p>  撤销工作区的修改；</p>
 <p>  让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态；</p>
 <p>  注意是 <code>--</code>；</p>
 <p>  <code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”；</p>
 </blockquote>
-<p>12、<code>git reset HEAD 文件名</code></p>
-<blockquote>
+<h4 id="12、git-reset-HEAD-文件名"><a href="#12、git-reset-HEAD-文件名" class="headerlink" title="12、git reset HEAD 文件名"></a>12、<code>git reset HEAD 文件名</code></h4><blockquote>
 <p>  撤销暂存区的修改，重新放回工作区；</p>
 <p>  已经提交到暂存区，如何从暂存区和工作区撤销：</p>
 <p>  （<code>git reset HEAD  文件名</code>）撤销暂存区的修改，回到工作区-&gt;（<code>git checkout -- 文件名</code>）撤销工作区的修改；</p>
 </blockquote>
-<p>13、<code>git rm 文件名</code></p>
-<blockquote>
+<h4 id="13、git-rm-文件名"><a href="#13、git-rm-文件名" class="headerlink" title="13、git rm 文件名"></a>13、<code>git rm 文件名</code></h4><blockquote>
 <p>  从版本库删除某文件；</p>
 <p>  <code>git rm &lt;file&gt; </code> -&gt; commit提交该删除；</p>
 </blockquote>
-<p>14、<code>git branch &lt;分支名&gt;</code></p>
-<blockquote>
+<h4 id="14、git-branch-lt-分支名-gt"><a href="#14、git-branch-lt-分支名-gt" class="headerlink" title="14、git branch &lt;分支名&gt;"></a>14、<code>git branch &lt;分支名&gt;</code></h4><blockquote>
 <p>  创建分支；</p>
 <p>  不加参数为列出所有分支，当前分支前有一个<code>*</code>号；</p>
 </blockquote>
-<p>15、<code>git branch -d &lt;分支名&gt;</code></p>
-<blockquote>
+<h4 id="15、git-branch-d-lt-分支名-gt"><a href="#15、git-branch-d-lt-分支名-gt" class="headerlink" title="15、git branch -d &lt;分支名&gt;"></a>15、<code>git branch -d &lt;分支名&gt;</code></h4><blockquote>
 <p>删除某一分支；</p>
 <p>-d，delete；</p>
 </blockquote>
-<p>15、<code>git checkout &lt;分支名&gt;</code></p>
-<blockquote>
+<h4 id="15、git-checkout-lt-分支名-gt"><a href="#15、git-checkout-lt-分支名-gt" class="headerlink" title="15、git checkout &lt;分支名&gt;"></a>15、<code>git checkout &lt;分支名&gt;</code></h4><blockquote>
 <p>  切换到某一分支；</p>
 <p>  <code>git checkout -b &lt;分支名&gt;</code>，创建并切换到新的分支；</p>
 </blockquote>
-<p>16、<code>git switch &lt;分支名&gt;</code></p>
-<blockquote>
+<h4 id="16、git-switch-lt-分支名-gt"><a href="#16、git-switch-lt-分支名-gt" class="headerlink" title="16、git switch &lt;分支名&gt;"></a>16、<code>git switch &lt;分支名&gt;</code></h4><blockquote>
 <p>  切换到某一分支；</p>
 <p>  <code>git switch -c &lt;分支名&gt;</code>，创建并切换到新的分支；</p>
 </blockquote>
-<p>17、<code>git merge</code></p>
-<blockquote>
+<h4 id="17、git-merge"><a href="#17、git-merge" class="headerlink" title="17、git merge"></a>17、<code>git merge</code></h4><blockquote>
 <p>用于合并指定分支到当前分支；</p>
 </blockquote>
-<p>18、<code>分支合并</code></p>
-<blockquote>
+<h4 id="18、分支合并"><a href="#18、分支合并" class="headerlink" title="18、分支合并"></a>18、<code>分支合并</code></h4><blockquote>
 <p>  分支1修改-&gt;提交该修改-&gt;分支2修改-&gt;提交该修改-&gt;合并分支-&gt;出现冲突-&gt;解决冲突-&gt;合并分支-&gt;删除某一分支；</p>
 </blockquote>
 <p>19、<code>git log --graph</code></p>
 <blockquote>
 <p>  查看分支合并图；</p>
 </blockquote>
-<p>20、<code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code></p>
-<blockquote>
+<h4 id="20、git-merge-no-ff-m-quot-merge-with-no-ff-quot-dev"><a href="#20、git-merge-no-ff-m-quot-merge-with-no-ff-quot-dev" class="headerlink" title="20、git merge --no-ff -m &quot;merge with no-ff&quot; dev"></a>20、<code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code></h4><blockquote>
 <p>合并dev分支，并有合并信息；</p>
 <p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而<code>fast forward</code>合并就看不出来曾经做过合并；</p>
 </blockquote>
-<p>21、<code>分支管理策略</code></p>
-<blockquote>
+<h4 id="21、分支管理策略"><a href="#21、分支管理策略" class="headerlink" title="21、分支管理策略"></a>21、<code>分支管理策略</code></h4><blockquote>
 <p>首先，<code>master</code>分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；</p>
 <p>那在哪干活呢？干活都在<code>dev</code>分支上，也就是说，<code>dev</code>分支是不稳定的，到某个时候，比如1.0版本发布时，再把<code>dev</code>分支合并到<code>master</code>上，在<code>master</code>分支发布1.0版本；</p>
 <p>你和你的小伙伴们每个人都在<code>dev</code>分支上干活，每个人都有自己的分支，时不时地往<code>dev</code>分支上合并就可以了；</p>
 <p>所以，团队合作的分支看起来就像这样；</p>
 <p><img src="https://s2.loli.net/2022/09/29/bA4oT5NH3vOKSFY.png" alt="git-br-policy"></p>
 </blockquote>
-<p>22、<code>git stash</code></p>
-<blockquote>
+<h4 id="22、git-stash"><a href="#22、git-stash" class="headerlink" title="22、git stash"></a>22、<code>git stash</code></h4><blockquote>
 <p>  暂存当前工作区和暂存区的内容，可以等恢复现场后再工作；</p>
 <p>  <code>git stash list</code>，列出当前暂存的内容；</p>
 <p>  <code>git stash apply</code>，恢复当前暂存的内容到工作区；</p>
@@ -349,25 +327,21 @@
 <p>  <code>git stash pop</code>，恢复当前暂存的内容到工作区的同时删除暂存的内容；</p>
 <p>  可以多次stash，先用<code>git stash list</code>查看，然后恢复指定的stash，用命令：<code>git stash apply stash@&#123;0&#125;</code>；</p>
 </blockquote>
-<p>23、<code>修复bug</code></p>
-<blockquote>
+<h4 id="23、修复bug"><a href="#23、修复bug" class="headerlink" title="23、修复bug"></a>23、<code>修复bug</code></h4><blockquote>
 <p>在Git中，由于分支是如此的强大，所以，每个bug都可以通过一个新的临时分支来修复，修复后，合并分支，然后将临时分支删除；</p>
 <p>修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；</p>
 <p>当手头工作没有完成时，先把工作现场<code>git stash</code>一下，然后去修复bug，修复后，再<code>git stash pop</code>，回到工作现场；</p>
 <p>在master分支上修复的bug，想要合并到当前dev分支，可以用<code>git cherry-pick &lt;commit&gt;</code>命令，把bug提交的修改“复制”到当前分支，避免重复劳动。</p>
 </blockquote>
-<p>24、<code>修复不同分支上相同的bug</code></p>
-<blockquote>
+<h4 id="24、修复不同分支上相同的bug"><a href="#24、修复不同分支上相同的bug" class="headerlink" title="24、修复不同分支上相同的bug"></a>24、<code>修复不同分支上相同的bug</code></h4><blockquote>
 <p>Git专门提供了一个<code>cherry-pick</code>命令，让我们能复制一个特定的提交到当前分支；</p>
 <p><code>git cherry-pick 4c805e2</code>；</p>
 </blockquote>
-<p>25、<code>开发新的feature</code></p>
-<blockquote>
+<h4 id="25、开发新的feature"><a href="#25、开发新的feature" class="headerlink" title="25、开发新的feature"></a>25、<code>开发新的feature</code></h4><blockquote>
 <p>开发一个新feature，最好新建一个分支；</p>
 <p>如果要丢弃一个没有被合并过的分支，可以通过<code>git branch -D &lt;name&gt;</code>强行删除。</p>
 </blockquote>
-<p>26、<code>标签管理</code></p>
-<blockquote>
+<h4 id="26、标签管理"><a href="#26、标签管理" class="headerlink" title="26、标签管理"></a>26、<code>标签管理</code></h4><blockquote>
 <p>发布一个版本时，我们通常先在版本库中打一个标签（tag），这样，就唯一确定了打标签时刻的版本。将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。</p>
 <p>Git的标签虽然是版本库的快照，但其实它就是指向某个commit的指针（跟分支很像对不对？但是分支可以移动，标签不能移动），所以，创建和删除标签都是瞬间完成的。</p>
 <p>在Git中打标签非常简单，首先，切换到需要打标签的分支上-&gt;</p>
@@ -409,8 +383,7 @@
 
 <p>因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。</p>
 </blockquote>
-<p>27、<code>忽略特殊文件</code></p>
-<blockquote>
+<h4 id="27、忽略特殊文件"><a href="#27、忽略特殊文件" class="headerlink" title="27、忽略特殊文件"></a>27、<code>忽略特殊文件</code></h4><blockquote>
 <p>在Git工作区的根目录下创建一个特殊的<code>.gitignore</code>文件，然后把要忽略的文件名填进去，Git就会自动忽略这些文件；</p>
 <p>例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;# Windows:</span><br><span class="line">&gt;Thumbs.db</span><br><span class="line">&gt;ehthumbs.db</span><br><span class="line">&gt;Desktop.ini</span><br><span class="line"></span><br><span class="line">&gt;# Python:</span><br><span class="line">&gt;*.py[cod]</span><br><span class="line">&gt;*.so</span><br><span class="line">&gt;*.egg</span><br><span class="line">&gt;*.egg-info</span><br><span class="line">&gt;dist</span><br><span class="line">&gt;build</span><br><span class="line"></span><br><span class="line">&gt;# My configurations:</span><br><span class="line">&gt;db.ini</span><br><span class="line">&gt;deploy_key_rsa</span><br></pre></td></tr></table></figure>
@@ -607,7 +580,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81git-init"><span class="toc-number">1.</span> <span class="toc-text">1、git init</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81git-add-%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">2.</span> <span class="toc-text">2、git add +文件名</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81git-commit-m-%E2%80%9C%E6%9C%AC%E6%AC%A1%E6%8F%90%E4%BA%A4%E7%9A%84%E8%AF%B4%E6%98%8E%E2%80%9D"><span class="toc-number">2.1.</span> <span class="toc-text">3、git commit -m +“本次提交的说明”</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81git-status"><span class="toc-number">3.</span> <span class="toc-text">4、git status</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81git-diff-%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">4.</span> <span class="toc-text">5、git diff +文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81git-log"><span class="toc-number">5.</span> <span class="toc-text">6、git log</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81git-reset-hard-HEAD"><span class="toc-number">6.</span> <span class="toc-text">7、git reset --hard HEAD^</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81git-reset-hard-1094a"><span class="toc-number">7.</span> <span class="toc-text">8、git reset --hard 1094a</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%E3%80%81git-reflog"><span class="toc-number">8.</span> <span class="toc-text">9、git reflog</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10%E3%80%81git-diff-HEAD-readme-txt"><span class="toc-number">9.</span> <span class="toc-text">10、git diff HEAD -- readme.txt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11%E3%80%81git-checkout-%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">10.</span> <span class="toc-text">11、git checkout -- 文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12%E3%80%81git-reset-HEAD-%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">11.</span> <span class="toc-text">12、git reset HEAD 文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13%E3%80%81git-rm-%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">12.</span> <span class="toc-text">13、git rm 文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14%E3%80%81git-branch-lt-%E5%88%86%E6%94%AF%E5%90%8D-gt"><span class="toc-number">13.</span> <span class="toc-text">14、git branch &lt;分支名&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15%E3%80%81git-branch-d-lt-%E5%88%86%E6%94%AF%E5%90%8D-gt"><span class="toc-number">14.</span> <span class="toc-text">15、git branch -d &lt;分支名&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15%E3%80%81git-checkout-lt-%E5%88%86%E6%94%AF%E5%90%8D-gt"><span class="toc-number">15.</span> <span class="toc-text">15、git checkout &lt;分支名&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16%E3%80%81git-switch-lt-%E5%88%86%E6%94%AF%E5%90%8D-gt"><span class="toc-number">16.</span> <span class="toc-text">16、git switch &lt;分支名&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17%E3%80%81git-merge"><span class="toc-number">17.</span> <span class="toc-text">17、git merge</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18%E3%80%81%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6"><span class="toc-number">18.</span> <span class="toc-text">18、分支合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20%E3%80%81git-merge-no-ff-m-quot-merge-with-no-ff-quot-dev"><span class="toc-number">19.</span> <span class="toc-text">20、git merge --no-ff -m &quot;merge with no-ff&quot; dev</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21%E3%80%81%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E7%AD%96%E7%95%A5"><span class="toc-number">20.</span> <span class="toc-text">21、分支管理策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#22%E3%80%81git-stash"><span class="toc-number">21.</span> <span class="toc-text">22、git stash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#23%E3%80%81%E4%BF%AE%E5%A4%8Dbug"><span class="toc-number">22.</span> <span class="toc-text">23、修复bug</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24%E3%80%81%E4%BF%AE%E5%A4%8D%E4%B8%8D%E5%90%8C%E5%88%86%E6%94%AF%E4%B8%8A%E7%9B%B8%E5%90%8C%E7%9A%84bug"><span class="toc-number">23.</span> <span class="toc-text">24、修复不同分支上相同的bug</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#25%E3%80%81%E5%BC%80%E5%8F%91%E6%96%B0%E7%9A%84feature"><span class="toc-number">24.</span> <span class="toc-text">25、开发新的feature</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#26%E3%80%81%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="toc-number">25.</span> <span class="toc-text">26、标签管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#27%E3%80%81%E5%BF%BD%E7%95%A5%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6"><span class="toc-number">26.</span> <span class="toc-text">27、忽略特殊文件</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -803,10 +776,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
@@ -816,6 +785,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -835,6 +808,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
@@ -847,14 +824,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UART</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -863,11 +832,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
+                <a href="javascript:void(0)" class="js-tag color5">UART</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -883,11 +856,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -927,11 +900,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">实习</a>
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+                <a href="javascript:void(0)" class="js-tag color3">实习</a>
               </li>
              
               <li class="article-tag-list-item">
