@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/08/16/8unbH2fcU3prgoR.png">
 <meta property="og:image" content="https://s2.loli.net/2022/08/10/j7GLApnWg1b4FK9.png">
 <meta property="article:published_time" content="2022-08-10T03:35:34.000Z">
-<meta property="article:modified_time" content="2022-09-29T04:37:29.518Z">
+<meta property="article:modified_time" content="2022-09-29T04:39:23.223Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="FOC">
 <meta name="twitter:card" content="summary">
@@ -290,7 +290,7 @@
 </tbody></table>
 <h2 id="2022年9月12日："><a href="#2022年9月12日：" class="headerlink" title="2022年9月12日："></a>2022年9月12日：</h2><p>中间好久不更新，这些天对FOC项目做了更多的测试，还有做了一些应用，例如倒立摆，平衡车等等；</p>
 <p>想要加上电流环，刚开始自然的想法是，用合金采样电阻加电流放大器加stm32的AD，这个外围电路比较麻烦，成本也很高；</p>
-<p>昨天查找资料发现了一个芯片：<strong>MP5640</strong>，三相电机驱动芯片，且内部集成了电流检测，只需要用32的AD去读就可以了，今上午画了一个测试板，已经发去打样了，希望能正常工作；</p>
+<p>昨天查找资料发现了一个芯片：<strong>MP6540</strong>，三相电机驱动芯片，且内部集成了电流检测，只需要用32的AD去读就可以了，今上午画了一个测试板，已经发去打样了，希望能正常工作；</p>
 <p>等板子回来了，我测试一下，在说要不要改用这个芯片；</p>
 <h2 id="2022年9月3日："><a href="#2022年9月3日：" class="headerlink" title="2022年9月3日："></a>2022年9月3日：</h2><p>修改的板子今天已经到了，焊接好了，也测试了，很完美，发热没那么严重了；</p>
 <p>这次使用的LDO是AMS1117(SOT-89封装)，它的输入最高电压是18V，完全够用了，发热虽然还是很大，但封装也更大了，所以还是可以接受的；</p>
@@ -784,15 +784,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件格式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -808,7 +808,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -820,7 +820,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PID</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -832,7 +836,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PID</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -840,15 +844,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -880,15 +880,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -912,10 +912,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DJI</a>
               </li>
              
@@ -924,15 +920,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -941,10 +945,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
