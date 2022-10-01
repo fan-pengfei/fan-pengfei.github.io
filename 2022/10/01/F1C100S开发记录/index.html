@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/27vmTQFo1ayPGbW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/H7AfghBlEqZKawF.jpg">
 <meta property="article:published_time" content="2022-10-01T04:10:08.000Z">
-<meta property="article:modified_time" content="2022-10-01T04:27:20.783Z">
+<meta property="article:modified_time" content="2022-10-01T04:27:58.901Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="F1C100S">
 <meta name="twitter:card" content="summary">
@@ -206,21 +206,17 @@
 <td align="center"><img src="https://s2.loli.net/2022/10/01/H7AfghBlEqZKawF.jpg" alt="f1c100s-3"></td>
 </tr>
 </tbody></table>
-<h3 id="FLASH下载工具使用"><a href="#FLASH下载工具使用" class="headerlink" title="FLASH下载工具使用"></a>FLASH下载工具使用</h3><ol>
-<li><p>通过命令 <code>sudo sunxi-fel ver</code> 来确认有无成功进入fel模式；</p>
+<h3 id="FLASH下载工具使用"><a href="#FLASH下载工具使用" class="headerlink" title="FLASH下载工具使用"></a>FLASH下载工具使用</h3><p>1、通过命令 <code>sudo sunxi-fel ver</code> 来确认有无成功进入fel模式；</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel ver</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>短接FLASH<code>1</code>和<code>4</code>脚，可以进入fel模式，其实就是CS引脚拉低；</p>
-</li>
-<li><p>单次运行（下载到RAM中）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sunxi-fel uboot /your/path/to/u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>烧进 spi-flash （开机自启）</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sunxi-fel -p spiflash-write 0 /your/path/to/u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
 
-<p> 其中0是烧录偏移地址；</p>
-</li>
-</ol>
+<p>2、短接FLASH<code>1</code>和<code>4</code>脚，可以进入fel模式，其实就是CS引脚拉低；</p>
+<p>3、单次运行（下载到RAM中）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sunxi-fel uboot /your/path/to/u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
+
+<p>4、烧进 spi-flash （开机自启）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sunxi-fel -p spiflash-write 0 /your/path/to/u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
+
+<p>其中0是烧录偏移地址；</p>
 <h3 id="Uboot编译"><a href="#Uboot编译" class="headerlink" title="Uboot编译"></a>Uboot编译</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此处告知make采用arm-linux-gnueabi下的所有交叉编译工具，目标架构为Arm，设定各项默认配置为 nano 的spiflash支持版</span></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- f1c100s_nano_uboot_defconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若不带spi-flash的板子，请换成 licheepi_nano_defconfig</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行可视化配置</span></span><br><span class="line">make ARCH=arm menuconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始编译</span></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j8</span><br></pre></td></tr></table></figure>
 
 <p>只需要<code>u-boot-sunxi-with-spl.bin</code>即可；</p>
@@ -592,6 +588,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件格式</a>
               </li>
              
@@ -600,11 +600,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,10 +613,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,6 +636,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UART</a>
               </li>
              
@@ -660,15 +664,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -692,15 +688,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -724,10 +720,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DJI</a>
               </li>
              
@@ -736,15 +728,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">规划</a>
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,6 +749,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">规划</a>
               </li>
              
               <li class="article-tag-list-item">
