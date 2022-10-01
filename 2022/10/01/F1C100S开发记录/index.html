@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/27vmTQFo1ayPGbW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/H7AfghBlEqZKawF.jpg">
 <meta property="article:published_time" content="2022-10-01T04:10:08.000Z">
-<meta property="article:modified_time" content="2022-10-01T10:49:28.766Z">
+<meta property="article:modified_time" content="2022-10-01T13:30:22.464Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="F1C100S">
 <meta name="twitter:card" content="summary">
@@ -211,30 +211,50 @@
 
 <p>2、短接FLASH<code>1</code>和<code>4</code>脚，可以进入fel模式，其实就是CS引脚拉低；</p>
 <p>3、单次运行（下载到RAM中）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sunxi-fel uboot /your/path/to/u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sunxi-fel uboot /your/path/to/u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
 
 <p>4、烧进 spi-flash （开机自启）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sunxi-fel -p spiflash-write 0 /your/path/to/u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
 
 <p>其中0是烧录偏移地址；</p>
-<h2 id="Uboot编译"><a href="#Uboot编译" class="headerlink" title="Uboot编译"></a>Uboot编译</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此处告知make采用arm-linux-gnueabi下的所有交叉编译工具，目标架构为Arm，设定各项默认配置为 nano 的spiflash支持版</span></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- f1c100s_nano_uboot_defconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若不带spi-flash的板子，请换成 licheepi_nano_defconfig</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行可视化配置</span></span><br><span class="line">make ARCH=arm menuconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始编译</span></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j8</span><br></pre></td></tr></table></figure>
+<h2 id="Uboot编译"><a href="#Uboot编译" class="headerlink" title="Uboot编译"></a>Uboot编译</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br><span class="line">git <span class="built_in">clone</span> https://gitee.com/LicheePiNano/u-boot.git</span><br><span class="line"><span class="built_in">cd</span> u-boot</span><br><span class="line"><span class="comment"># 查看分支</span></span><br><span class="line">git branch -a</span><br><span class="line"><span class="comment"># 切换到 Nano 分支</span></span><br><span class="line">git checkout nano-lcd800480</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b nano-lcd800480 --depth=1 https://github.com/Lichee-Pi/u-boot.git</span><br><span class="line">此处告知make采用arm-linux-gnueabi下的所有交叉编译工具，目标架构为Arm，设定各项默认配置为 nano 的spiflash支持版</span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- f1c100s_nano_uboot_defconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若不带spi-flash的板子，请换成 licheepi_nano_defconfig</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行可视化配置</span></span><br><span class="line">make ARCH=arm menuconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改默认bootcmd</span></span><br><span class="line">gedit include/configs/suniv.h</span><br><span class="line"><span class="comment"># 需要修改为</span></span><br><span class="line"><span class="comment">#define CONFIG_BOOTCOMMAND &quot;run distro_bootcmd&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始编译</span></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j8</span><br></pre></td></tr></table></figure>
 
 <p>只需要<code>u-boot-sunxi-with-spl.bin</code>即可；</p>
+<h2 id="boot-scr"><a href="#boot-scr" class="headerlink" title="boot.scr"></a>boot.scr</h2><blockquote>
+<p>  根据上面对<code>bootcmd</code>的修改，u-boot启动时会从第一分区读取 <code>boot.scr</code> 文件，并执行其中的脚本。我们可以通过这个来设置要传递给linux内核的参数、来加载内核和设备树、来启动内核。</p>
+</blockquote>
+<p><strong>在uboot目录下新建boot.cmd文件，向其中写入u-boot要执行的脚本：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/f1c100s-sdk/u-boot/</span><br><span class="line">touch boot.cmd</span><br><span class="line">gedit boot.cmd</span><br></pre></td></tr></table></figure>
+
+<p><strong>写入以下内容：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置传递给内核的bootargs参数</span></span><br><span class="line"><span class="comment">#读取内核镜像和设备树到内存中指定位置</span></span><br><span class="line"><span class="comment">#启动内核程序</span></span><br><span class="line">setenv bootargs console=tty0 console=ttyS0,115200 panic=5 rootwait root=/dev/mmcblk0p2 rw</span><br><span class="line">load mmc 0:1 0x80008000 zImage</span><br><span class="line">load mmc 0:1 0x80C00000 suniv-f1c100s-licheepi-nano.dtb</span><br><span class="line">bootz 0x80008000 - 0x80C00000</span><br></pre></td></tr></table></figure>
+
+
+<p>使用u-boot编译后tools目录下的 <code>mkimage</code> 工具可以将<code>boot.cmd</code>文件生成为 <code>boot.scr</code> 文件，通过下面命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#arm架构；不压缩；script文件；输入boot.cmd文件；输出boot.scr文件</span></span><br><span class="line">tools/mkimage -A arm -C none -T script -d boot.cmd boot.scr</span><br></pre></td></tr></table></figure>
+
+<p><strong>生成的 <code>boot.scr</code> 文件就在当前目录下；</strong></p>
 <h2 id="Linux编译"><a href="#Linux编译" class="headerlink" title="Linux编译"></a>Linux编译</h2><p>1、Linux下载</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/LicheePiNano/Linux.git</span><br><span class="line"><span class="built_in">cd</span> ./Linux</span><br></pre></td></tr></table></figure>
 
 <p>2、Linux编译</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">make ARCH=arm f1c100s_nano_linux_defconfig</span><br><span class="line"></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j8</span><br><span class="line"></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j16 INSTALL_MOD_PATH=out modules</span><br><span class="line"></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j16 INSTALL_MOD_PATH=out modules_install</span><br></pre></td></tr></table></figure>
 
-<p>编译成功后，生成文件所在位置：</p>
+<p><strong>编译成功后，生成文件所在位置：</strong></p>
 <ul>
-<li>内核img文件：<code>./arch/arm/boot/zImage</code></li>
-<li>设备树dtb文件:<code>./arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb</code></li>
-<li>modules文件夹：<code>./out/lib/modules</code></li>
+<li><strong>内核img文件：<code>./arch/arm/boot/zImage</code></strong></li>
+<li><strong>设备树dtb文件:<code>./arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb</code></strong></li>
+<li><strong>modules文件夹：<code>./out/lib/modules</code></strong></li>
 </ul>
-<h2 id="buildrooft构建根文件系统"><a href="#buildrooft构建根文件系统" class="headerlink" title="buildrooft构建根文件系统"></a>buildrooft构建根文件系统</h2><p><strong>buildroot可用于构建小型的linux根文件系统。</strong></p>
-<p><strong>大小最小可低至2M，与内核一起可以放入最小8M的spi flash中。</strong></p>
-<p><strong>buildroot中可以方便地加入第三方软件包（其实已经内置了很多），省去了手工交叉编译的烦恼。</strong></p>
+<h2 id="buildrooft构建根文件系统"><a href="#buildrooft构建根文件系统" class="headerlink" title="buildrooft构建根文件系统"></a>buildrooft构建根文件系统</h2><blockquote>
+<p>  buildroot可用于构建小型的linux根文件系统。</p>
+<p>  大小最小可低至2M，与内核一起可以放入最小8M的spi flash中。</p>
+<p>  buildroot中可以方便地加入第三方软件包（其实已经内置了很多），省去了手工交叉编译的烦恼。</p>
+</blockquote>
 <h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><p>首先安装一些依赖，比如linux头文件：</p>
    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install linux-headers-$(uname -r)</span><br></pre></td></tr></table></figure>
 
@@ -248,7 +268,7 @@
 <h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
 
 <p>编译的过程如果带上下载软件包的时间比较漫长，很适合喝杯茶睡个午觉；(buildroot不能进行多线程编译)</p>
-<p>编译完成的镜像包，是<code>buildroot-2021.02.4/output/images/rootfs.tar</code>；</p>
+<p><strong>编译完成的镜像包，是<code>buildroot-2021.02.4/output/images/rootfs.tar</code>；</strong></p>
 <h2 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h2><p>嵌入式linux开发最终是需要在系统上运行应用程序来实现特定的功能需求，这里编写个基础的应用程序用于测试：</p>
 <p>建立程序文件夹并进入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir helloworld</span><br><span class="line"><span class="built_in">cd</span> helloworld/</span><br></pre></td></tr></table></figure>
@@ -266,7 +286,7 @@
 <blockquote>
 <p>需要静态编译；</p>
 </blockquote>
-<h2 id="系统烧录"><a href="#系统烧录" class="headerlink" title="系统烧录"></a>系统烧录</h2><h3 id="在SD卡中放了以下文件："><a href="#在SD卡中放了以下文件：" class="headerlink" title="在SD卡中放了以下文件："></a><strong>在SD卡中放了以下文件：</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── boot.cmd</span><br><span class="line">├── boot.scr*（这个可以在Uboot中输入对应命令达到相同的结果）</span><br><span class="line">├── helloworld*</span><br><span class="line">├── rootfs.tar*</span><br><span class="line">├── suniv-f1c100s-licheepi-nano.dtb*</span><br><span class="line">├── u-boot-sunxi-with-spl.bin*</span><br><span class="line">└── zImage*</span><br></pre></td></tr></table></figure>
+<h2 id="系统烧录-SD卡"><a href="#系统烧录-SD卡" class="headerlink" title="系统烧录(SD卡)"></a>系统烧录(SD卡)</h2><h3 id="在SD卡中放了以下文件："><a href="#在SD卡中放了以下文件：" class="headerlink" title="在SD卡中放了以下文件："></a><strong>在SD卡中放了以下文件：</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── boot.cmd</span><br><span class="line">├── boot.scr*（这个可以在Uboot中输入对应命令达到相同的结果）</span><br><span class="line">├── helloworld*</span><br><span class="line">├── rootfs.tar*</span><br><span class="line">├── suniv-f1c100s-licheepi-nano.dtb*</span><br><span class="line">├── u-boot-sunxi-with-spl.bin*</span><br><span class="line">└── zImage*</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>  带星号的是加载进SD卡中的；</p>
@@ -361,6 +381,121 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#如果分区已挂载到别的地方先进行卸载</span></span><br><span class="line">sudo umount /dev/sdb2</span><br><span class="line"><span class="comment">#将分区挂载到 /mnt</span></span><br><span class="line">sudo mount /dev/sdb2 /mnt</span><br><span class="line"><span class="comment">#解压并拷贝rootfs</span></span><br><span class="line"><span class="built_in">cd</span> ~/f1c100s-sdk/buildroot-2022.02/</span><br><span class="line">sudo tar -xf output/images/rootfs.tar -C /mnt/</span><br><span class="line"><span class="comment">#保存退出</span></span><br><span class="line">sync</span><br><span class="line">sudo umount /dev/sdb2</span><br></pre></td></tr></table></figure>
 
 <h5 id="测试程序："><a href="#测试程序：" class="headerlink" title="测试程序："></a>测试程序：</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#如果分区已挂载到别的地方先进行卸载</span></span><br><span class="line">sudo umount /dev/sdb2</span><br><span class="line"><span class="comment">#将分区挂载到 /mnt</span></span><br><span class="line">sudo mount /dev/sdb2 /mnt</span><br><span class="line"><span class="comment">#拷贝helloworld</span></span><br><span class="line"><span class="built_in">cd</span> ~/f1c100s-sdk/helloworld/</span><br><span class="line">sudo cp helloworld /mnt/root/</span><br><span class="line"><span class="comment">#保存退出</span></span><br><span class="line">sync</span><br><span class="line">sudo umount /dev/sdb2</span><br></pre></td></tr></table></figure>
+
+<h2 id="系统烧录-SPI-FLASH-16M"><a href="#系统烧录-SPI-FLASH-16M" class="headerlink" title="系统烧录(SPI FLASH 16M)"></a>系统烧录(SPI FLASH 16M)</h2><h3 id="Flash分区："><a href="#Flash分区：" class="headerlink" title="Flash分区："></a>Flash分区：</h3><table>
+<thead>
+<tr>
+<th align="center">分区序号</th>
+<th align="center">分区大小</th>
+<th align="center">分区作用</th>
+<th align="center">地址空间及分区名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">mtd0</td>
+<td align="center">1MB</td>
+<td align="center">spl+uboot</td>
+<td align="center">0x0000000-0x0100000 : “uboot”</td>
+</tr>
+<tr>
+<td align="center">mtd2</td>
+<td align="center">64KB</td>
+<td align="center">dtb文件</td>
+<td align="center">0x0100000-0x0110000: “dtb”</td>
+</tr>
+<tr>
+<td align="center">mtd2</td>
+<td align="center">4MB</td>
+<td align="center">linux内核</td>
+<td align="center">0x0110000-0x0510000 : “kernel”</td>
+</tr>
+<tr>
+<td align="center">mtd3</td>
+<td align="center">剩余</td>
+<td align="center">根文件系统</td>
+<td align="center">0x0510000-0x0c00000 : “rootfs”</td>
+</tr>
+<tr>
+<td align="center">mtd4</td>
+<td align="center">剩余</td>
+<td align="center">用户区</td>
+<td align="center">0x0c00000-0x1000000 : “user”</td>
+</tr>
+</tbody></table>
+<p>烧录前要进入fel模式，然后进行程序下载；</p>
+<h3 id="烧录文件准备："><a href="#烧录文件准备：" class="headerlink" title="烧录文件准备："></a>烧录文件准备：</h3><p><strong>只有根文件系统烧录文件与TF卡的不同，其他文件均相同；</strong></p>
+<p>准备根文件系统，生成<code>rootfs.img</code>镜像文件：</p>
+<p>1、新建一个目录<code>make_rootfs</code>（这个目录随便找一个路径放就可以了），拷贝<code>rootfs.tar</code>到<code>make_rootfs</code>目录下。</p>
+<p>2、使用命令解压：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf rootfs.tar   </span><br></pre></td></tr></table></figure>
+
+<p>然后删除压缩包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf rootfs.tar</span><br></pre></td></tr></table></figure>
+
+<p>3、回到上级目录<code>make_rootfs</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ../ </span><br></pre></td></tr></table></figure>
+
+<p>4、然后使用命令生成<code>rootfs.img</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.jffs2 -s 0x100 -e 0x10000 -p 0x6F0000 -d rootfs/ -o rootfs.img</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  说明：（0x10000：块擦除大小）,（0x6F0000：分区的大小）；</p>
+</blockquote>
+<p>5、<code>mtd-utils</code>安装：<br>此步骤是上一步制作根文件系统的命令没有的前提下进行的；</p>
+<p>安装<code>mkfs.jffs2</code>工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mtd-utils</span><br></pre></td></tr></table></figure>
+
+<h3 id="烧录命令："><a href="#烧录命令：" class="headerlink" title="烧录命令："></a>烧录命令：</h3><p>清空flash，进入FEL模式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sf probe 0</span><br><span class="line">sf erase 0 0x100000 <span class="comment">#清空flash</span></span><br><span class="line">reset				<span class="comment">#即可重新进入fel模式</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="烧录u-boot"><a href="#烧录u-boot" class="headerlink" title="烧录u-boot"></a>烧录u-boot</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0 u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
+
+<h4 id="烧录kernel"><a href="#烧录kernel" class="headerlink" title="烧录kernel"></a>烧录kernel</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0x0110000 arch/arm/boot/zImage</span><br></pre></td></tr></table></figure>
+
+<h4 id="烧录dtb"><a href="#烧录dtb" class="headerlink" title="烧录dtb"></a>烧录dtb</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0x0100000 arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb</span><br></pre></td></tr></table></figure>
+
+<h4 id="烧录rootfs"><a href="#烧录rootfs" class="headerlink" title="烧录rootfs"></a>烧录rootfs</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0x0510000 rootfs.img</span><br></pre></td></tr></table></figure>
+
+<h4 id="烧录userfs"><a href="#烧录userfs" class="headerlink" title="烧录userfs"></a>烧录userfs</h4><blockquote>
+<p>  说明：这个是个人创建的文件系统，该分区如果不需要可以不烧了；</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0x0c00000 userfs.img </span><br></pre></td></tr></table></figure>
+
+<h3 id="U-boot中启动系统："><a href="#U-boot中启动系统：" class="headerlink" title="U-boot中启动系统："></a>U-boot中启动系统：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sf probe 0 50000000</span><br><span class="line">sf <span class="built_in">read</span> 0x80C00000 0x100000 0x10000  <span class="comment">#加载dtb设备树</span></span><br><span class="line">sf <span class="built_in">read</span> 0x80008000 0x110000 0x400000 <span class="comment">#加载内核</span></span><br><span class="line">bootz 0x80008000 - 0x80C00000<span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="U-boot中sf命令用法："><a href="#U-boot中sf命令用法：" class="headerlink" title="U-boot中sf命令用法："></a>U-boot中sf命令用法：</h2><ul>
+<li><strong>sf read用来读取flash数据到内存；</strong></li>
+<li><strong>sf write写内存数据到flash；</strong></li>
+<li><strong>sf erase 擦除指定位置,指定长度的flash内容, 在进行写flash的时候一定要先进行擦除，否则会失败，因为flash只能从1变为0；</strong></li>
+</ul>
+<h3 id="具体用法："><a href="#具体用法：" class="headerlink" title="具体用法："></a>具体用法：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sf - SPI flash sub-system</span><br><span class="line"> </span><br><span class="line">Usage:</span><br><span class="line">sf probe [[bus:]cs] [hz] [mode] - init flash device on given SPI bus</span><br><span class="line">                                  and chip select</span><br><span class="line">sf <span class="built_in">read</span> addr offset len - <span class="built_in">read</span> `len<span class="string">&#x27; bytes starting at</span></span><br><span class="line"><span class="string">                                  `offset&#x27;</span> to memory at `addr<span class="string">&#x27;</span></span><br><span class="line"><span class="string">sf write addr offset len        - write `len&#x27;</span> bytes from memory</span><br><span class="line">                                  at `addr<span class="string">&#x27; to flash at `offset&#x27;</span></span><br><span class="line">sf erase offset [+]len          - erase `len<span class="string">&#x27; bytes from `offset&#x27;</span></span><br><span class="line">                                  `+len<span class="string">&#x27; round up `len&#x27;</span> to block size</span><br><span class="line">sf update addr offset len       - erase and write `len<span class="string">&#x27; bytes from memory</span></span><br><span class="line"><span class="string">                                  at `addr&#x27;</span> to flash at `offset<span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><h4 id="连接flash："><a href="#连接flash：" class="headerlink" title="连接flash："></a>连接flash：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sf probe 0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在使用sf的其他命令之前必须先进行此操作进行连接flash；</p>
+</blockquote>
+<h4 id="写flash："><a href="#写flash：" class="headerlink" title="写flash："></a>写flash：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sf write 0x82000000 0x8000 0x20000</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  把内存0x8200 0000处的数据, 写入flash的偏移0x80000, 写入数据长度为0x20000(128KB), 操作偏移和长度最小单位是Byte；</p>
+</blockquote>
+<h4 id="读flash："><a href="#读flash：" class="headerlink" title="读flash："></a>读flash：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sf <span class="built_in">read</span> 0x82000000 0x10000 0x20000</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  把flash偏移0x10000(64KB)处, 长度为0x20000(128KB)的数据, 写入到内存0x82000000, 操作偏移和长度最小单位是Byte；</p>
+</blockquote>
+<h4 id="擦除flash："><a href="#擦除flash：" class="headerlink" title="擦除flash："></a>擦除flash：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sf erase 0x0 0x10000</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  擦除偏移0x0处, 到0x10000之间的擦除块, 擦除操作是以erase block为单位的, 要求offset和len参数必须是erase block对齐的；</p>
+</blockquote>
+<h2 id="sunxi-fel工具的使用："><a href="#sunxi-fel工具的使用：" class="headerlink" title="sunxi-fel工具的使用："></a>sunxi-fel工具的使用：</h2><h3 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b f1c100s-spiflash https://github.com/Icenowy/sunxi-tools.git</span><br><span class="line"><span class="built_in">cd</span> sunxi-tools</span><br><span class="line">make &amp;&amp; sudo make install</span><br><span class="line"></span><br><span class="line">sudo apt install pkg-config</span><br><span class="line">sudo apt install pkgconf</span><br><span class="line">sudo apt-get install zlib1g-dev</span><br><span class="line">sudo apt-get install libusb-1.0-0-dev</span><br></pre></td></tr></table></figure>
+
+<h3 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">Usage: ./sunxi-fel [options] <span class="built_in">command</span> arguments... [<span class="built_in">command</span>...]</span><br><span class="line">    -h, --<span class="built_in">help</span>            Print this usage summary and <span class="built_in">exit</span></span><br><span class="line">    -v, --verbose            Verbose logging</span><br><span class="line">    -p, --progress            <span class="string">&quot;write&quot;</span> transfers show a progress bar</span><br><span class="line">    -l, --list            Enumerate all (USB) FEL devices and <span class="built_in">exit</span></span><br><span class="line">    -d, --dev bus:devnum        Use specific USB bus and device number</span><br><span class="line">        --sid SID            Select device by SID key (exact match)</span><br><span class="line"></span><br><span class="line">    spl file            Load and execute U-Boot SPL</span><br><span class="line">        If file additionally contains a main U-Boot binary</span><br><span class="line">        (u-boot-sunxi-with-spl.bin), this <span class="built_in">command</span> also transfers that</span><br><span class="line">        to memory (default address from image), but won<span class="string">&#x27;t execute it.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    uboot file-with-spl        like &quot;spl&quot;, but actually starts U-Boot</span></span><br><span class="line"><span class="string">        U-Boot execution will take place when the fel utility exits.</span></span><br><span class="line"><span class="string">        This allows combining &quot;uboot&quot; with further &quot;write&quot; commands</span></span><br><span class="line"><span class="string">        (to transfer other files needed for the boot).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    hex[dump] address length    Dumps memory region in hex</span></span><br><span class="line"><span class="string">    dump address length        Binary memory dump</span></span><br><span class="line"><span class="string">    exe[cute] address        Call function address</span></span><br><span class="line"><span class="string">    reset64 address            RMR request for AArch64 warm boot</span></span><br><span class="line"><span class="string">    memmove dest source size    Copy &lt;size&gt; bytes within device memory</span></span><br><span class="line"><span class="string">    readl address            Read 32-bit value from device memory</span></span><br><span class="line"><span class="string">    writel address value        Write 32-bit value to device memory</span></span><br><span class="line"><span class="string">    read address length file    Write memory contents into file</span></span><br><span class="line"><span class="string">    write address file        Store file contents into memory</span></span><br><span class="line"><span class="string">    write-with-progress addr file    &quot;write&quot; with progress bar</span></span><br><span class="line"><span class="string">    write-with-gauge addr file    Output progress for &quot;dialog --gauge&quot;</span></span><br><span class="line"><span class="string">    write-with-xgauge addr file    Extended gauge output (updates prompt)</span></span><br><span class="line"><span class="string">    multi[write] # addr file ...    &quot;write-with-progress&quot; multiple files,</span></span><br><span class="line"><span class="string">                    sharing a common progress status</span></span><br><span class="line"><span class="string">    multi[write]-with-gauge ...    like their &quot;write-with-*&quot; counterpart,</span></span><br><span class="line"><span class="string">    multi[write]-with-xgauge ...      but following the &#x27;</span>multi<span class="string">&#x27; syntax:</span></span><br><span class="line"><span class="string">                      &lt;#&gt; addr file [addr file [...]]</span></span><br><span class="line"><span class="string">    echo-gauge &quot;some text&quot;        Update prompt/caption for gauge output</span></span><br><span class="line"><span class="string">    ver[sion]            Show BROM version</span></span><br><span class="line"><span class="string">    sid                Retrieve and output 128-bit SID key</span></span><br><span class="line"><span class="string">    clear address length        Clear memory</span></span><br><span class="line"><span class="string">    fill address length value    Fill memory</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    spiflash-info            Retrieves basic information</span></span><br><span class="line"><span class="string">    spiflash-read addr length file    Write SPI flash contents into file</span></span><br><span class="line"><span class="string">    spiflash-write addr file    Store file contents into SPI flash</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a><strong>示例：</strong></h3><p>烧录文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0 Your-Flash-BIN</span><br></pre></td></tr></table></figure>
 
 
       
@@ -530,7 +665,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E5%9B%BE%E7%89%87%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">板子图片：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FLASH%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">FLASH下载工具使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Uboot%E7%BC%96%E8%AF%91"><span class="toc-number">3.</span> <span class="toc-text">Uboot编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%BC%96%E8%AF%91"><span class="toc-number">4.</span> <span class="toc-text">Linux编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#buildrooft%E6%9E%84%E5%BB%BA%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.</span> <span class="toc-text">buildrooft构建根文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-number">5.1.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">5.2.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E"><span class="toc-number">5.2.1.</span> <span class="toc-text">一些配置的简单说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91"><span class="toc-number">5.3.</span> <span class="toc-text">编译</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F"><span class="toc-number">6.</span> <span class="toc-text">测试程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95"><span class="toc-number">7.</span> <span class="toc-text">系统烧录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8SD%E5%8D%A1%E4%B8%AD%E6%94%BE%E4%BA%86%E4%BB%A5%E4%B8%8B%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">7.1.</span> <span class="toc-text">在SD卡中放了以下文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%83%A7%E5%BD%95%EF%BC%9A"><span class="toc-number">7.2.</span> <span class="toc-text">文件烧录：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%8C%BA%E8%AE%BE%E7%BD%AE%EF%BC%9A"><span class="toc-number">7.2.1.</span> <span class="toc-text">分区设置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%9D%97%E7%83%A7%E5%BD%95"><span class="toc-number">7.2.2.</span> <span class="toc-text">分块烧录:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#u-boot%EF%BC%9A"><span class="toc-number">7.2.2.1.</span> <span class="toc-text">u-boot：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#linux-amp-dtb-amp-boot-scr"><span class="toc-number">7.2.2.2.</span> <span class="toc-text">linux &amp; dtb &amp; boot.scr</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#rootfs%EF%BC%9A"><span class="toc-number">7.2.2.3.</span> <span class="toc-text">rootfs：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F%EF%BC%9A"><span class="toc-number">7.2.2.4.</span> <span class="toc-text">测试程序：</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E5%9B%BE%E7%89%87%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">板子图片：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FLASH%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">FLASH下载工具使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Uboot%E7%BC%96%E8%AF%91"><span class="toc-number">3.</span> <span class="toc-text">Uboot编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#boot-scr"><span class="toc-number">4.</span> <span class="toc-text">boot.scr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%BC%96%E8%AF%91"><span class="toc-number">5.</span> <span class="toc-text">Linux编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#buildrooft%E6%9E%84%E5%BB%BA%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">6.</span> <span class="toc-text">buildrooft构建根文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-number">6.1.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">6.2.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E"><span class="toc-number">6.2.1.</span> <span class="toc-text">一些配置的简单说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91"><span class="toc-number">6.3.</span> <span class="toc-text">编译</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F"><span class="toc-number">7.</span> <span class="toc-text">测试程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95-SD%E5%8D%A1"><span class="toc-number">8.</span> <span class="toc-text">系统烧录(SD卡)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8SD%E5%8D%A1%E4%B8%AD%E6%94%BE%E4%BA%86%E4%BB%A5%E4%B8%8B%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">8.1.</span> <span class="toc-text">在SD卡中放了以下文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%83%A7%E5%BD%95%EF%BC%9A"><span class="toc-number">8.2.</span> <span class="toc-text">文件烧录：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%8C%BA%E8%AE%BE%E7%BD%AE%EF%BC%9A"><span class="toc-number">8.2.1.</span> <span class="toc-text">分区设置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%9D%97%E7%83%A7%E5%BD%95"><span class="toc-number">8.2.2.</span> <span class="toc-text">分块烧录:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#u-boot%EF%BC%9A"><span class="toc-number">8.2.2.1.</span> <span class="toc-text">u-boot：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#linux-amp-dtb-amp-boot-scr"><span class="toc-number">8.2.2.2.</span> <span class="toc-text">linux &amp; dtb &amp; boot.scr</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#rootfs%EF%BC%9A"><span class="toc-number">8.2.2.3.</span> <span class="toc-text">rootfs：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F%EF%BC%9A"><span class="toc-number">8.2.2.4.</span> <span class="toc-text">测试程序：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95-SPI-FLASH-16M"><span class="toc-number">9.</span> <span class="toc-text">系统烧录(SPI FLASH 16M)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flash%E5%88%86%E5%8C%BA%EF%BC%9A"><span class="toc-number">9.1.</span> <span class="toc-text">Flash分区：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%A7%E5%BD%95%E6%96%87%E4%BB%B6%E5%87%86%E5%A4%87%EF%BC%9A"><span class="toc-number">9.2.</span> <span class="toc-text">烧录文件准备：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%A7%E5%BD%95%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-number">9.3.</span> <span class="toc-text">烧录命令：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95u-boot"><span class="toc-number">9.3.1.</span> <span class="toc-text">烧录u-boot</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95kernel"><span class="toc-number">9.3.2.</span> <span class="toc-text">烧录kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95dtb"><span class="toc-number">9.3.3.</span> <span class="toc-text">烧录dtb</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95rootfs"><span class="toc-number">9.3.4.</span> <span class="toc-text">烧录rootfs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95userfs"><span class="toc-number">9.3.5.</span> <span class="toc-text">烧录userfs</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#U-boot%E4%B8%AD%E5%90%AF%E5%8A%A8%E7%B3%BB%E7%BB%9F%EF%BC%9A"><span class="toc-number">9.4.</span> <span class="toc-text">U-boot中启动系统：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#U-boot%E4%B8%ADsf%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="toc-number">10.</span> <span class="toc-text">U-boot中sf命令用法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="toc-number">10.1.</span> <span class="toc-text">具体用法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-number">10.2.</span> <span class="toc-text">示例：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5flash%EF%BC%9A"><span class="toc-number">10.2.1.</span> <span class="toc-text">连接flash：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99flash%EF%BC%9A"><span class="toc-number">10.2.2.</span> <span class="toc-text">写flash：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BBflash%EF%BC%9A"><span class="toc-number">10.2.3.</span> <span class="toc-text">读flash：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%A6%E9%99%A4flash%EF%BC%9A"><span class="toc-number">10.2.4.</span> <span class="toc-text">擦除flash：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sunxi-fel%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="toc-number">11.</span> <span class="toc-text">sunxi-fel工具的使用：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-number">11.1.</span> <span class="toc-text">安装：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="toc-number">11.2.</span> <span class="toc-text">用法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A-1"><span class="toc-number">11.3.</span> <span class="toc-text">示例：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -742,10 +877,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
@@ -806,11 +937,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -850,11 +981,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">实习</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color3">实习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -874,19 +1005,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -907,6 +1038,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
               </li>
              
               <li class="article-tag-list-item">
