@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/27vmTQFo1ayPGbW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/H7AfghBlEqZKawF.jpg">
 <meta property="article:published_time" content="2022-10-01T04:10:08.000Z">
-<meta property="article:modified_time" content="2022-10-01T14:54:06.890Z">
+<meta property="article:modified_time" content="2022-10-01T14:56:38.693Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="F1C100S">
 <meta name="twitter:card" content="summary">
@@ -499,7 +499,7 @@
 
 
 
-<h2 id="F1C100S-GPIO操作："><a href="#F1C100S-GPIO操作：" class="headerlink" title="F1C100S GPIO操作："></a>F1C100S GPIO操作：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">使用sysfs操作GPIO的例子：</span><br><span class="line"></span><br><span class="line"><span class="comment">#echo 192 &gt; /sys/class/gpio/export  #导出 PG0, GREEN</span></span><br><span class="line"><span class="comment">#ls /sys/class/gpio/</span></span><br><span class="line"><span class="built_in">export</span>     gpio192    gpiochip0  unexport</span><br><span class="line"><span class="comment">#ls /sys/class/gpio/gpio192/</span></span><br><span class="line">active_low direction subsystem/ value device/ power/ uevent</span><br><span class="line"><span class="comment">#echo &quot;out&quot; &gt; /sys/class/gpio/gpio192/direction #设置为输出</span></span><br><span class="line"><span class="comment">#echo 0 &gt; /sys/class/gpio/gpio192/value     #亮灯</span></span><br><span class="line"><span class="comment">#echo 1 &gt; /sys/class/gpio/gpio192/value #灭灯</span></span><br><span class="line"><span class="comment">#echo &quot;in&quot; &gt; /sys/class/gpio/gpio192/direction #设置为输入</span></span><br><span class="line"><span class="comment">#cat /sys/class/gpio/gpio192/value #读取电平</span></span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<h2 id="F1C100S-GPIO操作："><a href="#F1C100S-GPIO操作：" class="headerlink" title="F1C100S GPIO操作："></a>F1C100S GPIO操作：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用sysfs操作GPIO的例子：</span></span><br><span class="line"><span class="built_in">echo</span> 192 &gt; /sys/class/gpio/<span class="built_in">export</span>  <span class="comment">#导出 PG0, GREEN</span></span><br><span class="line">ls /sys/class/gpio/</span><br><span class="line"><span class="built_in">export</span>     gpio192    gpiochip0  unexport</span><br><span class="line">ls /sys/class/gpio/gpio192/</span><br><span class="line">active_low direction subsystem/ value device/ power/ uevent</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;out&quot;</span> &gt; /sys/class/gpio/gpio192/direction <span class="comment">#设置为输出</span></span><br><span class="line"><span class="built_in">echo</span> 0 &gt; /sys/class/gpio/gpio192/value     <span class="comment">#亮灯</span></span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /sys/class/gpio/gpio192/value <span class="comment">#灭灯</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;in&quot;</span> &gt; /sys/class/gpio/gpio192/direction <span class="comment">#设置为输入</span></span><br><span class="line">cat /sys/class/gpio/gpio192/value <span class="comment">#读取电平</span></span><br><span class="line">0</span><br></pre></td></tr></table></figure>
 
 <p>引脚计算规则：</p>
 <blockquote>
@@ -874,11 +874,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1006,14 +1006,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DJI</a>
               </li>
              
@@ -1022,15 +1014,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">规划</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">规划</a>
               </li>
              
               <li class="article-tag-list-item">
