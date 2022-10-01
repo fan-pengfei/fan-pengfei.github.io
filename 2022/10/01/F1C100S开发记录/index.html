@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/27vmTQFo1ayPGbW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/H7AfghBlEqZKawF.jpg">
 <meta property="article:published_time" content="2022-10-01T04:10:08.000Z">
-<meta property="article:modified_time" content="2022-10-01T04:27:58.901Z">
+<meta property="article:modified_time" content="2022-10-01T10:49:28.766Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="F1C100S">
 <meta name="twitter:card" content="summary">
@@ -192,7 +192,7 @@
         <blockquote>
 <p>  最近画了一个Linux板子，主控是全志的F1C100S，自带了32M RAM，不是很大，但是可以学习下；<span id="more"></span></p>
 </blockquote>
-<h3 id="板子图片："><a href="#板子图片：" class="headerlink" title="板子图片："></a>板子图片：</h3><table>
+<h2 id="板子图片："><a href="#板子图片：" class="headerlink" title="板子图片："></a>板子图片：</h2><table>
 <thead>
 <tr>
 <th align="center">板子正面</th>
@@ -206,7 +206,7 @@
 <td align="center"><img src="https://s2.loli.net/2022/10/01/H7AfghBlEqZKawF.jpg" alt="f1c100s-3"></td>
 </tr>
 </tbody></table>
-<h3 id="FLASH下载工具使用"><a href="#FLASH下载工具使用" class="headerlink" title="FLASH下载工具使用"></a>FLASH下载工具使用</h3><p>1、通过命令 <code>sudo sunxi-fel ver</code> 来确认有无成功进入fel模式；</p>
+<h2 id="FLASH下载工具使用"><a href="#FLASH下载工具使用" class="headerlink" title="FLASH下载工具使用"></a>FLASH下载工具使用</h2><p>1、通过命令 <code>sudo sunxi-fel ver</code> 来确认有无成功进入fel模式；</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel ver</span><br></pre></td></tr></table></figure>
 
 <p>2、短接FLASH<code>1</code>和<code>4</code>脚，可以进入fel模式，其实就是CS引脚拉低；</p>
@@ -217,9 +217,151 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sunxi-fel -p spiflash-write 0 /your/path/to/u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
 
 <p>其中0是烧录偏移地址；</p>
-<h3 id="Uboot编译"><a href="#Uboot编译" class="headerlink" title="Uboot编译"></a>Uboot编译</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此处告知make采用arm-linux-gnueabi下的所有交叉编译工具，目标架构为Arm，设定各项默认配置为 nano 的spiflash支持版</span></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- f1c100s_nano_uboot_defconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若不带spi-flash的板子，请换成 licheepi_nano_defconfig</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行可视化配置</span></span><br><span class="line">make ARCH=arm menuconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始编译</span></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j8</span><br></pre></td></tr></table></figure>
+<h2 id="Uboot编译"><a href="#Uboot编译" class="headerlink" title="Uboot编译"></a>Uboot编译</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此处告知make采用arm-linux-gnueabi下的所有交叉编译工具，目标架构为Arm，设定各项默认配置为 nano 的spiflash支持版</span></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- f1c100s_nano_uboot_defconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若不带spi-flash的板子，请换成 licheepi_nano_defconfig</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行可视化配置</span></span><br><span class="line">make ARCH=arm menuconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始编译</span></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j8</span><br></pre></td></tr></table></figure>
 
 <p>只需要<code>u-boot-sunxi-with-spl.bin</code>即可；</p>
+<h2 id="Linux编译"><a href="#Linux编译" class="headerlink" title="Linux编译"></a>Linux编译</h2><p>1、Linux下载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/LicheePiNano/Linux.git</span><br><span class="line"><span class="built_in">cd</span> ./Linux</span><br></pre></td></tr></table></figure>
+
+<p>2、Linux编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">make ARCH=arm f1c100s_nano_linux_defconfig</span><br><span class="line"></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j8</span><br><span class="line"></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j16 INSTALL_MOD_PATH=out modules</span><br><span class="line"></span><br><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j16 INSTALL_MOD_PATH=out modules_install</span><br></pre></td></tr></table></figure>
+
+<p>编译成功后，生成文件所在位置：</p>
+<ul>
+<li>内核img文件：<code>./arch/arm/boot/zImage</code></li>
+<li>设备树dtb文件:<code>./arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb</code></li>
+<li>modules文件夹：<code>./out/lib/modules</code></li>
+</ul>
+<h2 id="buildrooft构建根文件系统"><a href="#buildrooft构建根文件系统" class="headerlink" title="buildrooft构建根文件系统"></a>buildrooft构建根文件系统</h2><p><strong>buildroot可用于构建小型的linux根文件系统。</strong></p>
+<p><strong>大小最小可低至2M，与内核一起可以放入最小8M的spi flash中。</strong></p>
+<p><strong>buildroot中可以方便地加入第三方软件包（其实已经内置了很多），省去了手工交叉编译的烦恼。</strong></p>
+<h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><p>首先安装一些依赖，比如linux头文件：</p>
+   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install linux-headers-$(uname -r)</span><br></pre></td></tr></table></figure>
+
+<p>然后下载安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://buildroot.org/downloads/buildroot-2021.02.4.tar.gz</span><br><span class="line">tar xvf buildroot-2021.02.4.tar.gz</span><br><span class="line"><span class="built_in">cd</span> buildroot-2021.02.4/</span><br><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">make menuconfig</span><br><span class="line"></span><br><span class="line">以下选项为基础配置：</span><br><span class="line"></span><br><span class="line">- Target options</span><br><span class="line">  - Target Architecture (ARM (little endian))</span><br><span class="line">  - Target Variant arm926t</span><br><span class="line">- Toolchain</span><br><span class="line">  - C library (musl) <span class="comment"># 使用musl减小最终体积</span></span><br><span class="line">- System configuration</span><br><span class="line">  - Use syslinks to /usr .... <span class="comment"># 启用/bin, /sbin, /lib的链接</span></span><br><span class="line">  - Enable root login <span class="comment"># 启用root登录</span></span><br><span class="line">  - Run a getty after boot <span class="comment"># 启用登录密码输入窗口</span></span><br><span class="line">  - (licheepi) Root password <span class="comment">#　默认账户为root 密码为licheepi</span></span><br><span class="line"></span><br><span class="line">另可自行添加或删除指定的软件包</span><br></pre></td></tr></table></figure>
+
+<h4 id="一些配置的简单说明"><a href="#一些配置的简单说明" class="headerlink" title="一些配置的简单说明"></a>一些配置的简单说明</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Target options  ---&gt;</span><br><span class="line"></span><br><span class="line">    Target Architecture Variant (arm926t)  ---&gt;   // arm926ejs架构</span><br><span class="line">[ ] Enable VFP extension support                  // Nano 没有 VFP单元，勾选会导致某些应用无法运行</span><br><span class="line">    Target ABI (EABI)  ---&gt;</span><br><span class="line">    Floating point strategy (Soft <span class="built_in">float</span>)  ---&gt;    // 软浮点</span><br><span class="line"></span><br><span class="line">System configuration  ---&gt;</span><br><span class="line"></span><br><span class="line">    (Lichee Pi) System hostname                   // hostname</span><br><span class="line">    (licheepi) Root password                      // 默认账户为root 密码为licheepi</span><br><span class="line">    [*] remount root filesystem read-write during boot  // 启动时重新挂在文件系统使其可读写 </span><br></pre></td></tr></table></figure>
+
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p>编译的过程如果带上下载软件包的时间比较漫长，很适合喝杯茶睡个午觉；(buildroot不能进行多线程编译)</p>
+<p>编译完成的镜像包，是<code>buildroot-2021.02.4/output/images/rootfs.tar</code>；</p>
+<h2 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h2><p>嵌入式linux开发最终是需要在系统上运行应用程序来实现特定的功能需求，这里编写个基础的应用程序用于测试：</p>
+<p>建立程序文件夹并进入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir helloworld</span><br><span class="line"><span class="built_in">cd</span> helloworld/</span><br></pre></td></tr></table></figure>
+
+<p>建立程序文件并编写程序</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch helloworld.c</span><br><span class="line">gedit helloworld.c</span><br></pre></td></tr></table></figure>
+
+<p>写入以下内容：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello, world!\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译生成可执行文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arm-linux-gnueabi-gcc -static helloworld.c -o helloworld</span><br></pre></td></tr></table></figure>
+
+<p>生成的 helloworld 就是我们需要的可执行文件了。</p>
+<blockquote>
+<p>需要静态编译；</p>
+</blockquote>
+<h2 id="系统烧录"><a href="#系统烧录" class="headerlink" title="系统烧录"></a>系统烧录</h2><h3 id="在SD卡中放了以下文件："><a href="#在SD卡中放了以下文件：" class="headerlink" title="在SD卡中放了以下文件："></a><strong>在SD卡中放了以下文件：</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── boot.cmd</span><br><span class="line">├── boot.scr*（这个可以在Uboot中输入对应命令达到相同的结果）</span><br><span class="line">├── helloworld*</span><br><span class="line">├── rootfs.tar*</span><br><span class="line">├── suniv-f1c100s-licheepi-nano.dtb*</span><br><span class="line">├── u-boot-sunxi-with-spl.bin*</span><br><span class="line">└── zImage*</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  带星号的是加载进SD卡中的；</p>
+<p>  分别是U-boot、rootfs、Linux、boot.scr、测试程序；</p>
+<p>  <strong>关于boot.scr：</strong></p>
+<blockquote>
+<p>  修改默认bootcmd：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gedit include/configs/suniv.h</span><br></pre></td></tr></table></figure>
+
+<p>  需要修改为：</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_BOOTCOMMAND <span class="meta-string">&quot;run distro_bootcmd&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>  然后就可以编译了：</p>
+<p>  根据上面对bootcmd的修改，u-boot启动时会从第一分区读取 boot.scr 文件，并执行其中的脚本。我们可以通过这个来设置要传递给linux内核的参数、来加载内核和设备树、来启动内核。</p>
+</blockquote>
+<p>  <strong>也可以使用Uboot中的boot命令：</strong></p>
+<blockquote>
+<p>  boot 命令也是用来启动 Linux 系统的，只是 <code>boot </code>会读取环境变量 <code>bootcmd</code> 来启动 Linux 系<br>  统， <code>bootcmd</code> 是一个很重要的环境变量！其名字分为“<code>boot</code>”和“<code>cmd</code>”，也就是“引导”和“命<br>  令”，说明这个环境变量保存着引导命令，其实就是启动的命令集合，具体的引导命令内容是可<br>  以修改的。比如我们要想使用 tftp 命令从网络启动 Linux 那么就可以设置 <code>bootcmd </code>为<code>“tftp   80800000 zImage; tftp 83000000 imx6ull-14x14-emmc-7-1024x600-c.dtb; bootz 80800000 -83000000”</code>，然后使用 <code>saveenv </code>将 <code>bootcmd </code>保存起来。然后直接输入 boot 命令即可从网络启动Linux 系统，命令如下：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$:setenv bootcmd <span class="string">&#x27;tftp 80800000 zImage; tftp 83000000 imx6ull-14x14-emmc-7-1024x600-c.dtb;bootz 80800000 - 83000000&#x27;</span></span><br><span class="line">$:saveenv</span><br><span class="line">$:boot  </span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>  <strong>boot</strong>命令使用如下所示：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$:setenv bootcmd <span class="string">&#x27;setenv bootargs console=tty0 console=ttyS0,115200 panic=5 rootwait root=/dev/mmcblk0p2 rw; load mmc 0:1 0x80008000 zImage; load mmc 0:1 0x80C00000 suniv-f1c100s-licheepi-nano.dtb; bootz 0x80008000 - 0x80C00000&#x27;</span></span><br><span class="line">$:saveenv</span><br><span class="line">$:boot  </span><br></pre></td></tr></table></figure>
+
+<p>  <strong>最后输入boot，启动linux系统，并且重启后仍会自动跳转进入linux系统；</strong></p>
+</blockquote>
+<p><strong>得到了需要的所有文件，接下来是烧录到SD卡中；</strong></p>
+<h3 id="文件烧录："><a href="#文件烧录：" class="headerlink" title="文件烧录："></a><strong>文件烧录：</strong></h3><blockquote>
+<p>  前面编译生成的内容可以分块分别烧录进SD卡进行测试，也可以将 u-boot &amp; linux &amp; rootfs 整块打包烧录进SD卡进行测试，其实本质上是一样的，这里先进行分块测试的介绍，打包烧录介绍将在后面的章节说明。</p>
+</blockquote>
+<ol>
+<li>先将SD卡插入Ubuntu中；</li>
+<li>使用 lsblk 查看SD卡设备号sdX；</li>
+</ol>
+<p>我这里显示为sdb，下面均以此进行说明；</p>
+<h4 id="分区设置："><a href="#分区设置：" class="headerlink" title="分区设置："></a>分区设置：</h4><p>准备SD卡并按要求分区，空间划分参考下表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">start</th>
+<th align="center">sector</th>
+<th align="center">size</th>
+<th align="center">usage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0KB</td>
+<td align="center">0</td>
+<td align="center">8KB</td>
+<td align="center">Unused, available for an MBR or (limited) GPT partition table</td>
+</tr>
+<tr>
+<td align="center">8KB</td>
+<td align="center">16</td>
+<td align="center">32KB</td>
+<td align="center">Initial SPL loader</td>
+</tr>
+<tr>
+<td align="center">40KB</td>
+<td align="center">80</td>
+<td align="center">Max 984KB</td>
+<td align="center">U-Boot</td>
+</tr>
+<tr>
+<td align="center">1MB</td>
+<td align="center">2048</td>
+<td align="center">-</td>
+<td align="center">bootfs and rootfs</td>
+</tr>
+</tbody></table>
+<p><strong>下面是在Ubuntu终端中进行分区划分示例：</strong></p>
+<p>如果已经分过区了那么Ubuntu可能会自动挂载；</p>
+<p>逐条使用 sudo umount &#x2F;dev&#x2F;sdbn 进行卸载；</p>
+<p>对SD（TF）卡进行分区：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk /dev/sdb</span><br><span class="line"><span class="comment">#如果有分区的话可以输入 d 回车依次删除</span></span><br><span class="line"><span class="comment">#输入 n 新建分区，分区大小根据需要设置即可</span></span><br><span class="line"><span class="comment">#下面是我新建的两个分区的输入情况</span></span><br><span class="line"><span class="comment">#n回车  回车(p)  回车(1)  回车(2048)  +32M回车  (如果有额外提示则Y回车)</span></span><br><span class="line"><span class="comment">#n回车  回车(p)  回车(2)  回车(67584) +200M回车  (如果有额外提示则Y回车)</span></span><br><span class="line"><span class="comment">#输入 w 回车保存退出，输入使用 lsblk 查看分区情况</span></span><br></pre></td></tr></table></figure>
+
+<p>格式化分区建立文件系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs.vfat /dev/sdb1</span><br><span class="line">sudo mkfs.ext4 /dev/sdb2</span><br></pre></td></tr></table></figure>
+
+<h4 id="分块烧录"><a href="#分块烧录" class="headerlink" title="分块烧录:"></a>分块烧录:</h4><h5 id="u-boot："><a href="#u-boot：" class="headerlink" title="u-boot："></a>u-boot：</h5><blockquote>
+<p>  u-boot-sunxi-with-spl.bin 文件需要放置在SD卡8k开始的位置上：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/f1c100s-sdk/u-boot/</span><br><span class="line">sudo dd <span class="keyword">if</span>=u-boot-sunxi-with-spl.bin  of=/dev/sdb bs=1024 seek=8</span><br></pre></td></tr></table></figure>
+
+<h5 id="linux-amp-dtb-amp-boot-scr"><a href="#linux-amp-dtb-amp-boot-scr" class="headerlink" title="linux &amp; dtb &amp; boot.scr"></a>linux &amp; dtb &amp; boot.scr</h5><blockquote>
+<p>  这三个放在刚才新建的第一个分区里（sdb1）：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#如果分区已挂载到别的地方先进行卸载</span></span><br><span class="line">sudo umount /dev/sdb1</span><br><span class="line"><span class="comment">#将分区挂载到 /mnt</span></span><br><span class="line">sudo mount /dev/sdb1 /mnt</span><br><span class="line"><span class="comment">#拷贝linux和dtb</span></span><br><span class="line"><span class="built_in">cd</span> ~/f1c100s-sdk/linux/</span><br><span class="line">sudo cp arch/arm/boot/zImage /mnt/</span><br><span class="line">sudo cp arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb /mnt/</span><br><span class="line"><span class="comment">#拷贝boot.scr</span></span><br><span class="line"><span class="built_in">cd</span> ~/f1c100s-sdk/u-boot/</span><br><span class="line">sudo cp boot.scr /mnt/</span><br><span class="line"><span class="comment">#保存退出</span></span><br><span class="line">sync</span><br><span class="line">sudo umount /dev/sdb1</span><br></pre></td></tr></table></figure>
+
+<h5 id="rootfs："><a href="#rootfs：" class="headerlink" title="rootfs："></a>rootfs：</h5><blockquote>
+<p>  这个放在刚才新建的第二个分区里（sdb2）：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#如果分区已挂载到别的地方先进行卸载</span></span><br><span class="line">sudo umount /dev/sdb2</span><br><span class="line"><span class="comment">#将分区挂载到 /mnt</span></span><br><span class="line">sudo mount /dev/sdb2 /mnt</span><br><span class="line"><span class="comment">#解压并拷贝rootfs</span></span><br><span class="line"><span class="built_in">cd</span> ~/f1c100s-sdk/buildroot-2022.02/</span><br><span class="line">sudo tar -xf output/images/rootfs.tar -C /mnt/</span><br><span class="line"><span class="comment">#保存退出</span></span><br><span class="line">sync</span><br><span class="line">sudo umount /dev/sdb2</span><br></pre></td></tr></table></figure>
+
+<h5 id="测试程序："><a href="#测试程序：" class="headerlink" title="测试程序："></a>测试程序：</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#如果分区已挂载到别的地方先进行卸载</span></span><br><span class="line">sudo umount /dev/sdb2</span><br><span class="line"><span class="comment">#将分区挂载到 /mnt</span></span><br><span class="line">sudo mount /dev/sdb2 /mnt</span><br><span class="line"><span class="comment">#拷贝helloworld</span></span><br><span class="line"><span class="built_in">cd</span> ~/f1c100s-sdk/helloworld/</span><br><span class="line">sudo cp helloworld /mnt/root/</span><br><span class="line"><span class="comment">#保存退出</span></span><br><span class="line">sync</span><br><span class="line">sudo umount /dev/sdb2</span><br></pre></td></tr></table></figure>
+
 
       
         <!-- 《添加版权声明 -->
@@ -388,7 +530,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E5%9B%BE%E7%89%87%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">板子图片：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FLASH%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">FLASH下载工具使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Uboot%E7%BC%96%E8%AF%91"><span class="toc-number">3.</span> <span class="toc-text">Uboot编译</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E5%9B%BE%E7%89%87%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">板子图片：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FLASH%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">FLASH下载工具使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Uboot%E7%BC%96%E8%AF%91"><span class="toc-number">3.</span> <span class="toc-text">Uboot编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%BC%96%E8%AF%91"><span class="toc-number">4.</span> <span class="toc-text">Linux编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#buildrooft%E6%9E%84%E5%BB%BA%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.</span> <span class="toc-text">buildrooft构建根文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-number">5.1.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">5.2.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E"><span class="toc-number">5.2.1.</span> <span class="toc-text">一些配置的简单说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91"><span class="toc-number">5.3.</span> <span class="toc-text">编译</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F"><span class="toc-number">6.</span> <span class="toc-text">测试程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95"><span class="toc-number">7.</span> <span class="toc-text">系统烧录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8SD%E5%8D%A1%E4%B8%AD%E6%94%BE%E4%BA%86%E4%BB%A5%E4%B8%8B%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">7.1.</span> <span class="toc-text">在SD卡中放了以下文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%83%A7%E5%BD%95%EF%BC%9A"><span class="toc-number">7.2.</span> <span class="toc-text">文件烧录：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%8C%BA%E8%AE%BE%E7%BD%AE%EF%BC%9A"><span class="toc-number">7.2.1.</span> <span class="toc-text">分区设置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%9D%97%E7%83%A7%E5%BD%95"><span class="toc-number">7.2.2.</span> <span class="toc-text">分块烧录:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#u-boot%EF%BC%9A"><span class="toc-number">7.2.2.1.</span> <span class="toc-text">u-boot：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#linux-amp-dtb-amp-boot-scr"><span class="toc-number">7.2.2.2.</span> <span class="toc-text">linux &amp; dtb &amp; boot.scr</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#rootfs%EF%BC%9A"><span class="toc-number">7.2.2.3.</span> <span class="toc-text">rootfs：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F%EF%BC%9A"><span class="toc-number">7.2.2.4.</span> <span class="toc-text">测试程序：</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -576,19 +718,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -656,11 +798,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,10 +818,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -684,11 +826,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,11 +850,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color3">实习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">实习</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -732,11 +874,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -756,15 +898,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">can</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CRC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据校验</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">can</a>
               </li>
              
               <li class="article-tag-list-item">
