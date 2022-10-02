@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/27vmTQFo1ayPGbW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/H7AfghBlEqZKawF.jpg">
 <meta property="article:published_time" content="2022-10-01T04:10:08.000Z">
-<meta property="article:modified_time" content="2022-10-02T04:59:03.507Z">
+<meta property="article:modified_time" content="2022-10-02T05:03:18.039Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="F1C100S">
 <meta name="twitter:card" content="summary">
@@ -494,11 +494,19 @@
 
 <h3 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">Usage: ./sunxi-fel [options] <span class="built_in">command</span> arguments... [<span class="built_in">command</span>...]</span><br><span class="line">    -h, --<span class="built_in">help</span>            Print this usage summary and <span class="built_in">exit</span></span><br><span class="line">    -v, --verbose            Verbose logging</span><br><span class="line">    -p, --progress            <span class="string">&quot;write&quot;</span> transfers show a progress bar</span><br><span class="line">    -l, --list            Enumerate all (USB) FEL devices and <span class="built_in">exit</span></span><br><span class="line">    -d, --dev bus:devnum        Use specific USB bus and device number</span><br><span class="line">        --sid SID            Select device by SID key (exact match)</span><br><span class="line"></span><br><span class="line">    spl file            Load and execute U-Boot SPL</span><br><span class="line">        If file additionally contains a main U-Boot binary</span><br><span class="line">        (u-boot-sunxi-with-spl.bin), this <span class="built_in">command</span> also transfers that</span><br><span class="line">        to memory (default address from image), but won<span class="string">&#x27;t execute it.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    uboot file-with-spl        like &quot;spl&quot;, but actually starts U-Boot</span></span><br><span class="line"><span class="string">        U-Boot execution will take place when the fel utility exits.</span></span><br><span class="line"><span class="string">        This allows combining &quot;uboot&quot; with further &quot;write&quot; commands</span></span><br><span class="line"><span class="string">        (to transfer other files needed for the boot).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    hex[dump] address length    Dumps memory region in hex</span></span><br><span class="line"><span class="string">    dump address length        Binary memory dump</span></span><br><span class="line"><span class="string">    exe[cute] address        Call function address</span></span><br><span class="line"><span class="string">    reset64 address            RMR request for AArch64 warm boot</span></span><br><span class="line"><span class="string">    memmove dest source size    Copy &lt;size&gt; bytes within device memory</span></span><br><span class="line"><span class="string">    readl address            Read 32-bit value from device memory</span></span><br><span class="line"><span class="string">    writel address value        Write 32-bit value to device memory</span></span><br><span class="line"><span class="string">    read address length file    Write memory contents into file</span></span><br><span class="line"><span class="string">    write address file        Store file contents into memory</span></span><br><span class="line"><span class="string">    write-with-progress addr file    &quot;write&quot; with progress bar</span></span><br><span class="line"><span class="string">    write-with-gauge addr file    Output progress for &quot;dialog --gauge&quot;</span></span><br><span class="line"><span class="string">    write-with-xgauge addr file    Extended gauge output (updates prompt)</span></span><br><span class="line"><span class="string">    multi[write] # addr file ...    &quot;write-with-progress&quot; multiple files,</span></span><br><span class="line"><span class="string">                    sharing a common progress status</span></span><br><span class="line"><span class="string">    multi[write]-with-gauge ...    like their &quot;write-with-*&quot; counterpart,</span></span><br><span class="line"><span class="string">    multi[write]-with-xgauge ...      but following the &#x27;</span>multi<span class="string">&#x27; syntax:</span></span><br><span class="line"><span class="string">                      &lt;#&gt; addr file [addr file [...]]</span></span><br><span class="line"><span class="string">    echo-gauge &quot;some text&quot;        Update prompt/caption for gauge output</span></span><br><span class="line"><span class="string">    ver[sion]            Show BROM version</span></span><br><span class="line"><span class="string">    sid                Retrieve and output 128-bit SID key</span></span><br><span class="line"><span class="string">    clear address length        Clear memory</span></span><br><span class="line"><span class="string">    fill address length value    Fill memory</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    spiflash-info            Retrieves basic information</span></span><br><span class="line"><span class="string">    spiflash-read addr length file    Write SPI flash contents into file</span></span><br><span class="line"><span class="string">    spiflash-write addr file    Store file contents into SPI flash</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a><strong>示例：</strong></h3><p>烧录文件：</p>
+<h3 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a><strong>示例：</strong></h3><p>烧录文件到FLASH：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0 Your-Flash-BIN</span><br></pre></td></tr></table></figure>
+
+<p>烧录到RAM中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel uboot u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
 
 <p>检测usb设备：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$: sudo sunxi-fel -l</span><br><span class="line">USB device 002:005   Allwinner F1C100s </span><br></pre></td></tr></table></figure>
+
+<p>列出设备信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$: sudo sunxi-fel ver</span><br><span class="line">AWUSBFEX soc=00001663(F1C100s) 00000001 ver=0001 44 08 scratchpad=00007e00 00000000 00000000</span><br></pre></td></tr></table></figure>
+
+
 
 <h2 id="F1C100S-GPIO操作："><a href="#F1C100S-GPIO操作：" class="headerlink" title="F1C100S GPIO操作："></a>F1C100S GPIO操作：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用sysfs操作GPIO的例子：</span></span><br><span class="line"><span class="built_in">echo</span> 192 &gt; /sys/class/gpio/<span class="built_in">export</span>  <span class="comment">#导出 PG0, GREEN</span></span><br><span class="line">ls /sys/class/gpio/</span><br><span class="line"><span class="built_in">export</span>     gpio192    gpiochip0  unexport</span><br><span class="line">ls /sys/class/gpio/gpio192/</span><br><span class="line">active_low direction subsystem/ value device/ power/ uevent</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;out&quot;</span> &gt; /sys/class/gpio/gpio192/direction <span class="comment">#设置为输出</span></span><br><span class="line"><span class="built_in">echo</span> 0 &gt; /sys/class/gpio/gpio192/value     <span class="comment">#亮灯</span></span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /sys/class/gpio/gpio192/value <span class="comment">#灭灯</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;in&quot;</span> &gt; /sys/class/gpio/gpio192/direction <span class="comment">#设置为输入</span></span><br><span class="line">cat /sys/class/gpio/gpio192/value <span class="comment">#读取电平</span></span><br><span class="line">0</span><br></pre></td></tr></table></figure>
 
@@ -900,11 +908,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -952,10 +960,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
@@ -964,11 +968,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -988,15 +996,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1028,15 +1036,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1049,10 +1061,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
