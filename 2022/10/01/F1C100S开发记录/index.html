@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/27vmTQFo1ayPGbW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/H7AfghBlEqZKawF.jpg">
 <meta property="article:published_time" content="2022-10-01T04:10:08.000Z">
-<meta property="article:modified_time" content="2022-10-02T05:03:18.039Z">
+<meta property="article:modified_time" content="2022-10-02T09:00:51.097Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="F1C100S">
 <meta name="twitter:card" content="summary">
@@ -519,6 +519,13 @@
 <p>这个板子是PE12引脚为LED引脚，故：<br>$$<br>PIN_{num}&#x3D;32\times4+12&#x3D;140<br>$$<br>故点灯的脚本如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;out&quot;</span> &gt; /sys/class/gpio/gpio140/direction <span class="comment">#设置为输出</span></span><br><span class="line"><span class="comment">#死循环</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> 0 &gt; /sys/class/gpio/gpio140/value</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;点亮&quot;</span></span><br><span class="line">    sleep 0.1</span><br><span class="line">    <span class="built_in">echo</span> 1 &gt; /sys/class/gpio/gpio140/value</span><br><span class="line">    sleep 0.1</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;熄灭&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="Linux取消开机登录输入账户密码："><a href="#Linux取消开机登录输入账户密码：" class="headerlink" title="Linux取消开机登录输入账户密码："></a>Linux取消开机登录输入账户密码：</h2><p>找到 &#x2F;etc&#x2F;inittab 文件的：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console::respawn:/sbin/getty -L console 0 vt100 <span class="comment"># GENERIC_SERIAL</span></span><br></pre></td></tr></table></figure>
+
+<p>修改为：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console::respawn:-/bin/sh</span><br></pre></td></tr></table></figure>
+
+<p>重启后就没有恼人的 login 提示了；</p>
 
       
         <!-- 《添加版权声明 -->
@@ -696,7 +703,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E5%9B%BE%E7%89%87%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">板子图片：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FLASH%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">FLASH下载工具使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Uboot%E7%BC%96%E8%AF%91"><span class="toc-number">3.</span> <span class="toc-text">Uboot编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#boot-scr"><span class="toc-number">4.</span> <span class="toc-text">boot.scr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%BC%96%E8%AF%91"><span class="toc-number">5.</span> <span class="toc-text">Linux编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#buildrooft%E6%9E%84%E5%BB%BA%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">6.</span> <span class="toc-text">buildrooft构建根文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-number">6.1.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">6.2.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E"><span class="toc-number">6.2.1.</span> <span class="toc-text">一些配置的简单说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91"><span class="toc-number">6.3.</span> <span class="toc-text">编译</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F"><span class="toc-number">7.</span> <span class="toc-text">测试程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95-SD%E5%8D%A1"><span class="toc-number">8.</span> <span class="toc-text">系统烧录(SD卡)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8SD%E5%8D%A1%E4%B8%AD%E6%94%BE%E4%BA%86%E4%BB%A5%E4%B8%8B%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">8.1.</span> <span class="toc-text">在SD卡中放了以下文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%83%A7%E5%BD%95%EF%BC%9A"><span class="toc-number">8.2.</span> <span class="toc-text">文件烧录：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%8C%BA%E8%AE%BE%E7%BD%AE%EF%BC%9A"><span class="toc-number">8.2.1.</span> <span class="toc-text">分区设置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%9D%97%E7%83%A7%E5%BD%95"><span class="toc-number">8.2.2.</span> <span class="toc-text">分块烧录:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#u-boot%EF%BC%9A"><span class="toc-number">8.2.2.1.</span> <span class="toc-text">u-boot：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#linux-amp-dtb-amp-boot-scr"><span class="toc-number">8.2.2.2.</span> <span class="toc-text">linux &amp; dtb &amp; boot.scr</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#rootfs%EF%BC%9A"><span class="toc-number">8.2.2.3.</span> <span class="toc-text">rootfs：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F%EF%BC%9A"><span class="toc-number">8.2.2.4.</span> <span class="toc-text">测试程序：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95-SPI-FLASH-16M"><span class="toc-number">9.</span> <span class="toc-text">系统烧录(SPI FLASH 16M)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flash%E5%88%86%E5%8C%BA%EF%BC%9A"><span class="toc-number">9.1.</span> <span class="toc-text">Flash分区：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%A7%E5%BD%95%E6%96%87%E4%BB%B6%E5%87%86%E5%A4%87%EF%BC%9A"><span class="toc-number">9.2.</span> <span class="toc-text">烧录文件准备：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%A7%E5%BD%95%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-number">9.3.</span> <span class="toc-text">烧录命令：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95u-boot"><span class="toc-number">9.3.1.</span> <span class="toc-text">烧录u-boot</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95kernel"><span class="toc-number">9.3.2.</span> <span class="toc-text">烧录kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95dtb"><span class="toc-number">9.3.3.</span> <span class="toc-text">烧录dtb</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95rootfs"><span class="toc-number">9.3.4.</span> <span class="toc-text">烧录rootfs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95userfs"><span class="toc-number">9.3.5.</span> <span class="toc-text">烧录userfs</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#U-boot%E4%B8%AD%E5%90%AF%E5%8A%A8%E7%B3%BB%E7%BB%9F%EF%BC%9A"><span class="toc-number">9.4.</span> <span class="toc-text">U-boot中启动系统：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#U-boot%E4%B8%ADsf%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="toc-number">10.</span> <span class="toc-text">U-boot中sf命令用法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="toc-number">10.1.</span> <span class="toc-text">具体用法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-number">10.2.</span> <span class="toc-text">示例：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5flash%EF%BC%9A"><span class="toc-number">10.2.1.</span> <span class="toc-text">连接flash：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99flash%EF%BC%9A"><span class="toc-number">10.2.2.</span> <span class="toc-text">写flash：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BBflash%EF%BC%9A"><span class="toc-number">10.2.3.</span> <span class="toc-text">读flash：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%A6%E9%99%A4flash%EF%BC%9A"><span class="toc-number">10.2.4.</span> <span class="toc-text">擦除flash：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sunxi-fel%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="toc-number">11.</span> <span class="toc-text">sunxi-fel工具的使用：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-number">11.1.</span> <span class="toc-text">安装：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="toc-number">11.2.</span> <span class="toc-text">用法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A-1"><span class="toc-number">11.3.</span> <span class="toc-text">示例：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#F1C100S-GPIO%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">12.</span> <span class="toc-text">F1C100S GPIO操作：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%BF%E5%AD%90%E5%9B%BE%E7%89%87%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">板子图片：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FLASH%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">FLASH下载工具使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Uboot%E7%BC%96%E8%AF%91"><span class="toc-number">3.</span> <span class="toc-text">Uboot编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#boot-scr"><span class="toc-number">4.</span> <span class="toc-text">boot.scr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%BC%96%E8%AF%91"><span class="toc-number">5.</span> <span class="toc-text">Linux编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#buildrooft%E6%9E%84%E5%BB%BA%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">6.</span> <span class="toc-text">buildrooft构建根文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-number">6.1.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">6.2.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E"><span class="toc-number">6.2.1.</span> <span class="toc-text">一些配置的简单说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91"><span class="toc-number">6.3.</span> <span class="toc-text">编译</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F"><span class="toc-number">7.</span> <span class="toc-text">测试程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95-SD%E5%8D%A1"><span class="toc-number">8.</span> <span class="toc-text">系统烧录(SD卡)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8SD%E5%8D%A1%E4%B8%AD%E6%94%BE%E4%BA%86%E4%BB%A5%E4%B8%8B%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">8.1.</span> <span class="toc-text">在SD卡中放了以下文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%83%A7%E5%BD%95%EF%BC%9A"><span class="toc-number">8.2.</span> <span class="toc-text">文件烧录：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%8C%BA%E8%AE%BE%E7%BD%AE%EF%BC%9A"><span class="toc-number">8.2.1.</span> <span class="toc-text">分区设置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%9D%97%E7%83%A7%E5%BD%95"><span class="toc-number">8.2.2.</span> <span class="toc-text">分块烧录:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#u-boot%EF%BC%9A"><span class="toc-number">8.2.2.1.</span> <span class="toc-text">u-boot：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#linux-amp-dtb-amp-boot-scr"><span class="toc-number">8.2.2.2.</span> <span class="toc-text">linux &amp; dtb &amp; boot.scr</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#rootfs%EF%BC%9A"><span class="toc-number">8.2.2.3.</span> <span class="toc-text">rootfs：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F%EF%BC%9A"><span class="toc-number">8.2.2.4.</span> <span class="toc-text">测试程序：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95-SPI-FLASH-16M"><span class="toc-number">9.</span> <span class="toc-text">系统烧录(SPI FLASH 16M)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flash%E5%88%86%E5%8C%BA%EF%BC%9A"><span class="toc-number">9.1.</span> <span class="toc-text">Flash分区：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%A7%E5%BD%95%E6%96%87%E4%BB%B6%E5%87%86%E5%A4%87%EF%BC%9A"><span class="toc-number">9.2.</span> <span class="toc-text">烧录文件准备：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%A7%E5%BD%95%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-number">9.3.</span> <span class="toc-text">烧录命令：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95u-boot"><span class="toc-number">9.3.1.</span> <span class="toc-text">烧录u-boot</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95kernel"><span class="toc-number">9.3.2.</span> <span class="toc-text">烧录kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95dtb"><span class="toc-number">9.3.3.</span> <span class="toc-text">烧录dtb</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95rootfs"><span class="toc-number">9.3.4.</span> <span class="toc-text">烧录rootfs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95userfs"><span class="toc-number">9.3.5.</span> <span class="toc-text">烧录userfs</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#U-boot%E4%B8%AD%E5%90%AF%E5%8A%A8%E7%B3%BB%E7%BB%9F%EF%BC%9A"><span class="toc-number">9.4.</span> <span class="toc-text">U-boot中启动系统：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#U-boot%E4%B8%ADsf%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="toc-number">10.</span> <span class="toc-text">U-boot中sf命令用法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="toc-number">10.1.</span> <span class="toc-text">具体用法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-number">10.2.</span> <span class="toc-text">示例：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5flash%EF%BC%9A"><span class="toc-number">10.2.1.</span> <span class="toc-text">连接flash：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99flash%EF%BC%9A"><span class="toc-number">10.2.2.</span> <span class="toc-text">写flash：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BBflash%EF%BC%9A"><span class="toc-number">10.2.3.</span> <span class="toc-text">读flash：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%A6%E9%99%A4flash%EF%BC%9A"><span class="toc-number">10.2.4.</span> <span class="toc-text">擦除flash：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sunxi-fel%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="toc-number">11.</span> <span class="toc-text">sunxi-fel工具的使用：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-number">11.1.</span> <span class="toc-text">安装：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="toc-number">11.2.</span> <span class="toc-text">用法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A-1"><span class="toc-number">11.3.</span> <span class="toc-text">示例：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#F1C100S-GPIO%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">12.</span> <span class="toc-text">F1C100S GPIO操作：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%8F%96%E6%B6%88%E5%BC%80%E6%9C%BA%E7%99%BB%E5%BD%95%E8%BE%93%E5%85%A5%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%9A"><span class="toc-number">13.</span> <span class="toc-text">Linux取消开机登录输入账户密码：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -892,11 +899,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -908,11 +915,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -972,11 +979,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -996,15 +1003,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1036,11 +1043,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1048,11 +1055,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">规划</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">规划</a>
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
