@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/27vmTQFo1ayPGbW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/10/01/H7AfghBlEqZKawF.jpg">
 <meta property="article:published_time" content="2022-10-01T04:10:08.000Z">
-<meta property="article:modified_time" content="2022-10-02T09:00:51.097Z">
+<meta property="article:modified_time" content="2022-10-04T08:17:28.796Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="F1C100S">
 <meta name="twitter:card" content="summary">
@@ -448,20 +448,24 @@
 <h3 id="烧录命令："><a href="#烧录命令：" class="headerlink" title="烧录命令："></a>烧录命令：</h3><p>清空flash，进入FEL模式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sf probe 0</span><br><span class="line">sf erase 0 0x100000 <span class="comment">#清空flash</span></span><br><span class="line">reset				<span class="comment">#即可重新进入fel模式</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="烧录u-boot"><a href="#烧录u-boot" class="headerlink" title="烧录u-boot"></a>烧录u-boot</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0 u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
+<h4 id="烧录u-boot"><a href="#烧录u-boot" class="headerlink" title="烧录u-boot"></a>烧录u-boot</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0 ./u-boot-sunxi-with-spl.bin</span><br></pre></td></tr></table></figure>
 
-<h4 id="烧录kernel"><a href="#烧录kernel" class="headerlink" title="烧录kernel"></a>烧录kernel</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0x0110000 arch/arm/boot/zImage</span><br></pre></td></tr></table></figure>
+<h4 id="烧录kernel"><a href="#烧录kernel" class="headerlink" title="烧录kernel"></a>烧录kernel</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0x0110000 ./zImage</span><br></pre></td></tr></table></figure>
 
-<h4 id="烧录dtb"><a href="#烧录dtb" class="headerlink" title="烧录dtb"></a>烧录dtb</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0x0100000 arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb</span><br></pre></td></tr></table></figure>
+<h4 id="烧录dtb"><a href="#烧录dtb" class="headerlink" title="烧录dtb"></a>烧录dtb</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0x0100000 ./suniv-f1c100s-licheepi-nano.dtb</span><br></pre></td></tr></table></figure>
 
-<h4 id="烧录rootfs"><a href="#烧录rootfs" class="headerlink" title="烧录rootfs"></a>烧录rootfs</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0x0510000 rootfs.img</span><br></pre></td></tr></table></figure>
+<h4 id="烧录rootfs"><a href="#烧录rootfs" class="headerlink" title="烧录rootfs"></a>烧录rootfs</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0x0510000 ./rootfs.img</span><br></pre></td></tr></table></figure>
 
 <h4 id="烧录userfs"><a href="#烧录userfs" class="headerlink" title="烧录userfs"></a>烧录userfs</h4><blockquote>
 <p>  说明：这个是个人创建的文件系统，该分区如果不需要可以不烧了；</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sunxi-fel -p spiflash-write 0x0c00000 userfs.img </span><br></pre></td></tr></table></figure>
 
-<h3 id="U-boot中启动系统："><a href="#U-boot中启动系统：" class="headerlink" title="U-boot中启动系统："></a>U-boot中启动系统：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sf probe 0 50000000</span><br><span class="line">sf <span class="built_in">read</span> 0x80C00000 0x100000 0x10000  <span class="comment">#加载dtb设备树</span></span><br><span class="line">sf <span class="built_in">read</span> 0x80008000 0x110000 0x400000 <span class="comment">#加载内核</span></span><br><span class="line">bootz 0x80008000 - 0x80C00000<span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="U-boot中启动系统："><a href="#U-boot中启动系统：" class="headerlink" title="U-boot中启动系统："></a>U-boot中启动系统：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sf probe 0 50000000</span><br><span class="line">sf <span class="built_in">read</span> 0x80C00000 0x100000 0x10000  <span class="comment">#加载dtb设备树</span></span><br><span class="line">sf <span class="built_in">read</span> 0x80008000 0x110000 0x400000 <span class="comment">#加载内核</span></span><br><span class="line">bootz 0x80008000 - 0x80C00000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setenv bootcmd &#x27;sf probe 0 50000000; sf read 0x80C00000 0x100000 0x10000; sf read 0x80008000 0x110000 0x400000; bootz 0x80008000 - 0x80C00000&#x27;</span><br><span class="line">saveenv</span><br><span class="line">boot</span><br></pre></td></tr></table></figure>
+
+
 
 <h2 id="U-boot中sf命令用法："><a href="#U-boot中sf命令用法：" class="headerlink" title="U-boot中sf命令用法："></a>U-boot中sf命令用法：</h2><ul>
 <li><strong>sf read用来读取flash数据到内存；</strong></li>
@@ -899,10 +903,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
@@ -915,11 +915,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -939,11 +943,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -951,11 +955,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -971,11 +975,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -983,11 +987,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1047,11 +1051,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1060,14 +1072,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">规划</a>
               </li>
              
               <li class="article-tag-list-item">
