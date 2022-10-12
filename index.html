@@ -516,28 +516,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>  如何修改 Typora 「高亮」的颜色；</p>
-</blockquote>
-<p>Typora 有一个「高亮」的格式（示例：<code>==例子==</code>），类似于荧光笔，但是感觉默认的颜色偏亮，看久了不舒服，所以利用修改主题文件的方式来自定义颜色。</p>
-<p>操作很简单，先找到主题文件：「文件」 &#x3D;&#x3D;&gt; 「偏好设置」（或者直接 Ctrl + 逗号），在右边「外观」栏中找到「打开主题文件」打开：</p>
-<p>打开主题对应的 <code>.css</code> 文件，在最后面加上下面的文字：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mark</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#a9d18e</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: <span class="number">0px</span> solid <span class="number">#ffffff</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0.0px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">0px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果只是想要单纯改变颜色，也可以只写 <code>background </code>的这一行：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mark</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#a9d18e</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>其中 <code>backgraoud </code>后面的十六进制数为所需要的颜色。<code>border-bottom</code> 是下划线的大小和颜色。<code>padding </code>就是上下左右的边框大小。<code>margin </code>就是所标记文字离左右文字的距离。</p>
-<p>最后，Typora 中「高亮」没有快捷键，但是可以自定义。Ctrl+逗号 打开「偏好设置」，在「通用」里最下面打开高级设置，找到下图位置，添加自己需要的快捷键：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Custom key binding, which will override the default ones.</span></span><br><span class="line"><span class="string">&quot;keyBinding&quot;</span>: &#123;</span><br><span class="line">  <span class="comment">// for example: </span></span><br><span class="line">  <span class="comment">// &quot;Always on Top&quot;: &quot;Ctrl+Shift+P&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>修改为：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Custom key binding, which will override the default ones.</span></span><br><span class="line"><span class="string">&quot;keyBinding&quot;</span>: &#123;</span><br><span class="line">  <span class="comment">// for example: </span></span><br><span class="line">  <span class="comment">// &quot;Always on Top&quot;: &quot;Ctrl+Shift+P&quot;</span></span><br><span class="line">    <span class="attr">&quot;Highlight&quot;</span>:<span class="string">&quot;Ctrl+Shift+H&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>最后的效果如下：</p>
-<p>&#x3D;&#x3D;效果；&#x3D;&#x3D;</p>
-<p><img src="https://s2.loli.net/2022/10/12/R1NOI5uaHdPB4F6.png" alt="f33094f784609fb2950ee3a239dd889"></p>
-
+<p>  如何修改 Typora 「高亮」的颜色；
+        
+          <a class="article-more-a" href="/2022/10/12/Typora%E4%BF%AE%E6%94%B9%E9%AB%98%E4%BA%AE%E9%A2%9C%E8%89%B2/#more">more >></a>
+        
       
         <!-- 《添加版权声明 -->
         
@@ -626,7 +608,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>AG1280是一款国产的CPLD芯片，我准备将这个芯片和MCU配合起来，来做一些定制化的接口和功能；
+<p>AG1280是一款国产的CPLD芯片，我准备将这个芯片和MCU配合起来，来做一些定制化的接口和功能，例如扩展UART接口，外接一些高速的AD&#x2F;DA芯片；
         
           <a class="article-more-a" href="/2022/10/12/ag1280%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/#more">more >></a>
         
@@ -1379,6 +1361,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
@@ -1388,10 +1374,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1423,11 +1405,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UART</a>
+                <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Typora</a>
+                <a href="javascript:void(0)" class="js-tag color5">UART</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1523,19 +1505,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
