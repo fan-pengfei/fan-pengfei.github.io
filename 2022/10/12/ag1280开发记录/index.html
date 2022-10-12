@@ -6,21 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://fan-pengfei.top">
-  <title>ag1280开发记录 | 樊鹏飞的博客</title>
+  <title>AG1280开发记录 | 樊鹏飞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="AG1280是一款国产的CPLD芯片，我准备将这个芯片和MCU配合起来，来做一些定制化的接口和功能，例如扩展UART接口，外接一些高速的AD&#x2F;DA芯片；">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ag1280开发记录">
+<meta property="og:title" content="AG1280开发记录">
 <meta property="og:url" content="http://fan-pengfei.top/2022/10/12/ag1280%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="樊鹏飞的博客">
 <meta property="og:description" content="AG1280是一款国产的CPLD芯片，我准备将这个芯片和MCU配合起来，来做一些定制化的接口和功能，例如扩展UART接口，外接一些高速的AD&#x2F;DA芯片；">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/10/12/IQo64Hexg1KVYLv.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/12/2d7VcbT3RpFn4ZB.png">
 <meta property="article:published_time" content="2022-10-12T04:51:04.000Z">
-<meta property="article:modified_time" content="2022-10-12T06:05:43.727Z">
+<meta property="article:modified_time" content="2022-10-12T06:26:16.548Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="AG1280">
 <meta property="article:tag" content="CPLD">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/10/12/IQo64Hexg1KVYLv.png">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -167,7 +170,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ag1280开发记录
+      AG1280开发记录
     </h1>
   
 
@@ -189,6 +192,91 @@
         <blockquote>
 <p>AG1280是一款国产的CPLD芯片，我准备将这个芯片和MCU配合起来，来做一些定制化的接口和功能，例如扩展UART接口，外接一些高速的AD&#x2F;DA芯片；<span id="more"></span></p>
 </blockquote>
+<h3 id="芯片资源："><a href="#芯片资源：" class="headerlink" title="芯片资源："></a>芯片资源：</h3><p>AG1280资源：</p>
+<table>
+<thead>
+<tr>
+<th align="center">LUTs</th>
+<th align="center">1280</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Distributed RAM (Kbits)</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td align="center">EBR SRAM (Kbits)</td>
+<td align="center">68</td>
+</tr>
+<tr>
+<td align="center">Maximum User I&#x2F;O pins</td>
+<td align="center">40</td>
+</tr>
+<tr>
+<td align="center">Number of PLLs</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">Package</td>
+<td align="center">48-Pin QFN</td>
+</tr>
+</tbody></table>
+<p>价格很便宜，每颗单价大概是7元；</p>
+<p>我花了一个评估板，除了这颗CPLD芯片外，还加了一颗STM32F103C6T6芯片，他们之间有六个IO口互相连接来进行通信或者时钟输入；</p>
+<p>STM32F103C6T6资源：</p>
+<table>
+<thead>
+<tr>
+<th align="center">封装 &#x2F; 箱体</th>
+<th align="center">LQFP-48</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">核心</td>
+<td align="center">ARM Cortex M3</td>
+</tr>
+<tr>
+<td align="center">程序存储器大小</td>
+<td align="center">32 kB</td>
+</tr>
+<tr>
+<td align="center">数据总线宽度</td>
+<td align="center">32 bit</td>
+</tr>
+<tr>
+<td align="center">ADC分辨率</td>
+<td align="center">12 bit</td>
+</tr>
+<tr>
+<td align="center">最大时钟频率</td>
+<td align="center">72 MHz</td>
+</tr>
+<tr>
+<td align="center">输入&#x2F;输出端数量</td>
+<td align="center">48 I&#x2F;O</td>
+</tr>
+<tr>
+<td align="center">数据 RAM 大小</td>
+<td align="center">10 kB</td>
+</tr>
+</tbody></table>
+<h3 id="评估板设计："><a href="#评估板设计：" class="headerlink" title="评估板设计："></a>评估板设计：</h3><p>板子原理图如下：</p>
+<p><img src="https://s2.loli.net/2022/10/12/IQo64Hexg1KVYLv.png" alt="b1d8d200e99d2ad024b82831d823bf7"></p>
+<p>PCB视图如下：<br><img src="https://s2.loli.net/2022/10/12/2d7VcbT3RpFn4ZB.png" alt="d85be4f1a50fb9dc67385b0af4d328f"></p>
+<h3 id="硬件设计注意："><a href="#硬件设计注意：" class="headerlink" title="硬件设计注意："></a>硬件设计注意：</h3><p>AG1280硬件设计中有几个需要特别注意的点：</p>
+<p>1、IO_GLOBE_S1(位于第9脚)、IO_GLOBE_S2(位于第13脚)、IO_GLOBE_S3(位于第15脚)、IO_GLOBE_S4(位于第19脚)、IO_GLOBE_N1(位于第41脚) 、IO_GLOBE_N2(位于第44脚) 、IO_GLOBE_N3(位于第46脚)可以作为全局时钟输入管脚，可用于输入全局时钟。<strong>但若要使用PLL，则只能从13、15和19管脚输入。</strong></p>
+<p>2、电路板载一个24MHz有源晶振，另外还可以通过PMOD接口从STM32的MCO时钟输出管脚获得时钟，它们被连接到具有PLL输入功能的管脚13、15上。</p>
+<p>3、AG1280的GPIO分为North和South两组，可以使用不同IO电平，以实现不同电平逻辑的转换。另外AG1280还需要3.3V电源作为片上Flash电源，且该电源域North组的IO电源共用，因此<strong>North组也只能使用3.3V的IO电源电压。South组却可以任选电源电压</strong>。</p>
+<p>4、<strong>AG1280还需要1.2V内核电源电压，且该电源应略迟于Flash电源上电，以方便Flash加载程序</strong>。我的图2电路通过PMOD接口从STM32开发板获得3.3V电源，再用LDO芯片XC6206P122MR从3.3V向下稳压到1.2V内核电源，LDO后带有100uF电容,1.2V上电时间自然要落后于3.3V上电。</p>
+<p>板子已经发出去打样了，估计今天就能到，我到时候焊接测试下；</p>
+<h3 id="软件："><a href="#软件：" class="headerlink" title="软件："></a>软件：</h3><h4 id="环境配置："><a href="#环境配置：" class="headerlink" title="环境配置："></a>环境配置：</h4><p>AG1280的开发EDA软件Supera还不具备分析和综合电路的能力，但能实现其特有的PLL和片上RAM的IP核打包、综合后的布局布线、下载文件打包及下载等功能。</p>
+<p>到百度网盘<a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1eQxc6XG">http://pan.baidu.com/s/1eQxc6XG</a> 提取密码:q59e下载AGM公司EDA开发软件Supra（网盘上有多个版本的Supra，选择需要的一种即可）。Supra无需安装，下载后将其放置在不含中文的路径下，直接运行Bin目录下的Supra.exe即可。</p>
+<p>目前版本的Supra还无法进行硬件描述语言及原理框图的开发和电路综合，用户只能在Supra下创建工程并完成AGM公司特有IP（包括PLL和RAM）的配置，再通过Supra创建Quartus-II工程文件，在转到Quartus-II下完成硬件描述语言和原理框图开发和电路综合，最后再回到Supra中完成器件内部的布局布线、下载文件的打包和器件烧写（具体流程在后续会详细介绍）。</p>
+<p>综上，进行AG1280的开发一定需要安装一个顺手的Quartus-II。这里特别提醒网友注意，<strong>Supra只支持Quartus-II 13.0以上，且不支持Web与Lite版本，必须安装Full或Standard版本（本人掉到过坑里，因此特别提醒大家注意）。</strong>至于Quartus-II的安装方法，网上资料较多，这里不再赘述。</p>
+<p>AG1280可以使用Intel的USB-Blaster进行下载和软件调试，但淘宝网上USB-Blaster版本较多，价格差异较大。据网传，有的版本USB-Blaster不支持AG1280的Flash下载，大家可自行注意避坑。</p>
+<h4 id="开发流程："><a href="#开发流程：" class="headerlink" title="开发流程："></a>开发流程：</h4><p>具体操作参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/helesheng/p/16692320.html">https://www.cnblogs.com/helesheng/p/16692320.html</a></p>
+<h3 id="自己的想法："><a href="#自己的想法：" class="headerlink" title="自己的想法："></a>自己的想法：</h3><p>我感觉还是这种<code>MCU+FPGA/CPLD</code>的方案是很有用的，比如有时候MCU的UART接口不够用，就需要外扩，一般是购买专用的芯片，但是如果有了FPGA，就可以自己写一个逻辑用来外扩UART接口，而且通用性高，成本也很低；</p>
+<p>等板子测试过了再看具体要做什么应用吧；</p>
 
       
         <!-- 《添加版权声明 -->
@@ -370,7 +458,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%AF%E7%89%87%E8%B5%84%E6%BA%90%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">芯片资源：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E6%9D%BF%E8%AE%BE%E8%AE%A1%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">评估板设计：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%B3%A8%E6%84%8F%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">硬件设计注意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">软件：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">环境配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-number">4.2.</span> <span class="toc-text">开发流程：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%B7%B1%E7%9A%84%E6%83%B3%E6%B3%95%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">自己的想法：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -408,7 +496,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ag1280开发记录" data-title="ag1280开发记录" data-url="http://fan-pengfei.top/2022/10/12/ag1280%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/"></div>
+	<div class="ds-thread" data-thread-key="ag1280开发记录" data-title="AG1280开发记录" data-url="http://fan-pengfei.top/2022/10/12/ag1280%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -602,15 +690,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,11 +722,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,11 +766,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -714,6 +802,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DJI</a>
               </li>
              
@@ -722,7 +814,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -730,15 +822,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -750,7 +834,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">can</a>
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -759,6 +843,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">can</a>
               </li>
              
               <li class="article-tag-list-item">
