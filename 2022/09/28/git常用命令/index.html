@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/09/28/geOUF2QE6rSNjkV.png">
 <meta property="og:image" content="https://s2.loli.net/2022/09/29/bA4oT5NH3vOKSFY.png">
 <meta property="article:published_time" content="2022-09-28T13:12:41.000Z">
-<meta property="article:modified_time" content="2022-10-02T03:25:15.914Z">
+<meta property="article:modified_time" content="2022-10-11T04:36:08.796Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="GIT">
 <meta name="twitter:card" content="summary">
@@ -349,7 +349,7 @@
 <p>可以用命令<code>git tag</code>查看所有标签；</p>
 <p>默认标签是打在最新提交的commit上的。有时候，如果忘了打标签，比如，现在已经是周五了，但应该在周一打的标签没有打，怎么办？</p>
 <p>方法是找到历史提交的commit id，然后打上就可以了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git log --pretty=oneline --abbrev-commit</span><br><span class="line">&gt;12a631b (HEAD -&gt; master, tag: v1.0, origin/master) merged bug fix 101</span><br><span class="line">&gt;4c805e2 fix bug 101</span><br><span class="line">&gt;e1e9c68 merge with no-ff</span><br><span class="line">&gt;f52c633 add merge</span><br><span class="line">&gt;cf810e4 conflict fixed</span><br><span class="line">&gt;5dc6824 &amp; simple</span><br><span class="line">&gt;14096d0 AND simple</span><br><span class="line">&gt;b17d20e branch test</span><br><span class="line">&gt;d46f35e remove test.txt</span><br><span class="line">&gt;b84166e add test.txt</span><br><span class="line">&gt;519219b git tracks changes</span><br><span class="line">&gt;e43a48b understand how stage works</span><br><span class="line">&gt;1094adb append GPL</span><br><span class="line">&gt;e475afc add distributed</span><br><span class="line">&gt;eaadf4e wrote a readme file</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ git <span class="built_in">log</span> --pretty=oneline --abbrev-commit</span><br><span class="line">&gt;12a631b (HEAD -&gt; master, tag: v1.0, origin/master) merged bug fix 101</span><br><span class="line">&gt;4c805e2 fix bug 101</span><br><span class="line">&gt;e1e9c68 merge with no-ff</span><br><span class="line">&gt;f52c633 add merge</span><br><span class="line">&gt;cf810e4 conflict fixed</span><br><span class="line">&gt;5dc6824 &amp; simple</span><br><span class="line">&gt;14096d0 AND simple</span><br><span class="line">&gt;b17d20e branch <span class="built_in">test</span></span><br><span class="line">&gt;d46f35e remove test.txt</span><br><span class="line">&gt;b84166e add test.txt</span><br><span class="line">&gt;519219b git tracks changes</span><br><span class="line">&gt;e43a48b understand how stage works</span><br><span class="line">&gt;1094adb append GPL</span><br><span class="line">&gt;e475afc add distributed</span><br><span class="line">&gt;eaadf4e wrote a readme file</span><br></pre></td></tr></table></figure>
 
 </blockquote>
 <blockquote>
@@ -785,6 +785,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
@@ -794,14 +798,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -817,11 +813,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -837,15 +845,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UART</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -857,7 +861,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -865,15 +873,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -929,6 +941,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
@@ -937,15 +953,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
