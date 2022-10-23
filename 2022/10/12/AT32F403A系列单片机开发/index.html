@@ -23,8 +23,22 @@
 <meta property="og:image" content="https://s2.loli.net/2022/10/22/sDzx6mGPj9dIOwR.png">
 <meta property="og:image" content="https://s2.loli.net/2022/10/22/zJacSd89snBMjRK.png">
 <meta property="og:image" content="https://s2.loli.net/2022/10/22/mV6EKp9CM1Fbnaj.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/LQS7yUClPIgiqxa.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/rZVL3yP2twcWisq.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/Saq1gzkZIGOw6KT.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/fqzsYwyi1dVBKtR.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/ha7UrNoM6smWBHP.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/2vxTIlHPYwtX8AV.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/Tu3cXFMiy4vdhON.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/WpsSBQbgkVFM8Kf.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/VqANovgSU5FT3Lw.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/PYeIu6OAyiwaxWt.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/5nVWTuNhPYHFB1v.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/8Gl3EyDLHQdXZiO.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/RIaJEOZq8LCMQtf.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/23/Zeu5EbAk9dgDcnS.png">
 <meta property="article:published_time" content="2022-10-12T15:07:03.000Z">
-<meta property="article:modified_time" content="2022-10-22T08:47:21.681Z">
+<meta property="article:modified_time" content="2022-10-23T11:10:14.856Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="lvgl">
 <meta property="article:tag" content="AT32">
@@ -317,7 +331,162 @@
 </blockquote>
 <p>经测试，该检测算法可以很好的消除拨码开关转动时的抖动，最后得到的结果是比较准确的；</p>
 <h3 id="中间件移植："><a href="#中间件移植：" class="headerlink" title="中间件移植："></a>中间件移植：</h3><p>外设都测试完毕，接下来就是各种中间件的移植：LVGL移植、FATFS移植、USB Device等；</p>
-<h4 id="LVGL-8-3移植："><a href="#LVGL-8-3移植：" class="headerlink" title="LVGL-8.3移植："></a>LVGL-8.3移植：</h4>
+<h4 id="LVGL-8-3移植："><a href="#LVGL-8-3移植：" class="headerlink" title="LVGL-8.3移植："></a>LVGL-8.3移植：</h4><h5 id="文件夹创建："><a href="#文件夹创建：" class="headerlink" title="文件夹创建："></a>文件夹创建：</h5><p>下载以后打开文件可以看见下面四个文件：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/10/23/LQS7yUClPIgiqxa.png" alt="源码文件"></th>
+</tr>
+</thead>
+</table>
+<h6 id="第一步："><a href="#第一步：" class="headerlink" title="第一步："></a><strong>第一步：</strong></h6><p>在<code>stm32</code>工程下面创建一个文件夹，名称为<code>lvgl</code>；</p>
+<p>将上图中的四个文件加入到lvgl文件夹中；</p>
+<p>把<code>lv_conf_template.h</code>文件重命名为<code>lv_conf.h</code>；</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/10/23/rZVL3yP2twcWisq.png" alt="第一步"></th>
+</tr>
+</thead>
+</table>
+<h6 id="第二步："><a href="#第二步：" class="headerlink" title="第二步："></a><strong>第二步：</strong></h6><p>在<code>lvgl/examples/porting</code>文件夹中把三个.h文件开头的<code>#if 0</code>改为<code>#if 1</code>；</p>
+<p>打开你原本的stm32工程（就是那个正常驱动屏幕的工程），使能<code>c99</code>；</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/10/23/Saq1gzkZIGOw6KT.png" alt="使能从99"></th>
+</tr>
+</thead>
+</table>
+<h6 id="第三步："><a href="#第三步：" class="headerlink" title="第三步："></a><strong>第三步：</strong></h6><p>在左侧栏中添加两个文件夹</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/10/23/fqzsYwyi1dVBKtR.png" alt="添加两个文件夹"></th>
+</tr>
+</thead>
+</table>
+<p>添加两个<code>port</code>文件，位于<code>lvgl/examples/porting</code>，因为没有用到文件系统，故没有添加fs：</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://s2.loli.net/2022/10/23/ha7UrNoM6smWBHP.png" alt="添加port文件"></th>
+</tr>
+</thead>
+</table>
+<p>添加<code>lvgl</code>源文件，将<code>lvgl/src</code>目录下的<code>core draw font hal misc widgets</code>文件夹下的所有文件全部添加进<code>lvgl</code>组</p>
+<blockquote>
+<p>  注：文件夹中还有子文件夹要一层一层打开并加入；</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/10/23/2vxTIlHPYwtX8AV.png" alt="src文件"></th>
+</tr>
+</thead>
+</table>
+<p>将<code>lvgl/src/extra/</code>目录下的文件添加进<code>lvgl</code>组。具体为：</p>
+<blockquote>
+<p>  <code>layouts</code>目录下所有子目录文件；<br>  <code>themes</code>目录下所有子目录文件；<br>  <code>widgets</code>目录下所有子目录文件；<br>  <code>lv_extra.c</code>；</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/10/23/Tu3cXFMiy4vdhON.png" alt="extra文件"></th>
+</tr>
+</thead>
+</table>
+<p>加入路径，将<code>lvgl</code> ，<code>src</code>，<code>porting</code>文件夹添加到源路径下。</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/10/23/WpsSBQbgkVFM8Kf.png" alt="添加路径"></th>
+</tr>
+</thead>
+</table>
+<h5 id="修改配置文件："><a href="#修改配置文件：" class="headerlink" title="修改配置文件："></a><strong>修改配置文件：</strong></h5><p>修改<code>lv_port_disp_template.h</code>：</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://s2.loli.net/2022/10/23/VqANovgSU5FT3Lw.png" alt="if1"></th>
+</tr>
+</thead>
+</table>
+<p>修改<code>lv_port_disp_template.c</code>：<br>将开头的<code>#if 0</code>改成<code>#if 1</code></p>
+<p>修改<code>lv_conf.h</code>：</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://s2.loli.net/2022/10/23/PYeIu6OAyiwaxWt.png" alt="lv"></th>
+</tr>
+</thead>
+</table>
+<p>这两句是修改你屏幕大小的，直接粘贴在那里就可以了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MY_DISP_HOR_RES 240</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MY_DISP_VER_RES  240</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="修改显示的必要文件："><a href="#修改显示的必要文件：" class="headerlink" title="修改显示的必要文件："></a><strong>修改显示的必要文件：</strong></h5><p>在<code>lv_port_disp_template.c</code>中包含着显示的重要文件，这里我们只需要修改两处：</p>
+<h6 id="第一处："><a href="#第一处：" class="headerlink" title="第一处："></a><strong>第一处：</strong></h6><p>把框选的地方注释掉，</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://s2.loli.net/2022/10/23/5nVWTuNhPYHFB1v.png" alt="在这里插入图片描述"></th>
+</tr>
+</thead>
+</table>
+<p>去除<code>warning</code>；<br>此时编译应该没有<code>error</code>，但是有<code>warning</code>这个<code>warning</code>无伤大雅可以直接屏蔽；</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/10/23/8Gl3EyDLHQdXZiO.png" alt="屏蔽"></th>
+</tr>
+</thead>
+</table>
+<p><code>--diag_suppress=188,546,68,111</code><br>当完成这一步的时候就已经说明你已经把显示的移植了99%了，可以编译看一下是否有报错；</p>
+<h6 id="第二处："><a href="#第二处：" class="headerlink" title="第二处："></a><strong>第二处：</strong></h6><p>这是刷新函数，用于图形填充的，这里介绍两种方法，第一种是不断画点，只需要把红色部分写成你原来工程中的画点的函数就可以了，如果你的画点函数传入的形参中颜色的定义并不是指针的方式的话，一定要写成图中<code>color_p-&gt;full</code>的形式，不然会报错的。</p>
+<blockquote>
+<p>  不要把<code>#include“lcd.h”</code>遗忘</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/10/23/RIaJEOZq8LCMQtf.png" alt="在这里插入图片描述"></th>
+</tr>
+</thead>
+</table>
+<p>第二种方法是通过区域填充来实现的如果你是使用中景园的代码，你直接调用他的区域填充函数基本上会花屏，所以需要对他的函数进行一下改良。<br>可在你本来工程下面的<code>lcd.c</code>中添加一段代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lvgl_LCD_Color_Fill</span><span class="params">(u16 sx, u16 sy, u16 ex, u16 ey, <span class="keyword">lv_color_t</span> *color)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">uint32_t</span> y=<span class="number">0</span>; </span><br><span class="line">    u16 height, width;</span><br><span class="line">    width = ex - sx + <span class="number">1</span>;            <span class="comment">//得到填充的宽度</span></span><br><span class="line">    height = ey - sy + <span class="number">1</span>;           <span class="comment">//高度</span></span><br><span class="line">    LCD_SetWindows(sx,sy,ex,ey);</span><br><span class="line">    <span class="keyword">for</span>(y = <span class="number">0</span>; y &lt;width*height; y++) </span><br><span class="line">    &#123;</span><br><span class="line">        Lcd_WriteData_16Bit(color-&gt;full);</span><br><span class="line">        color++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也许他会报错说找不到<code>lv_color_t </code>这是以为我们没有在文件开头添加<code>#include &quot;lvgl.h&quot; </code>添加以后还需要在<code>lcd.h</code>文件中进行声明，不出意外还会报错，需要你在文件开头加入<code>#include &quot;lvgl.h&quot; </code>，我们就可以把第一种的描点换成画图：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://s2.loli.net/2022/10/23/Zeu5EbAk9dgDcnS.png" alt="在这里插入图片描述"></th>
+</tr>
+</thead>
+</table>
+<h5 id="显示测试："><a href="#显示测试：" class="headerlink" title="显示测试："></a><strong>显示测试：</strong></h5><p>在<code>main.c</code>中&#96;&#96;#include “lvgl.h”<code> </code>#include “lv_port_disp_template.h”&#96; 随后在屏幕初始化后面加上代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lv_init();</span><br><span class="line">lv_port_disp_init();</span><br></pre></td></tr></table></figure>
+<p>还需要一个在嘀嗒定时器里加一个跳动的“心脏”进行刷新；</p>
+<blockquote>
+<p>  <code>lv_tick_inc(1)</code>;&#x2F;&#x2F;在中断里面进行刷新；</p>
+<p>  如果这个对你而言比较难实现你也可以把这个放到主函数的循环里面；</p>
+</blockquote>
+<p>并在主函数中创建一个测试函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lv_ex_label</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* github_addr = <span class="string">&quot;https://gitee.com/W23&quot;</span>;</span><br><span class="line">    <span class="keyword">lv_obj_t</span> * label = lv_label_create(lv_scr_act());</span><br><span class="line">    lv_label_set_recolor(label, <span class="literal">true</span>);</span><br><span class="line">    lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR); <span class="comment">/*Circular scroll*/</span></span><br><span class="line">    lv_obj_set_width(label, <span class="number">120</span>);</span><br><span class="line">    lv_label_set_text_fmt(label, <span class="string">&quot;#ff0000 Gitee: %s#&quot;</span>, github_addr);</span><br><span class="line">    lv_obj_align(label, LV_ALIGN_CENTER, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">lv_obj_t</span> * label2 = lv_label_create(lv_scr_act());</span><br><span class="line">    lv_label_set_recolor(label2, <span class="literal">true</span>);</span><br><span class="line">    lv_label_set_long_mode(label2, LV_LABEL_LONG_SCROLL_CIRCULAR); <span class="comment">/*Circular scroll*/</span></span><br><span class="line">    lv_obj_set_width(label2, <span class="number">120</span>);</span><br><span class="line">    lv_label_set_text_fmt(label2, <span class="string">&quot;#ff0000 Hello# #0000ff world !123456789#&quot;</span>);</span><br><span class="line">    lv_obj_align(label2, LV_ALIGN_CENTER, <span class="number">0</span>, <span class="number">-10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>将测试函数写在<code>lv_port_disp_init();</code>的后面</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LCD_Init();</span><br><span class="line">lv_init();</span><br><span class="line">lv_port_disp_init();</span><br><span class="line">lv_ex_label();</span><br></pre></td></tr></table></figure>
+
+<p>在主函数中写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lv_task_handler();</span><br><span class="line">delay_ms(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="lv-port-disp-c示例代码："><a href="#lv-port-disp-c示例代码：" class="headerlink" title="lv_port_disp.c示例代码："></a>lv_port_disp.c示例代码：</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;lv_port_disp.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;lcd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MY_DISP_HOR_RES 240</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  MY_DISP_VER_RES 240</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LVGL_BUFF_SIZE (BSP_LCD_X_PIXELS * BSP_LCD_Y_PIXELS / 4) <span class="comment">// 1/6屏幕分辨率</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">lv_color_t</span> lvgl_draw_buff1[LVGL_BUFF_SIZE];</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">lv_color_t</span> lvgl_draw_buff2[LVGL_BUFF_SIZE];</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">disp_flush</span><span class="params">(<span class="keyword">lv_disp_drv_t</span> *disp_drv, <span class="keyword">const</span> <span class="keyword">lv_area_t</span> *area, <span class="keyword">lv_color_t</span> *color_p)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lv_port_disp_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* 向lvgl注册缓冲区 */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">lv_disp_draw_buf_t</span> draw_buf_dsc; <span class="comment">//需要全程生命周期，设置为静态变量</span></span><br><span class="line">    lv_disp_draw_buf_init(&amp;draw_buf_dsc, lvgl_draw_buff1, lvgl_draw_buff2, <span class="keyword">sizeof</span>(lvgl_draw_buff1) / <span class="keyword">sizeof</span>(<span class="keyword">lv_color_t</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 创建并初始化用于在lvgl中注册显示设备的结构 */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">lv_disp_drv_t</span> disp_drv;</span><br><span class="line">    lv_disp_drv_init(&amp;disp_drv); <span class="comment">//使用默认值初始化该结构</span></span><br><span class="line">    <span class="comment">/* 设置屏幕分辨率 */</span></span><br><span class="line">    disp_drv.hor_res = BSP_LCD_X_PIXELS;</span><br><span class="line">    disp_drv.ver_res = BSP_LCD_Y_PIXELS;</span><br><span class="line">    <span class="comment">/* 初始化LCD总线 */</span></span><br><span class="line">    bsp_lcd_init();</span><br><span class="line">    <span class="comment">/* 设置显示矩形函数，用于将矩形缓冲区刷新到屏幕上 */</span></span><br><span class="line">    disp_drv.flush_cb = disp_flush;</span><br><span class="line">    <span class="comment">/* 设置缓冲区 */</span></span><br><span class="line">    disp_drv.draw_buf = &amp;draw_buf_dsc;</span><br><span class="line">    <span class="comment">/* 注册显示设备 */</span></span><br><span class="line">    lv_disp_drv_register(&amp;disp_drv);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 开启显示 */</span></span><br><span class="line">    bsp_lcd_display_switch(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">disp_flush</span><span class="params">(<span class="keyword">lv_disp_drv_t</span> *disp_drv, <span class="keyword">const</span> <span class="keyword">lv_area_t</span> *area, <span class="keyword">lv_color_t</span> *color_p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* 等待上次传输完成 */</span></span><br><span class="line">    bsp_lcd_draw_rect_wait();</span><br><span class="line">    <span class="comment">/* 通知lvgl传输已完成 */</span></span><br><span class="line">    lv_disp_flush_ready(disp_drv);</span><br><span class="line">    <span class="comment">/* 启动新的传输 */</span></span><br><span class="line">    bsp_lcd_draw_rect(area-&gt;x1, area-&gt;y1, area-&gt;x2, area-&gt;y2, (<span class="keyword">const</span> <span class="keyword">uint8_t</span> *)color_p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  这里的数据传输部分的代码直接使用的是DMA传输，在该分辨率下，lvgl的benchmark加权平均帧率甚至能达到200FPS；</p>
+</blockquote>
+
       
         <!-- 《添加版权声明 -->
         
@@ -493,7 +662,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E9%83%A8%E5%88%86%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">硬件部分：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">软件开发：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">参考资料：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%BC%80%E5%8F%91%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">具体开发：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E7%81%AF%EF%BC%9A"><span class="toc-number">2.2.1.</span> <span class="toc-text">点灯：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%EF%BC%9A"><span class="toc-number">2.2.2.</span> <span class="toc-text">串口：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LCD%E5%B1%8F%E5%B9%95%EF%BC%9A"><span class="toc-number">2.2.3.</span> <span class="toc-text">LCD屏幕：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8%E5%BC%80%E5%85%B3%EF%BC%9A"><span class="toc-number">2.2.4.</span> <span class="toc-text">编码器开关：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%A7%BB%E6%A4%8D%EF%BC%9A"><span class="toc-number">2.3.</span> <span class="toc-text">中间件移植：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LVGL-8-3%E7%A7%BB%E6%A4%8D%EF%BC%9A"><span class="toc-number">2.3.1.</span> <span class="toc-text">LVGL-8.3移植：</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E9%83%A8%E5%88%86%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">硬件部分：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">软件开发：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">参考资料：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%BC%80%E5%8F%91%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">具体开发：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E7%81%AF%EF%BC%9A"><span class="toc-number">2.2.1.</span> <span class="toc-text">点灯：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%EF%BC%9A"><span class="toc-number">2.2.2.</span> <span class="toc-text">串口：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LCD%E5%B1%8F%E5%B9%95%EF%BC%9A"><span class="toc-number">2.2.3.</span> <span class="toc-text">LCD屏幕：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8%E5%BC%80%E5%85%B3%EF%BC%9A"><span class="toc-number">2.2.4.</span> <span class="toc-text">编码器开关：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%A7%BB%E6%A4%8D%EF%BC%9A"><span class="toc-number">2.3.</span> <span class="toc-text">中间件移植：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LVGL-8-3%E7%A7%BB%E6%A4%8D%EF%BC%9A"><span class="toc-number">2.3.1.</span> <span class="toc-text">LVGL-8.3移植：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B9%E5%88%9B%E5%BB%BA%EF%BC%9A"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">文件夹创建：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A"><span class="toc-number">2.3.1.1.1.</span> <span class="toc-text">第一步：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A"><span class="toc-number">2.3.1.1.2.</span> <span class="toc-text">第二步：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A"><span class="toc-number">2.3.1.1.3.</span> <span class="toc-text">第三步：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">2.3.1.2.</span> <span class="toc-text">修改配置文件：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%98%BE%E7%A4%BA%E7%9A%84%E5%BF%85%E8%A6%81%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">2.3.1.3.</span> <span class="toc-text">修改显示的必要文件：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%A4%84%EF%BC%9A"><span class="toc-number">2.3.1.3.1.</span> <span class="toc-text">第一处：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%A4%84%EF%BC%9A"><span class="toc-number">2.3.1.3.2.</span> <span class="toc-text">第二处：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E6%B5%8B%E8%AF%95%EF%BC%9A"><span class="toc-number">2.3.1.4.</span> <span class="toc-text">显示测试：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#lv-port-disp-c%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">2.3.1.5.</span> <span class="toc-text">lv_port_disp.c示例代码：</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -705,11 +874,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -722,6 +891,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -741,7 +914,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+                <a href="javascript:void(0)" class="js-tag color4">PID</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -750,10 +923,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PID</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -769,15 +938,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -789,11 +958,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -837,15 +1006,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">实习</a>
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -861,15 +1026,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">实习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -881,11 +1046,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AT32</a>
+                <a href="javascript:void(0)" class="js-tag color3">规划</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">can</a>
+                <a href="javascript:void(0)" class="js-tag color5">AT32</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -898,6 +1063,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">can</a>
               </li>
              
               <li class="article-tag-list-item">
