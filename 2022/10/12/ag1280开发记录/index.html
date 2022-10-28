@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/10/25/jEeRGUsdhKlBF6I.png">
 <meta property="og:image" content="https://s2.loli.net/2022/10/25/ToADBn7uqIpf81P.jpg">
 <meta property="article:published_time" content="2022-10-12T04:51:04.000Z">
-<meta property="article:modified_time" content="2022-10-25T11:36:38.386Z">
+<meta property="article:modified_time" content="2022-10-26T15:01:18.050Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="AG1280">
 <meta property="article:tag" content="CPLD">
@@ -359,7 +359,10 @@
 <td align="center"><img src="https://s2.loli.net/2022/10/25/UpMzY1tBGRTDeyb.png" alt="image-20221025193004741"></td>
 </tr>
 </tbody></table>
-<h5 id="Place-amp-Route"><a href="#Place-amp-Route" class="headerlink" title="Place &amp; Route"></a>Place &amp; Route</h5><p>当 Quartus II 完成逻辑综合后，回到 Supra，点击 Next：</p>
+<h5 id="Place-amp-Route"><a href="#Place-amp-Route" class="headerlink" title="Place &amp; Route"></a>Place &amp; Route</h5><blockquote>
+<p>以后修改原设计， Quartus 里只需执行正常的编译（ Start Compilation），不用再运行af_quartus.tcl 文件。然后在 Supra 中运行 Compile，完成编译即可； </p>
+</blockquote>
+<p>当 Quartus II 完成逻辑综合后，回到 Supra，点击 Next：</p>
 <table>
 <thead>
 <tr>
@@ -368,7 +371,7 @@
 </thead>
 </table>
 <p>在这里先不要点 Finish，先打开工程目录下的 blinky1280.asf 分配引脚：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set_location_assignment PIN_15 -to clk </span><br><span class="line">set_location_assignment PIN_48 -to led </span><br><span class="line">set_location_assignment PIN_41 -to rst_n </span><br><span class="line">set_location_assignment PIN_1 -to gpio[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">set_location_assignment PIN_15 -to clk </span><br><span class="line">set_location_assignment PIN_48 -to led </span><br><span class="line">set_location_assignment PIN_17 -to rst_n </span><br><span class="line"></span><br><span class="line">set_location_assignment PIN_1 -to gpio[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">set_global_assignment -name RESERVE_ALL_UNUSED_PINS <span class="string">&quot;AS INPUT TRI-STATED&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>保存，其他参数默认就行，点击 Finish，Supra 就会开始 Place &amp; Route。<br>一切顺利会输出这样：</p>
 <table>
@@ -768,15 +771,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -808,15 +811,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LCD</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -880,11 +883,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -944,11 +947,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
