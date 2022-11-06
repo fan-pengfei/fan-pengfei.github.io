@@ -16,7 +16,7 @@
 <meta property="og:description" content="CSAPP学习中所记录的笔记；">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-05T11:43:47.000Z">
-<meta property="article:modified_time" content="2022-11-06T04:10:17.191Z">
+<meta property="article:modified_time" content="2022-11-06T14:11:38.787Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
@@ -243,7 +243,43 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./prog</span><br></pre></td></tr></table></figure>
 
 <p>shell调用操作系统中一个叫做加载器的函数，它将可执行文件prog中的代码和数据复制到内存，然后将控制转移到这个程序的开头；</p>
-<h3 id="7-2-静态链接"><a href="#7-2-静态链接" class="headerlink" title="7.2 静态链接"></a>7.2 静态链接</h3>
+<h3 id="7-2-静态链接"><a href="#7-2-静态链接" class="headerlink" title="7.2 静态链接"></a>7.2 静态链接</h3><p>像Linux LD程序这样的静态链接器以一组可重定位目标文件和命令行参数作为输入，生成一个完全链接的、可以加载和运行的可执行目标文件作为输出。输入的可重定位目标文件由各种不同的代码和数据节组成，每一节都是一个连续的字节序列；</p>
+<blockquote>
+<p>  指令在一节中，初始化了的全局变量在另一节中，而未初始化的变量又在另外一节中；</p>
+</blockquote>
+<p>链接器的两个主要任务：</p>
+<ul>
+<li><p>符号解析：</p>
+<p>目标文件定义和引用符号，每个符号对应于一个函数、一个全局变量或一个静态变量。</p>
+<p><strong>符号解析的目的是将每个符号引用正好和一个符号定义关联起来；</strong></p>
+</li>
+<li><p>重定位：</p>
+<p>链接器通过把每个符号定义与一个内存位置关联起来，从而重定位这些节，然后修改所有对这个符号的引用，使得他们指向这个内存位置；</p>
+</li>
+</ul>
+<h3 id="7-3-目标文件"><a href="#7-3-目标文件" class="headerlink" title="7.3 目标文件"></a>7.3 目标文件</h3><p>目标文件有三种形式：</p>
+<ul>
+<li><p>可重定位目标文件：</p>
+<p>包含二进制代码和数据，其形式可以在编译时与其他可重定位目标文件合并起来，创建一个可执行目标文件；</p>
+</li>
+<li><p>可执行目标文件：</p>
+<p>包含二进制代码和数据，其形式可以被直接复制到内存并执行；</p>
+</li>
+<li><p>共享目标文件：</p>
+<p>一种特殊类型的可重定位目标文件，可以在加载或者运行时被动态地加载到内存并链接；</p>
+</li>
+</ul>
+<blockquote>
+<p>  可重定位目标文件（包括共享目标文件）是由编译器和汇编器生成的；</p>
+<p>  可执行目标文件是由链接器生成的；</p>
+</blockquote>
+<p>关于各个系统的目标文件格式：</p>
+<ul>
+<li>Windows：可移植可执行格式（PE）；</li>
+<li>Mac OS-X：Mach-O格式；</li>
+<li>Linux和Unix：可执行可链接格式（ELF）；</li>
+</ul>
+<h3 id="7-4-可重定位目标文件"><a href="#7-4-可重定位目标文件" class="headerlink" title="7.4 可重定位目标文件"></a>7.4 可重定位目标文件</h3>
       
         <!-- 《添加版权声明 -->
         
@@ -411,7 +447,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%93%BE%E6%8E%A5"><span class="toc-number">1.</span> <span class="toc-text">第七章 链接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E7%BC%96%E8%AF%91%E5%99%A8%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.1.</span> <span class="toc-text">7.1 编译器驱动程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5"><span class="toc-number">1.2.</span> <span class="toc-text">7.2 静态链接</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%93%BE%E6%8E%A5"><span class="toc-number">1.</span> <span class="toc-text">第七章 链接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E7%BC%96%E8%AF%91%E5%99%A8%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.1.</span> <span class="toc-text">7.1 编译器驱动程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5"><span class="toc-number">1.2.</span> <span class="toc-text">7.2 静态链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">7.3 目标文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-%E5%8F%AF%E9%87%8D%E5%AE%9A%E4%BD%8D%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="toc-number">1.4.</span> <span class="toc-text">7.4 可重定位目标文件</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -607,10 +643,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -623,7 +655,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -632,6 +664,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -659,15 +695,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LCD</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -691,15 +727,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Typora</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PID</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UART</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -711,15 +747,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -743,6 +779,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
@@ -752,10 +792,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -783,11 +819,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -803,15 +839,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">格言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
