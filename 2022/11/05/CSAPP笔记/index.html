@@ -16,7 +16,7 @@
 <meta property="og:description" content="CSAPP学习中所记录的笔记；">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-05T11:43:47.000Z">
-<meta property="article:modified_time" content="2022-11-06T03:11:00.687Z">
+<meta property="article:modified_time" content="2022-11-06T04:10:17.191Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
@@ -202,11 +202,11 @@
 <p><strong>链接器使分离编译成为可能；</strong></p>
 <p>学习链接的必要性：</p>
 <ul>
-<li>理解链接器将帮助你构造大型程序；</li>
-<li>理解链接器将帮助你避免一些危险的编程错误（例如，在默认情况下，错误的定义多个全局变量的程序将通过链接器，而不产生任何警告信息）；</li>
-<li>理解链接器将帮助你理解语言的作用域规则是如何实现的（全局变量和局部变量之间的区别？static属性的变量或者函数到底意味着什么）；</li>
-<li>理解链接将帮助你理解其他重要的系统概念（比如加载和运行程序、虚拟内存、分页、内存映射等）；</li>
-<li>理解链接将使你能够利用链接库；</li>
+<li><strong>理解链接器将帮助你构造大型程序；</strong></li>
+<li><strong>理解链接器将帮助你避免一些危险的编程错误（例如，在默认情况下，错误的定义多个全局变量的程序将通过链接器，而不产生任何警告信息）；</strong></li>
+<li><strong>理解链接器将帮助你理解语言的作用域规则是如何实现的（全局变量和局部变量之间的区别？static属性的变量或者函数到底意味着什么）；</strong></li>
+<li><strong>理解链接将帮助你理解其他重要的系统概念（比如加载和运行程序、虚拟内存、分页、内存映射等）；</strong></li>
+<li><strong>理解链接将使你能够利用链接库；</strong></li>
 </ul>
 <h3 id="7-1-编译器驱动程序"><a href="#7-1-编译器驱动程序" class="headerlink" title="7.1 编译器驱动程序"></a>7.1 编译器驱动程序</h3><p>贯穿本章的示例程序：</p>
 <blockquote>
@@ -226,17 +226,17 @@
 <blockquote>
 <p>以上命令等同于以下命令：</p>
 <p>首先运行预处理器，将main.c翻译成ASCII码的中间文件main.i：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;cpp main.c /tmp/main.i</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cpp main.c /tmp/main.i</span><br></pre></td></tr></table></figure>
 
 <p>接下来，驱动程序运行C编译器，将main.i翻译成一个ASCII汇编语言文件main.s：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;cc1 /temp/main.i -Og -o /tmp/main.s</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cc1 /temp/main.i -Og -o /tmp/main.s</span><br></pre></td></tr></table></figure>
 
 <p>然后，驱动程序运行汇编器，它将main.s翻译成一个可重定位目标文件main.o：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;as -o /temp/main.o /tmp/main.s</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">as -o /temp/main.o /tmp/main.s</span><br></pre></td></tr></table></figure>
 
 <p>驱动程序经过相同的过程生成sum.o。</p>
 <p>最后，运行链接器程序ld，将main.o和sum.o以及一些必要的目标文件组合起来，创建一个可执行目标文件prog：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;ld -o prog /tmp/main.o /tmp/sum.o</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ld -o prog /tmp/main.o /tmp/sum.o</span><br></pre></td></tr></table></figure>
 
 </blockquote>
 <p>要运行可执行文件prog，使用以下命令：</p>
@@ -599,15 +599,27 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Verilog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,15 +639,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DJI</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -644,6 +656,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">兴趣</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -695,15 +711,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Verilog</a>
+                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -715,7 +723,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -727,19 +735,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -755,11 +755,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -775,11 +779,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
+                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -791,11 +799,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">规划</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">规划</a>
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -804,14 +812,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
