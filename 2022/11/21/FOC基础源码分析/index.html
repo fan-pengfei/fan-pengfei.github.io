@@ -6,32 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://fan-pengfei.top">
-  <title>常用的通信协议 | 樊鹏飞的博客</title>
+  <title>FOC基础源码分析 | 樊鹏飞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="常用通讯协议(SPI、IIC、UART)；">
+  <meta name="description" content="以基于STM32F103的FOC源码为例分析；">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用的通信协议">
-<meta property="og:url" content="http://fan-pengfei.top/2022/05/09/%E5%B8%B8%E7%94%A8%E7%9A%84%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:title" content="FOC基础源码分析">
+<meta property="og:url" content="http://fan-pengfei.top/2022/11/21/FOC%E5%9F%BA%E7%A1%80%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="樊鹏飞的博客">
-<meta property="og:description" content="常用通讯协议(SPI、IIC、UART)；">
+<meta property="og:description" content="以基于STM32F103的FOC源码为例分析；">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2022/05/09/e9DubZFxEIN6hpG.png">
-<meta property="og:image" content="https://s2.loli.net/2022/05/09/uAPBRFhIjHGgT2C.png">
-<meta property="og:image" content="https://s2.loli.net/2022/05/09/lohGLODJXIuVNq4.png">
-<meta property="og:image" content="https://s2.loli.net/2022/05/09/Wl8YfhadFQ6btMk.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/05/09/7r5jshI1uEwF6NY.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/05/09/Z8P1QtrFSOTzBkx.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/05/09/nJ6BsN3V2zCAdKj.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/05/09/GnK3BTxa2fqkJFs.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/05/09/SPuNBVib5EalLqI.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/05/09/IeDp9AfdsicqokP.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/05/09/K3zfyHvXtRdlmBY.jpg">
-<meta property="article:published_time" content="2022-05-09T13:38:00.000Z">
-<meta property="article:modified_time" content="2022-05-09T13:46:17.522Z">
+<meta property="article:published_time" content="2022-11-21T08:05:05.000Z">
+<meta property="article:modified_time" content="2022-11-21T08:13:21.214Z">
 <meta property="article:author" content="樊鹏飞">
-<meta property="article:tag" content="通讯协议">
+<meta property="article:tag" content="FOC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/05/09/e9DubZFxEIN6hpG.png">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -171,14 +159,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-常用的通信协议" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-FOC基础源码分析" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      常用的通信协议
+      FOC基础源码分析
     </h1>
   
 
@@ -189,8 +177,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2022/05/09/%E5%B8%B8%E7%94%A8%E7%9A%84%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="archive-article-date">
-  	<time datetime="2022-05-09T13:38:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-09</time>
+<a href="/2022/11/21/FOC%E5%9F%BA%E7%A1%80%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2022-11-21T08:05:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-21</time>
 </a>
         
       </header>
@@ -198,169 +186,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>  常用通讯协议(SPI、IIC、UART)；<span id="more"></span></p>
+<p>  以基于STM32F103的FOC源码为例分析；<span id="more"></span></p>
 </blockquote>
-<h2 id="一、USART和UART"><a href="#一、USART和UART" class="headerlink" title="一、USART和UART:"></a>一、USART和UART:</h2><p>USART:通用同步异步收发器，USART是一个串行通信设备，可以灵活地与外部设备进行全双工数据交换。</p>
-<p>UART: 通用异步收发器，异步串行通信口(UART)就是我们在嵌入式中常说的串口，它还是一种通用的数据通信议。 </p>
-<p>异步通讯时二者无区别，同步通讯时USART可以提供主动时钟。</p>
-<p>均为全双工通信。</p>
-<blockquote>
-<p>起始位：先发出一个逻辑”0”的信号，表示传输数据的开始。 </p>
-<p>数据位：传输N bits。</p>
-<p>校验位(可选)：数据位加上这一位后，使得“1”的位数应为偶数(偶校验)或奇数(奇校验)，以此来校验数据传送的正确性。</p>
-<p>如传输“A”(01000001)为例,”A”字符的8个bit位中有两个1。当为奇数校验时该位为1；当为偶数校验时该位为0。 </p>
-<p>停止位：它是一帧数据的结束标志。可以是1bit、1.5bit、2bit的空闲电平。</p>
-<p>空闲位：没有数据传输时线路上的电平状态。为逻辑1。 </p>
-<p>传输方向：即数据是从高位(MSB)开始传输还是从低位(LSB)开始传输。比如传输“A”如果是MSB那么就是01000001，如果是LSB那么就是10000010</p>
-<p>帧间隔：即传送数据的帧与帧之间的间隔大小，可以以位为计量也可以用时间(知道波特率那么位数和时间可以换算)。比如传送”A”完后，这为一帧数据，再传”B”，那么A与B之间的间隔即为帧间隔。 </p>
-</blockquote>
-<blockquote>
-<p>波特率定义：有效数据信号调制载波的速率，每秒传输1或0的个数；</p>
-<p>例如：串口传输速率为9600bps，每秒可传输多少字节？</p>
-<p>起始位：1	数据位：8</p>
-<p>停止位：1	校验位：0</p>
-<p>传输1字节数据，需要传输10bit，因此：</p>
-<p>9600 ÷ 10 &#x3D; <strong>960Byte</strong></p>
-</blockquote>
-<h2 id="二、IIC通讯协议："><a href="#二、IIC通讯协议：" class="headerlink" title="二、IIC通讯协议："></a>二、IIC通讯协议：</h2><p>IIC协议为半双工协议。</p>
-<p>全双工指在发送数据的同时也能够接收数据；</p>
-<p>半双工就是指一个时间段内只有一个动作发生；</p>
-<p>数据有效传输在scl信号的高电平期间，sda数据线保持稳定，在scl为低电平时允许sda数据线变化。</p>
-<p><img src="https://s2.loli.net/2022/05/09/e9DubZFxEIN6hpG.png" alt="img"></p>
-<p>起始条件在scl为高电平期间，sda出现下降沿，则为起始信号。</p>
-<p><img src="https://s2.loli.net/2022/05/09/uAPBRFhIjHGgT2C.png" alt="img"></p>
-<p>结束条件在scl为高电平期间，sda出现上升沿，则为结束信号。</p>
-<p><img src="https://s2.loli.net/2022/05/09/lohGLODJXIuVNq4.png" alt="img"></p>
-<blockquote>
-<p>注意：注意起始和终止信号都是由主机发出的，总线在起始条件之后，视为忙状态，在停止条件之后被视为空闲状态。</p>
-</blockquote>
-<blockquote>
-<p>应答（ACK，Acknowledgement）。即确认字符，在数据通信中，接收站发给发送站的一种传输类控制字符。主机每向从机发送完一个字节的数据，主机总是需要等待从机给出一个应答信号，来确认从机是否成功接收到了数据，从机应答主机所需要的时钟也是由主机提供的，应答出现在每一次主机完成8个数据位传输后紧跟着的时钟周期，低电平0表示应答，1表示非应答。，需要应答时，数据发出方将SDA总线设置为3态输入，由于IIC总线上有上拉电阻，因此此时总线默认高电平，若数据接收方正确接收到数据，则数据接收方将SDA总线拉低，以示正确应答。</p>
-</blockquote>
-<p>IIC传输时时从MSB开始传输到LSB结束。MSB是Most Significant Bit的缩写，最高有效位。在二进制数中，MSB是最高加权位。与十进制数字中最左边的一位类似。通常，MSB位于二进制数的最左侧，LSB位于二进制数的最右侧。LSB，英文 least significant bit，中文义最低有效位。</p>
-<p>写时序：</p>
-<p><img src="https://s2.loli.net/2022/05/09/Wl8YfhadFQ6btMk.jpg" alt="img"></p>
-<p>​	ID_Address, REG_Address, W_REG_Data</p>
-<blockquote>
-<ol>
-<li>产生start位；</li>
-<li>传送器件地址ID_Address，器件地址的最后一位为数据的传输方向位，R&#x2F;W，低电平0表示主机往从机写数据（W），1表示主机从从机读数据（R）。ACK应答，应答是从机发送给主机的应答，这里不用管；</li>
-<li>传送写入器件寄存器地址，即数据要写入的位置。同样ACK应答不用管；</li>
-<li>传送要写入的数据。ACK应答不用管；</li>
-<li>产生stop信号；</li>
-</ol>
-</blockquote>
-<p>读时序：</p>
-<p><img src="https://s2.loli.net/2022/05/09/7r5jshI1uEwF6NY.jpg" alt="img"></p>
-<p>​	{ID_Address + REG_Address} + {ID_Address + R_REG_Data}</p>
-<blockquote>
-<ol>
-<li>产生start信号</li>
-<li>传送器件地址（写ID_Address），ACK。</li>
-<li>传送字地址（写REG_Address），ACK。</li>
-<li>再次产生start信号</li>
-<li>再传送一次器件地址，ACK。</li>
-<li>读取一个字节的数据，读数据最后结束前无应答ACK信号。</li>
-<li>产生stop信号。</li>
-</ol>
-</blockquote>
-<h2 id="三、SPI通讯协议"><a href="#三、SPI通讯协议" class="headerlink" title="三、SPI通讯协议"></a>三、SPI通讯协议</h2><h3 id="引脚定义："><a href="#引脚定义：" class="headerlink" title="引脚定义："></a>引脚定义：</h3><p><strong>四根逻辑线：</strong></p>
-<ul>
-<li><strong>MISO</strong>：<code>Master input slave output</code> 主机输入，从机输出（数据来自从机）；</li>
-<li><strong>MOSI</strong>：<code>Master output slave input</code> 主机输出，从机输入（数据来自主机）；</li>
-<li><strong>SCLK</strong> ：<code>Serial Clock</code> 串行时钟信号，由主机产生发送给从机；</li>
-<li><strong>SS</strong>：<code>Slave Select</code> 片选信号，由主机发送，以控制与哪个从机通信，通常是低电平有效信号。</li>
-</ul>
-<p>其他制造商可能会遵循其他命名规则，但是最终他们指的相同的含义。以下是一些常用术语；</p>
-<ul>
-<li><strong>MISO</strong>也可以是<code>SIMO</code>，<code>DOUT</code>，<code>DO</code>，<code>SDO</code>或<code>SO</code>（在主机端）;</li>
-<li><strong>MOSI</strong>也可以是<code>SOMI</code>，<code>DIN</code>，<code>DI</code>，<code>SDI</code>或<code>SI</code>（在主机端）;</li>
-<li><strong>NSS</strong>也可以是<code>CE</code>，<code>CS</code>或<code>SSEL</code>;</li>
-<li><strong>SCLK</strong>也可以是<code>SCK</code>;</li>
-</ul>
-<h3 id="数据传输："><a href="#数据传输：" class="headerlink" title="数据传输："></a>数据传输：</h3><p>数据的采集时机可能是<strong>时钟信号</strong>的<strong>上升沿</strong>（从低到高）或<strong>下降沿</strong>（从高到低）。</p>
-<blockquote>
-<p>具体要看对SPI的配置；</p>
-</blockquote>
-<p>整体的传输大概可以分为以下几个过程：</p>
-<ul>
-<li>主机先将<code>NSS</code>信号拉低，这样保证开始接收数据；</li>
-<li>当<strong>接收端</strong>检测到时钟的边沿信号时，它将立即读取<strong>数据线</strong>上的信号，这样就得到了一位数据（1<code>bit</code>）;<br>  由于时钟是随数据一起发送的，因此指定<strong>数据的传输速度并不重要</strong>，尽管设备将具有可以运行的最高速度（稍后我们将讨论选择合适的时钟边沿和速度）。</li>
-<li><strong>主机</strong>发送到<strong>从机</strong>时：主机产生相应的时钟信号，然后数据<strong>一位一位</strong>地将从<code>MOSI</code>信号线上进行发送到从机；</li>
-<li><strong>主机</strong>接收<strong>从机</strong>数据：如果从机需要将数据发送回主机，则主机将继续生成预定数量的时钟信号，并且从机会将数据通过<code>MISO</code>信号线发送；</li>
-</ul>
-<p>具体如下图所示：</p>
-<p><img src="https://s2.loli.net/2022/05/09/Z8P1QtrFSOTzBkx.jpg" alt="img"></p>
-<blockquote>
-<p>注意，SPI是“全双工”（具有单独的发送和接收线路），因此可以在同一时间发送和接收数据，另外SPI的接收硬件可以是一个简单的移位寄存器。这比异步串行通信所需的完整UART要简单得多，并且更加便宜；</p>
-</blockquote>
-<h3 id="一些配置："><a href="#一些配置：" class="headerlink" title="一些配置："></a>一些配置：</h3><blockquote>
-<h3 id="时钟频率"><a href="#时钟频率" class="headerlink" title="时钟频率"></a><strong>时钟频率</strong></h3><p>SPI总线上的主机必须在通信开始时候配置并生成相应的时钟信号。在每个SPI时钟周期内，都会发生全双工数据传输。</p>
-<p>主机在<code>MOSI</code>线上发送一位数据，从机读取它，而从机在<code>MISO</code>线上发送一位数据，主机读取它。</p>
-<p>就算只进行单向的数据传输，也要保持这样的顺序。这就意味着无论接收任何数据，必须实际发送一些东西！在这种情况下，我们称其为虚拟数据；</p>
-<p>从理论上讲，只要实际可行，时钟速率就可以是您想要的任何速率，当然这个速率受限于每个系统能提供多大的系统时钟频率，以及最大的SPI传输速率。</p>
-<h3 id="时钟极性-CKP-x2F-Clock-Polarity"><a href="#时钟极性-CKP-x2F-Clock-Polarity" class="headerlink" title="时钟极性 CKP&#x2F;Clock Polarity"></a>时钟极性 CKP&#x2F;Clock Polarity</h3><p>除了配置串行时钟速率（频率）外，SPI主设备还需要配置<strong>时钟极性</strong>。</p>
-<p>根据硬件制造商的命名规则不同，时钟极性通常写为<strong>CKP</strong>或<strong>CPOL</strong>。时钟极性和相位共同决定读取数据的方式，比如信号上升沿读取数据还是信号下降沿读取数据；</p>
-<p><strong>CKP</strong>可以配置为1或0。这意味着您可以根据需要将时钟的默认状态（IDLE）设置为高或低。极性反转可以通过简单的逻辑逆变器实现。您必须参考设备的数据手册才能正确设置CKP和CKE。</p>
-<ul>
-<li><code>CKP = 0</code>：时钟空闲<code>IDLE</code>为低电平 <code>0</code>；</li>
-<li><code>CKP = 1</code>：时钟空闲<code>IDLE</code>为高电平<code>1</code>；</li>
-</ul>
-<h3 id="时钟相位-CKE-x2F-Clock-Phase-Edge"><a href="#时钟相位-CKE-x2F-Clock-Phase-Edge" class="headerlink" title="时钟相位 CKE &#x2F;Clock Phase (Edge)"></a>时钟相位 CKE &#x2F;Clock Phase (Edge)</h3><p>除配置串行时钟速率和极性外，SPI主设备还应配置时钟相位（或边沿）。根据硬件制造商的不同，时钟相位通常写为<strong>CKE</strong>或<strong>CPHA</strong>；</p>
-<p>顾名思义，时钟相位&#x2F;边沿，也就是采集数据时是在时钟信号的具体相位或者边沿；</p>
-<ul>
-<li><code>CKE = 0</code>：在时钟信号<code>SCK</code>的第一个跳变沿采样；</li>
-<li><code>CKE = 1</code>：在时钟信号<code>SCK</code>的第二个跳变沿采样；</li>
-</ul>
-<h3 id="时钟配置总结"><a href="#时钟配置总结" class="headerlink" title="时钟配置总结"></a><strong>时钟配置总结</strong></h3><p>综上几种情况，下图总结了所有时钟配置组合，并突出显示了实际采样数据的时刻；</p>
-<blockquote>
-<p>其中黑色线为采样数据的时刻；<br>蓝色线为SCK时钟信号；</p>
-</blockquote>
-<p>具体如下图所示；</p>
-<p><img src="https://s2.loli.net/2022/05/09/nJ6BsN3V2zCAdKj.jpg" alt="img"></p>
-</blockquote>
-<h3 id="多从机模式："><a href="#多从机模式：" class="headerlink" title="多从机模式："></a><strong>多从机模式</strong>：</h3><p>前面说到SPI总线必须有一个主机，可以有多个从机，那么具体连接到SPI总线的方法有以下两种：</p>
-<h4 id="第一种方法：多NSS"><a href="#第一种方法：多NSS" class="headerlink" title="第一种方法：多NSS"></a><strong>第一种方法：多NSS</strong></h4><ol>
-<li>通常，每个从机都需要一条单独的SS线。</li>
-<li>如果要和特定的从机进行通讯，可以将相应的<code>NSS</code>信号线拉低，并保持其他<code>NSS</code>信号线的状态为高电平；如果同时将两个<code>NSS</code>信号线拉低，则可能会出现乱码，因为从机可能都试图在同一条<code>MISO</code>线上传输数据，最终导致接收数据乱码。</li>
-</ol>
-<p>具体连接方式如下图所示；</p>
-<p><img src="https://s2.loli.net/2022/05/09/GnK3BTxa2fqkJFs.jpg" alt="img"></p>
-<h4 id="第二种方法：菊花链"><a href="#第二种方法：菊花链" class="headerlink" title="第二种方法：菊花链"></a><strong>第二种方法：菊花链</strong></h4><p><img src="https://s2.loli.net/2022/05/09/SPuNBVib5EalLqI.jpg" alt="img"></p>
-<p>在数字通信世界中，在设备信号（总线信号或中断信号）以串行的方式从一 个设备依次传到下一个设备，不断循环直到数据到达目标设备的方式被称为<strong>菊花链</strong>。</p>
-<ol>
-<li>菊花链的最大缺点是因为是信号串行传输，所以一旦数据链路中的某设备发生故障的时候，它下面优先级较低的设备就不可能得到服务了；</li>
-<li>另一方面，距离主机越远的从机，获得服务的优先级越低，所以需要安排好从机的优先级，并且设置总线检测器，如果某个从机超时，则对该从机进行短路，防止单个从机损坏造成整个链路崩溃的情况；</li>
-</ol>
-<p>具体的连接如下图所示；</p>
-<p><img src="https://s2.loli.net/2022/05/09/IeDp9AfdsicqokP.jpg" alt="img"></p>
-<blockquote>
-<p>其中红线加粗为数据的流向；</p>
-</blockquote>
-<p>所以最终的数据流向图可以表示为：</p>
-<p><img src="https://s2.loli.net/2022/05/09/K3zfyHvXtRdlmBY.jpg" alt="img"></p>
-<blockquote>
-<p>SCK为时钟信号，8clks表示8个边沿信号；<br>其中D为数据，X为无效数据；</p>
-</blockquote>
-<p>所以不难发现，菊花链模式充分使用了SPI其移位寄存器的功能，整个链充当通信移位寄存器，每个从机在下一个时钟周期将输入数据复制到输出。</p>
-<h3 id="优缺点："><a href="#优缺点：" class="headerlink" title="优缺点："></a><strong>优缺点：</strong></h3><h4 id="优势："><a href="#优势：" class="headerlink" title="优势："></a><strong>优势：</strong></h4><p>使SPI作为串行通信接口脱颖而出的原因很多；</p>
-<ul>
-<li>全双工串行通信；</li>
-<li>高速数据传输速率。</li>
-<li>简单的软件配置；</li>
-<li>极其灵活的数据传输，不限于8位，它可以是任意大小的字；</li>
-<li>非常简单的硬件结构。从站不需要唯一地址（与I2C不同）。从机使用主机时钟，不需要精密时钟振荡器&#x2F;晶振（与UART不同）。不需要收发器（与CAN不同）。</li>
-</ul>
-<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a><strong>缺点：</strong></h4><ul>
-<li>没有硬件从机应答信号（主机可能在不知情的情况下无处发送）；</li>
-<li>通常仅支持一个主设备；</li>
-<li>需要更多的引脚（与I2C不同）；</li>
-<li>没有定义硬件级别的错误检查协议；</li>
-<li>与RS-232和CAN总线相比，只能支持非常短的距离；</li>
-</ul>
-<blockquote>
-<h4 id="PS-IIC是MSB-first-UART是-LSB-first，SPI是可配置的。"><a href="#PS-IIC是MSB-first-UART是-LSB-first，SPI是可配置的。" class="headerlink" title="PS:IIC是MSB first ,UART是 LSB first，SPI是可配置的。"></a>PS:IIC是<em>MSB first</em> ,UART是 <em>LSB first</em>，SPI是可配置的。</h4><p>大小端问题描述的是字节之间的关系，而MSB、LSB描述的是bit位之间的关系。</p>
-</blockquote>
+<p>电机参数写入：</p>
+<p>采用宏定义开关是否要进行参数校准；</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1 已校准</span></span><br><span class="line"><span class="comment">//0 未校准</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IS_ALIGN 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//参数数据结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ALIGN_DATA</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">long</span> direction;</span><br><span class="line">    <span class="keyword">int</span> pole;</span><br><span class="line">    <span class="keyword">float</span> zero_angle;</span><br><span class="line">&#125; DATA_ALIGN;</span><br><span class="line"></span><br><span class="line"><span class="comment">//根据宏定义判断是否要更新FLASH中存储的参数</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> IS_ALIGN</span></span><br><span class="line">    Internal_ReadFlash(ALIGN_ANGLE_ADDR, (<span class="keyword">uint32_t</span> *)&amp;DATA_ALIGN, <span class="number">3</span>);<span class="comment">//读取内部FLASH中的参数</span></span><br><span class="line">    sensor_direction = DATA_ALIGN.direction;</span><br><span class="line">    pole_pairs = DATA_ALIGN.pole;</span><br><span class="line">    zero_electric_angle = DATA_ALIGN.zero_angle;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">//此处略去参数识别代码</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    DATA_ALIGN.direction = sensor_direction;</span><br><span class="line">    DATA_ALIGN.pole = pole_pairs;</span><br><span class="line">    DATA_ALIGN.zero_angle = zero_electric_angle;</span><br><span class="line">    Internal_WriteFlash(ALIGN_ANGLE_ADDR, (<span class="keyword">uint32_t</span> *)&amp;DATA_ALIGN, <span class="number">3</span>);<span class="comment">//将参数写入单片机内部FLASH中</span></span><br></pre></td></tr></table></figure>
+
 
       
         <!-- 《添加版权声明 -->
@@ -419,7 +250,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">通讯协议</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FOC</a>
         		</li>
       		
 		</ul>
@@ -431,7 +262,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/通讯协议//" class="article-tag-list-link color5">通讯协议</a>
+        			<a href="/categories/FOC//" class="article-tag-list-link color4">FOC</a>
         		</li>
       		
 		</ul>
@@ -486,7 +317,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://fan-pengfei.top/2022/05/09/%E5%B8%B8%E7%94%A8%E7%9A%84%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://fan-pengfei.top/2022/11/21/FOC%E5%9F%BA%E7%A1%80%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -500,18 +331,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/05/10/%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          结构体中定义函数指针
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/05/09/%E5%88%A4%E6%96%AD%E5%A4%A7%E7%AB%AF%E5%92%8C%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">判断大端和小端模式</div>
+    <a href="/2022/11/05/CSAPP%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CSAPP笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -538,7 +360,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81USART%E5%92%8CUART"><span class="toc-number">1.</span> <span class="toc-text">一、USART和UART:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81IIC%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">二、IIC通讯协议：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81SPI%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.</span> <span class="toc-text">三、SPI通讯协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E8%84%9A%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">引脚定义：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">数据传输：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">3.3.</span> <span class="toc-text">一些配置：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%A2%91%E7%8E%87"><span class="toc-number">3.4.</span> <span class="toc-text">时钟频率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E6%9E%81%E6%80%A7-CKP-x2F-Clock-Polarity"><span class="toc-number">3.5.</span> <span class="toc-text">时钟极性 CKP&#x2F;Clock Polarity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E7%9B%B8%E4%BD%8D-CKE-x2F-Clock-Phase-Edge"><span class="toc-number">3.6.</span> <span class="toc-text">时钟相位 CKE &#x2F;Clock Phase (Edge)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BB%93"><span class="toc-number">3.7.</span> <span class="toc-text">时钟配置总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E4%BB%8E%E6%9C%BA%E6%A8%A1%E5%BC%8F%EF%BC%9A"><span class="toc-number">3.8.</span> <span class="toc-text">多从机模式：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A%E5%A4%9ANSS"><span class="toc-number">3.8.1.</span> <span class="toc-text">第一种方法：多NSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A%E8%8F%8A%E8%8A%B1%E9%93%BE"><span class="toc-number">3.8.2.</span> <span class="toc-text">第二种方法：菊花链</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="toc-number">3.9.</span> <span class="toc-text">优缺点：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF%EF%BC%9A"><span class="toc-number">3.9.1.</span> <span class="toc-text">优势：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="toc-number">3.9.2.</span> <span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PS-IIC%E6%98%AFMSB-first-UART%E6%98%AF-LSB-first%EF%BC%8CSPI%E6%98%AF%E5%8F%AF%E9%85%8D%E7%BD%AE%E7%9A%84%E3%80%82"><span class="toc-number">3.9.3.</span> <span class="toc-text">PS:IIC是MSB first ,UART是 LSB first，SPI是可配置的。</span></a></li></ol></li></ol></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
@@ -576,7 +398,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="常用的通信协议" data-title="常用的通信协议" data-url="http://fan-pengfei.top/2022/05/09/%E5%B8%B8%E7%94%A8%E7%9A%84%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/"></div>
+	<div class="ds-thread" data-thread-key="FOC基础源码分析" data-title="FOC基础源码分析" data-url="http://fan-pengfei.top/2022/11/21/FOC%E5%9F%BA%E7%A1%80%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
