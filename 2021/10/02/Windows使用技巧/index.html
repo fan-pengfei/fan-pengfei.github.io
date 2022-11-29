@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/11/29/MPfZupI7OEwHz2S.png">
 <meta property="og:image" content="https://s2.loli.net/2022/11/29/a4rSDpYA12zEmFy.png">
 <meta property="article:published_time" content="2021-10-02T08:29:25.000Z">
-<meta property="article:modified_time" content="2022-11-29T08:05:45.290Z">
+<meta property="article:modified_time" content="2022-11-29T08:29:26.138Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="Windows">
 <meta name="twitter:card" content="summary">
@@ -192,25 +192,25 @@
 <p>Windows 使用技巧;<span id="more"></span></p>
 </blockquote>
 <h3 id="应用程序自启动"><a href="#应用程序自启动" class="headerlink" title="应用程序自启动"></a>应用程序自启动</h3><blockquote>
-<p>1.在Windows10桌面，右键点击桌面左下角的开始按钮，在弹出的菜单中选择”运行”菜单项.</p>
-<p>2.这时就会打开Windows10的运行窗口，在窗口中输入命令shell:startup，然后点击确定按钮.</p>
-<p>3.这时就可以打开Windows10系统的启动文件夹.</p>
-<p>4.把需要开机启动的应用或是程序的快捷方式拖动到该文件夹中，这样以后电脑开机的时候，就会自动启动这些应用.</p>
+<p>1、在Windows10桌面，右键点击桌面左下角的开始按钮，在弹出的菜单中选择”运行”菜单项.</p>
+<p>2、这时就会打开Windows10的运行窗口，在窗口中输入命令shell:startup，然后点击确定按钮.</p>
+<p>3、这时就可以打开Windows10系统的启动文件夹.</p>
+<p>4、把需要开机启动的应用或是程序的快捷方式拖动到该文件夹中，这样以后电脑开机的时候，就会自动启动这些应用.</p>
 </blockquote>
 <h3 id="添加右键新建Markdown文档"><a href="#添加右键新建Markdown文档" class="headerlink" title="添加右键新建Markdown文档"></a>添加右键新建Markdown文档</h3><blockquote>
-<p>  1.在电脑桌面右键一个.txt文本(文档名随便，文档内容如下)；</p>
+<p>  1、在电脑桌面右键一个.txt文本(文档名随便，文档内容如下)；</p>
   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line">[HKEY_CLASSES_ROOT\.md]</span><br><span class="line">@=&quot;MarkdownFile&quot;</span><br><span class="line">&quot;PerceivedType&quot;=&quot;text&quot;</span><br><span class="line">&quot;Content Type&quot;=&quot;text/plain&quot;</span><br><span class="line">[HKEY_CLASSES_ROOT\.md\ShellNew]</span><br><span class="line">[HKEY_CLASSES_ROOT\MarkdownFile]</span><br><span class="line">@=&quot;Markdown File&quot;</span><br><span class="line">[HKEY_CLASSES_ROOT\MarkdownFile\DefaultIcon]</span><br><span class="line">@=&quot;%SystemRoot%\system32\imageres.dll,-102&quot;</span><br><span class="line">[HKEY_CLASSES_ROOT\MarkdownFile\shell]</span><br><span class="line">[HKEY_CLASSES_ROOT\MarkdownFile\shell\open]</span><br></pre></td></tr></table></figure>
 
-<p>  2.修改文档的后缀为.reg；</p>
-<p>  3.双击打开这个.reg文档；</p>
-<p>  4.点击确定写进注册表；</p>
-<p>  5.在桌面右键刷新，然后新建就看到有markdown啦；</p>
+<p>  2、修改文档的后缀为.reg；</p>
+<p>  3、双击打开这个.reg文档；</p>
+<p>  4、点击确定写进注册表；</p>
+<p>  5、在桌面右键刷新，然后新建就看到有markdown啦；</p>
 </blockquote>
 <h3 id="取消右键新建文件-以visio文件为例"><a href="#取消右键新建文件-以visio文件为例" class="headerlink" title="取消右键新建文件(以visio文件为例)"></a>取消右键新建文件(以visio文件为例)</h3><blockquote>
-<p>1.WIN+R；</p>
-<p>2.输入regedit，enter确认，打开注册表编辑器；</p>
-<p>3.在第一项HKEY_CLASSES_ROOT中找到对应的后缀名(例如.vsdx)；</p>
-<p>4.删去该项的子项-&gt;ShellNew；</p>
+<p>1、WIN+R；</p>
+<p>2、输入regedit，enter确认，打开注册表编辑器；</p>
+<p>3、在第一项HKEY_CLASSES_ROOT中找到对应的后缀名(例如.vsdx)；</p>
+<p>4、删去该项的子项-&gt;ShellNew；</p>
 <table>
 <thead>
 <tr>
@@ -219,7 +219,7 @@
 </tr>
 </thead>
 </table>
-<p>5.再次右键新建文件即可发现已经修改成功；</p>
+<p>5、再次右键新建文件即可发现已经修改成功；</p>
 </blockquote>
 
       
@@ -586,15 +586,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,10 +611,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Verilog</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -630,11 +630,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,11 +682,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Typora</a>
+                <a href="javascript:void(0)" class="js-tag color5">UART</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UART</a>
+                <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,15 +698,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -715,10 +719,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -786,11 +786,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">规划</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">规划</a>
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -806,15 +806,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">can</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CRC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">can</a>
               </li>
              
               <li class="article-tag-list-item">
