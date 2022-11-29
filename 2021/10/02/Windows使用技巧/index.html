@@ -15,11 +15,14 @@
 <meta property="og:site_name" content="樊鹏飞的博客">
 <meta property="og:description" content="Windows 使用技巧;">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/11/29/MPfZupI7OEwHz2S.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/29/a4rSDpYA12zEmFy.png">
 <meta property="article:published_time" content="2021-10-02T08:29:25.000Z">
-<meta property="article:modified_time" content="2022-04-23T12:08:55.041Z">
+<meta property="article:modified_time" content="2022-11-29T08:02:58.182Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="Windows">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/11/29/MPfZupI7OEwHz2S.png">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -188,8 +191,7 @@
         <blockquote>
 <p>Windows 使用技巧;<span id="more"></span></p>
 </blockquote>
-<ul>
-<li><h3 id="应用程序自启动"><a href="#应用程序自启动" class="headerlink" title="应用程序自启动"></a>应用程序自启动</h3><blockquote>
+<h3 id="应用程序自启动"><a href="#应用程序自启动" class="headerlink" title="应用程序自启动"></a>应用程序自启动</h3><blockquote>
 <ol>
 <li>在Windows10桌面，右键点击桌面左下角的开始按钮，在弹出的菜单中选择”运行”菜单项.</li>
 <li>这时就会打开Windows10的运行窗口，在窗口中输入命令shell:startup，然后点击确定按钮.</li>
@@ -197,8 +199,44 @@
 <li>把需要开机启动的应用或是程序的快捷方式拖动到该文件夹中，这样以后电脑开机的时候，就会自动启动这些应用.</li>
 </ol>
 </blockquote>
+<h3 id="添加右键新建Markdown文档"><a href="#添加右键新建Markdown文档" class="headerlink" title="添加右键新建Markdown文档"></a>添加右键新建Markdown文档</h3><blockquote>
+<ol>
+<li><p>在电脑桌面右键一个.txt文本(文档名随便，文档内容如下)；</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line">[HKEY_CLASSES_ROOT\.md]</span><br><span class="line">@=&quot;MarkdownFile&quot;</span><br><span class="line">&quot;PerceivedType&quot;=&quot;text&quot;</span><br><span class="line">&quot;Content Type&quot;=&quot;text/plain&quot;</span><br><span class="line">[HKEY_CLASSES_ROOT\.md\ShellNew]</span><br><span class="line">[HKEY_CLASSES_ROOT\MarkdownFile]</span><br><span class="line">@=&quot;Markdown File&quot;</span><br><span class="line">[HKEY_CLASSES_ROOT\MarkdownFile\DefaultIcon]</span><br><span class="line">@=&quot;%SystemRoot%\system32\imageres.dll,-102&quot;</span><br><span class="line">[HKEY_CLASSES_ROOT\MarkdownFile\shell]</span><br><span class="line">[HKEY_CLASSES_ROOT\MarkdownFile\shell\open]</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
+<li><p>修改文档的后缀为.reg；</p>
+</li>
+<li><p>双击打开这个.reg文档；</p>
+</li>
+<li><p>点击确定写进注册表；</p>
+</li>
+<li><p>在桌面右键刷新，然后新建就看到有markdown啦；</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="取消右键新建文件-以visio文件为例"><a href="#取消右键新建文件-以visio文件为例" class="headerlink" title="取消右键新建文件(以visio文件为例)"></a>取消右键新建文件(以visio文件为例)</h3><blockquote>
+<ol>
+<li><p>WIN+R；</p>
+</li>
+<li><p>输入regedit，enter确认，打开注册表编辑器；</p>
+</li>
+<li><p>在第一项HKEY_CLASSES_ROOT中找到对应的后缀名(例如.vsdx)；</p>
+</li>
+<li><p>删去该项的子项-&gt;ShellNew；</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><img src="https://s2.loli.net/2022/11/29/MPfZupI7OEwHz2S.png" alt="8e1686b424d6d058e33837cd304b045"></th>
+<th><img src="https://s2.loli.net/2022/11/29/a4rSDpYA12zEmFy.png" alt="95bc7aa3a625bb0bed08dfa657c80af"></th>
+</tr>
+</thead>
+</table>
+<ol start="5">
+<li>再次右键新建文件即可发现已经修改成功；</li>
+</ol>
+</blockquote>
 
       
         <!-- 《添加版权声明 -->
@@ -376,7 +414,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%90%AF%E5%8A%A8"><span class="toc-number">1.</span> <span class="toc-text">应用程序自启动</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%90%AF%E5%8A%A8"><span class="toc-number">1.</span> <span class="toc-text">应用程序自启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BAMarkdown%E6%96%87%E6%A1%A3"><span class="toc-number">2.</span> <span class="toc-text">添加右键新建Markdown文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E6%B6%88%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6-%E4%BB%A5visio%E6%96%87%E4%BB%B6%E4%B8%BA%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">取消右键新建文件(以visio文件为例)</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -600,19 +638,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -668,19 +706,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,11 +746,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
