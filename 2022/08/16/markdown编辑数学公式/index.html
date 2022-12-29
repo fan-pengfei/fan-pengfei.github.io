@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/08/16/gHzdKf2jyN1UpAr.png">
 <meta property="og:image" content="https://s2.loli.net/2022/08/16/8Zjhqit7Hlz9fBw.jpg">
 <meta property="article:published_time" content="2022-08-16T08:41:33.000Z">
-<meta property="article:modified_time" content="2022-10-12T15:26:49.507Z">
+<meta property="article:modified_time" content="2022-12-28T08:37:05.294Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="markdown">
 <meta name="twitter:card" content="summary">
@@ -245,6 +245,11 @@
 
 
 <p>$$<br>T^t<br>T_t<br>T_t^r<br>T_{tt}<br>$$</p>
+<h2 id="其他例子"><a href="#其他例子" class="headerlink" title="其他例子"></a>其他例子</h2><p>由以下公式：<br>$$<br>^{i-1}<em>iT&#x3D;Rot(x,\alpha</em>{i-1})*Trans(\alpha_{i-1},0,0)*Rot(z,\theta_i)*Trans(0,0,d_i)<br>$$</p>
+<p>$$<br>^{i-1}_iT&#x3D;<br>\left [\begin{array}{c}<br>cos\theta_i &amp;-sin\theta_icos\alpha_i &amp;sin\theta_isin\alpha_i &amp;\alpha_icos\theta_i \<br>sin\theta_i &amp;cos\theta_isin\alpha_i &amp;-cos\theta_isin\alpha_i &amp;\alpha_isin\theta_i \<br>0 &amp;sin\alpha_i &amp;cos\alpha_i  &amp;d_i \<br>0 &amp;0 &amp;0 &amp;1<br>\end{array}\right]<br>$$</p>
+<p>可以得到$$^0_1T$$、$$^1_2T$$、$$^2_3T$$、$$^3_4T$$、$$^4_5T$$、$$^5_6T$$的计算公式；</p>
+<p>然后由公式：<br>$$<br>^0_6T&#x3D;^0_1T<em>^1_2T</em>^2_3T<em>^3_4T</em>^4_5T*^5_6T&#x3D;<br>\left [\begin{array}{c}<br>n_x &amp;o_x &amp;a_x &amp;p_x \<br>n_y &amp;o_y &amp;a_y &amp;p_y\<br>n_z &amp;o_z &amp;a_z &amp;p_z\<br>0 	&amp;0   &amp;0   &amp;1<br>\end{array}\right]<br>$$<br>可以计算得出$$^0_6T$$的值即可；</p>
+<p>使用MATLAB计算得到的结果为：<br>$$<br>^0_6T&#x3D;<br>\left [\begin{array}{r}<br>0.000 &amp;-1.000 &amp;0.000 &amp;0.1639 \<br>1.000 &amp;-1.000 &amp;0.000 &amp;-0.7277\<br>0.000 &amp;1.000  &amp;0.000 &amp;-0.3529\<br>0.000 &amp;0.000  &amp;0.000 &amp;1.0000<br>\end{array}\right]<br>$$<br>从末端姿态矩阵$$^0_6T$$可以知道机器人的末端位置分量：<br>$$<br>(p_x,p_y,p_z)&#x3D;(0.1639,-0.7277,-0.3529)<br>$$<br>按照关节角度$$[90°, 0°, 90°, 180°, 90°, 90°]$$来控制仿真程序中机器人得到的仿真结果如下图所示：</p>
 
       
         <!-- 《添加版权声明 -->
@@ -422,7 +427,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">希腊字母：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">常见希腊字母：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">数学结构：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%95%B0%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">分数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E5%8F%B7%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">根号：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E7%AC%A6%E5%8F%B7%EF%BC%9A"><span class="toc-number">2.3.</span> <span class="toc-text">向量符号：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E7%95%8C%E7%AC%A6%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">定界符：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E5%A4%A7%E5%B0%8F%E7%9A%84%E7%AC%A6%E5%8F%B7"><span class="toc-number">4.</span> <span class="toc-text">可变大小的符号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%90%8D%E7%A7%B0%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">函数名称：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">6.</span> <span class="toc-text">二进制运算符和关系运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%A0%87"><span class="toc-number">7.</span> <span class="toc-text">上下标</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">希腊字母：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">常见希腊字母：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">数学结构：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%95%B0%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">分数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E5%8F%B7%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">根号：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E7%AC%A6%E5%8F%B7%EF%BC%9A"><span class="toc-number">2.3.</span> <span class="toc-text">向量符号：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E7%95%8C%E7%AC%A6%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">定界符：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E5%A4%A7%E5%B0%8F%E7%9A%84%E7%AC%A6%E5%8F%B7"><span class="toc-number">4.</span> <span class="toc-text">可变大小的符号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%90%8D%E7%A7%B0%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">函数名称：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">6.</span> <span class="toc-text">二进制运算符和关系运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%A0%87"><span class="toc-number">7.</span> <span class="toc-text">上下标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E4%BE%8B%E5%AD%90"><span class="toc-number">8.</span> <span class="toc-text">其他例子</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -634,15 +639,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件格式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -670,6 +675,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LCD</a>
               </li>
              
@@ -678,11 +687,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,11 +707,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -718,10 +727,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Typora</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
@@ -734,19 +739,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -755,6 +756,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -770,7 +775,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -778,7 +783,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -786,15 +791,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
+                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -810,10 +819,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
@@ -823,6 +828,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">规划</a>
               </li>
              
               <li class="article-tag-list-item">
