@@ -216,46 +216,50 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x ^ (y ^ z) = (x ^ y) ^ z</span><br></pre></td></tr></table></figure>
 </blockquote>
 <h2 id="三、应用："><a href="#三、应用：" class="headerlink" title="三、应用："></a>三、<strong>应用：</strong></h2><h3 id="1、简化运算；"><a href="#1、简化运算；" class="headerlink" title="1、简化运算；"></a>1、<strong>简化运算；</strong></h3><ul>
-<li>多个值的异或运算，可以根据运算定律进行简化。</li>
-</ul>
+<li><p>多个值的异或运算，可以根据运算定律进行简化。</p>
 <blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a ^ b ^ c ^ a ^ b</span><br><span class="line">= a ^ a ^ b ^ b ^ c</span><br><span class="line">= <span class="number">0</span> ^ <span class="number">0</span> ^ c</span><br><span class="line">= c</span><br></pre></td></tr></table></figure>
 </blockquote>
-<h3 id="2、交换值；"><a href="#2、交换值；" class="headerlink" title="2、交换值；"></a>2、<strong>交换值；</strong></h3><ul>
-<li>两个变量连续进行三次异或运算，可以互相交换值。</li>
+</li>
 </ul>
-<p>   假设两个变量是<code>x</code>和<code>y</code>，各自的值是<code>a</code>和<code>b</code>。下面就是<code>x</code>和<code>y</code>进行三次异或运算，注释部分是每次运算后两个变量的值。</p>
+<h3 id="2、交换值；"><a href="#2、交换值；" class="headerlink" title="2、交换值；"></a>2、<strong>交换值；</strong></h3><ul>
+<li><p>两个变量连续进行三次异或运算，可以互相交换值。</p>
+<p>假设两个变量是<code>x</code>和<code>y</code>，各自的值是<code>a</code>和<code>b</code>。下面就是<code>x</code>和<code>y</code>进行三次异或运算，注释部分是每次运算后两个变量的值。</p>
 <blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = x ^ y <span class="comment">// (a ^ b, b)</span></span><br><span class="line">y = x ^ y <span class="comment">// (a ^ b, a ^ b ^ b) =&gt; (a ^ b, a)</span></span><br><span class="line">x = x ^ y <span class="comment">// (a ^ b ^ a, a) =&gt; (b, a)</span></span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>   这是两个变量交换值的最快方法，不需要任何额外的空间。</p>
-<h3 id="3、加密；"><a href="#3、加密；" class="headerlink" title="3、加密；"></a>3、<strong>加密；</strong></h3><ul>
-<li>异或运算可以用于加密。</li>
+<p>这是两个变量交换值的最快方法，不需要任何额外的空间。</p>
+</li>
 </ul>
-<p>   第一步，明文（text）与密钥（key）进行异或运算，可以得到密文（cipherText）。</p>
+<h3 id="3、加密；"><a href="#3、加密；" class="headerlink" title="3、加密；"></a>3、<strong>加密；</strong></h3><ul>
+<li><p>异或运算可以用于加密。</p>
+<p>第一步，明文（text）与密钥（key）进行异或运算，可以得到密文（cipherText）。</p>
 <blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text ^ key = cipherText</span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>   第二步，密文与密钥再次进行异或运算，就可以还原成明文。</p>
+<p>第二步，密文与密钥再次进行异或运算，就可以还原成明文。</p>
 <blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cipherText ^ key = text</span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>   原理很简单，如果明文是 x，密钥是 y，那么 x 连续与 y 进行两次异或运算，得到自身。</p>
+<p>原理很简单，如果明文是 x，密钥是 y，那么 x 连续与 y 进行两次异或运算，得到自身。</p>
 <blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(x ^ y) ^ y</span><br><span class="line">= x ^ (y ^ y)</span><br><span class="line">= x ^ <span class="number">0</span></span><br><span class="line">= x</span><br></pre></td></tr></table></figure>
 </blockquote>
-<h3 id="4、数据备份；"><a href="#4、数据备份；" class="headerlink" title="4、数据备份；"></a>4、<strong>数据备份；</strong></h3><ul>
-<li>异或运算可以用于数据备份。</li>
+</li>
 </ul>
-<p>   文件 x 和文件 y 进行异或运算，产生一个备份文件 z。</p>
+<h3 id="4、数据备份；"><a href="#4、数据备份；" class="headerlink" title="4、数据备份；"></a>4、<strong>数据备份；</strong></h3><ul>
+<li><p>异或运算可以用于数据备份。</p>
+<p>文件 x 和文件 y 进行异或运算，产生一个备份文件 z。</p>
 <blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x ^ y = z</span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>   以后，无论是文件 x 或文件 y 损坏，只要不是两个原始文件同时损坏，就能根据另一个文件和备份文件，进行还原。</p>
+<p>以后，无论是文件 x 或文件 y 损坏，只要不是两个原始文件同时损坏，就能根据另一个文件和备份文件，进行还原。</p>
 <blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x ^ z</span><br><span class="line">= x ^ (x ^ y) </span><br><span class="line">= (x ^ x) ^ y</span><br><span class="line">= <span class="number">0</span> ^ y</span><br><span class="line">= y</span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>   上面的例子是 y 损坏，x 和 z 进行异或运算，就能得到 y。</p>
+<p>上面的例子是 y 损坏，x 和 z 进行异或运算，就能得到 y。</p>
+</li>
+</ul>
 <h2 id="四、一道面试题目："><a href="#四、一道面试题目：" class="headerlink" title="四、一道面试题目："></a>四、<strong>一道面试题目：</strong></h2><p>一些面试的算法题，也能使用异或运算快速求解。</p>
 <p>请看下面这道题。</p>
 <blockquote>
@@ -644,10 +648,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -660,7 +660,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,11 +672,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -696,6 +696,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -705,10 +709,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -732,6 +732,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -744,19 +748,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -765,6 +765,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -784,10 +788,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -796,11 +796,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -808,7 +808,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -817,6 +817,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

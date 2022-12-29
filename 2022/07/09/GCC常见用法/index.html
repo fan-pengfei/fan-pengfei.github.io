@@ -202,7 +202,7 @@
 </blockquote>
 <h1 id="GCC编译命令："><a href="#GCC编译命令：" class="headerlink" title="GCC编译命令："></a>GCC编译命令：</h1><h2 id="1-GCC工具"><a href="#1-GCC工具" class="headerlink" title="1. GCC工具"></a><strong>1. GCC工具</strong></h2><p><strong>GCC编译器：</strong></p>
 <p>GCC（GNU Compiler Collection）是由 GNU 开发的编程语言编译器。 GCC最初代表“GNU C Compiler”，当时只支持C语言。 后来又扩展能够支持更多编程语言，包括 C++、Fortran 和 Java 等。 因此，GCC也被重新定义为“GNU Compiler Collection”，成为历史上最优秀的编译器， 其执行效率与一般的编译器相比平均效率要高 20%~30%。</p>
-<p>GCC的官网地址为：<a href="https://link.zhihu.com/?target=https://gcc.gnu.org/">https://gcc.gnu.org/</a>，在Ubuntu系统下系统默认已经安装好GCC编译器，可以通过如下命令查看Ubuntu系统中GCC编译器的版本及安装路径：</p>
+<p>GCC的官网地址为：<a href="https://link.zhihu.com/?target=https%3A//gcc.gnu.org/">https://gcc.gnu.org/</a>，在Ubuntu系统下系统默认已经安装好GCC编译器，可以通过如下命令查看Ubuntu系统中GCC编译器的版本及安装路径：</p>
 <p><img src="https://s2.loli.net/2022/07/15/gqVEvWFZmzXDfQp.jpg" alt="img"></p>
 <p><strong>GCC编译工具链：</strong></p>
 <p>GCC编译工具链（toolchain），是指以GCC编译器为核心的一整套工具。它主要包含以下三部分内容：</p>
@@ -213,7 +213,7 @@
 </ul>
 <p>在很多场合下会直接用GCC编译器来指代整套GCC编译工具链。</p>
 <p><strong>Binutils工具集：</strong></p>
-<p>Binutils（bin utility），是GNU二进制工具集，通常跟GCC编译器一起打包安装到系统，它的官方说明网站地址为： <a href="https://link.zhihu.com/?target=https://www.gnu.org/software/binutils/">https://www.gnu.org/software/binutils/</a> 。</p>
+<p>Binutils（bin utility），是GNU二进制工具集，通常跟GCC编译器一起打包安装到系统，它的官方说明网站地址为： <a href="https://link.zhihu.com/?target=https%3A//www.gnu.org/software/binutils/">https://www.gnu.org/software/binutils/</a> 。</p>
 <p>在进行程序开发的时候通常不会直接调用这些工具，而是在使用GCC编译指令的时候由GCC编译器间接调用。下面是其中一些常用的工具：</p>
 <ul>
 <li>as：汇编器，把汇编语言代码转换为机器码（目标文件）。</li>
@@ -224,24 +224,20 @@
 <li>objdump：可用于查看目标文件的信息，最主要的作用是反汇编。</li>
 <li>size：可用于查看目标文件不同部分的尺寸和总尺寸，例如代码段大小、数据段大小、使用的静态内存、总大小等。</li>
 </ul>
-<p>系统默认的Binutils工具集位于&#x2F;usr&#x2F;bin目录下，可使用如下命令查看系统中存在的Binutils工具集：</p>
+<p>系统默认的Binutils工具集位于/usr/bin目录下，可使用如下命令查看系统中存在的Binutils工具集：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在Ubantu上执行如下命令</span></span><br><span class="line"><span class="built_in">ls</span> /usr/bin/ | grep linux<span class="literal">-gnu</span>-</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://s2.loli.net/2022/07/09/LhjUbmDiRF6XskJ.jpg" alt="img"></p>
 <p><strong>glibc库：</strong></p>
 <p>glibc库是GNU组织为GNU系统以及Linux系统编写的C语言标准库，因为绝大部分C程序都依赖该函数库，该文件甚至会直接影响到系统的正常运行，例如常用的文件操作函数read、write、open，打印函数printf、动态内存申请函数malloc等。</p>
 <p>在Ubuntu系统下，libc.so.6是glibc的库文件，可直接执行该库文件查看版本，在主机上执行如下命令：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在Ubantu上执行如下命令</span></span><br><span class="line"><span class="comment"># 以下是Ubuntu 64位机的glibc库文件路径，可直接执行</span></span><br><span class="line">/lib/x86_64<span class="literal">-linux</span><span class="literal">-gnu</span>/libc.so.<span class="number">6</span></span><br></pre></td></tr></table></figure>
-
 <p><img src="https://s2.loli.net/2022/07/09/o6OQqYSHJRmCarD.jpg" alt="img"></p>
 <hr>
 <h2 id="2-GCC编译"><a href="#2-GCC编译" class="headerlink" title="2. GCC编译"></a><strong>2. GCC编译</strong></h2><p>编写HelloWorld文件：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello, world! This is a C program.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++ )&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;output i=%d\n&quot;</span>,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>编译并执行：</p>
 <p>Ubuntu默认安装GCC编译工具链，写好程序后可以直接进行编译，执行以下命令：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在Ubantu的hello_c目录下执行如下命令</span></span><br><span class="line">gcc hello.c –o hello <span class="comment">#使用gcc把hello.c编译成hello程序</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">ls</span>        <span class="comment">#查看目录下的文件</span></span><br><span class="line">./hello   <span class="comment">#执行生成的hello程序</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 若提示权限不够或不是可执行文件，执行如下命令再运行hello程序</span></span><br><span class="line">chmod u+x hello <span class="comment">#给hello文件添加可执行权限</span></span><br></pre></td></tr></table></figure>
-
 <p>GCC 编译工具链在编译一个C源文件时需要经过以下 4 步：</p>
 <ul>
 <li>预处理：为把头文件的代码、宏之类的内容转换成生成的.i文件，还是C代码。</li>
@@ -255,7 +251,6 @@
 <p>使用GCC的参数 “-E”，可以让编译器生成 .i 文件，参数 “-o”，可以指定输出文件的名字。</p>
 <p>具体命令如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 预处理，可理解为把头文件的代码汇总成C代码，把*.c转换得到*.i文件</span><br><span class="line">gcc –E hello.c –o hello.i</span><br></pre></td></tr></table></figure>
-
 <p>编译生成的hello.i文件内容如下：</p>
 <p><img src="https://s2.loli.net/2022/07/09/BMRVzreNmaFYQ9d.jpg" alt="img"></p>
 <p>相当于它把原C代码中包含的头文件中引用的内容汇总到一处， 如果原C代码有宏定义，它把宏定义展开成具体的内容。</p>
@@ -264,7 +259,6 @@
 <p>GCC可以使用-S选项，让编译程序生成汇编语言的代码文件（.s后缀）。</p>
 <p>具体命令如下:</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译，可理解为把C代码转换为汇编代码，把*.i转换得到*.s文件</span></span><br><span class="line">gcc –S hello.i –o hello.s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以直接以C文件作为输入进行编译，与上面的命令是等价的</span></span><br><span class="line">gcc –S hello.c –o hello.s</span><br></pre></td></tr></table></figure>
-
 <p>编译生成的hello.s文件内容如下：</p>
 <p><img src="https://s2.loli.net/2022/07/09/sXyIWf2FN5UbMB9.jpg" alt="img"></p>
 <p>汇编语言是跟平台相关的，由于本示例的GCC目标平台是x86，所以此处生成的汇编文件是x86的汇编代码。</p>
@@ -272,11 +266,10 @@
 <p>将汇编语言文件经过汇编，生成目标文件.o文件，每一个源文件都对应一个目标文件。即把汇编语言的代码转换成机器码，这是as汇编器完成的工作。</p>
 <p>GCC的参数“c”表示只编译(compile)源文件但不链接，会将源程序编译成目标文件（.o后缀）。计算机只认识0或者1，不懂得C语言，也不懂得汇编语言，经过编译汇编之后，生成的目标文件包含着机器代码，这部分代码就可以直接被计算机执行。一般情况下，可以直接使用参数“c”，跳过上述的两个过程，具体命令 如下：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 汇编，可理解为把汇编代码转换为机器码，把*.s转换得到*.o，即目标文件</span></span><br><span class="line">gcc –c hello.s –o hello.o</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以直接以C文件作为输入进行汇编，与上面的命令是等价的</span></span><br><span class="line">gcc –c hello.c –o hello.o</span><br></pre></td></tr></table></figure>
-
 <p>Linux下生成的 <em>.o目标文件、</em>so动态库文件以及下一小节链接阶段生成最终的可执行文件都是elf格式的， 可以使用“readelf”工具来查看它们的内容。</p>
 <p>请试执行如下命令：</p>
 <p><img src="https://s2.loli.net/2022/07/09/83wanVNWloYkiX6.jpg" alt="img"></p>
-<p>从 readelf 的工具输出的信息，可以了解到目标文件包含ELF头、程序头、节等内容， 对于*.o目标文件或*.so库文件，编译器在链接阶段利用这些信息把多个文件组织起来， 对于可执行文件，系统在运行时根据这些信息加载程序运行。</p>
+<p>从 readelf 的工具输出的信息，可以了解到目标文件包含ELF头、程序头、节等内容， 对于<em>.o目标文件或</em>.so库文件，编译器在链接阶段利用这些信息把多个文件组织起来， 对于可执行文件，系统在运行时根据这些信息加载程序运行。</p>
 <p><strong>（4）链接阶段</strong></p>
 <p>最后将每个源文件对应的目标.o文件链接起来，就生成一个可执行程序文件，这是链接器ld完成的工作。</p>
 <p>例如一个工程里包含了A和B两个代码文件，在链接阶段， 链接过程需要把A和B之间的函数调用关系理顺，也就是说要告诉A在哪里能够调用到fun函数， 建立映射关系，所以称之为链接。若链接过程中找不到fun函数的具体定义，则会链接报错。</p>
@@ -284,11 +277,10 @@
 <p>链接分为两种：</p>
 <ul>
 <li>动态链接：GCC编译时的默认选项。动态是指在应用程序运行时才去加载外部的代码库，不同的程序可以共用代码库。 所以动态链接生成的程序比较小，占用较少的内存。</li>
-<li>静态链接：链接时使用选项 “–static”，它在编译阶段就会把所有用到的库打包到自己的可执行程序中。 所以静态链接的优点是具有较好的兼容性，不依赖外部环境，但是生成的程序比较大。</li>
+<li>静态链接：链接时使用选项 “—static”，它在编译阶段就会把所有用到的库打包到自己的可执行程序中。 所以静态链接的优点是具有较好的兼容性，不依赖外部环境，但是生成的程序比较大。</li>
 </ul>
 <p>执行如下命令体验静态链接与动态链接的区别：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在hello.o所在的目录执行如下命令</span></span><br><span class="line"><span class="comment"># 动态链接，生成名为hello的可执行文件</span></span><br><span class="line"></span><br><span class="line">gcc hello.o –o hello</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以直接使用C文件一步生成，与上面的命令等价</span></span><br><span class="line">gcc hello.c <span class="literal">-o</span> hello</span><br><span class="line"></span><br><span class="line"><span class="comment"># 静态链接，使用--static参数，生成名为hello_static的可执行文件</span></span><br><span class="line">gcc hello.o –o hello_static -<span class="literal">-static</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以直接使用C文件一步生成，与上面的命令等价</span></span><br><span class="line">gcc hello.c <span class="literal">-o</span> hello_static -<span class="literal">-static</span></span><br></pre></td></tr></table></figure>
-
 <p><img src="https://s2.loli.net/2022/07/09/Oyqe8op9NSJYAju.jpg" alt="img"></p>
 <p>从图中可以看到，使用动态链接生成的hello程序才8.3KB， 而使用静态链接生成的hello_static程序则高达845KB。</p>
 <p>在Ubuntu下，可以使用 <strong>ldd</strong> 工具查看动态文件的库依赖，尝试执行如下命令：</p>
@@ -297,7 +289,6 @@
 <p>静态链接生成的hello_static没有依赖外部库文件。</p>
 <h2 id="3-GCC编译器命名格式"><a href="#3-GCC编译器命名格式" class="headerlink" title="3.GCC编译器命名格式"></a>3.GCC编译器命名格式</h2><p>除了我们安装的arm-linux-gnueabihf-gcc外，编译器还有很多版本，如arm-linux-gnueabi-gcc，本地编译器gcc全名为x86_64-linux-gnu-gcc，这些编译器是有一定的命名规则的：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch [-os] [-(gnu)eabi(hf)] -gcc</span><br></pre></td></tr></table></figure>
-
 <p>其中的各字段如下表所示：</p>
 <p><img src="https://s2.loli.net/2022/07/09/pTQAIuYhaVE5yOx.jpg" alt="img"></p>
 <p>以我们安装的arm-linux-gnueabihf-gcc编译器为例：</p>
@@ -318,14 +309,13 @@
 <li>如果想知道上面的优化参数具体做了哪些优化，可以使用 <code>gcc -Q --help=optimizers</code> 命令来查询，比如下面是查询 -O3 参数开启了哪些优化：</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -Q --help=optimizers -O3</span><br><span class="line">  ...</span><br><span class="line">  -fassociative-math              [disabled]</span><br><span class="line">  -fassume-phsa                   [enabled]</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
-
 <p>有关gcc优化的更多详细信息，请参考gcc的官方文档：</p>
 <p><a target="_blank" rel="noopener" href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#Optimize-Options">官方文档链接</a>；</p>
 <h3 id="2、常用参数："><a href="#2、常用参数：" class="headerlink" title="2、常用参数："></a>2、常用参数：</h3><p><strong>1</strong>、<code>gcc -E source_file.c</code></p>
 <blockquote>
 <p>  -E，只执行到预编译。直接输出预编译结果；</p>
 </blockquote>
-<p><strong>2</strong>、<code>gcc -S source_file.c </code></p>
+<p><strong>2</strong>、<code>gcc -S source_file.c</code></p>
 <blockquote>
 <p>  -S，只执行到源代码到汇编代码的转换，输出汇编代码；</p>
 </blockquote>
@@ -340,7 +330,7 @@
 <p>  -E：预编译结果将被输出到标准输出端口（通常是显示器）<br>  -S：生成名为source_file.s的汇编代码<br>  -c：生成名为source_file.o的目标文件。<br>  无标签情况：生成名为a.out的可执行文件。</p>
 </blockquote>
 </blockquote>
-<p><strong>5</strong>、<code>gcc -g source_file.c </code></p>
+<p><strong>5</strong>、<code>gcc -g source_file.c</code></p>
 <blockquote>
 <p>  -g，生成供调试用的可执行文件，可以在gdb中运行。由于文件中包含了调试信息因此运行效率很低，且文件也大不少。<br>  这里可以用strip命令重新将文件中debug信息删除。这是会发现生成的文件甚至比正常编译的输出更小了，这是因为strip把原先正常编译中的一些额外信息（如函数名之类）也删除了。用法为 strip a.out</p>
 </blockquote>
@@ -362,7 +352,7 @@
 </blockquote>
 <p><strong>9、</strong><code>gcc source_file.c -L/path/to/lib -lxxx -I/path/to/include</code></p>
 <blockquote>
-<p>  -l，指定所使用到的函数库，本例中链接器会尝试链接名为libxxx.a的函数库；<br>  -L，指定函数库所在的文件夹，本例中链接器会尝试搜索&#x2F;path&#x2F;to&#x2F;lib文件夹；<br>  -I，指定头文件所在的文件夹，本例中预编译器会尝试搜索&#x2F;path&#x2F;to&#x2F;include文件夹；</p>
+<p>  -l，指定所使用到的函数库，本例中链接器会尝试链接名为libxxx.a的函数库；<br>  -L，指定函数库所在的文件夹，本例中链接器会尝试搜索/path/to/lib文件夹；<br>  -I，指定头文件所在的文件夹，本例中预编译器会尝试搜索/path/to/include文件夹；</p>
 </blockquote>
 <h3 id="3、调试选项："><a href="#3、调试选项：" class="headerlink" title="3、调试选项："></a>3、调试选项：</h3><p><strong>1</strong>、<code>-g</code></p>
 <blockquote>
@@ -396,7 +386,7 @@
 </blockquote>
 <p><strong>3</strong>、<code>-symbolic</code> 建立共享目标文件的时候,把引用绑定到全局符号上.</p>
 <blockquote>
-<p>  对所有无法解析的引用作出警告(除非用连接编辑选项 &#96;-Xlinker -z -Xlinker defs’取代)；</p>
+<p>  对所有无法解析的引用作出警告(除非用连接编辑选项 `-Xlinker -z -Xlinker defs’取代)；</p>
 <p>  <strong>注：只有部分系统支持该选项；</strong></p>
 </blockquote>
 <h3 id="5、错误和警告选项："><a href="#5、错误和警告选项：" class="headerlink" title="5、错误和警告选项："></a>5、错误和警告选项：</h3><p><strong>1</strong>、<code>-Wall</code></p>
@@ -405,11 +395,11 @@
 </blockquote>
 <p><strong>2</strong>、<code>-pedantic</code></p>
 <blockquote>
-<p>  允许发出ANSI&#x2F;ISO C标准所列出的所有警告；</p>
+<p>  允许发出ANSI/ISO C标准所列出的所有警告；</p>
 </blockquote>
 <p><strong>3</strong>、<code>-pedantic-errors</code></p>
 <blockquote>
-<p>  允许发出ANSI&#x2F;ISO C标准所列出的错误；</p>
+<p>  允许发出ANSI/ISO C标准所列出的错误；</p>
 </blockquote>
 <p><strong>4</strong>、<code>-werror</code></p>
 <blockquote>
@@ -425,7 +415,7 @@
 </blockquote>
 <p><strong>2</strong>、<code>-Dmacro=defn</code></p>
 <blockquote>
-<p>  相当于C语言中的#define macro&#x3D;defn；</p>
+<p>  相当于C语言中的#define macro=defn；</p>
 </blockquote>
 <p><strong>3</strong>、<code>-Umacro</code></p>
 <blockquote>
@@ -828,10 +818,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -844,7 +830,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -856,11 +842,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -880,6 +866,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -889,10 +879,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -916,6 +902,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -928,19 +918,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -949,6 +935,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -968,10 +958,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -980,11 +966,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -992,7 +978,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1001,6 +987,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

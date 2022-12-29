@@ -200,8 +200,7 @@
 <h2 id="字体取模："><a href="#字体取模：" class="headerlink" title="字体取模："></a>字体取模：</h2><p>屏幕要显示图案，例如某个汉字或者数字、图案等，都需要对图案进行取模操作；</p>
 <p>使用的是<code>LvglFontTool</code>工具，<code>LVGL</code>官网的字体转化用于单个字体取模比较方便；批量的话，使用这个离线取模软件比较方便；</p>
 <p>操作界面如下所示：</p>
-<img src="https://s2.loli.net/2022/05/17/92tdN6pbBHvqyX7.png" alt="c941fa311425ab16f5bc3f354d99fc2" style="zoom: 67%;" />
-
+<p><img src="https://s2.loli.net/2022/05/17/92tdN6pbBHvqyX7.png" alt="c941fa311425ab16f5bc3f354d99fc2" style="zoom: 67%;" /></p>
 <p>步骤还是很简单的：</p>
 <ol>
 <li>首先选择字体，包括一个<code>TFF</code>字体文件还有选择需要取模的字体大小；</li>
@@ -209,8 +208,7 @@
 <li>然后在右边配置一些选项，按照图片上的配置就可以；</li>
 <li>最后点击开始转换就可以生成一个<code>myFont.c</code>和<code>myFont.bin</code>文件，<code>bin</code>文件加载到<code>SPI FLASH</code>中，C文件加入<code>Keil</code>工程即可;</li>
 </ol>
-<img src="https://s2.loli.net/2022/05/17/aFspGNLJkr2q5f3.png" alt="efcc7c6005ad5950310dbec4ab39cd3" style="zoom:67%;" />
-
+<p><img src="https://s2.loli.net/2022/05/17/aFspGNLJkr2q5f3.png" alt="efcc7c6005ad5950310dbec4ab39cd3" style="zoom:67%;" /></p>
 <p>如果只需要显示数量比较少的文本，取模后得到的数组可以直接放在一个<code>.c</code>或者<code>.h</code>文件中，直接下载到单片机的<code>FLASH</code>中即可，但是如果要显示各种不同样式和不同大小的字体，取模后得到的文件会很大，加载到<code>FLASH</code>中存放是不合理的。</p>
 <h2 id="文件放置："><a href="#文件放置：" class="headerlink" title="文件放置："></a>文件放置：</h2><p>小一这一版的硬件是带了一个<code>8M</code>的<code>SPI FLASH</code>，所以取模后的数据可以放在这块<code>SPI FLASH</code>中，可以用哪些方法通过单片机读取<code>bin</code>文件中的内容呢？</p>
 <p>一般是有两个方法：</p>
@@ -220,33 +218,34 @@
 </ol>
 <p>两种方案各有优缺点，第一种更换字体取模文件很方便，但是由于字体取模文件会频繁被读取，所以这个方案的效率会比较差；第二种方案更换字体取模文件比较麻烦，但是读取的效率会高不少。我是选择了第二种方案，第一种我也试了，效率确实不是很高。</p>
 <p>对于第二种方案，首先要将取模文件从PC机放入<code>SPI FLASH</code>中，我采用的方案是将<code>SPI FLASH</code>划分为两部分：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">前4MB</th>
-<th align="center">后4MB</th>
+<th style="text-align:center">前4MB</th>
+<th style="text-align:center">后4MB</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">用于存储字体取模数据</td>
-<td align="center">用于建立文件系统</td>
+<tbody>
+<tr>
+<td style="text-align:center">用于存储字体取模数据</td>
+<td style="text-align:center">用于建立文件系统</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>然后将<code>SPI FLASH</code>模拟为USB设备，插入PC机，会弹出一个U盘，将字体文件拖入；然后通过一个函数，将<code>bin</code>文件分段读取并分段写入<code>SPI FLASH</code>的前<code>4MB</code>部分中，具体函数如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write_to_flash</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">uint8_t</span> i;</span><br><span class="line">    f_res = f_open(&amp;file1, <span class="string">&quot;myFont.bin&quot;</span>, FA_READ);<span class="comment">//打开对应文件</span></span><br><span class="line">    count_f = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">190</span>; i++)<span class="comment">//文件是1900kb，由于RAM限制，每次读取10KB，分190次读取</span></span><br><span class="line">    &#123;</span><br><span class="line">        f_read(&amp;file1, ReadBuffer, <span class="number">10</span> * <span class="number">1024</span>, &amp;bw);<span class="comment">//读取文件，放入数组中</span></span><br><span class="line">        my_W25QXX_Write(ReadBuffer, i * <span class="number">10</span> * <span class="number">1024</span>, <span class="number">10</span> * <span class="number">1024</span>);<span class="comment">//将读到的数据写入SPI FLASH指定地址</span></span><br><span class="line">        count_f++;</span><br><span class="line">    &#125;</span><br><span class="line">    f_res = f_close(&amp;file1);<span class="comment">//关闭文件</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">read_from_flash</span><span class="params">(<span class="keyword">void</span>)</span><span class="comment">//读取某一位置数据，通过与PC机中bin文件相同位置数据比较来校验数据是否出错</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    my_W25QXX_Read(ReadBuffer, <span class="number">0x190</span>, <span class="number">100</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  如果有多个字体文件，可以将写入的地址偏移一个大小即可。</p>
 </blockquote>
 <h2 id="文件读取："><a href="#文件读取：" class="headerlink" title="文件读取："></a>文件读取：</h2><p>字体取模文件读取只需要修改<code>myFont.c</code>中的一个函数：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">uint8_t</span> __g_font_buf[<span class="number">324</span>]; <span class="comment">//如bin文件存在SPI FLASH可使用此buff</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">uint8_t</span> *__user_font_getdata(<span class="keyword">int</span> offset, <span class="keyword">int</span> size)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//如字模保存在SPI FLASH, SPIFLASH_Read(__g_font_buf,offset,size);</span></span><br><span class="line">    <span class="comment">//如字模已加载到SDRAM,直接返回偏移地址即可如:return (uint8_t*)(sdram_fontddr+offset);</span></span><br><span class="line">    my_W25QXX_Read(__g_font_buf, offset, size);</span><br><span class="line">    <span class="keyword">return</span> __g_font_buf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  如果有多个字体文件，可以在对应的<code>myFont</code>文件中将读出的地址偏移一个大小即可。</p>
 </blockquote>
 <h2 id="字体使用："><a href="#字体使用：" class="headerlink" title="字体使用："></a>字体使用：</h2><p>使用LVGL提供的函数接口即可调用：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">LV_FONT_DECLARE(myFont24); 										<span class="comment">// 字体声明,24号字体</span></span><br><span class="line">lv_style_init(&amp;font_style_24);</span><br><span class="line">lv_style_set_text_font(&amp;font_style_24, LV_STATE_DEFAULT, &amp;myFont24);</span><br><span class="line"></span><br><span class="line"><span class="keyword">lv_obj_t</span> *scr = lv_disp_get_scr_act(<span class="literal">NULL</span>); 						<span class="comment">/* 获取当前屏幕 */</span></span><br><span class="line"><span class="keyword">lv_obj_t</span> *label1 = lv_label_create(scr, <span class="literal">NULL</span>); 					<span class="comment">/* 创建 label 控件 */</span></span><br><span class="line"></span><br><span class="line">lv_obj_set_pos(label1, <span class="number">0</span>, <span class="number">0</span>);                  					<span class="comment">/* 设置控件的坐标 */</span></span><br><span class="line"><span class="built_in">sprintf</span>((<span class="keyword">uint8_t</span> *)text_temp, <span class="string">&quot;你好，我是小一!&quot;</span>);</span><br><span class="line">lv_label_set_text(label1, text_temp);							<span class="comment">/* 设置文字 */</span></span><br><span class="line">lv_obj_align(label1, <span class="literal">NULL</span>, LV_ALIGN_CENTER, <span class="number">0</span>, <span class="number">0</span>); 			<span class="comment">/* 设置控件的对齐方式-相对坐标 */</span> </span><br><span class="line">lv_obj_add_style(label1, LV_LABEL_PART_MAIN, &amp;font_style_24); 	<span class="comment">// 应用效果风格</span></span><br></pre></td></tr></table></figure>
-
 <p>这里边有很多坑：</p>
 <ul>
 <li>第一个是文本的字体编码格式，要修改为<code>UTF-8</code>编码格式才能正常显示；</li>
@@ -255,22 +254,26 @@
 <h2 id="最后："><a href="#最后：" class="headerlink" title="最后："></a>最后：</h2><p>刚开始字体取模还有读取取模文件就卡了好久，首先是文字编码问题，然后是<code>myFont</code>中的字体读取函数卡死，然后还有换行符的问题，然后中间莫名其妙系统还卡死很多次，初步判断是<code>LVGL</code>中的任务切换函数不能放在优先级较高的定时器中断中，必须要放在<code>while</code>循环中才可以正常运行，然后就是<code>LVGL</code>会卡死在某一个函数中，按照提示修改一般都可以解决问题。</p>
 <p>在项目中遇到了很多很多问题，花费了很大的精力才解决，不过这也是一个学习的过程，学到了很多知识还有解决问题时的办法。</p>
 <p>最后附上小一的图片还有开源代码地址:</p>
-<h3 id="图片："><a href="#图片：" class="headerlink" title="图片："></a>图片：</h3><table>
+<h3 id="图片："><a href="#图片：" class="headerlink" title="图片："></a>图片：</h3><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="left"><img src="https://s2.loli.net/2022/05/17/cmdvaZR1XwkTDtV.jpg" alt="2"></th>
+<th style="text-align:left"><img src="https://s2.loli.net/2022/05/17/cmdvaZR1XwkTDtV.jpg" alt="2"></th>
 <th><img src="https://s2.loli.net/2022/05/17/PXfwWUiZHKsJ5b7.jpg" alt="5"></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left"><img src="https://s2.loli.net/2022/05/17/bvMGjXTW3kAxZpc.jpg" alt="4"></td>
+<tbody>
+<tr>
+<td style="text-align:left"><img src="https://s2.loli.net/2022/05/17/bvMGjXTW3kAxZpc.jpg" alt="4"></td>
 <td><img src="https://s2.loli.net/2022/05/17/akDQPtXjAYyT5cL.jpg" alt="1"></td>
 </tr>
 <tr>
-<td align="left"><img src="https://s2.loli.net/2022/05/17/7MkxvwVnBCLdfYr.jpg" alt="3"></td>
+<td style="text-align:left"><img src="https://s2.loli.net/2022/05/17/7MkxvwVnBCLdfYr.jpg" alt="3"></td>
 <td><img src="https://s2.loli.net/2022/05/17/fFZetWGiyupN84Q.jpg" alt="6"></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="开源地址："><a href="#开源地址：" class="headerlink" title="开源地址："></a>开源地址：</h3><p><a target="_blank" rel="noopener" href="https://github.com/fan-pengfei/XiaoYi.git">GitHub地址</a></p>
 
       
@@ -645,10 +648,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -661,7 +660,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,11 +672,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -697,6 +696,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -706,10 +709,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -733,6 +732,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -745,19 +748,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -766,6 +765,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -785,10 +788,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -797,11 +796,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -809,7 +808,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -818,6 +817,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

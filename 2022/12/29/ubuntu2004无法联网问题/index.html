@@ -193,42 +193,59 @@
 </blockquote>
 <p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45084986/article/details/119192544?spm=1001.2014.3001.5506">VMware Ubuntu20.04无法联网的解决方法</a></p>
 <h2 id="一、安装环境及版本"><a href="#一、安装环境及版本" class="headerlink" title="一、安装环境及版本"></a>一、安装环境及版本</h2><blockquote>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">宿主机</th>
-<th align="left">Windows 10</th>
+<th style="text-align:left">宿主机</th>
+<th style="text-align:left">Windows 10</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">虚拟机软件版本</td>
-<td align="left">VMware Workstation 16 Pro</td>
+<tbody>
+<tr>
+<td style="text-align:left">虚拟机软件版本</td>
+<td style="text-align:left">VMware Workstation 16 Pro</td>
 </tr>
 <tr>
-<td align="left">ubuntu版本</td>
-<td align="left">Ubuntu 20.04</td>
+<td style="text-align:left">ubuntu版本</td>
+<td style="text-align:left">Ubuntu 20.04</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 </blockquote>
 <h2 id="二、解决方法"><a href="#二、解决方法" class="headerlink" title="二、解决方法"></a>二、解决方法</h2><p>1、虚拟机-&gt;设置-&gt;网络适配器：进行如下设置：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/12/29/MBHsxmiopR9dID6.png" alt="在这里插入图片描述"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/12/29/MBHsxmiopR9dID6.png" alt="在这里插入图片描述"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>2、然后打开终端窗口，在终端窗口输入如下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo service network-manager stop</span><br><span class="line">sudo rm /var/lib/NetworkManager/NetworkManager.state</span><br><span class="line">sudo service network-manager start</span><br></pre></td></tr></table></figure>
-
 <p>3、再运行<code>ifconfig</code>便可以发现网络已经恢复正常；</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/12/29/V7UTDw4eYLEzKv1.png" alt="88d3a0e09984f60b005c21210c88bd6"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/12/29/V7UTDw4eYLEzKv1.png" alt="88d3a0e09984f60b005c21210c88bd6"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 
       
         <!-- 《添加版权声明 -->
@@ -593,10 +610,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -609,7 +622,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,11 +634,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,6 +658,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -654,10 +671,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,6 +694,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -693,19 +710,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -714,6 +727,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -733,10 +750,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -745,11 +758,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,7 +770,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -766,6 +779,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

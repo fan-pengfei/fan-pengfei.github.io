@@ -210,26 +210,38 @@
 </blockquote>
 <p>分别如下图所示：</p>
 <p>1、在system_stm32f4xx.c中进行修改：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/04/22/J1KapwH5CjPnyBE.png"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/04/22/J1KapwH5CjPnyBE.png" alt=""></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>2、在小锤子那里进行修改：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/04/22/u1a3tkJqo2z9xVd.png"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/04/22/u1a3tkJqo2z9xVd.png" alt=""></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>3、修改完毕后，进行正常的编译即可；</p>
 <h3 id="二、BIN文件的处理"><a href="#二、BIN文件的处理" class="headerlink" title="二、BIN文件的处理"></a>二、BIN文件的处理</h3><blockquote>
 <p>最初的版本并没有加入crc校验，所以经常会出错，导致程序经常跑飞，所以加入了crc32校验；经检验，效果那是非常的好；</p>
-</blockquote>
-<blockquote>
 <p>为什么是采用bin文件而不是使用更容易得到的hex文件呢？</p>
 <p>原因很简单：因为写入单片机flash的程序实际就是bin文件，hex文件需要转换才能写进flash中；</p>
 <p>以上操作只是得到了hex文件，而我们需要的是bin文件，以下是对hex文件的处理过程：</p>
@@ -237,39 +249,59 @@
 <p>1、第一步呢，当然是得到最初的bin文件；而Keil默认情况下编译成功后生成的是Hex文件，而不是bin文件，所以要将Hex文件转换为bin文件，当然是有现成的Hex转bin的程序的，但是比较麻烦，可以用Keil自带的功能完成编译后自动生成bin文件的过程，具体的方法请自行百度；</p>
 <p>这是我的配置，仅供参考：</p>
 <blockquote>
-<p>D:\Keil_v5\ARM\ARMCC\bin\fromelf.exe –bin -o fromelf –bin -o “$<a href="mailto:&#x4c;&#64;&#x4c;&#x2e;&#98;&#x69;&#x6e;">&#x4c;&#64;&#x4c;&#x2e;&#98;&#x69;&#x6e;</a>“ “#L”</p>
+<p>D:\Keil_v5\ARM\ARMCC\bin\fromelf.exe —bin -o fromelf —bin -o “$L@L.bin” “#L”</p>
 </blockquote>
 <p>2、然后是对bin文件进行处理，也就是crc32校验码的生成以及插入该校验码到bin文件中，我用的是python脚本的方式，代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">crc2hex</span>(<span class="params">crc</span>):</span></span><br><span class="line">    res=<span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        t=crc &amp; <span class="number">0xFF</span></span><br><span class="line">        crc &gt;&gt;= <span class="number">8</span></span><br><span class="line">        res=<span class="string">&#x27;%02X%s&#x27;</span> % (t, res)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">inputfile = <span class="string">&quot;E:\IAP\APP\Project\OBJ\STM32F407.bin&quot;</span><span class="comment">#实际存放的bin文件路径</span></span><br><span class="line">isfile = os.path.isfile(inputfile);</span><br><span class="line"><span class="built_in">print</span>(inputfile);</span><br><span class="line">fp = <span class="built_in">open</span>(inputfile, <span class="string">&quot;r+b&quot;</span>)  <span class="comment">#直接打开一个文件，如果文件不存在则创建文件</span></span><br><span class="line">filesize = os.path.getsize(inputfile)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;ZI app firmware size:&quot;</span>, filesize, <span class="string">&quot;bytes.&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#计算bin文件的CRC，首先清空CRC32区域的4个byte</span></span><br><span class="line">fp.seek(<span class="number">0x1c</span>, <span class="number">0</span>)<span class="comment">#从bin文件开始，偏移地址为0x1c的地方存放bin的CRC32</span></span><br><span class="line">clear4bytes = <span class="string">&#x27;00000000&#x27;</span></span><br><span class="line">c4 =binascii.unhexlify(clear4bytes)</span><br><span class="line">fp.write(c4)  <span class="comment">#将CRC32存放的区域4bytes清零</span></span><br><span class="line">fp.seek(<span class="number">0</span>, <span class="number">0</span>)<span class="comment">#从0开始读取整个bin</span></span><br><span class="line">file_content = fp.read()<span class="comment">#读整个文件内容到 file_content</span></span><br><span class="line">crc = binascii.crc32(file_content)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;CRC32:&#x27;</span>, <span class="built_in">hex</span>(crc))</span><br><span class="line"></span><br><span class="line">fp.seek(<span class="number">0x1c</span>, <span class="number">0</span>)<span class="comment">#从bin文件开始，偏移地址为0x1c的地方存放bin的CRC32</span></span><br><span class="line"><span class="comment">#存放计算CRC32四个字节</span></span><br><span class="line">crcstr_2 = crc2hex(crc)</span><br><span class="line">r=binascii.unhexlify(crcstr_2)</span><br><span class="line">fp.write(r)</span><br><span class="line">fp.close()</span><br><span class="line">sys.exit(<span class="number">0</span>)<span class="comment">##正常退出</span></span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>代码我就不多解释了，应该还是挺容易看懂的；</p>
 </blockquote>
 <p>3、然后是对Keil进行配置，实现编译，生成bin文件和加入CRC校验可以一步完成；</p>
 <p>具体配置结果的截图如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/04/22/tI5SJfjQemFKHi9.png"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/04/22/tI5SJfjQemFKHi9.png" alt=""></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>配置成功后输出的结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/04/22/oklJyFMZKgpvjHr.png"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/04/22/oklJyFMZKgpvjHr.png" alt=""></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>4、此时在工程文件目录下就可以找到.bin文件了：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/04/22/vsJXCxQ8PzVfb4o.png"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/04/22/vsJXCxQ8PzVfb4o.png" alt=""></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>Bin文件的发送我用的是正点原子的串口助手，配置好波特率什么的就可以用蓝牙发送该bin文件了;</p>
 <h3 id="三、Bootloader部分"><a href="#三、Bootloader部分" class="headerlink" title="三、Bootloader部分"></a>三、Bootloader部分</h3><blockquote>
 <p>BootLoader就是一个引导程序，它的功能就是用串口接收蓝牙模块收到的信息，处理信息，校验信息，最后执行APP程序；</p>
@@ -277,26 +309,19 @@
 </blockquote>
 <p>Bootloader部分程序具体的工作流程是：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#接收串口收到的信息;</span></span><br><span class="line"><span class="comment">#判断是否接收完毕;</span></span><br><span class="line"><span class="comment">#提取bin文件中储存的crc32校验码;</span></span><br><span class="line"><span class="comment">#清除该校验码，还原初始bin文件;</span></span><br><span class="line"><span class="comment">#对该bin文件进行CRC校验得到校验码;</span></span><br><span class="line"><span class="comment">#比对两次得到的校验码;</span></span><br><span class="line"><span class="comment">#将bin文件写入flash中，跳转到目标地址执行APP程序;</span></span><br></pre></td></tr></table></figure>
-
 <h4 id="关键的代码如下："><a href="#关键的代码如下：" class="headerlink" title="关键的代码如下："></a>关键的代码如下：</h4><blockquote>
 <p>CRC校验函数以及校验过程：</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">crc32_temp=USART_RX_BUF[<span class="number">0x1c</span>]*<span class="number">256</span>*<span class="number">256</span>*<span class="number">256</span></span><br><span class="line">			+USART_RX_BUF[<span class="number">0x1c</span>+<span class="number">1</span>]*<span class="number">256</span>*<span class="number">256</span></span><br><span class="line">			+USART_RX_BUF[<span class="number">0x1c</span>+<span class="number">2</span>]*<span class="number">256</span></span><br><span class="line">			+USART_RX_BUF[<span class="number">0x1c</span>+<span class="number">3</span>];<span class="comment">//读取crc32的值</span></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)<span class="comment">//清空原crc32</span></span><br><span class="line">&#123;</span><br><span class="line">	USART_RX_BUF[<span class="number">0x1c</span>+i]=<span class="number">0x00</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(crc32_temp==crc32(USART_RX_BUF,applenth))<span class="comment">//判断CRC32校验值是否相等</span></span><br><span class="line">&#123;</span><br><span class="line">	crc32_true=<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%x,%x\r\nCRC校验成功！\r\n&quot;</span>,crc32_temp,crc32(USART_RX_BUF,applenth));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>CRC校验函数：</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">uint32_t</span> <span class="title">crc32</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *buf,<span class="keyword">uint32_t</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">uint32_t</span> i, crc;</span><br><span class="line">	crc = <span class="number">0xFFFFFFFF</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		crc = crc32tab[(crc ^ buf[i]) &amp; <span class="number">0xff</span>] ^ (crc &gt;&gt; <span class="number">8</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> crc^<span class="number">0xFFFFFFFF</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">uint32_t</span> crc32tab[] = &#123;</span><br><span class="line"> <span class="number">0x00000000</span>L, <span class="number">0x77073096</span>L, <span class="number">0xee0e612c</span>L, <span class="number">0x990951ba</span>L,</span><br><span class="line"> <span class="number">0x076dc419</span>L, <span class="number">0x706af48f</span>L, <span class="number">0xe963a535</span>L, <span class="number">0x9e6495a3</span>L,</span><br><span class="line"> <span class="number">0x0edb8832</span>L, <span class="number">0x79dcb8a4</span>L, <span class="number">0xe0d5e91e</span>L, <span class="number">0x97d2d988</span>L,</span><br><span class="line"> <span class="number">0x09b64c2b</span>L, <span class="number">0x7eb17cbd</span>L, <span class="number">0xe7b82d07</span>L, <span class="number">0x90bf1d91</span>L,</span><br><span class="line"> <span class="number">0x1db71064</span>L, <span class="number">0x6ab020f2</span>L, <span class="number">0xf3b97148</span>L, <span class="number">0x84be41de</span>L,</span><br><span class="line"> <span class="number">0x1adad47d</span>L, <span class="number">0x6ddde4eb</span>L, <span class="number">0xf4d4b551</span>L, <span class="number">0x83d385c7</span>L,</span><br><span class="line"> <span class="number">0x136c9856</span>L, <span class="number">0x646ba8c0</span>L, <span class="number">0xfd62f97a</span>L, <span class="number">0x8a65c9ec</span>L,</span><br><span class="line"> <span class="number">0x14015c4f</span>L, <span class="number">0x63066cd9</span>L, <span class="number">0xfa0f3d63</span>L, <span class="number">0x8d080df5</span>L,</span><br><span class="line"> <span class="number">0x3b6e20c8</span>L, <span class="number">0x4c69105e</span>L, <span class="number">0xd56041e4</span>L, <span class="number">0xa2677172</span>L,</span><br><span class="line"> <span class="number">0x3c03e4d1</span>L, <span class="number">0x4b04d447</span>L, <span class="number">0xd20d85fd</span>L, <span class="number">0xa50ab56b</span>L,</span><br><span class="line"> <span class="number">0x35b5a8fa</span>L, <span class="number">0x42b2986c</span>L, <span class="number">0xdbbbc9d6</span>L, <span class="number">0xacbcf940</span>L,</span><br><span class="line"> <span class="number">0x32d86ce3</span>L, <span class="number">0x45df5c75</span>L, <span class="number">0xdcd60dcf</span>L, <span class="number">0xabd13d59</span>L,</span><br><span class="line"> <span class="number">0x26d930ac</span>L, <span class="number">0x51de003a</span>L, <span class="number">0xc8d75180</span>L, <span class="number">0xbfd06116</span>L,</span><br><span class="line"> <span class="number">0x21b4f4b5</span>L, <span class="number">0x56b3c423</span>L, <span class="number">0xcfba9599</span>L, <span class="number">0xb8bda50f</span>L,</span><br><span class="line"> <span class="number">0x2802b89e</span>L, <span class="number">0x5f058808</span>L, <span class="number">0xc60cd9b2</span>L, <span class="number">0xb10be924</span>L,</span><br><span class="line"> <span class="number">0x2f6f7c87</span>L, <span class="number">0x58684c11</span>L, <span class="number">0xc1611dab</span>L, <span class="number">0xb6662d3d</span>L,</span><br><span class="line"> <span class="number">0x76dc4190</span>L, <span class="number">0x01db7106</span>L, <span class="number">0x98d220bc</span>L, <span class="number">0xefd5102a</span>L,</span><br><span class="line"> <span class="number">0x71b18589</span>L, <span class="number">0x06b6b51f</span>L, <span class="number">0x9fbfe4a5</span>L, <span class="number">0xe8b8d433</span>L,</span><br><span class="line"> <span class="number">0x7807c9a2</span>L, <span class="number">0x0f00f934</span>L, <span class="number">0x9609a88e</span>L, <span class="number">0xe10e9818</span>L,</span><br><span class="line"> <span class="number">0x7f6a0dbb</span>L, <span class="number">0x086d3d2d</span>L, <span class="number">0x91646c97</span>L, <span class="number">0xe6635c01</span>L,</span><br><span class="line"> <span class="number">0x6b6b51f4</span>L, <span class="number">0x1c6c6162</span>L, <span class="number">0x856530d8</span>L, <span class="number">0xf262004e</span>L,</span><br><span class="line"> <span class="number">0x6c0695ed</span>L, <span class="number">0x1b01a57b</span>L, <span class="number">0x8208f4c1</span>L, <span class="number">0xf50fc457</span>L,</span><br><span class="line"> <span class="number">0x65b0d9c6</span>L, <span class="number">0x12b7e950</span>L, <span class="number">0x8bbeb8ea</span>L, <span class="number">0xfcb9887c</span>L,</span><br><span class="line"> <span class="number">0x62dd1ddf</span>L, <span class="number">0x15da2d49</span>L, <span class="number">0x8cd37cf3</span>L, <span class="number">0xfbd44c65</span>L,</span><br><span class="line"> <span class="number">0x4db26158</span>L, <span class="number">0x3ab551ce</span>L, <span class="number">0xa3bc0074</span>L, <span class="number">0xd4bb30e2</span>L,</span><br><span class="line"> <span class="number">0x4adfa541</span>L, <span class="number">0x3dd895d7</span>L, <span class="number">0xa4d1c46d</span>L, <span class="number">0xd3d6f4fb</span>L,</span><br><span class="line"> <span class="number">0x4369e96a</span>L, <span class="number">0x346ed9fc</span>L, <span class="number">0xad678846</span>L, <span class="number">0xda60b8d0</span>L,</span><br><span class="line"> <span class="number">0x44042d73</span>L, <span class="number">0x33031de5</span>L, <span class="number">0xaa0a4c5f</span>L, <span class="number">0xdd0d7cc9</span>L,</span><br><span class="line"> <span class="number">0x5005713c</span>L, <span class="number">0x270241aa</span>L, <span class="number">0xbe0b1010</span>L, <span class="number">0xc90c2086</span>L,</span><br><span class="line"> <span class="number">0x5768b525</span>L, <span class="number">0x206f85b3</span>L, <span class="number">0xb966d409</span>L, <span class="number">0xce61e49f</span>L,</span><br><span class="line"> <span class="number">0x5edef90e</span>L, <span class="number">0x29d9c998</span>L, <span class="number">0xb0d09822</span>L, <span class="number">0xc7d7a8b4</span>L,</span><br><span class="line"> <span class="number">0x59b33d17</span>L, <span class="number">0x2eb40d81</span>L, <span class="number">0xb7bd5c3b</span>L, <span class="number">0xc0ba6cad</span>L,</span><br><span class="line"> <span class="number">0xedb88320</span>L, <span class="number">0x9abfb3b6</span>L, <span class="number">0x03b6e20c</span>L, <span class="number">0x74b1d29a</span>L,</span><br><span class="line"> <span class="number">0xead54739</span>L, <span class="number">0x9dd277af</span>L, <span class="number">0x04db2615</span>L, <span class="number">0x73dc1683</span>L,</span><br><span class="line"> <span class="number">0xe3630b12</span>L, <span class="number">0x94643b84</span>L, <span class="number">0x0d6d6a3e</span>L, <span class="number">0x7a6a5aa8</span>L,</span><br><span class="line"> <span class="number">0xe40ecf0b</span>L, <span class="number">0x9309ff9d</span>L, <span class="number">0x0a00ae27</span>L, <span class="number">0x7d079eb1</span>L,</span><br><span class="line"> <span class="number">0xf00f9344</span>L, <span class="number">0x8708a3d2</span>L, <span class="number">0x1e01f268</span>L, <span class="number">0x6906c2fe</span>L,</span><br><span class="line"> <span class="number">0xf762575d</span>L, <span class="number">0x806567cb</span>L, <span class="number">0x196c3671</span>L, <span class="number">0x6e6b06e7</span>L,</span><br><span class="line"> <span class="number">0xfed41b76</span>L, <span class="number">0x89d32be0</span>L, <span class="number">0x10da7a5a</span>L, <span class="number">0x67dd4acc</span>L,</span><br><span class="line"> <span class="number">0xf9b9df6f</span>L, <span class="number">0x8ebeeff9</span>L, <span class="number">0x17b7be43</span>L, <span class="number">0x60b08ed5</span>L,</span><br><span class="line"> <span class="number">0xd6d6a3e8</span>L, <span class="number">0xa1d1937e</span>L, <span class="number">0x38d8c2c4</span>L, <span class="number">0x4fdff252</span>L,</span><br><span class="line"> <span class="number">0xd1bb67f1</span>L, <span class="number">0xa6bc5767</span>L, <span class="number">0x3fb506dd</span>L, <span class="number">0x48b2364b</span>L,</span><br><span class="line"> <span class="number">0xd80d2bda</span>L, <span class="number">0xaf0a1b4c</span>L, <span class="number">0x36034af6</span>L, <span class="number">0x41047a60</span>L,</span><br><span class="line"> <span class="number">0xdf60efc3</span>L, <span class="number">0xa867df55</span>L, <span class="number">0x316e8eef</span>L, <span class="number">0x4669be79</span>L,</span><br><span class="line"> <span class="number">0xcb61b38c</span>L, <span class="number">0xbc66831a</span>L, <span class="number">0x256fd2a0</span>L, <span class="number">0x5268e236</span>L,</span><br><span class="line"> <span class="number">0xcc0c7795</span>L, <span class="number">0xbb0b4703</span>L, <span class="number">0x220216b9</span>L, <span class="number">0x5505262f</span>L,</span><br><span class="line"> <span class="number">0xc5ba3bbe</span>L, <span class="number">0xb2bd0b28</span>L, <span class="number">0x2bb45a92</span>L, <span class="number">0x5cb36a04</span>L,</span><br><span class="line"> <span class="number">0xc2d7ffa7</span>L, <span class="number">0xb5d0cf31</span>L, <span class="number">0x2cd99e8b</span>L, <span class="number">0x5bdeae1d</span>L,</span><br><span class="line"> <span class="number">0x9b64c2b0</span>L, <span class="number">0xec63f226</span>L, <span class="number">0x756aa39c</span>L, <span class="number">0x026d930a</span>L,</span><br><span class="line"> <span class="number">0x9c0906a9</span>L, <span class="number">0xeb0e363f</span>L, <span class="number">0x72076785</span>L, <span class="number">0x05005713</span>L,</span><br><span class="line"> <span class="number">0x95bf4a82</span>L, <span class="number">0xe2b87a14</span>L, <span class="number">0x7bb12bae</span>L, <span class="number">0x0cb61b38</span>L,</span><br><span class="line"> <span class="number">0x92d28e9b</span>L, <span class="number">0xe5d5be0d</span>L, <span class="number">0x7cdcefb7</span>L, <span class="number">0x0bdbdf21</span>L,</span><br><span class="line"> <span class="number">0x86d3d2d4</span>L, <span class="number">0xf1d4e242</span>L, <span class="number">0x68ddb3f8</span>L, <span class="number">0x1fda836e</span>L,</span><br><span class="line"> <span class="number">0x81be16cd</span>L, <span class="number">0xf6b9265b</span>L, <span class="number">0x6fb077e1</span>L, <span class="number">0x18b74777</span>L,</span><br><span class="line"> <span class="number">0x88085ae6</span>L, <span class="number">0xff0f6a70</span>L, <span class="number">0x66063bca</span>L, <span class="number">0x11010b5c</span>L,</span><br><span class="line"> <span class="number">0x8f659eff</span>L, <span class="number">0xf862ae69</span>L, <span class="number">0x616bffd3</span>L, <span class="number">0x166ccf45</span>L,</span><br><span class="line"> <span class="number">0xa00ae278</span>L, <span class="number">0xd70dd2ee</span>L, <span class="number">0x4e048354</span>L, <span class="number">0x3903b3c2</span>L,</span><br><span class="line"> <span class="number">0xa7672661</span>L, <span class="number">0xd06016f7</span>L, <span class="number">0x4969474d</span>L, <span class="number">0x3e6e77db</span>L,</span><br><span class="line"> <span class="number">0xaed16a4a</span>L, <span class="number">0xd9d65adc</span>L, <span class="number">0x40df0b66</span>L, <span class="number">0x37d83bf0</span>L,</span><br><span class="line"> <span class="number">0xa9bcae53</span>L, <span class="number">0xdebb9ec5</span>L, <span class="number">0x47b2cf7f</span>L, <span class="number">0x30b5ffe9</span>L,</span><br><span class="line"> <span class="number">0xbdbdf21c</span>L, <span class="number">0xcabac28a</span>L, <span class="number">0x53b39330</span>L, <span class="number">0x24b4a3a6</span>L,</span><br><span class="line"> <span class="number">0xbad03605</span>L, <span class="number">0xcdd70693</span>L, <span class="number">0x54de5729</span>L, <span class="number">0x23d967bf</span>L,</span><br><span class="line"> <span class="number">0xb3667a2e</span>L, <span class="number">0xc4614ab8</span>L, <span class="number">0x5d681b02</span>L, <span class="number">0x2a6f2b94</span>L,</span><br><span class="line"> <span class="number">0xb40bbe37</span>L, <span class="number">0xc30c8ea1</span>L, <span class="number">0x5a05df1b</span>L, <span class="number">0x2d02ef8d</span>L </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
 <blockquote>
 <p>程序加载以及程序跳转函数：</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(((*(vu32*)(<span class="number">0X20001000</span>+<span class="number">4</span>))&amp;<span class="number">0xFF000000</span>)==<span class="number">0x08000000</span>)<span class="comment">//判断是否为0X08XXXXXX.</span></span><br><span class="line">&#123;	  </span><br><span class="line">	iap_write_appbin(FLASH_APP1_ADDR,USART_RX_BUF,applenth);<span class="comment">//更新FLASH代码   </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;固件更新完成!\r\n&quot;</span>);	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;开始执行FLASH用户代码!!\r\n&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span>(((*(vu32*)(FLASH_APP1_ADDR+<span class="number">4</span>))&amp;<span class="number">0xFF000000</span>)==<span class="number">0x08000000</span>)<span class="comment">//判断是否为0X08XXXXXX.</span></span><br><span class="line">	&#123;	 </span><br><span class="line">		iap_load_app(FLASH_APP1_ADDR);<span class="comment">//执行FLASH APP代码</span></span><br><span class="line">		crc32_true=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;非FLASH应用程序,无法执行!\r\n&quot;</span>);	   </span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>完整的代码我放在GitHub上边了，欢迎访问。</p>
 </blockquote>
@@ -705,10 +730,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -721,7 +742,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -733,11 +754,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,6 +778,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -766,10 +791,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -793,6 +814,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -805,19 +830,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -826,6 +847,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -845,10 +870,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -857,11 +878,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -869,7 +890,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -878,6 +899,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

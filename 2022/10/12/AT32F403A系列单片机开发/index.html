@@ -214,26 +214,30 @@
 </blockquote>
 <h2 id="硬件部分："><a href="#硬件部分：" class="headerlink" title="硬件部分："></a>硬件部分：</h2><p>硬件部分我是参考官方开发板来做的；</p>
 <p>经过测试，硬件部分没有任何问题；</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">原理图</th>
-<th align="center"><img src="https://s2.loli.net/2022/10/22/1DqMwxfR4jZEbH8.png" alt="2e8cc9324c8e969b2ba048221939699"></th>
+<th style="text-align:center">原理图</th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/22/1DqMwxfR4jZEbH8.png" alt="2e8cc9324c8e969b2ba048221939699"></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">PCB仿真图</td>
-<td align="center"><img src="https://s2.loli.net/2022/10/22/tbnJfQZF4ely125.png" alt="f12b1584db83aef4fbd8cc925b76d40"></td>
+<tbody>
+<tr>
+<td style="text-align:center">PCB仿真图</td>
+<td style="text-align:center"><img src="https://s2.loli.net/2022/10/22/tbnJfQZF4ely125.png" alt="f12b1584db83aef4fbd8cc925b76d40"></td>
 </tr>
 <tr>
-<td align="center">实物图</td>
-<td align="center"><img src="https://s2.loli.net/2022/10/22/HujNB31xLJXvrod.jpg" alt="bbea8d18667d74360d3ef9c638453d5"></td>
+<td style="text-align:center">实物图</td>
+<td style="text-align:center"><img src="https://s2.loli.net/2022/10/22/HujNB31xLJXvrod.jpg" alt="bbea8d18667d74360d3ef9c638453d5"></td>
 </tr>
 <tr>
-<td align="center">显示效果</td>
-<td align="center"><img src="https://s2.loli.net/2022/10/22/AFPRnQrKwBzb1EZ.jpg" alt="dcf5793c87931e4e32513eca0f71157"></td>
+<td style="text-align:center">显示效果</td>
+<td style="text-align:center"><img src="https://s2.loli.net/2022/10/22/AFPRnQrKwBzb1EZ.jpg" alt="dcf5793c87931e4e32513eca0f71157"></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>有几个值得关注的地方，我将在下面列出：</p>
 <p><strong>使用编码器开关作为输入设备；</strong></p>
 <p><strong>使用CH340E芯片作为串口转USB；</strong></p>
@@ -242,247 +246,355 @@
 <p>硬件部分的测试很快就结束了，主要就是测试各个外设是否能正常使用；</p>
 <p>经测试，主控芯片、屏幕、spiflash、USB接口、CH340E、编码器开关、RTC时钟均能正常使用；</p>
 <h2 id="软件开发："><a href="#软件开发：" class="headerlink" title="软件开发："></a>软件开发：</h2><h3 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h3><p>主控芯片使用的是雅特力的AT32F403ACGU7，其特性如下所示：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/22/ve9ZB8o1xAYHpPK.png" alt="f9ed3e62565a45863771434081c095d"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/22/ve9ZB8o1xAYHpPK.png" alt="f9ed3e62565a45863771434081c095d"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>参考资料网站：<a target="_blank" rel="noopener" href="https://www.arterytek.com/cn/product/AT32F403A.jsp">https://www.arterytek.com/cn/product/AT32F403A.jsp</a></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/22/sDzx6mGPj9dIOwR.png" alt="ae1d18fa022ab02fffa6a006428d441"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/22/sDzx6mGPj9dIOwR.png" alt="ae1d18fa022ab02fffa6a006428d441"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>下载固件库源码，经解压后，可以在目录:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\AT32F403A_407_Firmware_Library_V2.1.2\project\at_start_f403a\examples</span><br></pre></td></tr></table></figure>
-
 <p>找到各个外设的例子：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">acc/        crm/    gpio/  spi/         wwdt/</span><br><span class="line">adc/        dac/    i2c/   sram/        xmc/</span><br><span class="line">bpr/        debug/  i2s/   tmr/</span><br><span class="line">can/        dma/    pwc/   usart/</span><br><span class="line">cortex_m4/  exint/  rtc/   usb_device/</span><br><span class="line">crc/        flash/  sdio/  wdt/</span><br></pre></td></tr></table></figure>
-
 <p>首先当然是串口打印和点灯，这样能测试时钟配置是否正常，以及判断芯片好坏与否；</p>
 <h3 id="具体开发："><a href="#具体开发：" class="headerlink" title="具体开发："></a>具体开发：</h3><p>关键代码如下：</p>
 <h4 id="点灯："><a href="#点灯：" class="headerlink" title="点灯："></a><strong>点灯</strong>：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">at32_led_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    gpio_init_type gpio_init_struct;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* enable the led clock */</span></span><br><span class="line">    crm_periph_clock_enable(USER_LED_GPIO_CRM_CLK, TRUE);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* set default parameter */</span></span><br><span class="line">    gpio_default_para_init(&amp;gpio_init_struct);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* configure the led gpio */</span></span><br><span class="line">    gpio_init_struct.gpio_pins = USER_LED_PIN;</span><br><span class="line">    gpio_init_struct.gpio_mode = GPIO_MODE_OUTPUT;</span><br><span class="line">    gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;</span><br><span class="line">    gpio_init_struct.gpio_pull = GPIO_PULL_NONE;</span><br><span class="line">    gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;</span><br><span class="line"></span><br><span class="line">    gpio_init(USER_LED_GPIO, &amp;gpio_init_struct);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">at32_led_on</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    USER_LED_GPIO-&gt;clr = USER_LED_PIN;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">at32_led_off</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    USER_LED_GPIO-&gt;scr = USER_LED_PIN;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">at32_led_toggle</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    USER_LED_GPIO-&gt;odt ^= USER_LED_PIN;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h4 id="串口："><a href="#串口：" class="headerlink" title="串口："></a><strong>串口</strong>：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">uart_print_init</span><span class="params">(<span class="keyword">uint32_t</span> baudrate)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    gpio_init_type gpio_init_struct;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* enable the uart and gpio clock */</span></span><br><span class="line">    crm_periph_clock_enable(PRINT_UART_CRM_CLK, TRUE);</span><br><span class="line">    crm_periph_clock_enable(PRINT_UART_TX_GPIO_CRM_CLK, TRUE);</span><br><span class="line">    gpio_default_para_init(&amp;gpio_init_struct);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* configure the uart tx pin */</span></span><br><span class="line">    gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;</span><br><span class="line">    gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;</span><br><span class="line">    gpio_init_struct.gpio_mode = GPIO_MODE_MUX;</span><br><span class="line">    gpio_init_struct.gpio_pins = PRINT_UART_TX_PIN;</span><br><span class="line">    gpio_init_struct.gpio_pull = GPIO_PULL_NONE;</span><br><span class="line">    gpio_init(PRINT_UART_TX_GPIO, &amp;gpio_init_struct);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* configure uart param */</span></span><br><span class="line">    usart_init(PRINT_UART, baudrate, USART_DATA_8BITS, USART_STOP_1_BIT);</span><br><span class="line">    usart_transmitter_enable(PRINT_UART, TRUE);</span><br><span class="line">    usart_enable(PRINT_UART, TRUE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>串口重定向</strong>：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)</span></span><br><span class="line">PUTCHAR_PROTOTYPE</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (usart_flag_get(PRINT_UART, USART_TDBE_FLAG) == RESET)</span><br><span class="line">        ;</span><br><span class="line">    usart_data_transmit(PRINT_UART, ch);</span><br><span class="line">    <span class="keyword">return</span> ch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>然后在main函数中分别初始化后即可：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">at32_led_init();</span><br><span class="line">uart_print_init(<span class="number">115200</span>);</span><br></pre></td></tr></table></figure>
-
 <p>通过USB线将板子连接在电脑上，即可通过串口助手收到板子发送的信息，并且板子上的LED开始闪烁；</p>
 <h4 id="LCD屏幕："><a href="#LCD屏幕：" class="headerlink" title="LCD屏幕："></a>LCD屏幕：</h4><p>然后便是测试LCD屏幕，LCD的接口使用的是SPI串行通信接口，使用AT32的硬件SPI接口，初始方案使用的是中景园的例子，成功点亮，后续为了提高帧率，优化了下，并且使用DMA传输，刷屏速度大大加快；</p>
 <p>下表是引脚配置：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">LCD引脚</th>
-<th align="center">AT32引脚</th>
+<th style="text-align:center">LCD引脚</th>
+<th style="text-align:center">AT32引脚</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">RST</td>
-<td align="center">PA8</td>
+<tbody>
+<tr>
+<td style="text-align:center">RST</td>
+<td style="text-align:center">PA8</td>
 </tr>
 <tr>
-<td align="center">DC</td>
-<td align="center">PB10</td>
+<td style="text-align:center">DC</td>
+<td style="text-align:center">PB10</td>
 </tr>
 <tr>
-<td align="center">CS</td>
-<td align="center">PB12</td>
+<td style="text-align:center">CS</td>
+<td style="text-align:center">PB12</td>
 </tr>
 <tr>
-<td align="center">BLK</td>
-<td align="center">PA3</td>
+<td style="text-align:center">BLK</td>
+<td style="text-align:center">PA3</td>
 </tr>
 <tr>
-<td align="center">MOSI</td>
-<td align="center">PB15(SPI2)</td>
+<td style="text-align:center">MOSI</td>
+<td style="text-align:center">PB15(SPI2)</td>
 </tr>
 <tr>
-<td align="center">CLK</td>
-<td align="center">PB13(SPI2)</td>
+<td style="text-align:center">CLK</td>
+<td style="text-align:center">PB13(SPI2)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>下边是屏幕驱动的关键代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @Author       : fan-pengfei 2253770787@qq.com</span></span><br><span class="line"><span class="comment"> * @Date         : 2022-10-16 18:55:05</span></span><br><span class="line"><span class="comment"> * @LastEditors  : fan-pengfei 2253770787@qq.com</span></span><br><span class="line"><span class="comment"> * @LastEditTime : 2022-10-19 13:09:13</span></span><br><span class="line"><span class="comment"> * @FilePath     : \Core\Src\lcd.c</span></span><br><span class="line"><span class="comment"> * @Description  :</span></span><br><span class="line"><span class="comment"> * Copyright (c) 2022 by fan-pengfei 2253770787@qq.com, All Rights Reserved.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;lcd.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;at32f403a_407_board.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">uint16_t</span> BACK_COLOR; <span class="comment">//背景色</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief 设置LCD亮度</span></span><br><span class="line"><span class="comment"> * @param BLK_NUM 亮度百分比</span></span><br><span class="line"><span class="comment"> * @return 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LCD_BLK_SET</span><span class="params">(<span class="keyword">uint16_t</span> BLK_NUM)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (BLK_NUM &gt; <span class="number">100</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        BLK_NUM = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    tmr_channel_value_set(TMR2, TMR_SELECT_CHANNEL_4, <span class="number">10</span> * BLK_NUM);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">uint8_t</span> dma_trans_done_flag = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief DMA1 5通道中断</span></span><br><span class="line"><span class="comment"> * @return 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DMA1_Channel5_IRQHandler</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dma_flag_get(DMA1_FDT5_FLAG) != RESET)</span><br><span class="line">    &#123;</span><br><span class="line">        dma_trans_done_flag = <span class="number">1</span>;</span><br><span class="line">        dma_reset(DMA1_CHANNEL5); <span class="comment">//复位DMA通道</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief LCD控制引脚初始化</span></span><br><span class="line"><span class="comment"> * @return 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">lcd_bus_init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* GPIO外设 */</span></span><br><span class="line">    crm_periph_clock_enable(CRM_GPIOA_PERIPH_CLOCK, TRUE); <span class="comment">//使能GPIOA外设时钟</span></span><br><span class="line">    crm_periph_clock_enable(CRM_GPIOB_PERIPH_CLOCK, TRUE); <span class="comment">//使能GPIOA外设时钟</span></span><br><span class="line">    gpio_init_type gpio_initstructure;</span><br><span class="line">    gpio_default_para_init(&amp;gpio_initstructure);</span><br><span class="line"></span><br><span class="line">    gpio_initstructure.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;</span><br><span class="line">    gpio_initstructure.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;</span><br><span class="line">    gpio_initstructure.gpio_mode = GPIO_MODE_MUX;</span><br><span class="line">    gpio_initstructure.gpio_pins = GPIO_PINS_13 | GPIO_PINS_15; <span class="comment">// PB13=SPI2_CLK  PB15=SPI2_MOSI</span></span><br><span class="line">    gpio_init(GPIOB, &amp;gpio_initstructure);</span><br><span class="line"></span><br><span class="line">    gpio_initstructure.gpio_mode = GPIO_MODE_OUTPUT;</span><br><span class="line">    gpio_initstructure.gpio_pins = GPIO_PINS_12; <span class="comment">// PB12=SPI2_CS</span></span><br><span class="line">    gpio_init(GPIOB, &amp;gpio_initstructure);</span><br><span class="line"></span><br><span class="line">    gpio_initstructure.gpio_mode = GPIO_MODE_OUTPUT;</span><br><span class="line">    gpio_initstructure.gpio_pins = GPIO_PINS_10; <span class="comment">// PB10=LCD_DC</span></span><br><span class="line">    gpio_init(GPIOB, &amp;gpio_initstructure);</span><br><span class="line"></span><br><span class="line">    gpio_initstructure.gpio_mode = GPIO_MODE_OUTPUT;</span><br><span class="line">    gpio_initstructure.gpio_pins = GPIO_PINS_8; <span class="comment">// PA8=LCD_RES</span></span><br><span class="line">    gpio_init(GPIOA, &amp;gpio_initstructure);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* SPI外设 */</span></span><br><span class="line">    crm_periph_clock_enable(CRM_SPI2_PERIPH_CLOCK, TRUE); <span class="comment">//使能SPI2外设时钟</span></span><br><span class="line"></span><br><span class="line">    spi_init_type spi_init_struct;</span><br><span class="line">    spi_default_para_init(&amp;spi_init_struct);</span><br><span class="line"></span><br><span class="line">    spi_init_struct.transmission_mode = SPI_TRANSMIT_HALF_DUPLEX_TX; <span class="comment">//仅发送</span></span><br><span class="line">    spi_init_struct.master_slave_mode = SPI_MODE_MASTER;</span><br><span class="line">    spi_init_struct.mclk_freq_division = SPI_MCLK_DIV_2; <span class="comment">// 120/2=60Mhz</span></span><br><span class="line">    spi_init_struct.first_bit_transmission = SPI_FIRST_BIT_MSB;</span><br><span class="line">    spi_init_struct.frame_bit_num = SPI_FRAME_8BIT;</span><br><span class="line">    spi_init_struct.clock_polarity = SPI_CLOCK_POLARITY_HIGH;</span><br><span class="line">    spi_init_struct.clock_phase = SPI_CLOCK_PHASE_2EDGE;</span><br><span class="line">    spi_init_struct.cs_mode_selection = SPI_CS_SOFTWARE_MODE;</span><br><span class="line">    spi_init(SPI2, &amp;spi_init_struct);</span><br><span class="line"></span><br><span class="line">    spi_i2s_dma_transmitter_enable(SPI2, TRUE); <span class="comment">//使能SPI发送DMA请求</span></span><br><span class="line"></span><br><span class="line">    spi_enable(SPI2, TRUE);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* DMA外设 */</span></span><br><span class="line">    crm_periph_clock_enable(CRM_DMA1_PERIPH_CLOCK, TRUE);</span><br><span class="line"></span><br><span class="line">    nvic_irq_enable(DMA1_Channel5_IRQn, <span class="number">1</span>, <span class="number">0</span>); <span class="comment">//使能DMA中断请求</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief LCD 发送命令</span></span><br><span class="line"><span class="comment"> * @param cmd 具体命令</span></span><br><span class="line"><span class="comment"> * @return 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">lcd_send_cmd</span><span class="params">(<span class="keyword">uint8_t</span> cmd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    OLED_DC_Clr(); <span class="comment">// D/C=0, 指令</span></span><br><span class="line">    OLED_CS_Clr(); <span class="comment">// CS=0</span></span><br><span class="line"></span><br><span class="line">    spi_frame_bit_num_set(SPI2, SPI_FRAME_8BIT);</span><br><span class="line"></span><br><span class="line">    spi_i2s_data_transmit(SPI2, cmd);</span><br><span class="line">    <span class="keyword">while</span> (spi_i2s_flag_get(SPI2, SPI_I2S_BF_FLAG) == SET)</span><br><span class="line">        ; <span class="comment">//等待传输完成</span></span><br><span class="line"></span><br><span class="line">    OLED_CS_Set(); <span class="comment">// CS=1</span></span><br><span class="line">    OLED_DC_Set(); <span class="comment">// D/C=1, 数据</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief LCD发送数据</span></span><br><span class="line"><span class="comment"> * @param *data 数据指针</span></span><br><span class="line"><span class="comment"> * @param len 数据长度</span></span><br><span class="line"><span class="comment"> * @return 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">lcd_send_data</span><span class="params">(<span class="keyword">const</span> <span class="keyword">uint8_t</span> *data, <span class="keyword">uint8_t</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    OLED_CS_Clr(); <span class="comment">// CS=0</span></span><br><span class="line"></span><br><span class="line">    spi_frame_bit_num_set(SPI2, SPI_FRAME_8BIT);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">uint8_t</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        spi_i2s_data_transmit(SPI2, data[i]);</span><br><span class="line">        <span class="keyword">while</span> (spi_i2s_flag_get(SPI2, SPI_I2S_BF_FLAG) == SET)</span><br><span class="line">            ; <span class="comment">//等待传输完成</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    OLED_CS_Set(); <span class="comment">// CS=1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief LCD 使用DMA发送数据</span></span><br><span class="line"><span class="comment"> * @param *data 数据指针</span></span><br><span class="line"><span class="comment"> * @param len 数据长度</span></span><br><span class="line"><span class="comment"> * @return 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">lcd_send_color</span><span class="params">(<span class="keyword">const</span> <span class="keyword">uint8_t</span> *data, <span class="keyword">uint32_t</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    spi_frame_bit_num_set(SPI2, SPI_FRAME_16BIT);</span><br><span class="line"></span><br><span class="line">    dma_init_type dma_init_struct;</span><br><span class="line"></span><br><span class="line">    dma_init_struct.buffer_size = len;</span><br><span class="line">    dma_init_struct.direction = DMA_DIR_MEMORY_TO_PERIPHERAL;</span><br><span class="line">    dma_init_struct.memory_base_addr = (<span class="keyword">uint32_t</span>)data;</span><br><span class="line">    dma_init_struct.memory_data_width = DMA_MEMORY_DATA_WIDTH_HALFWORD;</span><br><span class="line">    dma_init_struct.memory_inc_enable = TRUE;</span><br><span class="line">    dma_init_struct.peripheral_base_addr = (<span class="keyword">uint32_t</span>) &amp; (SPI2-&gt;dt);</span><br><span class="line">    dma_init_struct.peripheral_data_width = DMA_PERIPHERAL_DATA_WIDTH_HALFWORD;</span><br><span class="line">    dma_init_struct.peripheral_inc_enable = FALSE;</span><br><span class="line">    dma_init_struct.priority = DMA_PRIORITY_MEDIUM;</span><br><span class="line">    dma_init_struct.loop_mode_enable = FALSE;</span><br><span class="line"></span><br><span class="line">    dma_init(DMA1_CHANNEL5, &amp;dma_init_struct);</span><br><span class="line"></span><br><span class="line">    dma_interrupt_enable(DMA1_CHANNEL5, DMA_FDT_INT, TRUE); <span class="comment">//开启DMA传输完成中断</span></span><br><span class="line"></span><br><span class="line">    OLED_CS_Clr();                           <span class="comment">// CS=0</span></span><br><span class="line">    dma_channel_enable(DMA1_CHANNEL5, TRUE); <span class="comment">//启动传输</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief LCD初始化</span></span><br><span class="line"><span class="comment"> * @return 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">lcd_reg_init_st7789v</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    OLED_RST_Clr();</span><br><span class="line">    delay_ms(<span class="number">20</span>);</span><br><span class="line">    OLED_RST_Set();</span><br><span class="line">    delay_ms(<span class="number">20</span>);</span><br><span class="line">    <span class="comment">/* 退出睡眠模式 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0x11</span>);</span><br><span class="line">    <span class="comment">/* IPS屏幕需要设置屏幕反显才能显示正确的颜色 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0x21</span>); <span class="comment">//开启反显</span></span><br><span class="line">    <span class="comment">// lcd_send_cmd(0x20); //关闭反显</span></span><br><span class="line">    <span class="comment">/* 显存访问控制 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0x36</span>);</span><br><span class="line">    <span class="comment">// lcd_send_data((uint8_t[])&#123;0x60&#125;, 1); //MX=MV=1, MY=ML=MH=0, RGB=0 横屏, 芯片在右</span></span><br><span class="line">    <span class="comment">// lcd_send_data((uint8_t[])&#123;0xA0&#125;, 1); //MY=MV=1, MX=ML=MH=0, RGB=0 横屏，芯片在左</span></span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0x00</span>&#125;, <span class="number">1</span>); <span class="comment">// MX=MV=MY=ML=MH=0, RGB=0 竖屏，芯片在下</span></span><br><span class="line">    <span class="comment">/* 像素格式 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0x3A</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0x05</span>&#125;, <span class="number">1</span>); <span class="comment">// MCU mode, 16bit/pixel</span></span><br><span class="line">    <span class="comment">/* Porch设置 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0xB2</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0x0C</span>, <span class="number">0x0C</span>, <span class="number">0x00</span>, <span class="number">0x33</span>, <span class="number">0x33</span>&#125;, <span class="number">5</span>);</span><br><span class="line">    <span class="comment">/* Gate设置 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0xB7</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0x35</span>&#125;, <span class="number">1</span>); <span class="comment">// Vgh=13.26V, Vgl=-10.43V</span></span><br><span class="line">    <span class="comment">/* VCOM设置 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0xBB</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0x19</span>&#125;, <span class="number">1</span>); <span class="comment">// VCOM=0.725V</span></span><br><span class="line">    <span class="comment">/* LCN设置 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0xC0</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0x2C</span>&#125;, <span class="number">1</span>); <span class="comment">// XOR: BGR, MX, MH</span></span><br><span class="line">    <span class="comment">/* VDV与VRH写使能 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0xC2</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0x01</span>, <span class="number">0xFF</span>&#125;, <span class="number">2</span>); <span class="comment">// CMDEN=1</span></span><br><span class="line">    <span class="comment">/* VRH设置 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0xC3</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0x12</span>&#125;, <span class="number">1</span>); <span class="comment">// Vrh=4.45+</span></span><br><span class="line">    <span class="comment">/* VDV设置 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0xC4</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0x20</span>&#125;, <span class="number">1</span>); <span class="comment">// Vdv=0</span></span><br><span class="line">    <span class="comment">/* 刷新率设置 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0xC6</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0x0F</span>&#125;, <span class="number">1</span>); <span class="comment">// 60Hz, no column inversion</span></span><br><span class="line">    <span class="comment">/* 电源控制1 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0xD0</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0xA4</span>, <span class="number">0xA1</span>&#125;, <span class="number">2</span>); <span class="comment">// AVDD=6.8V, AVCL=-4.8V, VDDS=2.3V</span></span><br><span class="line">    <span class="comment">/* 正电压伽马控制 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0xE0</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0xD0</span>, <span class="number">0x0D</span>, <span class="number">0x14</span>, <span class="number">0x0B</span>, <span class="number">0x0B</span>, <span class="number">0x07</span>, <span class="number">0x3A</span>, <span class="number">0x44</span>, <span class="number">0x50</span>,</span><br><span class="line">                              <span class="number">0x08</span>, <span class="number">0x13</span>, <span class="number">0x13</span>, <span class="number">0x2D</span>, <span class="number">0x32</span>&#125;,</span><br><span class="line">                  <span class="number">14</span>);</span><br><span class="line">    <span class="comment">/* 负电压伽马控制 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0xE1</span>);</span><br><span class="line">    lcd_send_data((<span class="keyword">uint8_t</span>[])&#123;<span class="number">0xD0</span>, <span class="number">0x0D</span>, <span class="number">0x14</span>, <span class="number">0x0B</span>, <span class="number">0x0B</span>, <span class="number">0x07</span>, <span class="number">0x3A</span>, <span class="number">0x44</span>, <span class="number">0x50</span>,</span><br><span class="line">                              <span class="number">0x08</span>, <span class="number">0x13</span>, <span class="number">0x13</span>, <span class="number">0x2D</span>, <span class="number">0x32</span>&#125;,</span><br><span class="line">                  <span class="number">14</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief LCD发送某个区域的颜色数据</span></span><br><span class="line"><span class="comment"> * @param x0 横轴起始坐标</span></span><br><span class="line"><span class="comment"> * @param y0 纵轴起始坐标</span></span><br><span class="line"><span class="comment"> * @param x1 横轴结束坐标</span></span><br><span class="line"><span class="comment"> * @param y1 纵轴结束坐标</span></span><br><span class="line"><span class="comment"> * @param *pix_data 发送的数据指针</span></span><br><span class="line"><span class="comment"> * @return 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bsp_lcd_draw_rect</span><span class="params">(<span class="keyword">uint16_t</span> x0, <span class="keyword">uint16_t</span> y0, <span class="keyword">uint16_t</span> x1, <span class="keyword">uint16_t</span> y1, <span class="keyword">const</span> <span class="keyword">uint8_t</span> *pix_data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">uint8_t</span> tx_data[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 设置Column地址 */</span></span><br><span class="line">    tx_data[<span class="number">0</span>] = x0 &gt;&gt; <span class="number">8</span>;   <span class="comment">//起始地址高8位</span></span><br><span class="line">    tx_data[<span class="number">1</span>] = x0 &amp; <span class="number">0xFF</span>; <span class="comment">//起始地址高8位</span></span><br><span class="line">    tx_data[<span class="number">2</span>] = x1 &gt;&gt; <span class="number">8</span>;   <span class="comment">//结束地址高8位</span></span><br><span class="line">    tx_data[<span class="number">3</span>] = x1 &amp; <span class="number">0xFF</span>; <span class="comment">//结束地址高8位</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0x2A</span>);</span><br><span class="line">    lcd_send_data(tx_data, <span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 设置Page地址 */</span></span><br><span class="line">    tx_data[<span class="number">0</span>] = y0 &gt;&gt; <span class="number">8</span>;</span><br><span class="line">    tx_data[<span class="number">1</span>] = y0 &amp; <span class="number">0xFF</span>;</span><br><span class="line">    tx_data[<span class="number">2</span>] = y1 &gt;&gt; <span class="number">8</span>;</span><br><span class="line">    tx_data[<span class="number">3</span>] = y1 &amp; <span class="number">0xFF</span>;</span><br><span class="line">    lcd_send_cmd(<span class="number">0x2B</span>);</span><br><span class="line">    lcd_send_data(tx_data, <span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 写入图像数据 */</span></span><br><span class="line">    lcd_send_cmd(<span class="number">0x2C</span>);</span><br><span class="line">    lcd_send_color(pix_data, (x1 - x0 + <span class="number">1</span>) * (y1 - y0 + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief 等待数据传输完毕</span></span><br><span class="line"><span class="comment"> * @return 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bsp_lcd_draw_rect_wait</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (dma_trans_done_flag == <span class="number">0</span>)</span><br><span class="line">        ; <span class="comment">//等待传输完毕</span></span><br><span class="line">    dma_trans_done_flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (spi_i2s_flag_get(SPI2, SPI_I2S_BF_FLAG) == SET)</span><br><span class="line">        ;          <span class="comment">// DMA传输完成中断产生时，SPI的最后一个字节仍在传输中，不能提前释放CS</span></span><br><span class="line">    OLED_CS_Set(); <span class="comment">// CS=1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief 控制LCD开关</span></span><br><span class="line"><span class="comment"> * @param status 1-&gt;开 0-&gt;关</span></span><br><span class="line"><span class="comment"> * @return 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bsp_lcd_display_switch</span><span class="params">(<span class="keyword">uint8_t</span> status)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (status)</span><br><span class="line">    &#123;</span><br><span class="line">        lcd_send_cmd(<span class="number">0x29</span>); <span class="comment">//开显示</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        lcd_send_cmd(<span class="number">0x28</span>); <span class="comment">//关显示</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief LCD初始化</span></span><br><span class="line"><span class="comment"> * @return 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bsp_lcd_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lcd_bus_init();</span><br><span class="line">    lcd_reg_init_st7789v();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//下面是头文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __LCD_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __LCD_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;at32f403a_407_board.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;at32f403a_407_clock.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdlib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OLED_RST_Clr() gpio_bits_reset(GPIOA, GPIO_PINS_8) <span class="comment">// RES</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OLED_RST_Set() gpio_bits_set(GPIOA, GPIO_PINS_8)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OLED_DC_Clr() gpio_bits_reset(GPIOB, GPIO_PINS_10) <span class="comment">// DC</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OLED_DC_Set() gpio_bits_set(GPIOB, GPIO_PINS_10)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OLED_CS_Clr() gpio_bits_reset(GPIOB, GPIO_PINS_12) <span class="comment">// CS</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OLED_CS_Set() gpio_bits_set(GPIOB, GPIO_PINS_12)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OLED_BLK_Clr() gpio_bits_reset(GPIOA, GPIO_PINS_3) <span class="comment">// BLK</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OLED_BLK_Set() gpio_bits_set(GPIOA, GPIO_PINS_3)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 屏幕分辨率 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BSP_LCD_X_PIXELS 240</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BSP_LCD_Y_PIXELS 240</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bsp_lcd_init</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bsp_lcd_display_switch</span><span class="params">(<span class="keyword">uint8_t</span> status)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bsp_lcd_draw_rect</span><span class="params">(<span class="keyword">uint16_t</span> x0, <span class="keyword">uint16_t</span> y0, <span class="keyword">uint16_t</span> x1, <span class="keyword">uint16_t</span> y1, <span class="keyword">const</span> <span class="keyword">uint8_t</span> *dat)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bsp_lcd_draw_rect_wait</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LCD_BLK_SET</span><span class="params">(<span class="keyword">uint16_t</span> BLK_NUM)</span></span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
 <h4 id="编码器开关："><a href="#编码器开关：" class="headerlink" title="编码器开关："></a>编码器开关：</h4><p>接下来是测试编码器开关，编码器型号为：<code>SIQ-02FVS3</code>，</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/22/zJacSd89snBMjRK.png" alt="487216d6f5625d3151b7b37162c28c4"></th>
-<th align="center"><img src="https://s2.loli.net/2022/10/22/mV6EKp9CM1Fbnaj.png" alt="1fdfad3965ae4864f644eb7ab9ce885"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/22/zJacSd89snBMjRK.png" alt="487216d6f5625d3151b7b37162c28c4"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/22/mV6EKp9CM1Fbnaj.png" alt="1fdfad3965ae4864f644eb7ab9ce885"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>根据上述原理图可以发现这其实跟光电编码器很相似；</p>
 <p>因而我使用外部中断来检测编码器的转动方向和转动角度以及按键状态：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">uint8_t</span> flag_exit = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">uint8_t</span> int_nu = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int32_t</span> cnt_encode = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">EXINT0_IRQHandler</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (exint_flag_get(EXINT_LINE_0) != RESET)</span><br><span class="line">    &#123;</span><br><span class="line">        i = <span class="number">2000</span>;</span><br><span class="line">        <span class="keyword">while</span> (i--)</span><br><span class="line">            ;</span><br><span class="line">        <span class="keyword">if</span> (int_nu == <span class="number">0</span> &amp;&amp; gpio_input_data_bit_read(GPIOB, GPIO_PINS_0) == <span class="number">0</span>) <span class="comment">//第一次中断，并且A相是下降沿</span></span><br><span class="line">        &#123;</span><br><span class="line">            flag_exit = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (gpio_input_data_bit_read(GPIOB, GPIO_PINS_1))</span><br><span class="line">                flag_exit = <span class="number">1</span>; <span class="comment">//根据B相，设定标志</span></span><br><span class="line">            int_nu = <span class="number">1</span>;        <span class="comment">//中断计数</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (int_nu &amp;&amp; gpio_input_data_bit_read(GPIOB, GPIO_PINS_0) == <span class="number">1</span>) <span class="comment">//第二次中断，并且A相是上升沿</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (gpio_input_data_bit_read(GPIOB, GPIO_PINS_1) == <span class="number">0</span> &amp;&amp; flag_exit == <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                cnt_encode--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (gpio_input_data_bit_read(GPIOB, GPIO_PINS_1) &amp;&amp; flag_exit == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                cnt_encode++;</span><br><span class="line">            &#125;</span><br><span class="line">            int_nu = <span class="number">0</span>; <span class="comment">//中断计数复位，准备下一次</span></span><br><span class="line">        &#125;</span><br><span class="line">        exint_flag_clear(EXINT_LINE_0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  <code>cnt_encode</code>中存放旋转次数（24°为1单位），至于按键的按动状态检测则放在了1ms的定时器中；</p>
 </blockquote>
 <p>经测试，该检测算法可以很好的消除拨码开关转动时的抖动，最后得到的结果是比较准确的；</p>
 <h3 id="中间件移植："><a href="#中间件移植：" class="headerlink" title="中间件移植："></a>中间件移植：</h3><p>外设都测试完毕，接下来就是各种中间件的移植：LVGL移植、FATFS移植、USB Device等；</p>
 <h4 id="LVGL-8-3移植："><a href="#LVGL-8-3移植：" class="headerlink" title="LVGL-8.3移植："></a>LVGL-8.3移植：</h4><h5 id="文件夹创建："><a href="#文件夹创建：" class="headerlink" title="文件夹创建："></a>文件夹创建：</h5><p>下载以后打开文件可以看见下面四个文件：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/23/LQS7yUClPIgiqxa.png" alt="源码文件"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/23/LQS7yUClPIgiqxa.png" alt="源码文件"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <h6 id="第一步："><a href="#第一步：" class="headerlink" title="第一步："></a><strong>第一步：</strong></h6><p>在<code>stm32</code>工程下面创建一个文件夹，名称为<code>lvgl</code>；</p>
 <p>将上图中的四个文件加入到lvgl文件夹中；</p>
 <p>把<code>lv_conf_template.h</code>文件重命名为<code>lv_conf.h</code>；</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/23/rZVL3yP2twcWisq.png" alt="第一步"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/23/rZVL3yP2twcWisq.png" alt="第一步"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <h6 id="第二步："><a href="#第二步：" class="headerlink" title="第二步："></a><strong>第二步：</strong></h6><p>在<code>lvgl/examples/porting</code>文件夹中把三个.h文件开头的<code>#if 0</code>改为<code>#if 1</code>；</p>
 <p>打开你原本的stm32工程（就是那个正常驱动屏幕的工程），使能<code>c99</code>；</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/23/Saq1gzkZIGOw6KT.png" alt="使能从99"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/23/Saq1gzkZIGOw6KT.png" alt="使能从99"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <h6 id="第三步："><a href="#第三步：" class="headerlink" title="第三步："></a><strong>第三步：</strong></h6><p>在左侧栏中添加两个文件夹</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/23/fqzsYwyi1dVBKtR.png" alt="添加两个文件夹"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/23/fqzsYwyi1dVBKtR.png" alt="添加两个文件夹"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>添加两个<code>port</code>文件，位于<code>lvgl/examples/porting</code>，因为没有用到文件系统，故没有添加fs：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th><img src="https://s2.loli.net/2022/10/23/ha7UrNoM6smWBHP.png" alt="添加port文件"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>添加<code>lvgl</code>源文件，将<code>lvgl/src</code>目录下的<code>core draw font hal misc widgets</code>文件夹下的所有文件全部添加进<code>lvgl</code>组</p>
 <blockquote>
 <p>  注：文件夹中还有子文件夹要一层一层打开并加入；</p>
 </blockquote>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/23/2vxTIlHPYwtX8AV.png" alt="src文件"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/23/2vxTIlHPYwtX8AV.png" alt="src文件"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>将<code>lvgl/src/extra/</code>目录下的文件添加进<code>lvgl</code>组。具体为：</p>
 <blockquote>
 <p>  <code>layouts</code>目录下所有子目录文件；<br>  <code>themes</code>目录下所有子目录文件；<br>  <code>widgets</code>目录下所有子目录文件；<br>  <code>lv_extra.c</code>；</p>
 </blockquote>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/23/Tu3cXFMiy4vdhON.png" alt="extra文件"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/23/Tu3cXFMiy4vdhON.png" alt="extra文件"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>加入路径，将<code>lvgl</code> ，<code>src</code>，<code>porting</code>文件夹添加到源路径下。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/23/WpsSBQbgkVFM8Kf.png" alt="添加路径"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/23/WpsSBQbgkVFM8Kf.png" alt="添加路径"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <h5 id="修改配置文件："><a href="#修改配置文件：" class="headerlink" title="修改配置文件："></a><strong>修改配置文件：</strong></h5><p>修改<code>lv_port_disp_template.h</code>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th><img src="https://s2.loli.net/2022/10/23/VqANovgSU5FT3Lw.png" alt="if1"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>修改<code>lv_port_disp_template.c</code>：<br>将开头的<code>#if 0</code>改成<code>#if 1</code></p>
 <p>修改<code>lv_conf.h</code>：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th><img src="https://s2.loli.net/2022/10/23/PYeIu6OAyiwaxWt.png" alt="lv"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>这两句是修改你屏幕大小的，直接粘贴在那里就可以了。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MY_DISP_HOR_RES 240</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MY_DISP_VER_RES  240</span></span><br></pre></td></tr></table></figure>
-
 <h5 id="修改显示的必要文件："><a href="#修改显示的必要文件：" class="headerlink" title="修改显示的必要文件："></a><strong>修改显示的必要文件：</strong></h5><p>在<code>lv_port_disp_template.c</code>中包含着显示的重要文件，这里我们只需要修改两处：</p>
 <h6 id="第一处："><a href="#第一处：" class="headerlink" title="第一处："></a><strong>第一处：</strong></h6><p>把框选的地方注释掉，</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th><img src="https://s2.loli.net/2022/10/23/5nVWTuNhPYHFB1v.png" alt="在这里插入图片描述"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>去除<code>warning</code>；<br>此时编译应该没有<code>error</code>，但是有<code>warning</code>这个<code>warning</code>无伤大雅可以直接屏蔽；</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/23/8Gl3EyDLHQdXZiO.png" alt="屏蔽"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/23/8Gl3EyDLHQdXZiO.png" alt="屏蔽"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p><code>--diag_suppress=188,546,68,111</code><br>当完成这一步的时候就已经说明你已经把显示的移植了99%了，可以编译看一下是否有报错；</p>
 <h6 id="第二处："><a href="#第二处：" class="headerlink" title="第二处："></a><strong>第二处：</strong></h6><p>这是刷新函数，用于图形填充的，这里介绍两种方法，第一种是不断画点，只需要把红色部分写成你原来工程中的画点的函数就可以了，如果你的画点函数传入的形参中颜色的定义并不是指针的方式的话，一定要写成图中<code>color_p-&gt;full</code>的形式，不然会报错的。</p>
 <blockquote>
 <p>  不要把<code>#include“lcd.h”</code>遗忘</p>
 </blockquote>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/23/RIaJEOZq8LCMQtf.png" alt="在这里插入图片描述"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/23/RIaJEOZq8LCMQtf.png" alt="在这里插入图片描述"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
+</div>
 <p>第二种方法是通过区域填充来实现的如果你是使用中景园的代码，你直接调用他的区域填充函数基本上会花屏，所以需要对他的函数进行一下改良。<br>可在你本来工程下面的<code>lcd.c</code>中添加一段代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lvgl_LCD_Color_Fill</span><span class="params">(u16 sx, u16 sy, u16 ex, u16 ey, <span class="keyword">lv_color_t</span> *color)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">uint32_t</span> y=<span class="number">0</span>; </span><br><span class="line">    u16 height, width;</span><br><span class="line">    width = ex - sx + <span class="number">1</span>;            <span class="comment">//得到填充的宽度</span></span><br><span class="line">    height = ey - sy + <span class="number">1</span>;           <span class="comment">//高度</span></span><br><span class="line">    LCD_SetWindows(sx,sy,ex,ey);</span><br><span class="line">    <span class="keyword">for</span>(y = <span class="number">0</span>; y &lt;width*height; y++) </span><br><span class="line">    &#123;</span><br><span class="line">        Lcd_WriteData_16Bit(color-&gt;full);</span><br><span class="line">        color++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>也许他会报错说找不到<code>lv_color_t </code>这是以为我们没有在文件开头添加<code>#include &quot;lvgl.h&quot; </code>添加以后还需要在<code>lcd.h</code>文件中进行声明，不出意外还会报错，需要你在文件开头加入<code>#include &quot;lvgl.h&quot; </code>，我们就可以把第一种的描点换成画图：</p>
+<p>也许他会报错说找不到<code>lv_color_t</code>这是以为我们没有在文件开头添加<code>#include &quot;lvgl.h&quot;</code>添加以后还需要在<code>lcd.h</code>文件中进行声明，不出意外还会报错，需要你在文件开头加入<code>#include &quot;lvgl.h&quot;</code>，我们就可以把第一种的描点换成画图：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><img src="https://s2.loli.net/2022/10/23/Zeu5EbAk9dgDcnS.png" alt="在这里插入图片描述"></th>
+<th style="text-align:center"><img src="https://s2.loli.net/2022/10/23/Zeu5EbAk9dgDcnS.png" alt="在这里插入图片描述"></th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
 </table>
-<h5 id="显示测试："><a href="#显示测试：" class="headerlink" title="显示测试："></a><strong>显示测试：</strong></h5><p>在<code>main.c</code>中&#96;&#96;#include “lvgl.h”<code> </code>#include “lv_port_disp_template.h”&#96; 随后在屏幕初始化后面加上代码：</p>
+</div>
+<h5 id="显示测试："><a href="#显示测试：" class="headerlink" title="显示测试："></a><strong>显示测试：</strong></h5><p>在<code>main.c</code>中<code>`#include &quot;lvgl.h&quot;</code> <code>#include &quot;lv_port_disp_template.h&quot;</code> 随后在屏幕初始化后面加上代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lv_init();</span><br><span class="line">lv_port_disp_init();</span><br></pre></td></tr></table></figure>
 <p>还需要一个在嘀嗒定时器里加一个跳动的“心脏”进行刷新；</p>
 <blockquote>
-<p>  <code>lv_tick_inc(1)</code>;&#x2F;&#x2F;在中断里面进行刷新；</p>
+<p>  <code>lv_tick_inc(1)</code>;//在中断里面进行刷新；</p>
 <p>  如果这个对你而言比较难实现你也可以把这个放到主函数的循环里面；</p>
 </blockquote>
 <p>并在主函数中创建一个测试函数：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lv_ex_label</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* github_addr = <span class="string">&quot;https://gitee.com/W23&quot;</span>;</span><br><span class="line">    <span class="keyword">lv_obj_t</span> * label = lv_label_create(lv_scr_act());</span><br><span class="line">    lv_label_set_recolor(label, <span class="literal">true</span>);</span><br><span class="line">    lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR); <span class="comment">/*Circular scroll*/</span></span><br><span class="line">    lv_obj_set_width(label, <span class="number">120</span>);</span><br><span class="line">    lv_label_set_text_fmt(label, <span class="string">&quot;#ff0000 Gitee: %s#&quot;</span>, github_addr);</span><br><span class="line">    lv_obj_align(label, LV_ALIGN_CENTER, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">lv_obj_t</span> * label2 = lv_label_create(lv_scr_act());</span><br><span class="line">    lv_label_set_recolor(label2, <span class="literal">true</span>);</span><br><span class="line">    lv_label_set_long_mode(label2, LV_LABEL_LONG_SCROLL_CIRCULAR); <span class="comment">/*Circular scroll*/</span></span><br><span class="line">    lv_obj_set_width(label2, <span class="number">120</span>);</span><br><span class="line">    lv_label_set_text_fmt(label2, <span class="string">&quot;#ff0000 Hello# #0000ff world !123456789#&quot;</span>);</span><br><span class="line">    lv_obj_align(label2, LV_ALIGN_CENTER, <span class="number">0</span>, <span class="number">-10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 <p>将测试函数写在<code>lv_port_disp_init();</code>的后面</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LCD_Init();</span><br><span class="line">lv_init();</span><br><span class="line">lv_port_disp_init();</span><br><span class="line">lv_ex_label();</span><br></pre></td></tr></table></figure>
-
 <p>在主函数中写：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lv_task_handler();</span><br><span class="line">delay_ms(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
-
 <h5 id="lv-port-disp-c示例代码："><a href="#lv-port-disp-c示例代码：" class="headerlink" title="lv_port_disp.c示例代码："></a>lv_port_disp.c示例代码：</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;lv_port_disp.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;lcd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MY_DISP_HOR_RES 240</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  MY_DISP_VER_RES 240</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LVGL_BUFF_SIZE (BSP_LCD_X_PIXELS * BSP_LCD_Y_PIXELS / 4) <span class="comment">// 1/6屏幕分辨率</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">lv_color_t</span> lvgl_draw_buff1[LVGL_BUFF_SIZE];</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">lv_color_t</span> lvgl_draw_buff2[LVGL_BUFF_SIZE];</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">disp_flush</span><span class="params">(<span class="keyword">lv_disp_drv_t</span> *disp_drv, <span class="keyword">const</span> <span class="keyword">lv_area_t</span> *area, <span class="keyword">lv_color_t</span> *color_p)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lv_port_disp_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* 向lvgl注册缓冲区 */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">lv_disp_draw_buf_t</span> draw_buf_dsc; <span class="comment">//需要全程生命周期，设置为静态变量</span></span><br><span class="line">    lv_disp_draw_buf_init(&amp;draw_buf_dsc, lvgl_draw_buff1, lvgl_draw_buff2, <span class="keyword">sizeof</span>(lvgl_draw_buff1) / <span class="keyword">sizeof</span>(<span class="keyword">lv_color_t</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 创建并初始化用于在lvgl中注册显示设备的结构 */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">lv_disp_drv_t</span> disp_drv;</span><br><span class="line">    lv_disp_drv_init(&amp;disp_drv); <span class="comment">//使用默认值初始化该结构</span></span><br><span class="line">    <span class="comment">/* 设置屏幕分辨率 */</span></span><br><span class="line">    disp_drv.hor_res = BSP_LCD_X_PIXELS;</span><br><span class="line">    disp_drv.ver_res = BSP_LCD_Y_PIXELS;</span><br><span class="line">    <span class="comment">/* 初始化LCD总线 */</span></span><br><span class="line">    bsp_lcd_init();</span><br><span class="line">    <span class="comment">/* 设置显示矩形函数，用于将矩形缓冲区刷新到屏幕上 */</span></span><br><span class="line">    disp_drv.flush_cb = disp_flush;</span><br><span class="line">    <span class="comment">/* 设置缓冲区 */</span></span><br><span class="line">    disp_drv.draw_buf = &amp;draw_buf_dsc;</span><br><span class="line">    <span class="comment">/* 注册显示设备 */</span></span><br><span class="line">    lv_disp_drv_register(&amp;disp_drv);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 开启显示 */</span></span><br><span class="line">    bsp_lcd_display_switch(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">disp_flush</span><span class="params">(<span class="keyword">lv_disp_drv_t</span> *disp_drv, <span class="keyword">const</span> <span class="keyword">lv_area_t</span> *area, <span class="keyword">lv_color_t</span> *color_p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* 等待上次传输完成 */</span></span><br><span class="line">    bsp_lcd_draw_rect_wait();</span><br><span class="line">    <span class="comment">/* 通知lvgl传输已完成 */</span></span><br><span class="line">    lv_disp_flush_ready(disp_drv);</span><br><span class="line">    <span class="comment">/* 启动新的传输 */</span></span><br><span class="line">    bsp_lcd_draw_rect(area-&gt;x1, area-&gt;y1, area-&gt;x2, area-&gt;y2, (<span class="keyword">const</span> <span class="keyword">uint8_t</span> *)color_p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  这里的数据传输部分的代码直接使用的是DMA传输，在该分辨率下，lvgl的benchmark加权平均帧率甚至能达到200FPS；</p>
 </blockquote>
@@ -867,10 +979,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -883,7 +991,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -895,11 +1003,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -919,6 +1027,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -928,10 +1040,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -955,6 +1063,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -967,19 +1079,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -988,6 +1096,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1007,10 +1119,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -1019,11 +1127,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1031,7 +1139,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1040,6 +1148,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

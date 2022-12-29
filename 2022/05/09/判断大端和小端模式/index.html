@@ -188,15 +188,13 @@
         <blockquote>
 <p>测试自己的电脑是小端模式还是大端模式；<span id="more"></span></p>
 </blockquote>
-<h2 id="方法一：地址转换"><a href="#方法一：地址转换" class="headerlink" title="方法一：地址转换"></a>方法一：地址转换</h2><p>将int 48存起来，然后取得其地址，再将这个地址转为char* ，这时候，如果是小端存储，那么char*指针就指向48；</p>
+<h2 id="方法一：地址转换"><a href="#方法一：地址转换" class="headerlink" title="方法一：地址转换"></a>方法一：地址转换</h2><p>将int 48存起来，然后取得其地址，再将这个地址转为char<em> ，这时候，如果是小端存储，那么char</em>指针就指向48；</p>
 <blockquote>
 <p>  48对应的ASCII码为字符<code>0</code>；</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">judge_bigend_littleend1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">48</span>;</span><br><span class="line">    <span class="keyword">int</span>* p = &amp;i;</span><br><span class="line">    <span class="keyword">char</span> c = <span class="number">0</span>;</span><br><span class="line">    c = *((<span class="keyword">char</span>*)p);</span><br><span class="line">    <span class="keyword">if</span> (c == <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="方法二：同方法一"><a href="#方法二：同方法一" class="headerlink" title="方法二：同方法一"></a>方法二：同方法一</h2><p>定义变量int i&#x3D;1;将 i 的地址拿到，强转成char*型，这时候就取到了 i 的低地址，这时候如果是1就是小端存储，如果是0就是大端存储。</p>
+<h2 id="方法二：同方法一"><a href="#方法二：同方法一" class="headerlink" title="方法二：同方法一"></a>方法二：同方法一</h2><p>定义变量int i=1;将 i 的地址拿到，强转成char*型，这时候就取到了 i 的低地址，这时候如果是1就是小端存储，如果是0就是大端存储。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">judge_bigend_littleend2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> c = (*(<span class="keyword">char</span>*)&amp;i);</span><br><span class="line">    <span class="keyword">if</span> (c)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="方法三：利用联合体对齐规则"><a href="#方法三：利用联合体对齐规则" class="headerlink" title="方法三：利用联合体对齐规则"></a>方法三：利用联合体对齐规则</h2><p>定义联合体，一个成员是多字节，一个是单字节，给多字节的成员赋一个最低一个字节不为0，其他字节为0 的值，再用第二个成员来判断，如果第二个字节不为0，就是小端，若为0，就是大端。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">judge_bigend_littleend3</span><span class="params">()</span><span class="comment">//因为联合体小的总是在低位</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">union</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">char</span> c;</span><br><span class="line">    &#125;un;</span><br><span class="line">    un.i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (un.c == <span class="number">1</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -572,10 +570,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -588,7 +582,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,11 +594,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,6 +618,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -633,10 +631,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -660,6 +654,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -672,19 +670,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -693,6 +687,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -712,10 +710,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -724,11 +718,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -736,7 +730,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -745,6 +739,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

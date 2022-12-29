@@ -202,7 +202,7 @@
 <h3 id="核心步骤："><a href="#核心步骤：" class="headerlink" title="核心步骤："></a>核心步骤：</h3><p><strong>逆波兰算法的核心步骤就2个：</strong></p>
 <blockquote>
 <ol>
-<li>将中缀表达式转换为后缀表达式，例如输入的原始表达式是 3*(5+7) ，转换得到 3 5 7 + *</li>
+<li>将中缀表达式转换为后缀表达式，例如输入的原始表达式是 3<em>(5+7) ，转换得到 3 5 7 + </em></li>
 <li>根据后缀表达式，按照特定的计算规则得到最终计算结果</li>
 </ol>
 </blockquote>
@@ -227,8 +227,11 @@
 </li>
 <li>最后，如果SOP中还有元素，则依次弹出追加到L后，就得到了后缀表达式。</li>
 </ol>
-<h3 id="举例："><a href="#举例：" class="headerlink" title="举例："></a>举例：</h3><p><strong>中缀式子：</strong><br>$$<br>(2*(3-4))*5<br>$$<br><strong>逆波兰式（后缀式子）：</strong><br>$$<br>2 3 4-*5*<br>$$</p>
-<h2 id="二、逆波兰表达式的计算"><a href="#二、逆波兰表达式的计算" class="headerlink" title="二、逆波兰表达式的计算"></a>二、逆波兰表达式的计算</h2><h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><ol>
+<h3 id="举例："><a href="#举例：" class="headerlink" title="举例："></a>举例：</h3><p><strong>中缀式子：</strong></p>
+<script type="math/tex; mode=display">
+(2*(3-4))*5</script><p><strong>逆波兰式（后缀式子）：</strong></p>
+<script type="math/tex; mode=display">
+2 3 4-\*5\*</script><h2 id="二、逆波兰表达式的计算"><a href="#二、逆波兰表达式的计算" class="headerlink" title="二、逆波兰表达式的计算"></a>二、逆波兰表达式的计算</h2><h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><ol>
 <li>从左到右扫描表达式，如果当前字符为数字，则入栈。</li>
 <li>如果当前字符为运算符，则将栈顶两个元素出栈，作相应运算，结果再入栈。 </li>
 <li>最后当表达式扫描完后，栈里的就是计算结果了。</li>
@@ -614,10 +617,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -630,7 +629,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,11 +641,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -666,6 +665,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -675,10 +678,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,6 +701,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -714,19 +717,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -735,6 +734,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,10 +757,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -766,11 +765,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -778,7 +777,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -787,6 +786,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

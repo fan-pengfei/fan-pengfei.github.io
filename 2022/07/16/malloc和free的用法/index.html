@@ -194,14 +194,12 @@
 </blockquote>
 <h2 id="一、函数原型及说明："><a href="#一、函数原型及说明：" class="headerlink" title="一、函数原型及说明："></a>一、函数原型及说明：</h2><h3 id="malloc-："><a href="#malloc-：" class="headerlink" title="malloc()："></a><strong>malloc()：</strong></h3><p><strong>函数原型：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">long</span> NumBytes)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  该函数分配了NumBytes个字节，并返回了指向这块内存的指针。如果分配失败，则返回一个空指针（NULL）。</p>
 <p>  关于分配失败的原因，应该有多种，比如说空间不足就是一种。</p>
 </blockquote>
 <h3 id="free-："><a href="#free-：" class="headerlink" title="free()："></a><strong>free()：</strong></h3><p><strong>函数原型：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *FirstByte)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  该函数是将之前用malloc分配的空间还给程序或者是操作系统，也就是释放了这块内存，让它重新得到自由。</p>
 </blockquote>
@@ -216,9 +214,6 @@
 </blockquote>
 <p><strong>4、虽然malloc()函数的类型是(void *)，任何类型的指针都可以转换成(void *)，但是最好还是在前面进行强制类型转换，因为这样可以躲过一些编译器的检查；</strong></p>
 <h2 id="三、具体例子："><a href="#三、具体例子：" class="headerlink" title="三、具体例子："></a>三、具体例子：</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Code...</span></span><br><span class="line"><span class="keyword">char</span> *Ptr = <span class="literal">NULL</span>;</span><br><span class="line">Ptr = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span> * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">NULL</span> == Ptr)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">exit</span> (<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">gets(Ptr);</span><br><span class="line"><span class="comment">// code...</span></span><br><span class="line"><span class="built_in">free</span>(Ptr);</span><br><span class="line">Ptr = <span class="literal">NULL</span>;</span><br><span class="line"><span class="comment">// code...</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="四、原理部分："><a href="#四、原理部分：" class="headerlink" title="四、原理部分："></a>四、原理部分：</h2><h3 id="1、malloc内存空间的来源："><a href="#1、malloc内存空间的来源：" class="headerlink" title="1、malloc内存空间的来源："></a>1、malloc内存空间的来源：</h3><blockquote>
 <p>  答案是从堆里面获得空间。</p>
 <p>  也就是说函数返回的指针是指向堆里面的一块内存。操作系统中有一个记录空闲内存地址的链表。当操作系统收到程序的申请时，就会遍历该链表，然后就寻找第一个空间大于所申请空间的堆结点，然后就将该结点从空闲结点链表中删除，并将该结点的空间分配给程序。</p>
@@ -232,15 +227,13 @@
 </blockquote>
 <p><strong>free()的源代码：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mem_control_block</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> is_available;    <span class="comment">//一般来说应该是一个可用空间的首地址，但这里英文单词却显示出空间是否可用的一个标记</span></span><br><span class="line">    <span class="keyword">int</span> size;            <span class="comment">//这是实际空间的大小</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *ptr)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">mem_control_block</span> *<span class="title">free</span>;</span></span><br><span class="line">    <span class="built_in">free</span> = ptr - <span class="keyword">sizeof</span>(struct mem_control_block);</span><br><span class="line">    <span class="built_in">free</span>-&gt;is_available = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <h2 id="五、直接定义一个数组和使用malloc动态分配的区别："><a href="#五、直接定义一个数组和使用malloc动态分配的区别：" class="headerlink" title="五、直接定义一个数组和使用malloc动态分配的区别："></a>五、直接定义一个数组和使用malloc动态分配的区别：</h2><blockquote>
-<p>  malloc作为一个包含在&lt;stdlib.h&gt;头文件下的函数，用于申请空间。</p>
+<p>  malloc作为一个包含在<stdlib.h>头文件下的函数，用于申请空间。</p>
 </blockquote>
 <p>我们平常定义数组一般习惯性的就直接定义，比如<code>int a[5]</code>，此处就是直接定义了一个数组，数组内的元素都是int型，并且有五个，从一开始就确定了数组a的大小，并且无法被改变。</p>
 <p>并且变量被存放在<strong>栈区</strong>，栈区的变量都是由系统自己开辟空间存储，并自动销毁空间释放的。</p>
 <p>其实，还有一种定义数组的方式，那就是借助人为申请空间的方式定义一个数组。请看如下程序：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *a = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>[<span class="number">5</span>]));</span><br><span class="line">    a[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    a[<span class="number">1</span>]=<span class="number">2</span>;</span><br><span class="line">    a[<span class="number">2</span>]=<span class="number">3</span>;</span><br><span class="line">    a[<span class="number">3</span>]=<span class="number">4</span>;</span><br><span class="line">    a[<span class="number">4</span>]=<span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  定义的方法是首先得定义一个指针，然后在这个指针的指向下，利用malloc去开辟一个自定义大小的空间。</p>
 </blockquote>
@@ -632,10 +625,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -648,7 +637,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -660,11 +649,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,6 +673,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -693,10 +686,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -720,6 +709,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -732,19 +725,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -753,6 +742,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -772,10 +765,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -784,11 +773,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -796,7 +785,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,6 +794,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

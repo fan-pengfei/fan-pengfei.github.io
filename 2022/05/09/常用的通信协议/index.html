@@ -213,14 +213,12 @@
 <p>空闲位：没有数据传输时线路上的电平状态。为逻辑1。 </p>
 <p>传输方向：即数据是从高位(MSB)开始传输还是从低位(LSB)开始传输。比如传输“A”如果是MSB那么就是01000001，如果是LSB那么就是10000010</p>
 <p>帧间隔：即传送数据的帧与帧之间的间隔大小，可以以位为计量也可以用时间(知道波特率那么位数和时间可以换算)。比如传送”A”完后，这为一帧数据，再传”B”，那么A与B之间的间隔即为帧间隔。 </p>
-</blockquote>
-<blockquote>
 <p>波特率定义：有效数据信号调制载波的速率，每秒传输1或0的个数；</p>
 <p>例如：串口传输速率为9600bps，每秒可传输多少字节？</p>
-<p>起始位：1	数据位：8</p>
-<p>停止位：1	校验位：0</p>
+<p>起始位：1    数据位：8</p>
+<p>停止位：1    校验位：0</p>
 <p>传输1字节数据，需要传输10bit，因此：</p>
-<p>9600 ÷ 10 &#x3D; <strong>960Byte</strong></p>
+<p>9600 ÷ 10 = <strong>960Byte</strong></p>
 </blockquote>
 <h2 id="二、IIC通讯协议："><a href="#二、IIC通讯协议：" class="headerlink" title="二、IIC通讯协议："></a>二、IIC通讯协议：</h2><p>IIC协议为半双工协议。</p>
 <p>全双工指在发送数据的同时也能够接收数据；</p>
@@ -233,18 +231,16 @@
 <p><img src="https://s2.loli.net/2022/05/09/lohGLODJXIuVNq4.png" alt="img"></p>
 <blockquote>
 <p>注意：注意起始和终止信号都是由主机发出的，总线在起始条件之后，视为忙状态，在停止条件之后被视为空闲状态。</p>
-</blockquote>
-<blockquote>
 <p>应答（ACK，Acknowledgement）。即确认字符，在数据通信中，接收站发给发送站的一种传输类控制字符。主机每向从机发送完一个字节的数据，主机总是需要等待从机给出一个应答信号，来确认从机是否成功接收到了数据，从机应答主机所需要的时钟也是由主机提供的，应答出现在每一次主机完成8个数据位传输后紧跟着的时钟周期，低电平0表示应答，1表示非应答。，需要应答时，数据发出方将SDA总线设置为3态输入，由于IIC总线上有上拉电阻，因此此时总线默认高电平，若数据接收方正确接收到数据，则数据接收方将SDA总线拉低，以示正确应答。</p>
 </blockquote>
 <p>IIC传输时时从MSB开始传输到LSB结束。MSB是Most Significant Bit的缩写，最高有效位。在二进制数中，MSB是最高加权位。与十进制数字中最左边的一位类似。通常，MSB位于二进制数的最左侧，LSB位于二进制数的最右侧。LSB，英文 least significant bit，中文义最低有效位。</p>
 <p>写时序：</p>
 <p><img src="https://s2.loli.net/2022/05/09/Wl8YfhadFQ6btMk.jpg" alt="img"></p>
-<p>​	ID_Address, REG_Address, W_REG_Data</p>
+<p>​    ID_Address, REG_Address, W_REG_Data</p>
 <blockquote>
 <ol>
 <li>产生start位；</li>
-<li>传送器件地址ID_Address，器件地址的最后一位为数据的传输方向位，R&#x2F;W，低电平0表示主机往从机写数据（W），1表示主机从从机读数据（R）。ACK应答，应答是从机发送给主机的应答，这里不用管；</li>
+<li>传送器件地址ID_Address，器件地址的最后一位为数据的传输方向位，R/W，低电平0表示主机往从机写数据（W），1表示主机从从机读数据（R）。ACK应答，应答是从机发送给主机的应答，这里不用管；</li>
 <li>传送写入器件寄存器地址，即数据要写入的位置。同样ACK应答不用管；</li>
 <li>传送要写入的数据。ACK应答不用管；</li>
 <li>产生stop信号；</li>
@@ -252,7 +248,7 @@
 </blockquote>
 <p>读时序：</p>
 <p><img src="https://s2.loli.net/2022/05/09/7r5jshI1uEwF6NY.jpg" alt="img"></p>
-<p>​	{ID_Address + REG_Address} + {ID_Address + R_REG_Data}</p>
+<p>​    {ID_Address + REG_Address} + {ID_Address + R_REG_Data}</p>
 <blockquote>
 <ol>
 <li>产生start信号</li>
@@ -299,15 +295,15 @@
 <p>主机在<code>MOSI</code>线上发送一位数据，从机读取它，而从机在<code>MISO</code>线上发送一位数据，主机读取它。</p>
 <p>就算只进行单向的数据传输，也要保持这样的顺序。这就意味着无论接收任何数据，必须实际发送一些东西！在这种情况下，我们称其为虚拟数据；</p>
 <p>从理论上讲，只要实际可行，时钟速率就可以是您想要的任何速率，当然这个速率受限于每个系统能提供多大的系统时钟频率，以及最大的SPI传输速率。</p>
-<h3 id="时钟极性-CKP-x2F-Clock-Polarity"><a href="#时钟极性-CKP-x2F-Clock-Polarity" class="headerlink" title="时钟极性 CKP&#x2F;Clock Polarity"></a>时钟极性 CKP&#x2F;Clock Polarity</h3><p>除了配置串行时钟速率（频率）外，SPI主设备还需要配置<strong>时钟极性</strong>。</p>
+<h3 id="时钟极性-CKP-Clock-Polarity"><a href="#时钟极性-CKP-Clock-Polarity" class="headerlink" title="时钟极性 CKP/Clock Polarity"></a>时钟极性 CKP/Clock Polarity</h3><p>除了配置串行时钟速率（频率）外，SPI主设备还需要配置<strong>时钟极性</strong>。</p>
 <p>根据硬件制造商的命名规则不同，时钟极性通常写为<strong>CKP</strong>或<strong>CPOL</strong>。时钟极性和相位共同决定读取数据的方式，比如信号上升沿读取数据还是信号下降沿读取数据；</p>
 <p><strong>CKP</strong>可以配置为1或0。这意味着您可以根据需要将时钟的默认状态（IDLE）设置为高或低。极性反转可以通过简单的逻辑逆变器实现。您必须参考设备的数据手册才能正确设置CKP和CKE。</p>
 <ul>
 <li><code>CKP = 0</code>：时钟空闲<code>IDLE</code>为低电平 <code>0</code>；</li>
 <li><code>CKP = 1</code>：时钟空闲<code>IDLE</code>为高电平<code>1</code>；</li>
 </ul>
-<h3 id="时钟相位-CKE-x2F-Clock-Phase-Edge"><a href="#时钟相位-CKE-x2F-Clock-Phase-Edge" class="headerlink" title="时钟相位 CKE &#x2F;Clock Phase (Edge)"></a>时钟相位 CKE &#x2F;Clock Phase (Edge)</h3><p>除配置串行时钟速率和极性外，SPI主设备还应配置时钟相位（或边沿）。根据硬件制造商的不同，时钟相位通常写为<strong>CKE</strong>或<strong>CPHA</strong>；</p>
-<p>顾名思义，时钟相位&#x2F;边沿，也就是采集数据时是在时钟信号的具体相位或者边沿；</p>
+<h3 id="时钟相位-CKE-Clock-Phase-Edge"><a href="#时钟相位-CKE-Clock-Phase-Edge" class="headerlink" title="时钟相位 CKE /Clock Phase (Edge)"></a>时钟相位 CKE /Clock Phase (Edge)</h3><p>除配置串行时钟速率和极性外，SPI主设备还应配置时钟相位（或边沿）。根据硬件制造商的不同，时钟相位通常写为<strong>CKE</strong>或<strong>CPHA</strong>；</p>
+<p>顾名思义，时钟相位/边沿，也就是采集数据时是在时钟信号的具体相位或者边沿；</p>
 <ul>
 <li><code>CKE = 0</code>：在时钟信号<code>SCK</code>的第一个跳变沿采样；</li>
 <li><code>CKE = 1</code>：在时钟信号<code>SCK</code>的第二个跳变沿采样；</li>
@@ -349,7 +345,7 @@
 <li>高速数据传输速率。</li>
 <li>简单的软件配置；</li>
 <li>极其灵活的数据传输，不限于8位，它可以是任意大小的字；</li>
-<li>非常简单的硬件结构。从站不需要唯一地址（与I2C不同）。从机使用主机时钟，不需要精密时钟振荡器&#x2F;晶振（与UART不同）。不需要收发器（与CAN不同）。</li>
+<li>非常简单的硬件结构。从站不需要唯一地址（与I2C不同）。从机使用主机时钟，不需要精密时钟振荡器/晶振（与UART不同）。不需要收发器（与CAN不同）。</li>
 </ul>
 <h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a><strong>缺点：</strong></h4><ul>
 <li>没有硬件从机应答信号（主机可能在不知情的情况下无处发送）；</li>
@@ -538,7 +534,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81USART%E5%92%8CUART"><span class="toc-number">1.</span> <span class="toc-text">一、USART和UART:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81IIC%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">二、IIC通讯协议：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81SPI%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.</span> <span class="toc-text">三、SPI通讯协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E8%84%9A%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">引脚定义：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">数据传输：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">3.3.</span> <span class="toc-text">一些配置：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%A2%91%E7%8E%87"><span class="toc-number">3.4.</span> <span class="toc-text">时钟频率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E6%9E%81%E6%80%A7-CKP-x2F-Clock-Polarity"><span class="toc-number">3.5.</span> <span class="toc-text">时钟极性 CKP&#x2F;Clock Polarity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E7%9B%B8%E4%BD%8D-CKE-x2F-Clock-Phase-Edge"><span class="toc-number">3.6.</span> <span class="toc-text">时钟相位 CKE &#x2F;Clock Phase (Edge)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BB%93"><span class="toc-number">3.7.</span> <span class="toc-text">时钟配置总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E4%BB%8E%E6%9C%BA%E6%A8%A1%E5%BC%8F%EF%BC%9A"><span class="toc-number">3.8.</span> <span class="toc-text">多从机模式：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A%E5%A4%9ANSS"><span class="toc-number">3.8.1.</span> <span class="toc-text">第一种方法：多NSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A%E8%8F%8A%E8%8A%B1%E9%93%BE"><span class="toc-number">3.8.2.</span> <span class="toc-text">第二种方法：菊花链</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="toc-number">3.9.</span> <span class="toc-text">优缺点：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF%EF%BC%9A"><span class="toc-number">3.9.1.</span> <span class="toc-text">优势：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="toc-number">3.9.2.</span> <span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PS-IIC%E6%98%AFMSB-first-UART%E6%98%AF-LSB-first%EF%BC%8CSPI%E6%98%AF%E5%8F%AF%E9%85%8D%E7%BD%AE%E7%9A%84%E3%80%82"><span class="toc-number">3.9.3.</span> <span class="toc-text">PS:IIC是MSB first ,UART是 LSB first，SPI是可配置的。</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81USART%E5%92%8CUART"><span class="toc-number">1.</span> <span class="toc-text">一、USART和UART:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81IIC%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">二、IIC通讯协议：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81SPI%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.</span> <span class="toc-text">三、SPI通讯协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E8%84%9A%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">引脚定义：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">数据传输：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">3.3.</span> <span class="toc-text">一些配置：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%A2%91%E7%8E%87"><span class="toc-number">3.4.</span> <span class="toc-text">时钟频率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E6%9E%81%E6%80%A7-CKP-Clock-Polarity"><span class="toc-number">3.5.</span> <span class="toc-text">时钟极性 CKP&#x2F;Clock Polarity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E7%9B%B8%E4%BD%8D-CKE-Clock-Phase-Edge"><span class="toc-number">3.6.</span> <span class="toc-text">时钟相位 CKE &#x2F;Clock Phase (Edge)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BB%93"><span class="toc-number">3.7.</span> <span class="toc-text">时钟配置总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E4%BB%8E%E6%9C%BA%E6%A8%A1%E5%BC%8F%EF%BC%9A"><span class="toc-number">3.8.</span> <span class="toc-text">多从机模式：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A%E5%A4%9ANSS"><span class="toc-number">3.8.1.</span> <span class="toc-text">第一种方法：多NSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A%E8%8F%8A%E8%8A%B1%E9%93%BE"><span class="toc-number">3.8.2.</span> <span class="toc-text">第二种方法：菊花链</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="toc-number">3.9.</span> <span class="toc-text">优缺点：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF%EF%BC%9A"><span class="toc-number">3.9.1.</span> <span class="toc-text">优势：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="toc-number">3.9.2.</span> <span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PS-IIC%E6%98%AFMSB-first-UART%E6%98%AF-LSB-first%EF%BC%8CSPI%E6%98%AF%E5%8F%AF%E9%85%8D%E7%BD%AE%E7%9A%84%E3%80%82"><span class="toc-number">3.9.3.</span> <span class="toc-text">PS:IIC是MSB first ,UART是 LSB first，SPI是可配置的。</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -734,10 +730,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -750,7 +742,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -762,11 +754,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -786,6 +778,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -795,10 +791,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -822,6 +814,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -834,19 +830,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -855,6 +847,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -874,10 +870,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -886,11 +878,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -898,7 +890,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -907,6 +899,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

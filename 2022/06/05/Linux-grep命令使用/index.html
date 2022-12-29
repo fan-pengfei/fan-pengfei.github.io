@@ -198,77 +198,56 @@
 </blockquote>
 <h3 id="grep命令常见用法"><a href="#grep命令常见用法" class="headerlink" title="grep命令常见用法"></a>grep命令常见用法</h3><h4 id="1、字符串搜索："><a href="#1、字符串搜索：" class="headerlink" title="1、字符串搜索："></a>1、字符串搜索：</h4><p><strong>在文件中搜索一个单词，命令会返回一个包含 “match_pattern” 的文本行：</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep match_pattern file_name</span><br><span class="line">grep &quot;match_pattern&quot; file_name</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  例子：</p>
 <p>  <img src="https://s2.loli.net/2022/06/05/MzrU816ch2Tfigl.png" alt="img"></p>
 </blockquote>
 <h4 id="2、在多个文件中查找字符串："><a href="#2、在多个文件中查找字符串：" class="headerlink" title="2、在多个文件中查找字符串："></a>2、在多个文件中查找字符串：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;match_pattern&quot; file_1 file_2 file_3 ...</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  例子：</p>
 <p>  <img src="https://s2.loli.net/2022/06/05/1rdvPTgkYsRDUAJ.png" alt="2"></p>
 </blockquote>
 <h4 id="3、输出除之外的所有行-v-选项："><a href="#3、输出除之外的所有行-v-选项：" class="headerlink" title="3、输出除之外的所有行 -v 选项："></a>3、输出除之外的所有行 <strong>-v</strong> 选项：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -v &quot;match_pattern&quot; file_name</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  例子：</p>
 <p>  <img src="https://s2.loli.net/2022/06/05/92ioJTKaDNHcIn4.png" alt="img"></p>
 </blockquote>
-<h4 id="4、标记匹配颜色"><a href="#4、标记匹配颜色" class="headerlink" title="4、标记匹配颜色"></a>4、标记匹配颜色</h4><p><strong>–color&#x3D;auto 选项：</strong></p>
+<h4 id="4、标记匹配颜色"><a href="#4、标记匹配颜色" class="headerlink" title="4、标记匹配颜色"></a>4、标记匹配颜色</h4><p><strong>—color=auto 选项：</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;match_pattern&quot; file_name --color=auto</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  例子：</p>
 <p>  <img src="https://s2.loli.net/2022/06/05/oE2HBDmw9RPfGvk.png" alt="3"></p>
 </blockquote>
 <h4 id="5、使用正则表达式："><a href="#5、使用正则表达式：" class="headerlink" title="5、使用正则表达式："></a>5、使用正则表达式：</h4><p>使用正则表达式 <strong>-E</strong> 选项：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grep -E &quot;[1-9]+&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或</span></span><br><span class="line">egrep &quot;[1-9]+&quot;</span><br></pre></td></tr></table></figure>
-
 <p>使用正则表达式 <strong>-P</strong> 选项：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -P &quot;(\d&#123;3&#125;\-)&#123;2&#125;\d&#123;4&#125;&quot; file_name</span><br></pre></td></tr></table></figure>
-
 <p>只输出文件中匹配到的部分 <strong>-o</strong> 选项：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo this is a test line. | grep -o -E &quot;[a-z]+\.&quot;</span><br><span class="line">line.</span><br><span class="line"></span><br><span class="line">echo this is a test line. | egrep -o &quot;[a-z]+\.&quot;</span><br><span class="line">line.</span><br></pre></td></tr></table></figure>
-
 <h4 id="6、统计文件或者文本中包含匹配字符串的行数："><a href="#6、统计文件或者文本中包含匹配字符串的行数：" class="headerlink" title="6、统计文件或者文本中包含匹配字符串的行数："></a>6、统计文件或者文本中包含匹配字符串的行数：</h4><p><strong>-c 选项：</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -c &quot;text&quot; file_name</span><br></pre></td></tr></table></figure>
-
 <h4 id="7、搜索命令行历史记录中-输入过-git-命令的记录："><a href="#7、搜索命令行历史记录中-输入过-git-命令的记录：" class="headerlink" title="7、搜索命令行历史记录中 输入过 git 命令的记录："></a>7、搜索命令行历史记录中 输入过 <code>git</code> 命令的记录：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history | grep git</span><br></pre></td></tr></table></figure>
-
 <h4 id="8、输出包含匹配字符串的行数-n-选项："><a href="#8、输出包含匹配字符串的行数-n-选项：" class="headerlink" title="8、输出包含匹配字符串的行数 -n 选项："></a>8、输出包含匹配字符串的行数 <strong>-n</strong> 选项：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;text&quot; -n file_name</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或</span></span><br><span class="line">cat file_name | grep &quot;text&quot; -n</span><br><span class="line"><span class="meta">#</span><span class="bash">多个文件</span></span><br><span class="line">grep &quot;text&quot; -n file_1 file_2</span><br></pre></td></tr></table></figure>
-
 <h4 id="9、打印样式匹配所位于的字符或字节偏移："><a href="#9、打印样式匹配所位于的字符或字节偏移：" class="headerlink" title="9、打印样式匹配所位于的字符或字节偏移："></a>9、打印样式匹配所位于的字符或字节偏移：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo gun is not unix | grep -b -o &quot;not&quot;</span><br><span class="line">7:not</span><br><span class="line"><span class="meta">#</span><span class="bash">一行中字符串的字符便宜是从该行的第一个字符开始计算，起始值为0。选项  **-b -o**  一般总是配合使用。</span></span><br></pre></td></tr></table></figure>
-
 <h4 id="10、搜索多个文件并查找匹配文本在哪些文件中："><a href="#10、搜索多个文件并查找匹配文本在哪些文件中：" class="headerlink" title="10、搜索多个文件并查找匹配文本在哪些文件中："></a>10、搜索多个文件并查找匹配文本在哪些文件中：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -l &quot;text&quot; file1 file2 file3...</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  例子：</p>
 <p>  <img src="https://s2.loli.net/2022/06/05/v9iGYIOQysTXdu4.png" alt="4"></p>
 </blockquote>
 <h4 id="11、grep递归搜索文件："><a href="#11、grep递归搜索文件：" class="headerlink" title="11、grep递归搜索文件："></a>11、grep递归搜索文件：</h4><p>在多级目录中对文本进行递归搜索：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;text&quot; . -r -n</span><br><span class="line"><span class="meta">#</span><span class="bash"> .表示当前目录。</span></span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  例子：<img src="https://s2.loli.net/2022/06/05/9k4iFfUxrgq6XVN.png" alt="5"></p>
 </blockquote>
 <h4 id="12、忽略匹配样式中的字符大小写："><a href="#12、忽略匹配样式中的字符大小写：" class="headerlink" title="12、忽略匹配样式中的字符大小写："></a>12、忽略匹配样式中的字符大小写：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;hello world&quot; | grep -i &quot;HELLO&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> hello</span></span><br></pre></td></tr></table></figure>
-
 <h4 id="13、选项-e-制动多个匹配样式："><a href="#13、选项-e-制动多个匹配样式：" class="headerlink" title="13、选项 -e 制动多个匹配样式："></a>13、选项 <strong>-e</strong> 制动多个匹配样式：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">echo this is a text line | grep -e &quot;is&quot; -e &quot;line&quot; -o</span><br><span class="line">is</span><br><span class="line">is</span><br><span class="line">line</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">也可以使用 **-f** 选项来匹配多个样式，在样式文件中逐行写出需要匹配的字符。</span></span><br><span class="line">cat patfile</span><br><span class="line">aaa</span><br><span class="line">bbb</span><br><span class="line"></span><br><span class="line">echo aaa bbb ccc ddd eee | grep -f patfile -o</span><br></pre></td></tr></table></figure>
-
 <h4 id="14、在grep搜索结果中包括或者排除指定文件："><a href="#14、在grep搜索结果中包括或者排除指定文件：" class="headerlink" title="14、在grep搜索结果中包括或者排除指定文件："></a>14、在grep搜索结果中包括或者排除指定文件：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 只在目录中所有的.php和.html文件中递归搜索字符<span class="string">&quot;main()&quot;</span></span></span><br><span class="line">grep &quot;main()&quot; . -r --include *.&#123;php,html&#125;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在搜索结果中排除所有README文件</span></span><br><span class="line">grep &quot;main()&quot; . -r --exclude &quot;README&quot;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在搜索结果中排除filelist文件列表里的文件</span></span><br><span class="line">grep &quot;main()&quot; . -r --exclude-from filelist</span><br></pre></td></tr></table></figure>
-
 <h4 id="15、使用0值字节后缀的grep与xargs："><a href="#15、使用0值字节后缀的grep与xargs：" class="headerlink" title="15、使用0值字节后缀的grep与xargs："></a>15、使用0值字节后缀的grep与xargs：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 测试文件：</span></span><br><span class="line">echo &quot;aaa&quot; &gt; file1</span><br><span class="line">echo &quot;bbb&quot; &gt; file2</span><br><span class="line">echo &quot;aaa&quot; &gt; file3</span><br><span class="line"></span><br><span class="line">grep &quot;aaa&quot; file* -lZ | xargs -0 rm</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行后会删除file1和file3，grep输出用-Z选项来指定以0值字节作为终结符文件名（\0），xargs -0 读取输入并用0值字节终结符分隔文件名，然后删除匹配文件，-Z通常和-l结合使用。</span></span><br></pre></td></tr></table></figure>
-
 <h4 id="15、grep静默输出："><a href="#15、grep静默输出：" class="headerlink" title="15、grep静默输出："></a>15、grep静默输出：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -q &quot;test&quot; filename</span><br><span class="line"><span class="meta">#</span><span class="bash"> 不会输出任何信息，如果命令运行成功返回0，失败则返回非0值。一般用于条件测试。</span></span><br></pre></td></tr></table></figure>
-
 <h4 id="16、打印出匹配文本之前或者之后的行："><a href="#16、打印出匹配文本之前或者之后的行：" class="headerlink" title="16、打印出匹配文本之前或者之后的行："></a>16、打印出匹配文本之前或者之后的行：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示匹配某个结果之后的3行，使用 -A 选项：</span></span><br><span class="line">seq 10 | grep &quot;5&quot; -A 3</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示匹配某个结果之前的3行，使用 -B 选项：</span></span><br><span class="line">seq 10 | grep &quot;5&quot; -B 3</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示匹配某个结果的前三行和后三行，使用 -C 选项：</span></span><br><span class="line">seq 10 | grep &quot;5&quot; -C 3</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果匹配结果有多个，会用“--”作为各匹配结果之间的分隔符：</span></span><br><span class="line">echo -e &quot;a\nb\nc\na\nb\nc&quot; | grep a -A 1</span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">--</span><br><span class="line">a</span><br><span class="line">b</span><br></pre></td></tr></table></figure>
-
-<h3 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h3><p><strong>grep</strong> （global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。用于过滤&#x2F;搜索的特定字符。可使用正则表达式能配合多种命令使用，使用上十分灵活。</p>
+<h3 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h3><p><strong>grep</strong> （global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。用于过滤/搜索的特定字符。可使用正则表达式能配合多种命令使用，使用上十分灵活。</p>
 <h4 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">-a --text  # 不要忽略二进制数据。</span><br><span class="line">-A &lt;显示行数&gt;   --after-context=&lt;显示行数&gt;   # 除了显示符合范本样式的那一行之外，并显示该行之后的内容。</span><br><span class="line">-b --byte-offset                           # 在显示符合范本样式的那一行之外，并显示该行之前的内容。</span><br><span class="line">-B&lt;显示行数&gt;   --before-context=&lt;显示行数&gt;   # 除了显示符合样式的那一行之外，并显示该行之前的内容。</span><br><span class="line">-c --count    # 计算符合范本样式的列数。</span><br><span class="line">-C&lt;显示行数&gt; --context=&lt;显示行数&gt;或-&lt;显示行数&gt; # 除了显示符合范本样式的那一列之外，并显示该列之前后的内容。</span><br><span class="line">-d&lt;进行动作&gt; --directories=&lt;动作&gt;  # 当指定要查找的是目录而非文件时，必须使用这项参数，否则grep命令将回报信息并停止动作。</span><br><span class="line">-e&lt;范本样式&gt; --regexp=&lt;范本样式&gt;   # 指定字符串作为查找文件内容的范本样式。</span><br><span class="line">-E --extended-regexp             # 将范本样式为延伸的普通表示法来使用，意味着使用能使用扩展正则表达式。</span><br><span class="line">-f&lt;范本文件&gt; --file=&lt;规则文件&gt;     # 指定范本文件，其内容有一个或多个范本样式，让grep查找符合范本条件的文件内容，格式为每一列的范本样式。</span><br><span class="line">-F --fixed-regexp   # 将范本样式视为固定字符串的列表。</span><br><span class="line">-G --basic-regexp   # 将范本样式视为普通的表示法来使用。</span><br><span class="line">-h --no-filename    # 在显示符合范本样式的那一列之前，不标示该列所属的文件名称。</span><br><span class="line">-H --with-filename  # 在显示符合范本样式的那一列之前，标示该列的文件名称。</span><br><span class="line">-i --ignore-case    # 忽略字符大小写的差别。</span><br><span class="line">-l --file-with-matches   # 列出文件内容符合指定的范本样式的文件名称。</span><br><span class="line">-L --files-without-match # 列出文件内容不符合指定的范本样式的文件名称。</span><br><span class="line">-n --line-number         # 在显示符合范本样式的那一列之前，标示出该列的编号。</span><br><span class="line">-P --perl-regexp         # PATTERN 是一个 Perl 正则表达式</span><br><span class="line">-q --quiet或--silent     # 不显示任何信息。</span><br><span class="line">-R/-r  --recursive       # 此参数的效果和指定“-d recurse”参数相同。</span><br><span class="line">-s --no-messages  # 不显示错误信息。</span><br><span class="line">-v --revert-match # 反转查找。</span><br><span class="line">-V --version      # 显示版本信息。   </span><br><span class="line">-w --word-regexp  # 只显示全字符合的列。</span><br><span class="line">-x --line-regexp  # 只显示全列符合的列。</span><br><span class="line">-y # 此参数效果跟“-i”相同。</span><br><span class="line">-o # 只输出文件中匹配到的部分。</span><br><span class="line">-m &lt;num&gt; --max-count=&lt;num&gt; # 找到num行结果后停止查找，用来限制匹配行数</span><br></pre></td></tr></table></figure>
-
 <h4 id="规则表达式"><a href="#规则表达式" class="headerlink" title="规则表达式"></a>规则表达式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">^    # 锚定行的开始 如：&#x27;^grep&#x27;匹配所有以grep开头的行。    </span><br><span class="line"><span class="meta">$</span><span class="bash">    <span class="comment"># 锚定行的结束 如：&#x27;grep$&#x27; 匹配所有以grep结尾的行。</span></span></span><br><span class="line">.    # 匹配一个非换行符的字符 如：&#x27;gr.p&#x27;匹配gr后接一个任意字符，然后是p。    </span><br><span class="line">*    # 匹配零个或多个先前字符 如：&#x27;*grep&#x27;匹配所有一个或多个空格后紧跟grep的行。    </span><br><span class="line">.*   # 一起用代表任意字符。   </span><br><span class="line">[]   # 匹配一个指定范围内的字符，如&#x27;[Gg]rep&#x27;匹配Grep和grep。    </span><br><span class="line">[^]  # 匹配一个不在指定范围内的字符，如：&#x27;[^A-FH-Z]rep&#x27;匹配不包含A-R和T-Z的一个字母开头，紧跟rep的行。    </span><br><span class="line">\(..\)  # 标记匹配字符，如&#x27;\(love\)&#x27;，love被标记为1。    </span><br><span class="line">\&lt;      # 锚定单词的开始，如:&#x27;\&lt;grep&#x27;匹配包含以grep开头的单词的行。    </span><br><span class="line">\&gt;      # 锚定单词的结束，如&#x27;grep\&gt;&#x27;匹配包含以grep结尾的单词的行。    </span><br><span class="line">x\&#123;m\&#125;  # 重复字符x，m次，如：&#x27;0\&#123;5\&#125;&#x27;匹配包含5个o的行。    </span><br><span class="line">x\&#123;m,\&#125;   # 重复字符x,至少m次，如：&#x27;o\&#123;5,\&#125;&#x27;匹配至少有5个o的行。    </span><br><span class="line">x\&#123;m,n\&#125;  # 重复字符x，至少m次，不多于n次，如：&#x27;o\&#123;5,10\&#125;&#x27;匹配5--10个o的行。   </span><br><span class="line">\w    # 匹配文字和数字字符，也就是[A-Za-z0-9]，如：&#x27;G\w*p&#x27;匹配以G后跟零个或多个文字或数字字符，然后是p。   </span><br><span class="line">\W    # \w的反置形式，匹配一个或多个非单词字符，如点号句号等。   </span><br><span class="line">\b    # 单词锁定符，如: &#x27;\bgrep\b&#x27;只匹配grep。  </span><br></pre></td></tr></table></figure>
-
 
       
         <!-- 《添加版权声明 -->
@@ -650,10 +629,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -666,7 +641,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,11 +653,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,6 +677,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -711,10 +690,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -738,6 +713,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -750,19 +729,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -771,6 +746,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -790,10 +769,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -802,11 +777,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -814,7 +789,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -823,6 +798,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

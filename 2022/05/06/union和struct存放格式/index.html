@@ -201,115 +201,118 @@
 </blockquote>
 <p>例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">A</span>&#123;</span></span><br><span class="line">   <span class="keyword">int</span> a[<span class="number">5</span>];</span><br><span class="line">   <span class="keyword">char</span> b;</span><br><span class="line">   <span class="keyword">double</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">   cout&lt;&lt;<span class="built_in"><span class="keyword">sizeof</span></span>(A)&lt;&lt;endl;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果是24：，因为其中最大的是int，也就是4*5，但是共用体中默认的内存对齐方式应以最长的为标准，即<code>double</code>，故应该是24，离20最近的8的倍数。</strong></p>
 <h2 id="struct"><a href="#struct" class="headerlink" title="struct:"></a><strong>struct:</strong></h2><p>计算结构体大小时也要考虑内存布局，结构体在内存中存放是按照单元存放的，每个单元多大取决于结构体中最大基本类型的大小；</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例如：</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">short</span> c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//则sizeof(A)大小应该是3*4=12字节</span></span><br></pre></td></tr></table></figure>
-
 <p>内存排布方法：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><strong>a</strong></th>
-<th align="center"></th>
-<th align="center"></th>
-<th align="center"></th>
+<th style="text-align:center"><strong>a</strong></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><strong>b</strong></td>
-<td align="center"><strong>b</strong></td>
-<td align="center"><strong>b</strong></td>
-<td align="center"><strong>b</strong></td>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>b</strong></td>
+<td style="text-align:center"><strong>b</strong></td>
+<td style="text-align:center"><strong>b</strong></td>
+<td style="text-align:center"><strong>b</strong></td>
 </tr>
 <tr>
-<td align="center"><strong>c</strong></td>
-<td align="center"><strong>c</strong></td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center"><strong>c</strong></td>
+<td style="text-align:center"><strong>c</strong></td>
+<td style="text-align:center"></td>
 </tr>
-</tbody></table>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例如：</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">short</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//则sizeof(A)大小应该是4+4=8字节</span></span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="center"><strong>a</strong></th>
-<th align="center"><strong>c</strong></th>
-<th align="center"><strong>c</strong></th>
-<th align="center"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>b</strong></td>
-<td align="center"><strong>b</strong></td>
-<td align="center"><strong>b</strong></td>
-<td align="center"><strong>b</strong></td>
-</tr>
-</tbody></table>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例如：</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">char</span> b[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">4</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//则sizeof(A)大小应该是1+2+4=7字节</span></span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="center">a</th>
-<th align="center">b</th>
-<th align="center">b</th>
-<th align="center">c</th>
-<th align="center">c</th>
-<th align="center">c</th>
-<th align="center">c</th>
-</tr>
-</thead>
+</tbody>
 </table>
+</div>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例如：</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">short</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//则sizeof(A)大小应该是4+4=8字节</span></span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>a</strong></th>
+<th style="text-align:center"><strong>c</strong></th>
+<th style="text-align:center"><strong>c</strong></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>b</strong></td>
+<td style="text-align:center"><strong>b</strong></td>
+<td style="text-align:center"><strong>b</strong></td>
+<td style="text-align:center"><strong>b</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例如：</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">char</span> b[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">4</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//则sizeof(A)大小应该是1+2+4=7字节</span></span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">a</th>
+<th style="text-align:center">b</th>
+<th style="text-align:center">b</th>
+<th style="text-align:center">c</th>
+<th style="text-align:center">c</th>
+<th style="text-align:center">c</th>
+<th style="text-align:center">c</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p><strong>结构体在内存中的存放也是按照单元存放的，所以其开辟的单元的最大长度取决于占字节数最大的数据类型，而且存储顺序对于空间利用率有一些影响。</strong></p>
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p><strong>混合结构体的计算：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">union</span>&#123;</span></span><br><span class="line">	<span class="keyword">long</span> i;</span><br><span class="line">    <span class="keyword">int</span> k[<span class="number">5</span>];</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">&#125;UDATE;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> cat;</span><br><span class="line">    UDATE cow;</span><br><span class="line">    <span class="keyword">double</span> dog;</span><br><span class="line">&#125;too;</span><br><span class="line">UDATE temp;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d,%d&quot;</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(temp),<span class="built_in"><span class="keyword">sizeof</span></span>(too));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果是：24，40；</strong></p>
-<p><strong>前一个结果，联合体，最大单元为8，8对齐，4*5&#x3D;20，最接近20的8的倍数为24；</strong></p>
-<p><strong>后一个结果，8+24+8&#x3D;40；</strong></p>
-<p><strong>cat占用4个，cow占用24个，cow对齐方式为8字节，所以cat后边要填充4个字节，即cat和cow共占用8+24&#x3D;32个，再加上dog占的8个字节，所以一共是40个字节。</strong></p>
-<h2 id="packed"><a href="#packed" class="headerlink" title="__packed"></a><strong>__packed</strong></h2><p>​		像union和struct这样的数据结构，总有一些字节是浪费掉的，这样做的目的很简单，就是因为在大多数计算机体系结构中，对内存操作时按整字存取才能达到最高效率，相当于是以空间换取时间。</p>
-<p>​		当然在某些计算机体系结构中，比如ARM，是支持非对齐字传输的，也就是说变量并不一定要按照字长对齐，尽管这样可能会降低效率，但换来的是存储空间上的节约。在mdk中加上__packed关键字，可以得到非对齐字的紧凑型结构体，则会强制编译器将结构体成员按1字节对齐，则以下结构体占用空间仍为15字节。</p>
+<p><strong>前一个结果，联合体，最大单元为8，8对齐，4*5=20，最接近20的8的倍数为24；</strong></p>
+<p><strong>后一个结果，8+24+8=40；</strong></p>
+<p><strong>cat占用4个，cow占用24个，cow对齐方式为8字节，所以cat后边要填充4个字节，即cat和cow共占用8+24=32个，再加上dog占的8个字节，所以一共是40个字节。</strong></p>
+<h2 id="packed"><a href="#packed" class="headerlink" title="__packed"></a><strong>__packed</strong></h2><p>​        像union和struct这样的数据结构，总有一些字节是浪费掉的，这样做的目的很简单，就是因为在大多数计算机体系结构中，对内存操作时按整字存取才能达到最高效率，相当于是以空间换取时间。</p>
+<p>​        当然在某些计算机体系结构中，比如ARM，是支持非对齐字传输的，也就是说变量并不一定要按照字长对齐，尽管这样可能会降低效率，但换来的是存储空间上的节约。在mdk中加上__packed关键字，可以得到非对齐字的紧凑型结构体，则会强制编译器将结构体成员按1字节对齐，则以下结构体占用空间仍为15字节。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> __packed <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;   	 <span class="comment">//1byte</span></span><br><span class="line">    <span class="keyword">int</span> b;   	 <span class="comment">//4byte</span></span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">2</span>]    <span class="comment">//2byte</span></span><br><span class="line">    <span class="keyword">double</span> d;    <span class="comment">//8byte</span></span><br><span class="line">&#125;Test;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>如果编译器不支持__packed关键字，将其定义为空宏即可  #define  __packed.</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack (1) <span class="comment">/*指定按1字节对齐*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack () <span class="comment">/*取消指定对齐，恢复缺省对齐*/</span></span></span><br></pre></td></tr></table></figure>
-
 <h2 id="位域："><a href="#位域：" class="headerlink" title="位域："></a>位域：</h2><p>C语言标准规定，位域的宽度不能超过它所依附的数据类型的长度。通俗地讲，成员变量都是有类型的，这个类型限制了成员变量的最大长度，<code>:</code>后面的数字不能超过这个长度。</p>
 <p>C语言标准还规定，只有有限的几种数据类型可以用于位域。在 ANSI C 中，这几种数据类型是 int、signed int 和 unsigned int（int 默认就是 signed int）；到了 C99，_Bool 也被支持了。</p>
 <p>但编译器在具体实现时都进行了扩展，额外支持了 char、signed char、unsigned char 以及 enum 类型，所以上面的代码虽然不符合C语言标准，但它依然能够被编译器支持。</p>
 <h3 id="位域的内存分配："><a href="#位域的内存分配：" class="headerlink" title="位域的内存分配："></a>位域的内存分配：</h3><p>位域的具体存储规则如下：</p>
 <p><strong>1、当相邻成员的类型相同时，如果它们的位宽之和小于类型的 sizeof 大小，那么后面的成员紧邻前一个成员存储，直到不能容纳为止；如果它们的位宽之和大于类型的 sizeof 大小，那么后面的成员将从新的存储单元开始，其偏移量为类型大小的整数倍。</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bs</span>&#123;</span></span><br><span class="line">        <span class="keyword">unsigned</span> m: <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">unsigned</span> n: <span class="number">12</span>;</span><br><span class="line">        <span class="keyword">unsigned</span> p: <span class="number">4</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(struct bs));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>运行结果：4</p>
 </blockquote>
-<p>m、n、p 的类型都是 unsigned int，sizeof 的结果为 4 个字节（Byte），也即 32 个位（Bit）。m、n、p 的位宽之和为 6+12+4 &#x3D; 22，小于 32，所以它们会挨着存储，中间没有缝隙。</p>
+<p>m、n、p 的类型都是 unsigned int，sizeof 的结果为 4 个字节（Byte），也即 32 个位（Bit）。m、n、p 的位宽之和为 6+12+4 = 22，小于 32，所以它们会挨着存储，中间没有缝隙。</p>
 <blockquote>
 <p>sizeof(struct bs) 的大小之所以为 4，而不是 3，是因为要将内存对齐到 4 个字节，以便提高存取效率；</p>
 </blockquote>
-<p>如果将成员 m 的位宽改为 22，那么输出结果将会是 8，因为 22+12 &#x3D; 34，大于 32，n 会从新的位置开始存储，相对 m 的偏移量是 sizeof(unsigned int)，也即 4 个字节。</p>
+<p>如果将成员 m 的位宽改为 22，那么输出结果将会是 8，因为 22+12 = 34，大于 32，n 会从新的位置开始存储，相对 m 的偏移量是 sizeof(unsigned int)，也即 4 个字节。</p>
 <p>如果再将成员 p 的位宽也改为 22，那么输出结果将会是 12，三个成员都不会挨着存储。</p>
-<p><strong>2、当相邻成员的类型不同时，不同的编译器有不同的实现方案，GCC会压缩存储，而 VC&#x2F;VS 不会。</strong></p>
+<p><strong>2、当相邻成员的类型不同时，不同的编译器有不同的实现方案，GCC会压缩存储，而 VC/VS 不会。</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bs</span>&#123;</span></span><br><span class="line">        <span class="keyword">unsigned</span> m: <span class="number">12</span>;</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">char</span> ch: <span class="number">4</span>;</span><br><span class="line">        <span class="keyword">unsigned</span> p: <span class="number">4</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(struct bs));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>在 GCC 下的运行结果为 4，三个成员挨着存储；在 VC&#x2F;VS 下的运行结果为 12，三个成员按照各自的类型存储（与不指定位宽时的存储方式相同）。</p>
+<p>在 GCC 下的运行结果为 4，三个成员挨着存储；在 VC/VS 下的运行结果为 12，三个成员按照各自的类型存储（与不指定位宽时的存储方式相同）。</p>
 </blockquote>
 <p><strong>3、如果成员之间穿插着非位域成员，那么不会进行压缩。例如以下：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">bs</span>&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> m: <span class="number">12</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> ch;</span><br><span class="line">    <span class="keyword">unsigned</span> p: <span class="number">4</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>在各个编译器下 sizeof 的结果都是 12。</p>
 </blockquote>
 <p><strong>4、位域成员可以没有名称，只给出数据类型和位宽，如下所示：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">bs</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> m: <span class="number">12</span>;</span><br><span class="line">    <span class="keyword">int</span>  : <span class="number">20</span>;  <span class="comment">//该位域成员不能使用</span></span><br><span class="line">    <span class="keyword">int</span> n: <span class="number">4</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>无名位域一般用来作填充或者调整成员位置。</p>
 </blockquote>
@@ -686,10 +689,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -702,7 +701,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -714,11 +713,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -738,6 +737,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -747,10 +750,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -774,6 +773,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -786,19 +789,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -807,6 +806,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -826,10 +829,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -838,11 +837,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -850,7 +849,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -859,6 +858,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -209,6 +209,7 @@
 <p>预处理实际上是将头文件、宏进行展开。编译阶段，gcc调用不同语言的编译器，例如c语言调用编译器ccl。gcc实际上是个工具链，在编译程序的过程中调用不同的工具。汇编阶段，gcc调用汇编器进行汇编。链接过程会将程序所需要的目标文件进行链接成可执行文件。汇编器生成的是可重定位的目标文件，学过操作系统，我们知道，在源程序中地址是从0开始的，这是一个相对地址，而程序真正在内存中运行时的地址肯定不是从0开始的，而且在编写源代码的时候也不能知道程序的绝对地址，所以<strong>重定位</strong>能够将源代码的代码、变量等定位为内存具体地址。下面以一张图来表示这个过程，注意过程中文件的后缀变化，编译选项和这些后缀有关。</p>
 <p>这是GCC编译的四个步骤。</p>
 <h2 id="4-gcc常用选项"><a href="#4-gcc常用选项" class="headerlink" title="4. gcc常用选项"></a>4. gcc常用选项</h2><p>来看一下gcc常用选项</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -216,7 +217,8 @@
 <th>作用</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>-o</td>
 <td>产生目标（.i、.s、.o、可执行文件等）</td>
 </tr>
@@ -252,27 +254,23 @@
 <td>-g</td>
 <td>在目标文件中嵌入调试信息，以便gdb之类的调试程序调试</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>现在我们有源文件hello.c，下面是一些gcc的使用示例：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gcc -E hello.c -o hello.i   对hello.c文件进行预处理，生成了hello.i 文件</span><br><span class="line">gcc -S hello.i -o hello.s    对预处理文件进行编译，生成了汇编文件</span><br><span class="line">gcc -c hello.s -o hello.o  对汇编文件进行编译，生成了目标文件</span><br><span class="line">gcc hello.o -o hello 对目标文件进行链接，生成可执行文件</span><br><span class="line">gcc hello.c -o hello 直接编译链接成可执行目标文件</span><br><span class="line">gcc -c hello.c 或 gcc -c hello.c -o hello.o 编译生成可重定位目标文件</span><br></pre></td></tr></table></figure>
-
 <p>使用gcc时可以加上-Wall选项。下面这个例子如果不加上-Wall选项，编译器不会报出任何错误或警告，但是程序的结果却不是预期的：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//bad.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;the number is %f &quot;</span>,<span class="number">5</span>);  <span class="comment">//程序输出了the number is 0.000000，结果错误</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
 <p>使用-Wall选项：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -Wall bad.c -o bad</span><br></pre></td></tr></table></figure>
-
 <p>gcc将输出警告信息：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">warning: format ‘%f’ expects argument of <span class="built_in">type</span> ‘double’, but argument 2 has <span class="built_in">type</span> ‘int’ [-Wformat=]</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;the number is %f\n&quot;</span>,5);</span><br></pre></td></tr></table></figure>
-
 <h2 id="5-gcc编译多个文件"><a href="#5-gcc编译多个文件" class="headerlink" title="5. gcc编译多个文件"></a>5. gcc编译多个文件</h2><p>假设现在有三个文件：hello.c hello.h main.c ,三个文件的内容如下：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hello.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&quot;hello.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printHello</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;hello world!\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//main.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&quot;hello.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="built_in">printHello</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//hello.h</span></span><br><span class="line"><span class="comment">//仅包含函数声明</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _HELLO_</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _HELLO_</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printHello</span><span class="params">()</span></span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
 <p>编译这三个文件，可以一次编译：</p>
 <p>gcc hello.c main.c -o main 生成可执行文件main</p>
 <p>也可以独立编译：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc -Wall -c main.c -o main.o</span><br><span class="line">gcc -Wall -c hello.c -o hello.o</span><br><span class="line">gcc -Wall main.o hello.o -o main</span><br></pre></td></tr></table></figure>
-
 <p>独立编译的好处是，当其中某个模块发送改变时，只需要编译该模块就行，不必重新编译所有文件，这样可以节省编译时间。</p>
 <h2 id="6-使用外部库"><a href="#6-使用外部库" class="headerlink" title="6. 使用外部库"></a>6. 使用外部库</h2><p>在使用C语言和其他语言进行程序设计的时候，我们需要头文件来提供对常数的定义和对系统及库函数调用的声明。库文件是一些预先编译好的函数集合，那些函数都是按照可重用原则编写的。它们通常由一组互相关联的可重用原则编写的，它们通常由一组互相关联的用来完成某项常见工作的函数构成。使用库的优点在于：</p>
 <ul>
@@ -287,35 +285,30 @@
 </ul>
 <p>一般头文件或库文件的位置在：</p>
 <ul>
-<li>&#x2F;usr&#x2F;include及其子目录底下的include文件夹</li>
-<li>&#x2F;usr&#x2F;local&#x2F;include及其子目录底下的include文件夹</li>
-<li>&#x2F;usr&#x2F;lib</li>
-<li>&#x2F;usr&#x2F;local&#x2F;lib</li>
-<li>&#x2F;lib</li>
+<li>/usr/include及其子目录底下的include文件夹</li>
+<li>/usr/local/include及其子目录底下的include文件夹</li>
+<li>/usr/lib</li>
+<li>/usr/local/lib</li>
+<li>/lib</li>
 </ul>
 <h2 id="7-生成静态库"><a href="#7-生成静态库" class="headerlink" title="7. 生成静态库"></a>7. 生成静态库</h2><p>为了生成.a文件，我们需要先生成.o文件。下面这行命令将我们的hello.o打包成静态库libhello.a：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar rcs libhello.a hello.o</span><br></pre></td></tr></table></figure>
-
 <p>ar是gun归档工具，rcs表示replace and create，如果libhello之前存在，将创建新的libhello.a并将其替换。</p>
 <p>然后就可以这样来使用静态库libhello.a</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -Wall main.c libhello.a -o main</span><br></pre></td></tr></table></figure>
-
 <p>还有另外一种使用方式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -Wall -L. main.c -o main -lhello 【lhello 是 libhello的缩写】</span><br></pre></td></tr></table></figure>
-
-<p>其中 **-L.**表示库文件的位置在当前目录下，由于libhello.a是我们自己生成的，并存放在当前录下下，所以需要加上-L.选项。默认库文件是在系统的目录下进行搜索。同样的，-I.选项用于头文件的搜索。</p>
+<p>其中 <strong>-L.</strong>表示库文件的位置在当前目录下，由于libhello.a是我们自己生成的，并存放在当前录下下，所以需要加上-L.选项。默认库文件是在系统的目录下进行搜索。同样的，-I.选项用于头文件的搜索。</p>
 <h2 id="8-生成共享库"><a href="#8-生成共享库" class="headerlink" title="8. 生成共享库"></a>8. 生成共享库</h2><p>生成一个共享库，名称的规则是libxxx.so。将刚才hello.o生成libhello.so的命令为：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -fPIC hello.o -o libhello.so</span><br></pre></td></tr></table></figure>
-
 <p>生成了共享库之后，可以这样来使用共享库：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -Wall main.o -o main -L. -lhello</span><br></pre></td></tr></table></figure>
-
 <p>该命令与使用静态库的命令相同，但是在共享库与静态库共存的情况下，优先使用共享库。</p>
 <p>共享库有时候并不不在当前的目录下，为了让gcc能够找得到共享库，有下面几种方法：</p>
 <ol>
-<li>拷贝.so文件到系统共享库路径下，一般指&#x2F;usr&#x2F;lib</li>
-<li>在~&#x2F;.bash_profile文件中，配置LD_LIBRARY_PATH变量</li>
-<li>配置&#x2F;etc&#x2F;ld.so.conf，配置完成后调用ldconfig更新ld.so.cache</li>
+<li>拷贝.so文件到系统共享库路径下，一般指/usr/lib</li>
+<li>在~/.bash_profile文件中，配置LD_LIBRARY_PATH变量</li>
+<li>配置/etc/ld.so.conf，配置完成后调用ldconfig更新ld.so.cache</li>
 </ol>
 <p>其中，shared选项表示生成共享库格式。fPIC表示产生位置无关码（position independent code），位置无关码表示它的运行、加载与内存位置无关，可以在任何内存地址进行加载。</p>
 <h2 id="9-库的搜索路径"><a href="#9-库的搜索路径" class="headerlink" title="9. 库的搜索路径"></a>9. 库的搜索路径</h2><p>库的搜索路径遵循几个搜索原则：从左到右搜索-I -l指定的目录，如果在这些目录中找不到，那么gcc会从由<strong>环境 变量指定的目录</strong>进行查找。头文件的环境变量是<strong>C_INCLUDE_PATH</strong>,库的环境变量是<strong>LIBRARY_PATH</strong>.如果还是找不到，那么会从<strong>系统指定指定的目录</strong>进行搜索。</p>
@@ -684,10 +677,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -700,7 +689,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -712,11 +701,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -736,6 +725,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -745,10 +738,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -772,6 +761,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -784,19 +777,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,6 +794,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -824,10 +817,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -836,11 +825,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -848,7 +837,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -857,6 +846,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">

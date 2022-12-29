@@ -189,68 +189,52 @@
 <p>  Uboot和系统跑起来了，接下来就是进行驱动开发了；<span id="more"></span></p>
 </blockquote>
 <h2 id="Heartbeat-心跳灯"><a href="#Heartbeat-心跳灯" class="headerlink" title="Heartbeat(心跳灯)"></a>Heartbeat(心跳灯)</h2><h3 id="修改设备树："><a href="#修改设备树：" class="headerlink" title="修改设备树："></a>修改设备树：</h3><p>在设备树文件<code>arch/arm/boot/dts/sun8i-v3s-licheepi-zero.dts</code>中；</p>
-<p>在 &#x2F; { } 所包裹的根节点目录下添加：</p>
+<p>在 / { } 所包裹的根节点目录下添加：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">leds &#123;</span><br><span class="line">    compatible = &quot;gpio-leds&quot;;</span><br><span class="line">    user_led &#123;</span><br><span class="line">    label = &quot;led:usr&quot;;</span><br><span class="line">        gpios = &lt;&amp;pio 4 12 GPIO_ACTIVE_LOW&gt;; /* PE12 */</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>其中</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpios = &lt;&amp;pio 4 12 GPIO_ACTIVE_LOW&gt;; /* PE12 */</span><br></pre></td></tr></table></figure>
-
-<p>代表引脚 <code>4 * 32 + 12 </code>也就是<code> PE12（ A~G： 0~6）</code><br>其名字为：<code>led:usr</code>；</p>
+<p>代表引脚 <code>4 * 32 + 12</code>也就是<code>PE12（ A~G： 0~6）</code><br>其名字为：<code>led:usr</code>；</p>
 <p>系统启动后与LED控制有关的文件；</p>
 <p>系统启动后，将看到这样的文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$: ls /sys/class/leds/</span><br><span class="line">led:usr</span><br></pre></td></tr></table></figure>
-
 <p>这里三个文件夹分别对应设备树中定义的三个LED；</p>
 <h3 id="编译设备树："><a href="#编译设备树：" class="headerlink" title="编译设备树："></a>编译设备树：</h3><blockquote>
 <p>  可以只编译设备树，不编译其他文件；</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- dtbs -j12</span><br></pre></td></tr></table></figure>
-
 <h3 id="控制LED灯亮灭："><a href="#控制LED灯亮灭：" class="headerlink" title="控制LED灯亮灭："></a>控制LED灯亮灭：</h3><p>点亮LED：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$: <span class="built_in">echo</span> 1 &gt; /sys/class/leds/led\:usr/brightness</span><br></pre></td></tr></table></figure>
-
 <p>熄灭LED：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$: <span class="built_in">echo</span> 0 &gt; /sys/class/leds/led\:usr/brightness</span><br></pre></td></tr></table></figure>
-
 <p>控制LED闪烁：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$: ls /sys/class/leds/led\:usr/</span><br><span class="line">brightness      invert          power           trigger</span><br><span class="line">device          max_brightness  subsystem       uevent</span><br><span class="line">$: cat /sys/class/leds/led\:usr/trigger</span><br><span class="line">none kbd-scrolllock kbd-numlock kbd-capslock kbd-kanalock kbd-shiftlock kbd-altgrlock kbd-ctrllock kbd-altlock kbd-shiftllock kbd-shiftrlock kbd-ctrlllock kbd-ctrlrlock mmc0 [heartbeat] default-on</span><br><span class="line"><span class="comment">#这里可以看到当前的值为none，表示没有trigger，将其值改成heartbeat就可以看到闪烁了</span></span><br><span class="line">$: <span class="built_in">echo</span> heartbeat &gt; /sys/class/leds/led\:usr/trigger</span><br></pre></td></tr></table></figure>
-
 <h3 id="开机自动打开心跳灯："><a href="#开机自动打开心跳灯：" class="headerlink" title="开机自动打开心跳灯："></a>开机自动打开心跳灯：</h3><blockquote>
 <p>作为系统服务自动启动，在这个目录添加脚本文件 <code>/etc/init.d/</code>；</p>
 <p>作为登录用户的自动启动程序，在 <code>/etc/profile.d/</code> 添加脚本文件；</p>
 </blockquote>
 <p>新建脚本文件<code>heartbeat_led.sh</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> heartbeat &gt;/sys/class/leds/led\:usr/trigger</span><br></pre></td></tr></table></figure>
-
 <p>将该脚本放置于 <code>/etc/profile.d/</code>中即可开机自动调用该脚本：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">: ls /etc/profile.d/</span></span><br><span class="line">heartbeat_led.sh  umask.sh</span><br></pre></td></tr></table></figure>
-
 <h2 id="F1C100S-GPIO操作："><a href="#F1C100S-GPIO操作：" class="headerlink" title="F1C100S GPIO操作："></a>F1C100S GPIO操作：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用sysfs操作GPIO的例子：</span></span><br><span class="line"><span class="built_in">echo</span> 192 &gt; /sys/class/gpio/<span class="built_in">export</span>  <span class="comment">#导出 PG0, GREEN</span></span><br><span class="line">ls /sys/class/gpio/</span><br><span class="line"><span class="built_in">export</span>     gpio192    gpiochip0  unexport</span><br><span class="line">ls /sys/class/gpio/gpio192/</span><br><span class="line">active_low direction subsystem/ value device/ power/ uevent</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;out&quot;</span> &gt; /s</span><br><span class="line">ys/class/gpio/gpio192/direction <span class="comment">#设置为输出</span></span><br><span class="line"><span class="built_in">echo</span> 0 &gt; /sys/class/gpio/gpio192/value     <span class="comment">#亮灯</span></span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /sys/class/gpio/gpio192/value <span class="comment">#灭灯</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;in&quot;</span> &gt; /sys/class/gpio/gpio192/direction <span class="comment">#设置为输入</span></span><br><span class="line">cat /sys/class/gpio/gpio192/value <span class="comment">#读取电平</span></span><br><span class="line">0</span><br></pre></td></tr></table></figure>
-
 <h3 id="引脚计算规则："><a href="#引脚计算规则：" class="headerlink" title="引脚计算规则："></a>引脚计算规则：</h3><blockquote>
 <p>在Linux中，GPIO 使用0～MAX_INT之间的整数标识；</p>
 <p>对于32位CPU，每组GPIO 32个，引脚号就是按顺序排列；</p>
-<p>从PA0开始gpio是0，那么PE3对应是32*4+3&#x3D;131，经试验已验证；</p>
+<p>从PA0开始gpio是0，那么PE3对应是32*4+3=131，经试验已验证；</p>
 </blockquote>
-<p>这个板子是PE12引脚为LED引脚，故：<br>$$<br>PIN_{num}&#x3D;32\times4+12&#x3D;140<br>$$</p>
-<h3 id="故点灯的脚本如下："><a href="#故点灯的脚本如下：" class="headerlink" title="故点灯的脚本如下："></a>故点灯的脚本如下：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;out&quot;</span> &gt; /sys/class/gpio/gpio140/direction <span class="comment">#设置为输出</span></span><br><span class="line"><span class="comment">#死循环</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> 0 &gt; /sys/class/gpio/gpio140/value</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;点亮&quot;</span></span><br><span class="line">    sleep 0.1</span><br><span class="line">    <span class="built_in">echo</span> 1 &gt; /sys/class/gpio/gpio140/value</span><br><span class="line">    sleep 0.1</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;熄灭&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-
+<p>这个板子是PE12引脚为LED引脚，故：</p>
+<script type="math/tex; mode=display">
+PIN_{num}=32\times4+12=140</script><h3 id="故点灯的脚本如下："><a href="#故点灯的脚本如下：" class="headerlink" title="故点灯的脚本如下："></a>故点灯的脚本如下：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;out&quot;</span> &gt; /sys/class/gpio/gpio140/direction <span class="comment">#设置为输出</span></span><br><span class="line"><span class="comment">#死循环</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> 0 &gt; /sys/class/gpio/gpio140/value</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;点亮&quot;</span></span><br><span class="line">    sleep 0.1</span><br><span class="line">    <span class="built_in">echo</span> 1 &gt; /sys/class/gpio/gpio140/value</span><br><span class="line">    sleep 0.1</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;熄灭&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 <h2 id="文件系统打包和解压缩（rootfs-tar）："><a href="#文件系统打包和解压缩（rootfs-tar）：" class="headerlink" title="文件系统打包和解压缩（rootfs.tar）："></a>文件系统打包和解压缩（rootfs.tar）：</h2><h3 id="压缩："><a href="#压缩：" class="headerlink" title="压缩："></a>压缩：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -cvf rootfs.tar ./</span><br></pre></td></tr></table></figure>
-
 <h3 id="解压："><a href="#解压：" class="headerlink" title="解压："></a>解压：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -xf ./rootfs.tar -C /mnt/</span><br></pre></td></tr></table></figure>
-
 <h3 id="解压到SD卡中："><a href="#解压到SD卡中：" class="headerlink" title="解压到SD卡中："></a>解压到SD卡中：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#如果分区已挂载到别的地方先进行卸载</span></span><br><span class="line">sudo umount /dev/sdb2</span><br><span class="line"><span class="comment">#将分区挂载到 /mnt</span></span><br><span class="line">sudo mount /dev/sdb2 /mnt</span><br><span class="line"><span class="comment">#解压并拷贝rootfs</span></span><br><span class="line"><span class="built_in">cd</span> ~/f1c100s-sdk/buildroot-2022.02/</span><br><span class="line">sudo tar -xf output/images/rootfs.tar -C /mnt/</span><br><span class="line"><span class="comment">#保存退出</span></span><br><span class="line">sync</span><br><span class="line">sudo umount /dev/sdb2</span><br></pre></td></tr></table></figure>
-
 <h2 id="复制-so文件到系统中："><a href="#复制-so文件到系统中：" class="headerlink" title="复制.so文件到系统中："></a>复制.so文件到系统中：</h2><h3 id="From："><a href="#From：" class="headerlink" title="From："></a>From：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#虚拟机</span></span><br><span class="line">/usr/arm-linux-gnueabi/lib</span><br></pre></td></tr></table></figure>
-
 <h3 id="To："><a href="#To：" class="headerlink" title="To："></a>To：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#嵌入式Linux系统</span></span><br><span class="line">/usr/lib</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>  有名称相同的文件，跳过即可，不能覆盖；</p>
 </blockquote>
 <h2 id="关机操作："><a href="#关机操作：" class="headerlink" title="关机操作："></a><strong>关机操作：</strong></h2><p>需要注意的是，在开发板运行过程中，如果想要重启，请先执行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">poweroff</span><br></pre></td></tr></table></figure>
-
 <p>命令正常关闭系统后，在按重启按钮，否则有很大概率回造成文件系统损坏；</p>
 
       
@@ -625,10 +609,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -641,7 +621,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,11 +633,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -677,6 +657,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
@@ -686,10 +670,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -713,6 +693,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -725,19 +709,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -746,6 +726,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -765,10 +749,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
@@ -777,11 +757,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -789,7 +769,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -798,6 +778,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
