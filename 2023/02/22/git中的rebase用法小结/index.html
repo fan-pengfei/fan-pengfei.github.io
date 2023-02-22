@@ -6,17 +6,34 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://fan-pengfei.top">
-  <title>Tag: 谷歌 | 樊鹏飞的博客</title>
+  <title>git中的rebase用法小结 | 樊鹏飞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="网页描述">
-<meta property="og:type" content="website">
-<meta property="og:title" content="樊鹏飞的博客">
-<meta property="og:url" content="http://fan-pengfei.top/tags/%E8%B0%B7%E6%AD%8C/index.html">
+  <meta name="description" content="今天用到了git rebase命令来进行合并两次提交，顺带梳理下rebase命令的用法；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git中的rebase用法小结">
+<meta property="og:url" content="http://fan-pengfei.top/2023/02/22/git%E4%B8%AD%E7%9A%84rebase%E7%94%A8%E6%B3%95%E5%B0%8F%E7%BB%93/index.html">
 <meta property="og:site_name" content="樊鹏飞的博客">
-<meta property="og:description" content="网页描述">
+<meta property="og:description" content="今天用到了git rebase命令来进行合并两次提交，顺带梳理下rebase命令的用法；">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/WxcIDldCF18svHV.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/WRoXzvHaKJtf2Lq.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/lmajGokxwhbB81y.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/tUEo21Zz5FjfxSM.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/EV8NXAnBLZPpFua.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/VCx2npLGmrEOqM5.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/zPcxnGLSZC8ku1y.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/PGTKsAVgMpH2h8n.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/nR93qahjAD1L2Fg.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/W3oKbJywjQcLXn2.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/XKNvtJHbCu2Bax5.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/gy3P9ShdTrAxtVf.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/22/DmbnW74KvwyAxOB.png">
+<meta property="article:published_time" content="2023-02-22T07:28:48.000Z">
+<meta property="article:modified_time" content="2023-02-22T07:46:36.628Z">
 <meta property="article:author" content="樊鹏飞">
+<meta property="article:tag" content="GIT">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/02/22/WxcIDldCF18svHV.png">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -156,80 +173,493 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-git中的rebase用法小结" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/08/06/%E8%B0%B7%E6%AD%8C%E5%8F%91%E7%8E%B0%E7%9A%84%E5%8D%81%E6%9D%A1%E7%9C%9F%E7%90%86/" class="archive-article-date">
-  	<time datetime="2022-08-06T07:06:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/08/06/%E8%B0%B7%E6%AD%8C%E5%8F%91%E7%8E%B0%E7%9A%84%E5%8D%81%E6%9D%A1%E7%9C%9F%E7%90%86/">谷歌发现的十条真理</a>
+    <h1 class="article-title" itemprop="name">
+      git中的rebase用法小结
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2023/02/22/git%E4%B8%AD%E7%9A%84rebase%E7%94%A8%E6%B3%95%E5%B0%8F%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2023-02-22T07:28:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>  今天用到了git rebase命令来进行合并两次提交，顺带梳理下rebase命令的用法；<span id="more"></span></p>
+<p>  参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4a8f4af4e803">https://www.jianshu.com/p/4a8f4af4e803</a></p>
+</blockquote>
+<p>rebase在git中是一个非常有魅力的命令，使用得当会极大提高自己的工作效率；相反，如果乱用，会给团队中其他人带来麻烦。它的作用简要概括为：可以对某一段线性提交历史进行编辑、删除、复制、粘贴；因此，合理使用rebase命令可以使我们的提交历史干净、简洁！</p>
+<p><strong>前提：不要通过rebase对任何已经提交到公共仓库中的commit进行修改（你自己一个人玩的分支除外）；</strong></p>
+<h3 id="一、合并多个commit为一个完整commit"><a href="#一、合并多个commit为一个完整commit" class="headerlink" title="一、合并多个commit为一个完整commit"></a>一、合并多个commit为一个完整commit</h3><p>当我们在本地仓库中提交了多次，在我们把本地提交push到公共仓库中之前，为了让提交记录更简洁明了，我们希望把如下分支B、C、D三个提交记录合并为一个完整的提交，然后再push到公共仓库。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/WxcIDldCF18svHV.png" alt="0ba5c5a59eac26db62f1de57ccd6040"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>现在我们在测试分支上添加了四次提交，我们的目标是把最后三个提交合并为一个提交：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/WRoXzvHaKJtf2Lq.png" alt="70c9817cfaf9fe0b38bf3bbb97197bd"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>这里我们使用命令:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i  [startpoint]  [endpoint]</span><br></pre></td></tr></table></figure>
+<p>其中<code>-i</code>的意思是<code>--interactive</code>，即弹出交互式的界面让用户编辑完成合并操作，<code>[startpoint]</code>  <code>[endpoint]</code>则指定了一个编辑区间，如果不指定<code>[endpoint]</code>，则该区间的终点默认是当前分支<code>HEAD</code>所指向的<code>commit</code>(注：该区间指定的是一个前开后闭的区间)。<br>在查看到了log日志后，我们运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i 36224db</span><br></pre></td></tr></table></figure>
+<p>或:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~3 </span><br></pre></td></tr></table></figure>
+<p>然后我们会看到如下界面:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/lmajGokxwhbB81y.png" alt="326677b29707761988e3d89c2a5ef58"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>上面未被注释的部分列出的是我们本次rebase操作包含的所有提交，下面注释部分是git为我们提供的命令说明。每一个commit id 前面的<code>pick</code>表示指令类型，git 为我们提供了以下几个命令:</p>
+<blockquote>
+<ul>
+<li>pick：保留该commit（缩写:p）</li>
+<li>reword：保留该commit，但我需要修改该commit的注释（缩写:r）</li>
+<li>edit：保留该commit, 但我要停下来修改该提交(不仅仅修改注释)（缩写:e）</li>
+<li>squash：将该commit和前一个commit合并（缩写:s）</li>
+<li>fixup：将该commit和前一个commit合并，但我不要保留该提交的注释信息（缩写:f）</li>
+<li>exec：执行shell命令（缩写:x）</li>
+<li>drop：我要丢弃该commit（缩写:d）</li>
+</ul>
+</blockquote>
+<p>根据我们的需求，我们将commit内容编辑如下:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/tUEo21Zz5FjfxSM.png" alt="5939a788fc6c0730435233001dc4cf4"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>然后是注释修改界面:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/EV8NXAnBLZPpFua.png" alt="d1cc8502accee35249a4a248663085c"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>编辑完保存即可完成commit的合并了：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/VCx2npLGmrEOqM5.png" alt="3a0723ad06ce0cff218b931b1a0b422"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="二、将某一段commit粘贴到另一个分支上"><a href="#二、将某一段commit粘贴到另一个分支上" class="headerlink" title="二、将某一段commit粘贴到另一个分支上"></a>二、将某一段commit粘贴到另一个分支上</h3><p>当我们项目中存在多个分支，有时候我们需要将某一个分支中的一段提交同时应用到其他分支中，就像下图：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/zPcxnGLSZC8ku1y.png" alt="d4b3c401612bba5cd4cac2efb15450c"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>我们希望将develop分支中的C~E部分复制到master分支中，这时我们就可以通过rebase命令来实现（如果只是复制某一两个提交到其他分支，建议使用更简单的命令:<code>git cherry-pick</code>）。</p>
+<p>在实际模拟中，我们创建了master和develop两个分支:</p>
+<p><strong>master分支:</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/PGTKsAVgMpH2h8n.png" alt="55dda3c4a0bf2cd83d03b5714ec9107"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>develop分支:</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/nR93qahjAD1L2Fg.png" alt="c2a745be2db81114facc5c699da5170"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>我们使用命令的形式为:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase [startpoint] [endpoint] --onto [branchName]</span><br></pre></td></tr></table></figure>
+<p>其中，<code>[startpoint]</code>  <code>[endpoint]</code>仍然和上一个命令一样指定了一个编辑区间(前开后闭)，<code>--onto</code>的意思是要将该指定的提交复制到哪个分支上。</p>
+<p>所以，在找到C(90bc0045b)和E(5de0da9f2)的提交id后，我们运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git  rebase 90bc0045b^ 5de0da9f2 --onto master</span><br></pre></td></tr></table></figure>
+<p>注:因为<code>[startpoint]</code>  <code>[endpoint]</code>指定的是一个前开后闭的区间，为了让这个区间包含C提交，我们将区间起始点向后退了一步。</p>
+<p>运行完成后查看当前分支的日志:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/W3oKbJywjQcLXn2.png" alt="75db2b0a8fbff59fe69e8adffcf39c0"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>可以看到，C~E部分的提交内容已经复制到了G的后面了，大功告成？NO！我们看一下当前分支的状态:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/XKNvtJHbCu2Bax5.png" alt="0bae75814bd0b9b1a05cab216d41bfe"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>当前HEAD处于游离状态，实际上，此时所有分支的状态应该是这样:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/gy3P9ShdTrAxtVf.png" alt="e09f29e92ed5408f6de80b05aef9d7b"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>所以，虽然此时HEAD所指向的内容正是我们所需要的，但是master分支是没有任何变化的，<code>git</code>只是将C~E部分的提交内容复制一份粘贴到了master所指向的提交后面，我们需要做的就是将master所指向的提交id设置为当前HEAD所指向的提交id就可以了，即:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git reset --hard  0c72e64</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/22/DmbnW74KvwyAxOB.png" alt="e16abe1dcafee93caec0e79b9c9a2a4"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>这样就大功告成了！</p>
+
+      
+        <!-- 《添加版权声明 -->
+        
+            <!-- 《添加版权声明 -->
+<!--添加版权声明https://github.com/JoeyBling/hexo-theme-yilia-plus/commit/c1215e132f6d5621c5fea83d3c4f7ccbcca074a3-->
+
+
+<!-- #版权基础设定：0-关闭声明； 1-文章对应的md文件里有declare: true属性，才有版权声明； 2-所有文章均有版权声明 -->
+
+  <div class="declare" hidden="hidden"></div>
+
+<!-- 添加版权声明》 -->
+
+        
+        <!-- 添加版权声明》 -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝可乐<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay2.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixin2.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">格言</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">谷歌</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GIT</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/格言//" class="article-tag-list-link color3">格言</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/格言/谷歌//" class="article-tag-list-link color3">谷歌</a>
+        			<a href="/categories/GIT//" class="article-tag-list-link color4">GIT</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://fan-pengfei.top/2023/02/22/git%E4%B8%AD%E7%9A%84rebase%E7%94%A8%E6%B3%95%E5%B0%8F%E7%BB%93/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2023/02/22/%E5%8D%95%E6%80%BB%E7%BA%BF%E6%8C%82%E8%BD%BD%E5%A4%9A%E4%B8%AADS18B20%E5%B9%B6%E8%AF%BB%E5%8F%96%E6%B8%A9%E5%BA%A6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">单总线挂载多个DS18B20并读取温度</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%90%88%E5%B9%B6%E5%A4%9A%E4%B8%AAcommit%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4commit"><span class="toc-number">1.</span> <span class="toc-text">一、合并多个commit为一个完整commit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B0%86%E6%9F%90%E4%B8%80%E6%AE%B5commit%E7%B2%98%E8%B4%B4%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A"><span class="toc-number">2.</span> <span class="toc-text">二、将某一段commit粘贴到另一个分支上</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
 
     
+      <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  var notify = 'true' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+      // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+      av: AV,
+      el: '.valine_comment',
+      emoticon_url: 'https://cloud.panjunwen.com/alu',
+      emoticon_list: ["狂汗.png","不说话.png","汗.png","坐等.png","献花.png","不高兴.png","中刀.png","害羞.png","皱眉.png","小眼睛.png","暗地观察.png"],
+      app_id: 'npG1XmP1ddhLsT2R6u4nXdKz-gzGzoHsz',
+      app_key: 'fqEEJWxiAlwQyoAo7nXcqPyO',
+      placeholder: '有话要说？在此输入'
+    });
+</script>
+
+    
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="git中的rebase用法小结" data-title="git中的rebase用法小结" data-url="http://fan-pengfei.top/2023/02/22/git%E4%B8%AD%E7%9A%84rebase%E7%94%A8%E6%B3%95%E5%B0%8F%E7%BB%93/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -263,9 +693,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
