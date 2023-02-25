@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/02/25/N3E8rfjeAHTFxQD.png">
 <meta property="og:image" content="https://s2.loli.net/2023/02/25/ORznj3NuLUhy6Ip.png">
 <meta property="article:published_time" content="2023-02-25T04:38:38.000Z">
-<meta property="article:modified_time" content="2023-02-25T05:22:55.780Z">
+<meta property="article:modified_time" content="2023-02-25T05:31:58.301Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="ARM">
 <meta name="twitter:card" content="summary">
@@ -306,7 +306,7 @@
 <blockquote>
 <p>  Flash基地址：0x08000000，小为256kB；<br>  RAM基地址：0x20000000，大小为96kB；</p>
 </blockquote>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">LR_IROM1 <span class="number">0x08000000</span> <span class="number">0x00040000</span>  &#123;   ; 定义一个加载时域，域基址：0x08000000，域大小为 0x00040000</span><br><span class="line">  ER_IROM1 0x08000000 0x00040000  &#123; ; 定义一个运行时域，第一个运行时域必须和加载</span><br><span class="line">                                    ; 时域起始地址相同，否则库不能加载到该时域的</span><br><span class="line">                                    ; 错误，其域大小一般也和加载时域大小相同</span><br><span class="line">   *.o (RESET, +First)              ; 将 RESET 段最先加载到本域的起始地址外，即</span><br><span class="line">                                    ; RESET 的起始地址为 0， RESET 存储的是矢量表</span><br><span class="line">  &#125;</span><br><span class="line">  ER_IROM2 + <span class="number">0</span> &#123;                    ; 自定义的应用程序信息（软硬件版本、发布时间、升级信息等）</span><br><span class="line">                                    ; 将其固定的放在中断矢量表之后，便于通过.bin文档查看程序的信息</span><br><span class="line">   *.o (SECTION_APP_INFO, +First)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  ER_IROM3 + <span class="number">0</span> &#123;                    ; 初始化相关代码</span><br><span class="line">   *(InRoot$$Sections)</span><br><span class="line">   .ANY (+RO)                       ; 加载所有匹配目标文档的只读属性数据，包含：</span><br><span class="line">                                    ; Code、 RW-Code、 RO-Data。</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  RW_IRAM1 <span class="number">0x20000000</span> <span class="number">0x00018000</span>  &#123; ; 定义一个运行时域，域基址： 0x20000000 ，域大</span><br><span class="line">                                    ; 小为 0x00018000 ，对应实际 RAM 大小</span><br><span class="line">   .ANY (+RW +ZI) ; 这里也可以用 * 号替代 .ANY</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">LR_IROM1 <span class="number">0x08000000</span> <span class="number">0x00040000</span>  &#123;   ; 定义一个加载时域，域基址：0x08000000，域大小为 0x00040000</span><br><span class="line">  ER_IROM1 0x08000000 0x00040000  &#123; ; 定义一个运行时域，第一个运行时域必须和加载</span><br><span class="line">                                    ; 时域起始地址相同，否则库不能加载到该时域的</span><br><span class="line">                                    ; 错误，其域大小一般也和加载时域大小相同</span><br><span class="line">   *.o (RESET, +First)              ; 将 RESET 段最先加载到本域的起始地址外，即</span><br><span class="line">                                    ; RESET 的起始地址为 0， RESET 存储的是矢量表</span><br><span class="line">  &#125;</span><br><span class="line">  ER_IROM2 + <span class="number">0</span> &#123;                    ; 自定义的应用程序信息（软硬件版本、发布时间、升级信息等）</span><br><span class="line">                                    ; 将其固定的放在中断矢量表之后，便于通过.bin文档查看程序的信息</span><br><span class="line">   *.o (SECTION_APP_INFO, +First)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  ER_IROM3 + <span class="number">0</span> &#123;                    ; 初始化相关代码</span><br><span class="line">   *(InRoot$$Sections)</span><br><span class="line">   .ANY (+RO)                       ; 加载所有匹配目标文档的只读属性数据，包含：</span><br><span class="line">                                    ; Code、 RW-Code、 RO-Data。</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  RW_IRAM1 <span class="number">0x20000000</span> <span class="number">0x00018000</span>  &#123; ; 定义一个运行时域，域基址： 0x20000000 ，域大</span><br><span class="line">                                    ; 小为 0x00018000 ，对应实际 RAM 大小</span><br><span class="line">   .ANY (+RW +ZI)                   ; 这里也可以用 * 号替代 .ANY</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如上分散加载文档所示：它包含1个加载时域，3个运行时域。其第一个运行时域与加载时域的基地址一致（在嵌入式系统中，必须首先加载中断矢量表，且必须与加载时域的基地址保持一致，否则编译时会报错）。</p>
 <p>==SECTION_APP_INFO==：用户自定义的一块区域，记录终端的版本、升级等相关信息，它是一块固定的位置，紧随中断矢量变之后。它为一个结构体形式。<br>结构体形式如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief 应用程序信息(必须为4字节对齐。同时用于IAP和APP)</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    UINT8   ucFactory[FACTORY_LENGTH];        <span class="comment">/* 厂商标志 */</span></span><br><span class="line">    UINT8   ucProduct[PRODUCT_LENGTH];        <span class="comment">/* 产品标志 */</span></span><br><span class="line">    UINT8   ucProtocol[PROTOCOL_LENGTH];      <span class="comment">/* 规约标志 */</span></span><br><span class="line">    UINT8   ucVerSW[VER_SW_LENGTH];           <span class="comment">/* 软件版本 */</span></span><br><span class="line">    UINT8   ucVerDateSW[DATE_SW_LENGTH];      <span class="comment">/* 软件发布日期 */</span></span><br><span class="line">    UINT8   ucVerHW[VER_SW_LENGTH];           <span class="comment">/* 硬件版本 */</span></span><br><span class="line">    UINT8   ucVerDateHW[DATE_HW_LENGTH];      <span class="comment">/* 硬件发布日期 */</span></span><br><span class="line">    UINT64  udwUpGradeFlag;                   <span class="comment">/* 升级标志。主要存放升级方式。该值在升级完成后，改为 以上定义的各种值，以指示升级方式 */</span></span><br><span class="line">    UINT64  udwAppFlag;                       <span class="comment">/* 应用程序标志。该值在升级中动态改变。升级完成后必为APP_FLAG_UPGRADED */</span></span><br><span class="line">    UINT64  udwCRC;                           <span class="comment">/* 程序本身的 CRC。用来保证数据的完整性 */</span></span><br><span class="line">    UINT64  udwLength;                        <span class="comment">/* 程序本身的长度。仅指计算 CRC 的长度 */</span></span><br><span class="line">&#125; APP_INFO, IAP_INFO;</span><br></pre></td></tr></table></figure>
@@ -365,10 +365,10 @@
 <li>RAM 基址： 0x10000000，大小： 32 Kbyte；</li>
 </ul>
 <p>注意这里多增加的一块的不是RAM，而是Flash，其情况会如何呢？假设其相同，那写法应该就是如程序清单所示的样子：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">LR_IROM1 0x00000000 0x00040000 &#123;</span><br><span class="line">	ER_IROM1 0x00000000 0x00040000 &#123;   ; 定义 Flash1 运行时域</span><br><span class="line">		*.o (RESET, +First)            ; 先加载矢量表</span><br><span class="line">		*(InRoot$$Sections)</span><br><span class="line">		.ANY (+RO)                     ; 随意分配只读数据</span><br><span class="line">	&#125;</span><br><span class="line">	ER_IROM2 0x20000000 0x00200000 &#123;   ; 定义 Flash2 运行时域</span><br><span class="line">		.ANY (+RO)                     ; 随意分配只读数据</span><br><span class="line">	&#125;</span><br><span class="line">	RW_IRAM1 0x10000000 0x00008000 &#123;</span><br><span class="line">		.ANY (+RW +ZI)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">LR_IROM1 0x00000000 0x00040000 &#123;</span><br><span class="line">    ER_IROM1 0x00000000 0x00040000 &#123;   ; 定义 Flash1 运行时域</span><br><span class="line">        *.o (RESET, +First)            ; 先加载矢量表</span><br><span class="line">		*(InRoot$$Sections)</span><br><span class="line">        .ANY (+RO)                     ; 随意分配只读数据</span><br><span class="line">	&#125;</span><br><span class="line"> ER_IROM2 0x20000000 0x00200000 &#123;   ; 定义 Flash2 运行时域</span><br><span class="line">        .ANY (+RO)                     ; 随意分配只读数据</span><br><span class="line">	&#125;</span><br><span class="line">	RW_IRAM1 0x10000000 0x00008000 &#123;</span><br><span class="line">		.ANY (+RW +ZI)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>令人遗憾的是，编译出错，为什么会出错呢，仔细分析一下：代码加载时，仅加载到了ROM1中（加载地址是ROM1），但是运行时只读数据却是在ROM1、ROM2随机分配的。当内核访问ROM2的数据时，那必须先将数据复制到ROM2中才能访问（但这一操作是不能实现的），当然导致编译出错。</p>
 <p>正确的编写方式应该如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">LR_IROM1 0x00000000 0x00040000 &#123;     ; 定义 Flash1 的加载域</span><br><span class="line">	ER_IROM1 0x00000000 0x00040000 &#123;</span><br><span class="line">		*.o (RESET, +First)</span><br><span class="line">		*(InRoot$$Sections)</span><br><span class="line">		.ANY (+RO)                   ; 随机分配只读数据</span><br><span class="line">	&#125;</span><br><span class="line">	RW_IRAM1 0x10000000 0x00008000 &#123;</span><br><span class="line">		.ANY (+RW +ZI)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">LR_IROM2 0x20000000 0x00200000 &#123;     ; 定义 Flash2 的加载域</span><br><span class="line">	ER_IROM2 0x20000000 0x00200000 &#123;</span><br><span class="line">		.ANY (+RO)                   ; 随机分配只读数据，代码不会进行拷贝</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">LR_IROM1 0x00000000 0x00040000 &#123;     ; 定义 Flash1 的加载域</span><br><span class="line">	ER_IROM1 0x00000000 0x00040000 &#123;</span><br><span class="line">		*.o (RESET, +First)</span><br><span class="line">		*(InRoot$$Sections)</span><br><span class="line">        .ANY (+RO)                   ; 随机分配只读数据</span><br><span class="line">	&#125;</span><br><span class="line">	RW_IRAM1 0x10000000 0x00008000 &#123;</span><br><span class="line">		.ANY (+RW +ZI)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">LR_IROM2 0x20000000 0x00200000 &#123;     ; 定义 Flash2 的加载域</span><br><span class="line">	ER_IROM2 0x20000000 0x00200000 &#123;</span><br><span class="line">        .ANY (+RO)                   ; 随机分配只读数据，代码不会进行拷贝</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样写能够解决双Flash加载的问题，但是同样有一个问题，那就是，编译时会生成2份bin文档，需要分别两次烧录代码。</p>
 <h3 id="6-5-关于加载时域与第一个运行时域的关系的说明"><a href="#6-5-关于加载时域与第一个运行时域的关系的说明" class="headerlink" title="6.5 关于加载时域与第一个运行时域的关系的说明"></a>6.5 关于加载时域与第一个运行时域的关系的说明</h3><ul>
 <li>第一个运行时域存放的代码不会进行额外拷贝<br>因为分散加载文档有一项很强大的功能，就是可以将 Flash的代码拷贝到 RAM中运行，这一段拷贝代码就存在于__main()函数中，但拷贝代码不能拷贝自身，所以必须规定有一个运行时域中存放的代码是不会被拷贝的，这个指的就是第一个运行时域。<br>一段代码必须先完成拷贝，才能被执行。换句理解就是拷贝代码前包括自身的所有代码都不能拷贝，也就是说这些代码全部都必须放在第一个运行时域中。</li>
@@ -755,15 +755,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件格式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -775,11 +775,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -859,11 +859,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -911,19 +911,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网站集锦</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
               </li>
              
               <li class="article-tag-list-item">
