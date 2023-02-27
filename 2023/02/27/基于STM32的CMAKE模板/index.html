@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/02/27/dGSe3k48g7xnPam.png">
 <meta property="og:image" content="https://s2.loli.net/2023/02/27/3zodliJKPMXfW61.png">
 <meta property="article:published_time" content="2023-02-27T06:23:22.000Z">
-<meta property="article:modified_time" content="2023-02-27T06:36:36.553Z">
+<meta property="article:modified_time" content="2023-02-27T06:42:06.693Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="CMAKE">
 <meta property="article:tag" content="STM32">
@@ -215,9 +215,8 @@
 </div>
 <blockquote>
 <p>若要使用<code>printf</code>或者<code>sprintf</code>函数，需要自己底层实现一些函数；</p>
-<p>例如使用<code>printf</code>:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">#<span class="meta-keyword">ifdef</span> __GNUC__</span></span><br><span class="line">&gt;<span class="meta">#<span class="meta-keyword">define</span> PUTCHAR_PROTOTYPE int __io_putchar(int ch)</span></span><br><span class="line">&gt;<span class="keyword">int</span> _write(<span class="keyword">int</span> fd, <span class="keyword">char</span> *pBuffer, <span class="keyword">int</span> size)</span><br><span class="line">&gt;&#123;</span><br><span class="line">   HAL_UART_Transmit(&amp;huart1, (<span class="keyword">uint8_t</span> *)pBuffer, size, <span class="number">0xFFFF</span>);</span><br><span class="line">   <span class="keyword">return</span> size;</span><br><span class="line">&gt;&#125;</span><br><span class="line">&gt;<span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">&gt;<span class="meta">#<span class="meta-keyword">define</span> PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)</span></span><br><span class="line">&gt;PUTCHAR_PROTOTYPE</span><br><span class="line">&gt;&#123;</span><br><span class="line">   HAL_UART_Transmit(&amp;huart1, (<span class="keyword">uint8_t</span> *)&amp;ch, <span class="number">1</span>, <span class="number">0xFFFF</span>);</span><br><span class="line">   <span class="keyword">return</span> ch;</span><br><span class="line">&gt;&#125;</span><br><span class="line">&gt;<span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
 </blockquote>
+<p>例如使用<code>printf</code>:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __GNUC__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PUTCHAR_PROTOTYPE int __io_putchar(int ch)</span></span><br><span class="line"><span class="keyword">int</span> _write(<span class="keyword">int</span> fd, <span class="keyword">char</span> *pBuffer, <span class="keyword">int</span> size)</span><br><span class="line">&#123;</span><br><span class="line">    HAL_UART_Transmit(&amp;huart1, (<span class="keyword">uint8_t</span> *)pBuffer, size, <span class="number">0xFFFF</span>);</span><br><span class="line">    <span class="keyword">return</span> size;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)</span></span><br><span class="line">PUTCHAR_PROTOTYPE</span><br><span class="line">&#123;</span><br><span class="line">    HAL_UART_Transmit(&amp;huart1, (<span class="keyword">uint8_t</span> *)&amp;ch, <span class="number">1</span>, <span class="number">0xFFFF</span>);</span><br><span class="line">    <span class="keyword">return</span> ch;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
 
       
         <!-- 《添加版权声明 -->
@@ -590,10 +589,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -603,6 +598,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Verilog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,11 +693,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数电</a>
+                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
+                <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -806,15 +805,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">格言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
