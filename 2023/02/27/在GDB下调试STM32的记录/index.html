@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/02/27/TBl43YetwMfjVOH.png">
 <meta property="og:image" content="https://s2.loli.net/2023/02/27/kIJbvT6cN8gfBrZ.png">
 <meta property="article:published_time" content="2023-02-27T12:04:31.000Z">
-<meta property="article:modified_time" content="2023-02-27T12:57:42.251Z">
+<meta property="article:modified_time" content="2023-02-27T13:01:28.241Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="STM32">
 <meta property="article:tag" content="GDB">
@@ -439,8 +439,20 @@
 </tbody>
 </table>
 </div>
-<p>4、其他</p>
-<p>可以参考这个链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuwade/article/details/122473098；">https://blog.csdn.net/zhuwade/article/details/122473098；</a></p>
+<h3 id="4、watch-变量监视"><a href="#4、watch-变量监视" class="headerlink" title="4、watch(变量监视)"></a>4、watch(变量监视)</h3><p>Watchpoints 是用来告诉 <strong>GDB</strong> 停止执行某个程序的标记。Watchpoints 与数据相关联：放置监视点需要指定一个表达式来描述变量、多个变量或内存地址。</p>
+<p>为数据 <strong>change</strong> (写) <strong>放置</strong>一个观察点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) watch expression</span><br></pre></td></tr></table></figure>
+<p>使用描述您要监视的表达式替换 <em>expression</em>；对于变量，<em>expression</em> 等于变量的名称。</p>
+<p>为数据 <strong>access</strong> (读) <strong>放置</strong>一个观察点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) rwatch expression</span><br></pre></td></tr></table></figure>
+<p>要针对 <strong>任何</strong> 数据访问 <strong>放置</strong> 监视点（读取和写入）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) awatch expression</span><br></pre></td></tr></table></figure>
+<p><strong>检查</strong>所有观察点和断点的状态：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) info br</span><br></pre></td></tr></table></figure>
+<p><strong>删除</strong>一个监视点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) delete num</span><br></pre></td></tr></table></figure>
+<p>将 <em>num</em> 选项替换为 <code>info br</code> 命令报告的编号；</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>可以参考这个链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuwade/article/details/122473098；">https://blog.csdn.net/zhuwade/article/details/122473098；</a></p>
 <p>等我用到了，我再一个一个写；</p>
 <h2 id="三、使用VSCode进行辅助调试"><a href="#三、使用VSCode进行辅助调试" class="headerlink" title="三、使用VSCode进行辅助调试"></a>三、使用VSCode进行辅助调试</h2><p>参考：<a target="_blank" rel="noopener" href="https://www.fan-pengfei.top/2023/02/27/%E5%9F%BA%E4%BA%8ESTM32%E7%9A%84CMAKE%E6%A8%A1%E6%9D%BF/#more">https://www.fan-pengfei.top/2023/02/27/%E5%9F%BA%E4%BA%8ESTM32%E7%9A%84CMAKE%E6%A8%A1%E6%9D%BF/#more</a></p>
 
@@ -619,7 +631,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%B0%83%E8%AF%95%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">一、调试步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%90%AF%E5%8A%A8Jlink-GDB-Server"><span class="toc-number">1.2.</span> <span class="toc-text">1、启动Jlink GDB Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81GDB%E8%B0%83%E8%AF%95"><span class="toc-number">1.3.</span> <span class="toc-text">2、GDB调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-number">1.4.</span> <span class="toc-text">3、需要注意的地方</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">二、常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81p-%E6%89%93%E5%8D%B0"><span class="toc-number">2.1.</span> <span class="toc-text">1、p(打印)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81s-%E5%8D%95%E6%AD%A5%E8%BF%90%E8%A1%8C"><span class="toc-number">2.2.</span> <span class="toc-text">2、s(单步运行)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81l-%E5%88%97%E5%87%BA"><span class="toc-number">2.3.</span> <span class="toc-text">3、l(列出)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BD%BF%E7%94%A8VSCode%E8%BF%9B%E8%A1%8C%E8%BE%85%E5%8A%A9%E8%B0%83%E8%AF%95"><span class="toc-number">3.</span> <span class="toc-text">三、使用VSCode进行辅助调试</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%B0%83%E8%AF%95%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">一、调试步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%90%AF%E5%8A%A8Jlink-GDB-Server"><span class="toc-number">1.2.</span> <span class="toc-text">1、启动Jlink GDB Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81GDB%E8%B0%83%E8%AF%95"><span class="toc-number">1.3.</span> <span class="toc-text">2、GDB调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-number">1.4.</span> <span class="toc-text">3、需要注意的地方</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">二、常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81p-%E6%89%93%E5%8D%B0"><span class="toc-number">2.1.</span> <span class="toc-text">1、p(打印)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81s-%E5%8D%95%E6%AD%A5%E8%BF%90%E8%A1%8C"><span class="toc-number">2.2.</span> <span class="toc-text">2、s(单步运行)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81l-%E5%88%97%E5%87%BA"><span class="toc-number">2.3.</span> <span class="toc-text">3、l(列出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81watch-%E5%8F%98%E9%87%8F%E7%9B%91%E8%A7%86"><span class="toc-number">2.4.</span> <span class="toc-text">4、watch(变量监视)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">2.5.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BD%BF%E7%94%A8VSCode%E8%BF%9B%E8%A1%8C%E8%BE%85%E5%8A%A9%E8%B0%83%E8%AF%95"><span class="toc-number">3.</span> <span class="toc-text">三、使用VSCode进行辅助调试</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -807,15 +819,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -835,15 +847,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CMAKE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件格式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">CMAKE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -863,10 +875,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">感悟</a>
               </li>
              
@@ -875,11 +883,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LCD</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -896,10 +912,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -923,7 +935,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -931,11 +943,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -943,7 +955,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -971,15 +983,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1011,19 +1023,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">2022</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">工程师</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">年终总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">2022</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1035,15 +1047,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">格言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
