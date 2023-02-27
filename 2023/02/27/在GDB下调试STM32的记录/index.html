@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/02/27/TBl43YetwMfjVOH.png">
 <meta property="og:image" content="https://s2.loli.net/2023/02/27/kIJbvT6cN8gfBrZ.png">
 <meta property="article:published_time" content="2023-02-27T12:04:31.000Z">
-<meta property="article:modified_time" content="2023-02-27T12:41:59.459Z">
+<meta property="article:modified_time" content="2023-02-27T12:57:42.251Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="STM32">
 <meta property="article:tag" content="GDB">
@@ -423,7 +423,7 @@
 <p>并且可以用 <code>breakpoint+行号</code>进行断点设置；</p>
 </blockquote>
 <h3 id="3、l-列出"><a href="#3、l-列出" class="headerlink" title="3、l(列出)"></a>3、l(列出)</h3><blockquote>
-<p>  列出当前位置后十行程序；</p>
+<p>  列出当前位置前后共5行程序；</p>
 </blockquote>
 <div class="table-container">
 <table>
@@ -439,6 +439,9 @@
 </tbody>
 </table>
 </div>
+<p>4、其他</p>
+<p>可以参考这个链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuwade/article/details/122473098；">https://blog.csdn.net/zhuwade/article/details/122473098；</a></p>
+<p>等我用到了，我再一个一个写；</p>
 <h2 id="三、使用VSCode进行辅助调试"><a href="#三、使用VSCode进行辅助调试" class="headerlink" title="三、使用VSCode进行辅助调试"></a>三、使用VSCode进行辅助调试</h2><p>参考：<a target="_blank" rel="noopener" href="https://www.fan-pengfei.top/2023/02/27/%E5%9F%BA%E4%BA%8ESTM32%E7%9A%84CMAKE%E6%A8%A1%E6%9D%BF/#more">https://www.fan-pengfei.top/2023/02/27/%E5%9F%BA%E4%BA%8ESTM32%E7%9A%84CMAKE%E6%A8%A1%E6%9D%BF/#more</a></p>
 
       
@@ -804,6 +807,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
@@ -824,11 +831,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+                <a href="javascript:void(0)" class="js-tag color1">CMAKE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -837,10 +844,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CMAKE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -860,6 +863,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">感悟</a>
               </li>
              
@@ -868,19 +875,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LCD</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -897,6 +896,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -920,10 +923,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
@@ -932,7 +931,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
+                <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -940,7 +943,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -968,15 +971,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">md语法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图床</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1008,19 +1011,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">年终总结</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">2022</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1032,15 +1035,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">格言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
