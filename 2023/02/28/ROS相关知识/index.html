@@ -6,22 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://fan-pengfei.top">
-  <title>Windows10 Bat脚本 | 樊鹏飞的博客</title>
+  <title>ROS相关知识 | 樊鹏飞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="常用bat脚本；">
+  <meta name="description" content="做毕设用到了ROS，这里记录ROS相关知识；">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows10 Bat脚本">
-<meta property="og:url" content="http://fan-pengfei.top/2021/08/17/windows-bat/index.html">
+<meta property="og:title" content="ROS相关知识">
+<meta property="og:url" content="http://fan-pengfei.top/2023/02/28/ROS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="樊鹏飞的博客">
-<meta property="og:description" content="常用bat脚本；">
+<meta property="og:description" content="做毕设用到了ROS，这里记录ROS相关知识；">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2022/04/22/FB5RGyUWeXdYzpI.png">
-<meta property="article:published_time" content="2021-08-17T12:41:10.000Z">
-<meta property="article:modified_time" content="2022-04-23T12:08:49.571Z">
+<meta property="og:image" content="https://s2.loli.net/2023/02/28/py4WXFgSu1onAEM.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/28/zZmjXSEJkMhIs1C.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/28/IQxBtlMDZuXWcgA.png">
+<meta property="article:published_time" content="2023-02-28T08:56:52.000Z">
+<meta property="article:modified_time" content="2023-02-28T10:35:51.838Z">
 <meta property="article:author" content="樊鹏飞">
-<meta property="article:tag" content="Windows">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/04/22/FB5RGyUWeXdYzpI.png">
+<meta name="twitter:image" content="https://s2.loli.net/2023/02/28/py4WXFgSu1onAEM.png">
   
     <link rel="alternative" href="/atom.xml" title="樊鹏飞的博客" type="application/atom+xml">
   
@@ -161,14 +162,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-windows-bat" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ROS相关知识" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Windows10 Bat脚本
+      ROS相关知识
     </h1>
   
 
@@ -179,8 +180,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2021/08/17/windows-bat/" class="archive-article-date">
-  	<time datetime="2021-08-17T12:41:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-17</time>
+<a href="/2023/02/28/ROS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" class="archive-article-date">
+  	<time datetime="2023-02-28T08:56:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-28</time>
 </a>
         
       </header>
@@ -188,18 +189,122 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>常用bat脚本；<span id="more"></span></p>
+<p>  做毕设用到了ROS，这里记录ROS相关知识；<span id="more"></span></p>
 </blockquote>
-<h2 id="Windows-bat脚本："><a href="#Windows-bat脚本：" class="headerlink" title="Windows bat脚本："></a>Windows bat脚本：</h2><blockquote>
-<p>依次执行多条命令，并且执行完执行完毕并不退出：<!-- more --></p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*upload.bat:博客自动上传脚本*/</span><br><span class="line">call hexo clean //</span><br><span class="line">call hexo g //博客生成</span><br><span class="line">call hexo d //博客上传</span><br><span class="line">pause //页面暂停</span><br></pre></td></tr></table></figure>
+<p>语言基于Python，因为C++短时间学不起来，Python的话还能懂一些；</p>
+<h3 id="工作空间构建"><a href="#工作空间构建" class="headerlink" title="工作空间构建"></a>工作空间构建</h3><p>创建一个新的文档夹<br>我们创建一个新的文档夹作为新的工作空间的开始<br>给每个新的工作空间创建一个新的文档夹是一个好习惯，取上面名字无关紧要，但是最好能从这个名字上看出这个工作空间是干什么的，例如main_ws，(主要工作空间)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir main_ws</span><br></pre></td></tr></table></figure>
+<p>将功能包放入src也是一个比较好的习惯，我们创建一个工作空间同时创建一个src文档夹，然后进入这个文档夹内：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir main_ws/src</span><br><span class="line"><span class="built_in">cd</span> main_ws/src</span><br></pre></td></tr></table></figure>
+<p>与ROS1不同，ROS2的工作空间并不需要init；</p>
+<h3 id="自定义包"><a href="#自定义包" class="headerlink" title="自定义包"></a>自定义包</h3><p>如何在ROS2中创建一个功能包呢？我们可以使用这个指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ros2 pkg create --build-type &lt;build-type&gt; &lt;package_name&gt;</span><br></pre></td></tr></table></figure>
+<p>在ros2命令中：</p>
+<ul>
+<li><strong>pkg</strong>：表示功能包相关的功能；</li>
+<li><strong>create</strong>：表示创建功能包；</li>
+<li><strong>build-type</strong>：表示新创建的功能包是C++还是Python的，如果使用C++或者C，那这里就跟ament_cmake，如果使用Python，就跟ament_python；</li>
+<li><strong>package_name</strong>：新建功能包的名字。</li>
+</ul>
+<p>比如在终端中分别创建C++和Python版本的功能包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/main_ws/src</span><br><span class="line">ros2 pkg create --build-type ament_cmake learning_pkg_c               <span class="comment"># C++</span></span><br><span class="line">ros2 pkg create --build-type ament_python learning_pkg_python <span class="comment"># Python</span></span><br></pre></td></tr></table></figure>
+<p>对于Python包：</p>
+<p>只需要进到构建的包文件夹中，进入与上一层文件夹名字相同的包中即可，然后写入源文件；</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/28/py4WXFgSu1onAEM.png" alt="c74bd28eec8ebcb6aba8146b743cc0e"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>然后修改package.xml文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">from setuptools import setup</span><br><span class="line"></span><br><span class="line">package_name = &#x27;serial_test&#x27;</span><br><span class="line"></span><br><span class="line">setup(</span><br><span class="line">    name=package_name,</span><br><span class="line">    version=&#x27;0.0.0&#x27;,</span><br><span class="line">    packages=[package_name],</span><br><span class="line">    data_files=[</span><br><span class="line">        (&#x27;share/ament_index/resource_index/packages&#x27;,</span><br><span class="line">            [&#x27;resource/&#x27; + package_name]),</span><br><span class="line">        (&#x27;share/&#x27; + package_name, [&#x27;package.xml&#x27;]),</span><br><span class="line">    ],</span><br><span class="line">    install_requires=[&#x27;setuptools&#x27;],</span><br><span class="line">    zip_safe=True,</span><br><span class="line">    maintainer=&#x27;xioafei&#x27;,</span><br><span class="line">    maintainer_email=&#x27;2253770787@qq.com&#x27;,</span><br><span class="line">    description=&#x27;TODO: Package description&#x27;,</span><br><span class="line">    license=&#x27;TODO: License declaration&#x27;,</span><br><span class="line">    tests_require=[&#x27;pytest&#x27;],</span><br><span class="line">    entry_points=&#123;</span><br><span class="line">        &#x27;console_scripts&#x27;: [</span><br><span class="line">         &#x27;interface_object_pub  = serial_test.interface_object_pub:main&#x27;,</span><br><span class="line">        #  &#x27;interface_object_sub  = serial_test.interface_object_sub:main&#x27;,</span><br><span class="line">        ],</span><br><span class="line">    &#125;,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="编译功能包"><a href="#编译功能包" class="headerlink" title="编译功能包"></a><strong>编译功能包</strong></h3><p>在创建好的功能包中，我们可以继续完成代码的编写，之后需要编译和配置环境变量，才能正常运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/main_ws  <span class="comment">#在工作空间的根目录编译</span></span><br><span class="line">colcon build  <span class="comment">#编译工作空间所有功能包</span></span><br><span class="line">colcon build --packages-select 包名<span class="comment">#编译特定的包 </span></span><br></pre></td></tr></table></figure>
+<p>编译成功后，需要source一下，才能让ros识别到这个包：</p>
 <blockquote>
-<p>同时执行多条命令，并且执行完执行完毕并不退出（以下例子仅仅说明语法，并不代表可用）：</p>
+<p>  注意，最好新开一个终端，而不是在当前终端；</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*upload.bat:博客自动上传脚本*/</span><br><span class="line">start hexo clean //</span><br><span class="line">start hexo g //博客生成</span><br><span class="line">start hexo d //博客上传</span><br><span class="line">pause //页面暂停</span><br></pre></td></tr></table></figure>
-<p>脚本运行结果：</p>
-<p><img src="https://s2.loli.net/2022/04/22/FB5RGyUWeXdYzpI.png" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> install/local_setup.bash</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>  关于sourceros1和ros2有很大的不同，在install目录下会有local_setup 和setup两个文档。local_setup只会把当前工作空间中的可用包添加到环境当中，setup则会把新建该工作空间时候的底层的工作空间也加入到环境当中，这样就可用同时使用两个工作空间中的包；</p>
+<p>  因此，先sourceROS2安装时系统的setup，然后再source main_ws的local_setup，和source main_ws的setup的效果是相同的，应为main_ws这个工作空间的创建时的底层就是系统的setup；</p>
+<p>  对于存在多个工作空间的情况这种区别就会体现出来，官网对于新的工作空间叫overlay，也就是这个一个每个工作空间之间是存在覆盖累计的情况；</p>
+<p>  个人推荐首先source系统，然后对于自己创建的工作空间选择local_setup这样就会减少自己创建的多个工作空间之间的干扰。这解决了ros1上一个很头疼的问题；</p>
+</blockquote>
+<h3 id="自定义数据类型"><a href="#自定义数据类型" class="headerlink" title="自定义数据类型"></a>自定义数据类型</h3><p>在ROS2中定义接口，需要编写一个接口文档，该文档后缀为<code>msg</code>、<code>srv</code>、<code>action</code></p>
+<p>在接口文档中定义通信过程中所使用的数据类型和数据名称；</p>
+<p>数据类型有哪些呢？</p>
+<p>原始的数据类型只有九类，其中每一个都可以在后面加上[]将其变成数组形式（从一个变成多个）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">bool</span><br><span class="line">byte</span><br><span class="line">char</span><br><span class="line">float32, float64</span><br><span class="line">int8, uint8</span><br><span class="line">int16, uint16</span><br><span class="line">int32, uint32</span><br><span class="line">int64, uint64</span><br><span class="line">string</span><br></pre></td></tr></table></figure>
+<p>使用以下命令可以查看数据组成：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 interface show point_msgs/msg/Ds18b20</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/28/zZmjXSEJkMhIs1C.png" alt="21fb0b5056d999039b2da8da0bb9799"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如何自定义数据类型呢？</p>
+<p>对于话题接口的定义：</p>
+<p>你会、在包里面创建定制化的.msg和.srv文档，并且它们可在别的包内使用．所涉及的包应该放到同一工作空间下面．</p>
+<p>建立一个新的包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 pkg create --build-type ament_cmake tutorial_interfaces</span><br></pre></td></tr></table></figure>
+<p>tutorial_interfaces是新包的名字．注意这是一个CMake类型的包；在单纯python包里面，目前是没有办法生成.msg或者.srv文档的．在CMake型包里面，你可以创建定制化接口，然后在python型节点中使用；</p>
+<p>在一个包中，最后是让.msg 和.srv放在各自文档目录比较好．在目录main_ws/src/tutorial_interfaces创建文档夹：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir msg</span><br><span class="line">mkdir srv</span><br></pre></td></tr></table></figure>
+<p>在刚刚创建的tutorial_interfaces/msg文档目录，新建一个名字为Ds18b20.msg的文档，里面放着声明数据结构的一行代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int32 temp1      # 表示第1个温度</span><br><span class="line">int32 temp2      # 表示第2个温度</span><br><span class="line">int32 temp3      # 表示第1个温度</span><br><span class="line">int32 temp4      # 表示第2个温度</span><br><span class="line">int32 temp5      # 表示第1个温度</span><br><span class="line">int32 temp6      # 表示第2个温度</span><br><span class="line">int32 temp7      # 表示第1个温度</span><br><span class="line">int32 temp8      # 表示第2个温度</span><br></pre></td></tr></table></figure>
+<p>将八个32位整数称为temp1~8，这就是你的定制化消息；</p>
+<p>3.3 CMakeLists.txt<br>为了将你定义的接口转为特定语言代码（如c++和python）,使得这些接口可在这些语言里被使用，(为了达到这个目地你)</p>
+<p>参考CMakeLists.txt文档：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.8</span>)</span><br><span class="line"><span class="keyword">project</span>(point_msgs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Default to C99</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">NOT</span> CMAKE_C_STANDARD)</span><br><span class="line">  <span class="keyword">set</span>(CMAKE_C_STANDARD <span class="number">99</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Default to C++14</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">NOT</span> CMAKE_CXX_STANDARD)</span><br><span class="line">  <span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">14</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(CMAKE_COMPILER_IS_GNUCXX <span class="keyword">OR</span> CMAKE_CXX_COMPILER_ID <span class="keyword">MATCHES</span> <span class="string">&quot;Clang&quot;</span>)</span><br><span class="line">  <span class="keyword">add_compile_options</span>(-Wall -Wextra -Wpedantic)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># find dependencies</span></span><br><span class="line"><span class="keyword">find_package</span>(ament_cmake REQUIRED)</span><br><span class="line"><span class="comment"># uncomment the following section in order to fill in</span></span><br><span class="line"><span class="comment"># further dependencies manually.</span></span><br><span class="line"><span class="comment"># find_package(&lt;dependency&gt; REQUIRED)</span></span><br><span class="line"><span class="keyword">find_package</span>(rosidl_default_generators REQUIRED)</span><br><span class="line"></span><br><span class="line">rosidl_generate_interfaces(<span class="variable">$&#123;PROJECT_NAME&#125;</span></span><br><span class="line">  <span class="string">&quot;msg/Ds18b20.msg&quot;</span></span><br><span class="line"> )</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span>(BUILD_TESTING)</span><br><span class="line">  <span class="keyword">find_package</span>(ament_lint_auto REQUIRED)</span><br><span class="line">  <span class="comment"># the following line skips the linter which checks for copyrights</span></span><br><span class="line">  <span class="comment"># uncomment the line when a copyright and license is not present in all source files</span></span><br><span class="line">  <span class="comment">#set(ament_cmake_copyright_FOUND TRUE)</span></span><br><span class="line">  <span class="comment"># the following line skips cpplint (only works in a git repo)</span></span><br><span class="line">  <span class="comment"># uncomment the line when this package is not in a git repo</span></span><br><span class="line">  <span class="comment">#set(ament_cmake_cpplint_FOUND TRUE)</span></span><br><span class="line">  ament_lint_auto_find_test_dependencies()</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line">ament_package()</span><br></pre></td></tr></table></figure>
+<p>参考package.xml文档：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml-model href=&quot;http://download.ros.org/schema/package_format3.xsd&quot; schematypens=&quot;http://www.w3.org/2001/XMLSchema&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">format</span>=<span class="string">&quot;3&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>point_msgs<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>TODO: Package description<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">maintainer</span> <span class="attr">email</span>=<span class="string">&quot;2253770787@qq.com&quot;</span>&gt;</span>xioafei<span class="tag">&lt;/<span class="name">maintainer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">license</span>&gt;</span>TODO: License declaration<span class="tag">&lt;/<span class="name">license</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">buildtool_depend</span>&gt;</span>ament_cmake<span class="tag">&lt;/<span class="name">buildtool_depend</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">test_depend</span>&gt;</span>ament_lint_auto<span class="tag">&lt;/<span class="name">test_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">test_depend</span>&gt;</span>ament_lint_common<span class="tag">&lt;/<span class="name">test_depend</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>rosidl_default_generators<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>rosidl_default_runtime<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">member_of_group</span>&gt;</span>rosidl_interface_packages<span class="tag">&lt;/<span class="name">member_of_group</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">export</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">build_type</span>&gt;</span>ament_cmake<span class="tag">&lt;/<span class="name">build_type</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">export</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>既然你定制化接口包的组成部分都齐了，那可以编译这个包了．在工作空间根目录（~/main_ws）下，运行下面指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">colcon build --packages-select tutorial_interfaces</span><br></pre></td></tr></table></figure>
+<p>现在，这些接口可以被ros2包找到了；</p>
+<p>在新终端，main_ws工作空间运行下面指令来source一下（该空间环境变量）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ./install/setup.bash</span><br></pre></td></tr></table></figure>
+<p>现在使用ros2 interface show指令来确认你的创建的接口可以使用了．</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 interface show tutorial_interfaces/msg/Ds18b20</span><br></pre></td></tr></table></figure>
+<p>应该返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int32 temp1      # 表示第1个温度</span><br><span class="line">int32 temp2      # 表示第2个温度</span><br><span class="line">int32 temp3      # 表示第1个温度</span><br><span class="line">int32 temp4      # 表示第2个温度</span><br><span class="line">int32 temp5      # 表示第1个温度</span><br><span class="line">int32 temp6      # 表示第2个温度</span><br><span class="line">int32 temp7      # 表示第1个温度</span><br><span class="line">int32 temp8      # 表示第2个温度</span><br></pre></td></tr></table></figure>
+<h3 id="通过发布话题发布自定义数据"><a href="#通过发布话题发布自定义数据" class="headerlink" title="通过发布话题发布自定义数据"></a>通过发布话题发布自定义数据</h3><p>参考源码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> rclpy                                     <span class="comment"># ROS2 Python接口库</span></span><br><span class="line"><span class="keyword">from</span> rclpy.node <span class="keyword">import</span> Node                      <span class="comment"># ROS2 节点类</span></span><br><span class="line"><span class="keyword">from</span> std_msgs.msg <span class="keyword">import</span> String                  <span class="comment"># 字符串消息类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> point_msgs.msg <span class="keyword">import</span> Ds18b20  <span class="comment"># 自定义的温度消息</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">创建一个发布者节点</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PublisherNode</span>(<span class="params">Node</span>):</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__(name)                                    <span class="comment"># ROS2节点父类初始化</span></span><br><span class="line">        self.pub = self.create_publisher(Ds18b20, <span class="string">&quot;Ds18b20_temperature&quot;</span>, <span class="number">100</span>)<span class="comment"># 创建发布者对象（消息类型、话题名、队列长度）</span></span><br><span class="line">        self.timer = self.create_timer(<span class="number">0.1</span>, self.timer_callback)  <span class="comment"># 创建一个定时器（单位为秒的周期，定时执行的回调函数）</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">timer_callback</span>(<span class="params">self</span>):</span>                                     <span class="comment"># 创建定时器周期执行的回调函数</span></span><br><span class="line">        temp = Ds18b20()</span><br><span class="line">        temp.temp1= <span class="built_in">int</span>(<span class="number">1</span>)</span><br><span class="line">        temp.temp2= <span class="built_in">int</span>(<span class="number">2</span>)</span><br><span class="line">        temp.temp3= <span class="built_in">int</span>(<span class="number">3</span>)</span><br><span class="line">        temp.temp4= <span class="built_in">int</span>(<span class="number">4</span>)</span><br><span class="line">        temp.temp5= <span class="built_in">int</span>(<span class="number">5</span>)</span><br><span class="line">        temp.temp6= <span class="built_in">int</span>(<span class="number">6</span>)</span><br><span class="line">        temp.temp7= <span class="built_in">int</span>(<span class="number">7</span>)</span><br><span class="line">        temp.temp8= <span class="built_in">int</span>(<span class="number">8</span>)</span><br><span class="line">        self.pub.publish(temp)                              <span class="comment"># 发布目标位置</span></span><br><span class="line">        self.get_logger().info(<span class="string">&#x27;Publishing: &quot;%d&quot;&#x27;</span> % temp.temp1) <span class="comment"># 输出日志信息，提示已经完成话题发布</span></span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>(<span class="params">args=<span class="literal">None</span></span>):</span>                                 <span class="comment"># ROS2节点主入口main函数</span></span><br><span class="line">    rclpy.init(args=args)                            <span class="comment"># ROS2 Python接口初始化</span></span><br><span class="line">    node = PublisherNode(<span class="string">&quot;interface_object_pub&quot;</span>)     <span class="comment"># 创建ROS2节点对象并进行初始化</span></span><br><span class="line">    rclpy.spin(node)                                 <span class="comment"># 循环等待ROS2退出</span></span><br><span class="line">    node.destroy_node()                              <span class="comment"># 销毁节点对象</span></span><br><span class="line">    rclpy.shutdown()                                 <span class="comment"># 关闭ROS2 Python接口</span></span><br></pre></td></tr></table></figure>
+<p>通过以下命令验证：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ros2 topilist</span><br><span class="line">ros2 topic <span class="built_in">echo</span> /DS18B20N8_temperature</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://s2.loli.net/2023/02/28/IQxBtlMDZuXWcgA.png" alt="b7a3df73fa89d76109f092488de53e4"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="通过订阅话题订阅自定义数据"><a href="#通过订阅话题订阅自定义数据" class="headerlink" title="通过订阅话题订阅自定义数据"></a>通过订阅话题订阅自定义数据</h3><p>参考源码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 
       
         <!-- 《添加版权声明 -->
@@ -210,30 +315,7 @@
 
 <!-- #版权基础设定：0-关闭声明； 1-文章对应的md文件里有declare: true属性，才有版权声明； 2-所有文章均有版权声明 -->
 
-  <div class="declare">
-    <strong class="author">本文作者：</strong>
-    
-      樊鹏飞
-    
-    <br>
-    <strong class="create-time">发布时间：</strong>
-    2021-08-17
-    <br>
-    <strong class="update-time">最后更新：</strong>
-    2022-04-23
-    <br>
-    <strong class="article-titles">本文标题：</strong>
-    <a href="http://fan-pengfei.top/2021/08/17/windows-bat/" title="Windows10 Bat脚本" target="_blank">Windows10 Bat脚本</a>
-    <br>
-    <strong class="article-url">本文链接：</strong>
-    <a href="http://fan-pengfei.top/2021/08/17/windows-bat/" title="Windows10 Bat脚本" target="_blank">http://fan-pengfei.top/2021/08/17/windows-bat/</a>
-    <br>
-    <strong class="copyright">版权声明：</strong>
-    本作品采用
-    <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议">CC BY-NC-SA 4.0</a>
-    许可协议进行许可。转载请注明出处！
-    
-  </div>
+  <div class="declare" hidden="hidden"></div>
 
 <!-- 添加版权声明》 -->
 
@@ -276,29 +358,7 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Windows//" class="article-tag-list-link color3">Windows</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -348,7 +408,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://fan-pengfei.top/2021/08/17/windows-bat/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://fan-pengfei.top/2023/02/28/ROS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -362,18 +422,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/08/17/typora-picgo/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          typora图片上传出错
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/08/17/hexo-creat/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hexo+Yilia搭建自己的博客</div>
+    <a href="/2023/02/27/%E5%9C%A8GDB%E4%B8%8B%E8%B0%83%E8%AF%95STM32%E7%9A%84%E8%AE%B0%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">在GDB下调试STM32的记录</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -400,7 +451,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-bat%E8%84%9A%E6%9C%AC%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">Windows bat脚本：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E6%9E%84%E5%BB%BA"><span class="toc-number">1.</span> <span class="toc-text">工作空间构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8C%85"><span class="toc-number">2.</span> <span class="toc-text">自定义包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="toc-number">3.</span> <span class="toc-text">编译功能包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">自定义数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%8F%91%E5%B8%83%E8%AF%9D%E9%A2%98%E5%8F%91%E5%B8%83%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE"><span class="toc-number">5.</span> <span class="toc-text">通过发布话题发布自定义数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E8%AE%A2%E9%98%85%E8%AF%9D%E9%A2%98%E8%AE%A2%E9%98%85%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE"><span class="toc-number">6.</span> <span class="toc-text">通过订阅话题订阅自定义数据</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -438,7 +489,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="windows-bat" data-title="Windows10 Bat脚本" data-url="http://fan-pengfei.top/2021/08/17/windows-bat/"></div>
+	<div class="ds-thread" data-thread-key="ROS相关知识" data-title="ROS相关知识" data-url="http://fan-pengfei.top/2023/02/28/ROS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
