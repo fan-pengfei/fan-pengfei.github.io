@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/03/07/jvzdqVkAeb1o4yL.png">
 <meta property="og:image" content="https://s2.loli.net/2023/03/07/EGUMegfiHNn5OT3.png">
 <meta property="article:published_time" content="2023-03-07T08:53:27.000Z">
-<meta property="article:modified_time" content="2023-03-07T11:07:04.816Z">
+<meta property="article:modified_time" content="2023-03-07T11:15:55.416Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="STM32">
 <meta property="article:tag" content="C">
@@ -263,6 +263,51 @@
 </tbody>
 </table>
 </div>
+<p><strong>C:</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Total RO  Size (Code + RO Data)</th>
+<th style="text-align:center">14016 (13.69kB)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Total RW  Size (RW Data + ZI Data)</td>
+<td style="text-align:center">2040 (1.99kB)</td>
+</tr>
+<tr>
+<td style="text-align:left">Total ROM Size (Code + RO Data + RW Data)</td>
+<td style="text-align:center">14464 (  14.13kB)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>C++:</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Total RO  Size (Code + RO Data)</th>
+<th style="text-align:center">11780 (11.50kB)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Total RW  Size (RW Data + ZI Data)</td>
+<td style="text-align:center">2864 (2.80kB)</td>
+</tr>
+<tr>
+<td style="text-align:left">Total ROM Size (Code + RO Data + RW Data)</td>
+<td style="text-align:center">12220 (  11.93kB)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>  相比较而言C用的ROM比较多一些，C++用的RAM比较多一些；</p>
+</blockquote>
 <p><strong>可见在某些情况下，使用C++编写代码可以有效缩减代码体积，且代码更易懂；</strong></p>
 <h3 id="microlib"><a href="#microlib" class="headerlink" title="microlib"></a>microlib</h3><p>使用C++编译的话，就没法再使用MicroLIB，因为MicroLIB为非标准的精简库，会与标准C++产生冲突；</p>
 <h3 id="中断服务程序"><a href="#中断服务程序" class="headerlink" title="中断服务程序"></a>中断服务程序</h3><p>如果中断服务程序是异常的，因为stm32的中断入口矢量是按C的方式进入的，因此需要在整个文档的头部和末尾加上extern “C”{}用大括号把整个代码段扩住，这样中断就可以正常的进入了；</p>
@@ -660,10 +705,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -673,6 +714,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Verilog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -724,6 +769,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
@@ -737,14 +790,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -788,15 +833,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -860,11 +905,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
+                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -884,15 +929,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">格言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
