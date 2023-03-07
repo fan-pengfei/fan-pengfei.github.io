@@ -19,8 +19,10 @@
 <meta property="og:image" content="https://s2.loli.net/2023/03/07/6ZLduQVeXqHoO38.png">
 <meta property="og:image" content="https://s2.loli.net/2023/03/07/OjazCfiWwELdKkN.png">
 <meta property="og:image" content="https://s2.loli.net/2023/03/07/7Zv9lgaTPbhsD2p.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/07/jvzdqVkAeb1o4yL.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/07/EGUMegfiHNn5OT3.png">
 <meta property="article:published_time" content="2023-03-07T08:53:27.000Z">
-<meta property="article:modified_time" content="2023-03-07T11:00:01.663Z">
+<meta property="article:modified_time" content="2023-03-07T11:07:04.816Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="STM32">
 <meta property="article:tag" content="C">
@@ -240,7 +242,29 @@
 <p>  注意main文件也是cpp后缀；</p>
 </blockquote>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">User_DS18B20_Init</span>();</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">User_Start_Convert</span>();</span><br><span class="line">        <span class="built_in">HAL_Delay</span>(<span class="number">200</span>); <span class="comment">// 更新速率为200ms，等待转换结束</span></span><br><span class="line">        <span class="built_in">User_Get_Data</span>();</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; <span class="number">64</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;temp[%d]:%.3lf\r\n&quot;</span>, i, temp_data[i]);</span><br><span class="line">            i++;</span><br><span class="line">            <span class="keyword">if</span> (i % <span class="number">8</span> == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\r\n----------------------------%d\r\n&quot;</span>, i / <span class="number">8</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="microlib"><a href="#microlib" class="headerlink" title="microlib"></a>microlib</h3><p>使用C++编译的话，就没法再使用MicroLIB，因为MicroLIB为非标准的精简库，会与标准C++产生冲突；</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="可执行文件的大小比较"><a href="#可执行文件的大小比较" class="headerlink" title="可执行文件的大小比较"></a>可执行文件的大小比较</h3><p>实现相同功能的情况下，生成的bin文件的大小比较：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">使用C编写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="https://s2.loli.net/2023/03/07/jvzdqVkAeb1o4yL.png" alt="5a011b38ca2d1e989de04f32bb8c0e5"></td>
+</tr>
+<tr>
+<td style="text-align:center">使用C++编写</td>
+</tr>
+<tr>
+<td style="text-align:center"><img src="https://s2.loli.net/2023/03/07/EGUMegfiHNn5OT3.png" alt="4dbfdf38abe4f0d85cc7f98e4133007"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>可见在某些情况下，使用C++编写代码可以有效缩减代码体积，且代码更易懂；</strong></p>
+<h3 id="microlib"><a href="#microlib" class="headerlink" title="microlib"></a>microlib</h3><p>使用C++编译的话，就没法再使用MicroLIB，因为MicroLIB为非标准的精简库，会与标准C++产生冲突；</p>
 <h3 id="中断服务程序"><a href="#中断服务程序" class="headerlink" title="中断服务程序"></a>中断服务程序</h3><p>如果中断服务程序是异常的，因为stm32的中断入口矢量是按C的方式进入的，因此需要在整个文档的头部和末尾加上extern “C”{}用大括号把整个代码段扩住，这样中断就可以正常的进入了；</p>
 <h3 id="Cubemx"><a href="#Cubemx" class="headerlink" title="Cubemx"></a>Cubemx</h3><p>Cubemx在生成头文件中已经加入了：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
@@ -436,7 +460,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">环境说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E7%BC%96%E5%86%99"><span class="toc-number">2.</span> <span class="toc-text">源码编写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">头文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">源文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Main%E4%B8%AD%E8%B0%83%E7%94%A8%EF%BC%9A"><span class="toc-number">2.3.</span> <span class="toc-text">Main中调用：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">3.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#microlib"><span class="toc-number">3.1.</span> <span class="toc-text">microlib</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F"><span class="toc-number">3.2.</span> <span class="toc-text">中断服务程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cubemx"><span class="toc-number">3.3.</span> <span class="toc-text">Cubemx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#printf%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.4.</span> <span class="toc-text">printf的实现</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">环境说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E7%BC%96%E5%86%99"><span class="toc-number">2.</span> <span class="toc-text">源码编写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">头文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">源文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Main%E4%B8%AD%E8%B0%83%E7%94%A8%EF%BC%9A"><span class="toc-number">2.3.</span> <span class="toc-text">Main中调用：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">3.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%A7%E5%B0%8F%E6%AF%94%E8%BE%83"><span class="toc-number">3.1.</span> <span class="toc-text">可执行文件的大小比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#microlib"><span class="toc-number">3.2.</span> <span class="toc-text">microlib</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F"><span class="toc-number">3.3.</span> <span class="toc-text">中断服务程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cubemx"><span class="toc-number">3.4.</span> <span class="toc-text">Cubemx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#printf%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.5.</span> <span class="toc-text">printf的实现</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -636,6 +660,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AG1280</a>
               </li>
              
@@ -645,10 +673,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Verilog</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -700,6 +724,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
@@ -708,7 +736,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+                <a href="javascript:void(0)" class="js-tag color4">PID</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,10 +745,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PID</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -772,11 +796,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -836,11 +860,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
+                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
               </li>
              
               <li class="article-tag-list-item">
