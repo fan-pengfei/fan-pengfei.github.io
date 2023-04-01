@@ -16,8 +16,11 @@
 <meta property="og:description" content="我这两天又翻出来了之前做的一个ESP32-Pico-D4的板子，之前测是发现会无限重启，结果现在再试，下进去一个新的程序就能用了，这里记录一下开发中遇到的问题；">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/04/01/EMVBm9OyQ3tHkI4.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/01/Sha1ZObYuNLDi7X.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/01/VxjFJwgSb4hlDmA.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/04/01/5ByinesU3IArVYT.png">
 <meta property="article:published_time" content="2023-04-01T07:04:46.000Z">
-<meta property="article:modified_time" content="2023-04-01T07:13:37.875Z">
+<meta property="article:modified_time" content="2023-04-01T07:39:54.407Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -191,11 +194,150 @@
 <p>  我这两天又翻出来了之前做的一个ESP32-Pico-D4的板子，之前测是发现会无限重启，结果现在再试，下进去一个新的程序就能用了，这里记录一下开发中遇到的问题；<span id="more"></span></p>
 </blockquote>
 <h2 id="Pico-D4介绍"><a href="#Pico-D4介绍" class="headerlink" title="Pico D4介绍"></a>Pico D4介绍</h2><p>这个芯片资源挺多的，最主要的是内嵌了晶振和Flash，在板子布线方面容易了许多；</p>
-<p><div align=center><img src="https://s2.loli.net/2023/04/01/EMVBm9OyQ3tHkI4.png"style="zoom:80%;"></p>
-<p><strong>芯片特性</strong></p>
+<p><div align=center><img src="https://s2.loli.net/2023/04/01/EMVBm9OyQ3tHkI4.png"style="zoom:80%;"><br><strong>芯片特性</strong></p>
+<p><div align=left></p>
+<h2 id="原理图设计"><a href="#原理图设计" class="headerlink" title="原理图设计"></a>原理图设计</h2><h3 id="原理图设计参考"><a href="#原理图设计参考" class="headerlink" title="原理图设计参考"></a>原理图设计参考</h3><p><div align=center><img src="https://s2.loli.net/2023/04/01/Sha1ZObYuNLDi7X.png"style="zoom:50%;"><br><strong>原理图参考</strong></p>
 <div align=left>
 
+<p><div align=center><img src="https://s2.loli.net/2023/04/01/VxjFJwgSb4hlDmA.jpg"style="zoom:30%;"></p>
+<p><strong>实物图片</strong></p>
+<div align=left>
 
+<h3 id="重启问题"><a href="#重启问题" class="headerlink" title="重启问题"></a>重启问题</h3><p> <code>ESP32</code> 启动时会有如下打印:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)</span><br></pre></td></tr></table></figure>
+<p>其中 <code>rst</code> 简单说明如下:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">PRO</th>
+<th style="text-align:center">APP</th>
+<th style="text-align:center">源</th>
+<th style="text-align:center">复位方式</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0x01</td>
+<td style="text-align:center">0x01</td>
+<td style="text-align:center">芯片上电复位</td>
+<td style="text-align:center">系统复位</td>
+<td>-</td>
+</tr>
+<tr>
+<td style="text-align:center">0x10</td>
+<td style="text-align:center">0x10</td>
+<td style="text-align:center">RWDT 系统复位</td>
+<td style="text-align:center">系统复位</td>
+<td>详见 ESP32 技术参考手册 WDT 章节</td>
+</tr>
+<tr>
+<td style="text-align:center">0x0F</td>
+<td style="text-align:center">0x0F</td>
+<td style="text-align:center">欠压复位</td>
+<td style="text-align:center">系统复位</td>
+<td>详见 ESP32 技术参考手册 Power Management 章节</td>
+</tr>
+<tr>
+<td style="text-align:center">0x03</td>
+<td style="text-align:center">0x03</td>
+<td style="text-align:center">软件系统复位</td>
+<td style="text-align:center">内核复位</td>
+<td>配置 RTC_CNTL_SW_SYS_RST 寄存器</td>
+</tr>
+<tr>
+<td style="text-align:center">0x05</td>
+<td style="text-align:center">0x05</td>
+<td style="text-align:center">Deep Sleep Reset</td>
+<td style="text-align:center">内核复位</td>
+<td>详见 ESP32 技术参考手册 Power Management 章节</td>
+</tr>
+<tr>
+<td style="text-align:center">0x07</td>
+<td style="text-align:center">0x07</td>
+<td style="text-align:center">MWDT0 全局复位</td>
+<td style="text-align:center">内核复位</td>
+<td>详见 ESP32 技术参考手册 WDT 章节</td>
+</tr>
+<tr>
+<td style="text-align:center">0x08</td>
+<td style="text-align:center">0x08</td>
+<td style="text-align:center">MWDT1 全局复位</td>
+<td style="text-align:center">内核复位</td>
+<td>详见 ESP32 技术参考手册 WDT 章节</td>
+</tr>
+<tr>
+<td style="text-align:center">0x09</td>
+<td style="text-align:center">0x09</td>
+<td style="text-align:center">RWDT 内核复位</td>
+<td style="text-align:center">内核复位</td>
+<td>详见 ESP32 技术参考手册 WDT 章节</td>
+</tr>
+<tr>
+<td style="text-align:center">0x0B</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">MWDT0 CPU 复位</td>
+<td style="text-align:center">CPU 复位</td>
+<td>详见 ESP32 技术参考手册 WDT 章节</td>
+</tr>
+<tr>
+<td style="text-align:center">0x0C</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">软件 CPU 复位</td>
+<td style="text-align:center">CPU 复位</td>
+<td>配置 RTC_CNTL_SW_APPCPU_RST 寄存器</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0x0B</td>
+<td style="text-align:center">MWDT1 CPU 复位</td>
+<td style="text-align:center">CPU 复位</td>
+<td>详见 ESP32 技术参考手册 WDT 章节</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0x0C</td>
+<td style="text-align:center">软件 CPU 复位</td>
+<td style="text-align:center">CPU 复位</td>
+<td>配置 RTC_CNTL_SW_APPCPU_RST 寄存器</td>
+</tr>
+<tr>
+<td style="text-align:center">0x0D</td>
+<td style="text-align:center">0x0D</td>
+<td style="text-align:center">RWDT CPU 复位</td>
+<td style="text-align:center">CPU 复位</td>
+<td>详见 ESP32 技术参考手册 WDT 章节</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0xE</td>
+<td style="text-align:center">PRO CPU 复位</td>
+<td style="text-align:center">CPU 复位</td>
+<td>表明 PRO CPU 能够通过配置 DPORT_APPCPU_RESETTING 寄存器单独复位 APP CPU</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code>boot mode</code>说明如下：</p>
+<p>ESP32 上电时会判断 strapping 管脚的状态, 并决定 boot mode；</p>
+<p>例如常见的两种上电打印:</p>
+<p><strong>下载固件模式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rst:0x1 (POWERON_RESET),boot:0x3 (DOWNLOAD_BOOT(UART0/UART1/SDIO_REI_REO_V2)) </span><br></pre></td></tr></table></figure>
+<p><strong>芯片运行模式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)</span><br></pre></td></tr></table></figure>
+<p><code>boot</code> 值由 <strong>Strapping 管脚</strong> 的 5 位值 <code>[MTDI, GPIO0, GPIO2, MTDO, GPIO5]</code> 共同决定。</p>
+<p>下面是关于 <strong>Stripping 管脚</strong> 相关说明：</p>
+<p><div align=center><img src="https://s2.loli.net/2023/04/01/5ByinesU3IArVYT.png"style="zoom:60%;"></p>
+<p><strong>Strapping 管脚  </strong></p>
+<p><div align=left></p>
+<blockquote>
+<p>固件可以通过配置一些寄存器比特位，在启动后改变“内置 LDO (VDD_SDIO) 电压”和“SDIO 从机信号输入输出时序”的设定；</p>
+<p>ESP32-PICO-D4 集成的外部 SPI flash 工作电压为 3.3 V，因此在上电复位过程中需保持 Strapping 管脚 MTDI 为低电平；  </p>
+<p><strong>注意供电不足时，打开WiFi会导致重启；</strong></p>
+</blockquote>
+<h3 id="IO引脚分配"><a href="#IO引脚分配" class="headerlink" title="IO引脚分配"></a>IO引脚分配</h3><p>绿色突出显示的管脚可以使用。黄色突出显示的可以使用，但您需要注意，因为它们可能在启动时有意外行为。不建议将红色突出显示的管脚用作输入或输出。</p>
+<h3 id="外设引脚分配"><a href="#外设引脚分配" class="headerlink" title="外设引脚分配"></a>外设引脚分配</h3>
       
         <!-- 《添加版权声明 -->
         
@@ -363,7 +505,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pico-D4%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">Pico D4介绍</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pico-D4%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">Pico D4介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%9B%BE%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">原理图设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%9B%BE%E8%AE%BE%E8%AE%A1%E5%8F%82%E8%80%83"><span class="toc-number">2.1.</span> <span class="toc-text">原理图设计参考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E9%97%AE%E9%A2%98"><span class="toc-number">2.2.</span> <span class="toc-text">重启问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IO%E5%BC%95%E8%84%9A%E5%88%86%E9%85%8D"><span class="toc-number">2.3.</span> <span class="toc-text">IO引脚分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E8%AE%BE%E5%BC%95%E8%84%9A%E5%88%86%E9%85%8D"><span class="toc-number">2.4.</span> <span class="toc-text">外设引脚分配</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -551,15 +693,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,6 +717,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">CMAKE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
@@ -587,7 +733,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CMAKE</a>
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -595,19 +741,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,15 +761,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LCD</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,19 +825,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GIT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -775,11 +917,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
+                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -791,11 +933,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
