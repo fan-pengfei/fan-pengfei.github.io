@@ -19,8 +19,9 @@
 <meta property="og:image" content="https://s2.loli.net/2023/02/28/zZmjXSEJkMhIs1C.png">
 <meta property="og:image" content="https://s2.loli.net/2023/02/28/IQxBtlMDZuXWcgA.png">
 <meta property="article:published_time" content="2023-02-28T08:56:52.000Z">
-<meta property="article:modified_time" content="2023-02-28T10:35:51.838Z">
+<meta property="article:modified_time" content="2023-03-19T02:27:50.665Z">
 <meta property="article:author" content="樊鹏飞">
+<meta property="article:tag" content="ROS">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s2.loli.net/2023/02/28/py4WXFgSu1onAEM.png">
   
@@ -305,6 +306,25 @@
 </div>
 <h3 id="通过订阅话题订阅自定义数据"><a href="#通过订阅话题订阅自定义数据" class="headerlink" title="通过订阅话题订阅自定义数据"></a>通过订阅话题订阅自定义数据</h3><p>参考源码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="ROS2-TurtleBot3"><a href="#ROS2-TurtleBot3" class="headerlink" title="ROS2 TurtleBot3"></a>ROS2 TurtleBot3</h3><p>主机和树莓派的ROS_DOMAIN_ID要设置的一样才可以；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ROS_DOMAIN_ID=30 <span class="comment">#TURTLEBOT3</span></span><br></pre></td></tr></table></figure>
+<p>装ROS2 TurtleBot3 的包只需要：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ros-galatic-turtlebot3-*</span><br></pre></td></tr></table></figure>
+<p>其他的包也是类似；</p>
+<p><strong>[TurtleBot] 启动小车</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 launch turtlebot3_bringup robot.launch.py</span><br></pre></td></tr></table></figure>
+<p><strong>[Remote PC] 运行键盘控制节点</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 run turtlebot3_teleop teleop_keyboard</span><br></pre></td></tr></table></figure>
+<p><strong>[Remote PC] 启动Rviz</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 launch turtlebot3_bringup rviz2.launch.py</span><br></pre></td></tr></table></figure>
+<p>[Remote PC] 查看话题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ ros2 topic list</span><br><span class="line">/battery_state</span><br><span class="line">/cmd_vel</span><br><span class="line">/imu</span><br><span class="line">/joint_states</span><br><span class="line">/magnetic_field</span><br><span class="line">/odom</span><br><span class="line">/parameter_events</span><br><span class="line">/robot_description</span><br><span class="line">/rosout</span><br><span class="line">/scan</span><br><span class="line">/sensor_state</span><br><span class="line">/tf</span><br><span class="line">/tf_static</span><br></pre></td></tr></table></figure>
+<p>[Remote PC] 查看服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 service list</span><br></pre></td></tr></table></figure>
+<h3 id="GAZEBO仿真"><a href="#GAZEBO仿真" class="headerlink" title="GAZEBO仿真"></a>GAZEBO仿真</h3><p>用自己做的模型替代例子包中的文件</p>
+<h3 id="注意点："><a href="#注意点：" class="headerlink" title="注意点："></a>注意点：</h3><p>1、串口设备和激光雷达设备串口会干扰，且好像激光雷达默认串口ttyUSB0，因此要在开机时或者运行launch.py前拔掉自己的串口设备；</p>
+<p>2、ros2 run nav2_map_server map_saver -f ~/map修改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 run nav2_map_server map_saver_server -f ~/map</span><br></pre></td></tr></table></figure>
 
       
         <!-- 《添加版权声明 -->
@@ -358,7 +378,29 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ROS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ROS//" class="article-tag-list-link color4">ROS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -460,7 +502,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E6%9E%84%E5%BB%BA"><span class="toc-number">1.</span> <span class="toc-text">工作空间构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8C%85"><span class="toc-number">2.</span> <span class="toc-text">自定义包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="toc-number">3.</span> <span class="toc-text">编译功能包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">自定义数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%8F%91%E5%B8%83%E8%AF%9D%E9%A2%98%E5%8F%91%E5%B8%83%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE"><span class="toc-number">5.</span> <span class="toc-text">通过发布话题发布自定义数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E8%AE%A2%E9%98%85%E8%AF%9D%E9%A2%98%E8%AE%A2%E9%98%85%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE"><span class="toc-number">6.</span> <span class="toc-text">通过订阅话题订阅自定义数据</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E6%9E%84%E5%BB%BA"><span class="toc-number">1.</span> <span class="toc-text">工作空间构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8C%85"><span class="toc-number">2.</span> <span class="toc-text">自定义包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="toc-number">3.</span> <span class="toc-text">编译功能包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">自定义数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%8F%91%E5%B8%83%E8%AF%9D%E9%A2%98%E5%8F%91%E5%B8%83%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE"><span class="toc-number">5.</span> <span class="toc-text">通过发布话题发布自定义数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E8%AE%A2%E9%98%85%E8%AF%9D%E9%A2%98%E8%AE%A2%E9%98%85%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE"><span class="toc-number">6.</span> <span class="toc-text">通过订阅话题订阅自定义数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ROS2-TurtleBot3"><span class="toc-number">7.</span> <span class="toc-text">ROS2 TurtleBot3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GAZEBO%E4%BB%BF%E7%9C%9F"><span class="toc-number">8.</span> <span class="toc-text">GAZEBO仿真</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9%EF%BC%9A"><span class="toc-number">9.</span> <span class="toc-text">注意点：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -688,11 +730,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DJI</a>
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -724,14 +770,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
@@ -748,15 +786,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ROS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UART</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">UART</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -768,11 +818,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -788,15 +842,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IAP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -884,15 +938,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">格言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
