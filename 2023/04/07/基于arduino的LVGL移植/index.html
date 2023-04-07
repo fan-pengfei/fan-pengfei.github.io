@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/04/07/xbs1F7XOGi9DM5V.png">
 <meta property="og:image" content="https://s2.loli.net/2023/04/07/CmKz6T73NFtkq9U.png">
 <meta property="article:published_time" content="2023-04-07T05:47:41.000Z">
-<meta property="article:modified_time" content="2023-04-07T07:11:04.117Z">
+<meta property="article:modified_time" content="2023-04-07T07:16:13.403Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="Arduino">
 <meta property="article:tag" content="lvgl">
@@ -203,7 +203,7 @@
 <p>这是一篇如何将LVGL移植到Arduino的教程(基于芯片ESP32 Pico D4)；<span id="more"></span></p>
 </blockquote>
 <h2 id="软件版本"><a href="#软件版本" class="headerlink" title="软件版本"></a>软件版本</h2><p><strong>这次实验使用的lvgl版本是8.1.1，要先配置好tft_espi，确保显示正常；如果要使用触摸屏设备，在移植之前要确保能获取到触摸数据；</strong></p>
-<h2 id="工程配置"><a href="#工程配置" class="headerlink" title="工程配置"></a>工程配置</h2><h3 id="库安装"><a href="#库安装" class="headerlink" title="库安装"></a>库安装</h3><p>添加lvlg库 ，最好也添加lv_examples库，自带的例子虽然内容完全一样，但是并不能直接使用；</p>
+<h2 id="工程配置"><a href="#工程配置" class="headerlink" title="工程配置"></a>工程配置</h2><h3 id="库安装"><a href="#库安装" class="headerlink" title="库安装"></a>库安装</h3><p>添加lvgl库 ，最好也添加lv_examples库，自带的例子虽然内容完全一样，但是并不能直接使用；</p>
 <p><div align=center><img src="https://s2.loli.net/2023/04/07/zErOIwavjpZMnSq.png"style="zoom:50%;"></p>
 <p><strong>库安装</strong></p>
 <div align=left>
@@ -224,8 +224,7 @@
 <div align=left>
 
 <p>设置色深，一般都是16：</p>
-<p><div align=center><img src="https://s2.loli.net/2023/04/07/zA1HpYocK7Xvfan.png"style="zoom:90%;"></p>
-<p><strong>设置色深</strong></p>
+<p><div align=center><img src="https://s2.loli.net/2023/04/07/zA1HpYocK7Xvfan.png"style="zoom:90%;"><br><strong>设置色深</strong></p>
 <div align=left>
 
 <p>启动自定义时钟，不设置的话只会显示第一帧不动：</p>
@@ -246,12 +245,12 @@ LV\_DPI\_DEF =\frac{\sqrt{240*280} }{1.69} ≈ 153</script><p><div align=center>
 <div align=left>
 
 <p>配置要运行的Demo：</p>
-<p><div align=center><img src="https://s2.loli.net/2023/04/07/MRAgFeXVs5zHZw4.png"style="zoom:90%;"></p>
-<p><strong>Demo选择</strong></p>
-<p><div align=left><br><img src="" alt="2822e16948f9def38340801d9afe78e"></p>
+<p><div align=center><img src="https://s2.loli.net/2023/04/07/MRAgFeXVs5zHZw4.png"style="zoom:90%;"><br><strong>Demo选择</strong></p>
+<div align=left>
+
+
 <h2 id="自定义显示接口和外部输入接口"><a href="#自定义显示接口和外部输入接口" class="headerlink" title="自定义显示接口和外部输入接口"></a>自定义显示接口和外部输入接口</h2><h3 id="文件添加"><a href="#文件添加" class="headerlink" title="文件添加"></a>文件添加</h3><p>在src文件夹下添加以下两个文件：</p>
-<p><div align=center><img src="https://s2.loli.net/2023/04/07/xbs1F7XOGi9DM5V.png"style="zoom:90%;"></p>
-<p><strong>自定义接口</strong></p>
+<p><div align=center><img src="https://s2.loli.net/2023/04/07/xbs1F7XOGi9DM5V.png"style="zoom:90%;"><br><strong>自定义接口</strong></p>
 <p><div align=left></p>
 <h3 id="代码内容"><a href="#代码内容" class="headerlink" title="代码内容"></a>代码内容</h3><p><code>my_lv_ports.cpp</code></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;my_lv_ports.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;CST816T.h&quot;</span></span></span><br><span class="line"><span class="comment">// TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */</span></span><br><span class="line">TFT_eSPI tft = TFT_eSPI();     <span class="comment">/* TFT instance */</span></span><br><span class="line"><span class="function">CST816T <span class="title">touch</span><span class="params">(<span class="number">19</span>, <span class="number">21</span>, <span class="number">-1</span>, <span class="number">22</span>)</span></span>; <span class="comment">// sda, scl, rst, irq</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// /*Read the touchpad*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">my_touchpad_read</span><span class="params">(<span class="keyword">lv_indev_drv_t</span> *indev_driver, <span class="keyword">lv_indev_data_t</span> *data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> FingerNum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">uint8_t</span> gesture;</span><br><span class="line">    <span class="keyword">uint16_t</span> touchX, touchY;</span><br><span class="line">    FingerNum = touch.getTouch(&amp;touchX, &amp;touchY, &amp;gesture);</span><br><span class="line">    <span class="keyword">if</span> (FingerNum)</span><br><span class="line">    &#123;</span><br><span class="line">        data-&gt;state = LV_INDEV_STATE_REL;</span><br><span class="line">        data-&gt;point.x = touchX;</span><br><span class="line">        data-&gt;point.y = touchY;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LV_USE_LOG != 0</span></span><br><span class="line">        Serial.<span class="built_in">printf</span>(<span class="string">&quot;Touch: x=%d y=%d mode=%d\r\n&quot;</span>, touchX, touchY, gesture);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">        FingerNum = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        data-&gt;state = LV_INDEV_STATE_PR;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Display flushing */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">my_disp_flush</span><span class="params">(<span class="keyword">lv_disp_drv_t</span> *disp, <span class="keyword">const</span> <span class="keyword">lv_area_t</span> *area,</span></span></span><br><span class="line"><span class="params"><span class="function">                   <span class="keyword">lv_color_t</span> *color_p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">uint32_t</span> w = (area-&gt;x2 - area-&gt;x1 + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">uint32_t</span> h = (area-&gt;y2 - area-&gt;y1 + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    tft.setSwapBytes(<span class="literal">true</span>);</span><br><span class="line">    <span class="comment">// tft.pushImageDMA(area-&gt;x1, area-&gt;y1, w, h, (uint16_t *)&amp;color_p-&gt;full);</span></span><br><span class="line">    tft.pushImage(area-&gt;x1, area-&gt;y1, w, h, (<span class="keyword">uint16_t</span> *)&amp;color_p-&gt;full);</span><br><span class="line">    <span class="comment">// tft.startWrite();</span></span><br><span class="line">    <span class="comment">// tft.setAddrWindow( area-&gt;x1, area-&gt;y1, w, h );</span></span><br><span class="line">    <span class="comment">// tft.pushColors( ( uint16_t * )&amp;color_p-&gt;full, w * h, true );</span></span><br><span class="line">    <span class="comment">// tft.endWrite();</span></span><br><span class="line"></span><br><span class="line">    lv_disp_flush_ready(disp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LV_USE_LOG != 0</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">my_print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *buf)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Serial.<span class="built_in">printf</span>(<span class="string">&quot;%s \r\n&quot;</span>, buf);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">my_disp_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 绘图缓冲初始化</span></span><br><span class="line">    <span class="comment">//   static lv_disp_draw_buf_t draw_buf;</span></span><br><span class="line">    <span class="comment">//   static lv_color_t buf[screenWidth * 10];</span></span><br><span class="line">    <span class="comment">//   lv_disp_draw_buf_init(&amp;draw_buf, buf, NULL, screenWidth * 10);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">lv_disp_draw_buf_t</span> draw_buf;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">lv_color_t</span> buf_2_1[screenWidth * <span class="number">40</span>]; <span class="comment">/*A buffer for 10 rows*/</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">lv_color_t</span> buf_2_2[screenWidth * <span class="number">40</span>]; <span class="comment">/*An other buffer for 10</span></span><br><span class="line"><span class="comment">    rows*/</span></span><br><span class="line">    lv_disp_draw_buf_init(&amp;draw_buf, buf_2_1, buf_2_2,</span><br><span class="line">                          screenWidth * <span class="number">30</span>); <span class="comment">/*Initialize</span></span><br><span class="line"><span class="comment">                          the display buffer*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TFT驱动初始化</span></span><br><span class="line">    tft.begin(); <span class="comment">/* TFT init */</span></span><br><span class="line">    <span class="comment">// tft.initDMA();</span></span><br><span class="line">    tft.setRotation(<span class="number">0</span>); <span class="comment">/* Landscape orientation, flipped */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置LVGL显示设备</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">lv_disp_drv_t</span> disp_drv;</span><br><span class="line">    lv_disp_drv_init(&amp;disp_drv);</span><br><span class="line">    <span class="comment">/*Change the following line to your display resolution*/</span></span><br><span class="line">    disp_drv.hor_res = screenWidth;</span><br><span class="line">    disp_drv.ver_res = screenHeight;</span><br><span class="line">    disp_drv.flush_cb = my_disp_flush;</span><br><span class="line">    disp_drv.draw_buf = &amp;draw_buf;</span><br><span class="line">    lv_disp_drv_register(&amp;disp_drv);</span><br><span class="line">    touch.begin();</span><br><span class="line">    <span class="comment">// 设置LVGL输入设备（电阻屏）</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">lv_indev_drv_t</span> indev_drv;</span><br><span class="line">    lv_indev_drv_init(&amp;indev_drv);</span><br><span class="line">    indev_drv.type = LV_INDEV_TYPE_POINTER;</span><br><span class="line">    indev_drv.read_cb = my_touchpad_read;</span><br><span class="line">    lv_indev_drv_register(&amp;indev_drv);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置LVGL串口输出设备（调试用）</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LV_USE_LOG != 0</span></span><br><span class="line">    lv_log_register_print_cb(my_print);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -260,7 +259,10 @@ LV\_DPI\_DEF =\frac{\sqrt{240*280} }{1.69} ≈ 153</script><p><div align=center>
 <h2 id="测试LVGL"><a href="#测试LVGL" class="headerlink" title="测试LVGL"></a>测试LVGL</h2><h3 id="benchmark测试"><a href="#benchmark测试" class="headerlink" title="benchmark测试"></a>benchmark测试</h3><p><code>main.cpp</code></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Arduino.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;TFT_eSPI.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;lv_demo.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;lvgl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;my_lv_ports.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;user.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WiFi.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;CST816T.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Serial.begin(<span class="number">115200</span>);</span><br><span class="line">    LCD_Light_Set(<span class="number">50</span>);<span class="comment">//LCD亮度设置</span></span><br><span class="line">    lv_init();<span class="comment">//初始化LVGL</span></span><br><span class="line">    my_disp_init();<span class="comment">//初始化显示接口</span></span><br><span class="line">    <span class="comment">// lv_demo_widgets(); </span></span><br><span class="line">    lv_demo_benchmark();</span><br><span class="line">    <span class="comment">// lv_demo_keypad_encoder();</span></span><br><span class="line">    <span class="comment">// an encoder lv_demo_music();</span></span><br><span class="line">    <span class="comment">// lv_demo_printer();</span></span><br><span class="line">    <span class="comment">// lv_demo_stress();</span></span><br><span class="line">    Serial.println(<span class="string">&quot;Setup done&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lv_timer_handler(); <span class="comment">/* let the GUI do its work */</span></span><br><span class="line">    delay(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行结果；</p>
-<p><div align=center><img src="https://s2.loli.net/2023/04/07/CmKz6T73NFtkq9U.png"style="zoom:50%;"><br><strong>运行结果</strong></p>
+<p><div align=center><img src="https://s2.loli.net/2023/04/07/CmKz6T73NFtkq9U.png"style="zoom:50%;"></p>
+<p><strong>运行结果</strong></p>
+<div align=left>
+
 <blockquote>
 <p>  <strong>可以看到LVGL正常运行；</strong></p>
 </blockquote>
@@ -628,15 +630,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">stc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DIY</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -664,15 +666,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">CMAKE</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DJI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,6 +686,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">感悟</a>
               </li>
              
@@ -692,7 +698,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FOC</a>
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -704,7 +710,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -716,7 +722,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
+                <a href="javascript:void(0)" class="js-tag color4">PID</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -725,10 +731,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PID</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -748,19 +750,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数电</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CPLD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -772,15 +774,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">lvgl</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -848,6 +850,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
              
@@ -860,10 +866,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工程师</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">年终总结</a>
               </li>
              
@@ -872,11 +874,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -896,15 +898,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">can</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CRC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">can</a>
               </li>
              
               <li class="article-tag-list-item">
