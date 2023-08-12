@@ -16,8 +16,9 @@
 <meta property="og:description" content="这个是关于LOG分级打印的配置，并有时间戳，基于STM32H7和gcc；">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/08/06/y5KgZtUXzwjLl2C.png">
+<meta property="og:image" content="https://s2.loli.net/2023/08/13/ydrNlTOavXsRJ24.png">
 <meta property="article:published_time" content="2023-08-06T03:46:57.000Z">
-<meta property="article:modified_time" content="2023-08-06T04:01:27.859Z">
+<meta property="article:modified_time" content="2023-08-12T17:40:07.924Z">
 <meta property="article:author" content="樊鹏飞">
 <meta property="article:tag" content="LOG">
 <meta name="twitter:card" content="summary">
@@ -221,6 +222,15 @@
 <p><div align=center><img src="https://s2.loli.net/2023/08/06/y5KgZtUXzwjLl2C.png"style="zoom:100%;"></p>
 <div align=left>
 
+<h2 id="增加VOFA支持"><a href="#增加VOFA支持" class="headerlink" title="增加VOFA支持"></a>增加VOFA支持</h2><p><img src="https://s2.loli.net/2023/08/13/ydrNlTOavXsRJ24.png" alt="image-20230813013734374"></p>
+<blockquote>
+<p>增加宏定义如下：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* VOFA */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_VOFA(channel, args)                                                                                                            \</span></span><br><span class="line"><span class="meta">    do                                                                                                                                     \</span></span><br><span class="line"><span class="meta">    &#123;                                                                                                                                      \</span></span><br><span class="line"><span class="meta">        switch (sizeof(args) / sizeof(args[0]))                                                                                                              \</span></span><br><span class="line"><span class="meta">        &#123;                                                                                                                                  \</span></span><br><span class="line"><span class="meta">        case 1:                                                                                                                            \</span></span><br><span class="line"><span class="meta">            printf(<span class="meta-string">&quot;&lt;%ld.%03ld&gt;[VOFA] %s:%f\n\r&quot;</span>, tick_all / 1000, tick_all % 1000, channel, args[0]);                                     \</span></span><br><span class="line"><span class="meta">            break;                                                                                                                         \</span></span><br><span class="line"><span class="meta">        case 2:                                                                                                                            \</span></span><br><span class="line"><span class="meta">            printf(<span class="meta-string">&quot;&lt;%ld.%03ld&gt;[VOFA] %s:%f,%f\n\r&quot;</span>, tick_all / 1000, tick_all % 1000, channel, args[0], args[1]);                         \</span></span><br><span class="line"><span class="meta">            break;                                                                                                                         \</span></span><br><span class="line"><span class="meta">        case 3:                                                                                                                            \</span></span><br><span class="line"><span class="meta">            printf(<span class="meta-string">&quot;&lt;%ld.%03ld&gt;[VOFA] %s:%f,%f,%f\n\r&quot;</span>, tick_all / 1000, tick_all % 1000, channel, args[0], args[1], args[2]);             \</span></span><br><span class="line"><span class="meta">            break;                                                                                                                         \</span></span><br><span class="line"><span class="meta">        case 4:                                                                                                                            \</span></span><br><span class="line"><span class="meta">            printf(<span class="meta-string">&quot;&lt;%ld.%03ld&gt;[VOFA] %s:%f,%f,%f,%f\n\r&quot;</span>, tick_all / 1000, tick_all % 1000, channel, args[0], args[1], args[2], args[3]); \</span></span><br><span class="line"><span class="meta">            break;                                                                                                                         \</span></span><br><span class="line"><span class="meta">        default:                                                                                                                           \</span></span><br><span class="line"><span class="meta">            break;                                                                                                                         \</span></span><br><span class="line"><span class="meta">        &#125;                                                                                                                                  \</span></span><br><span class="line"><span class="meta">    &#125; while (0)</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>测试代码：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> t = <span class="number">0.0</span>;</span><br><span class="line"><span class="keyword">float</span> ch4[<span class="number">4</span>] = &#123;<span class="number">0.0f</span>&#125;;</span><br><span class="line">t = t + <span class="number">0.01</span>;</span><br><span class="line">ch4[<span class="number">0</span>] = (<span class="keyword">float</span>)<span class="built_in">sin</span>(t);</span><br><span class="line">ch4[<span class="number">1</span>] = (<span class="keyword">float</span>)<span class="built_in">sin</span>(<span class="number">2</span> * t);</span><br><span class="line">ch4[<span class="number">2</span>] = (<span class="keyword">float</span>)<span class="built_in">sin</span>(<span class="number">3</span> * t);</span><br><span class="line">ch4[<span class="number">3</span>] = (<span class="keyword">float</span>)<span class="built_in">sin</span>(<span class="number">4</span> * t);</span><br><span class="line">HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);</span><br><span class="line">HAL_Delay(<span class="number">10</span>);</span><br><span class="line">LOG_VOFA(<span class="string">&quot;ch4&quot;</span>, ch4);</span><br></pre></td></tr></table></figure>
 
       
         <!-- 《添加版权声明 -->
@@ -389,7 +399,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#printf%E6%98%A0%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">printf映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LOG%E5%88%86%E7%BA%A7%E6%89%93%E5%8D%B0"><span class="toc-number">3.</span> <span class="toc-text">LOG分级打印</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">测试</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#printf%E6%98%A0%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">printf映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LOG%E5%88%86%E7%BA%A7%E6%89%93%E5%8D%B0"><span class="toc-number">3.</span> <span class="toc-text">LOG分级打印</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0VOFA%E6%94%AF%E6%8C%81"><span class="toc-number">5.</span> <span class="toc-text">增加VOFA支持</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -577,6 +587,14 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DIY</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">stc</a>
               </li>
              
@@ -593,11 +611,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DIY</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件格式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">51单片机</a>
+                <a href="javascript:void(0)" class="js-tag color4">单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">can</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">CMAKE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -609,27 +639,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件格式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">单片机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CMAKE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CRC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据校验</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,19 +663,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">can</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">F1C100S</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,15 +683,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GCC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">stm32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -689,7 +691,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LOG</a>
+                <a href="javascript:void(0)" class="js-tag color4">GCC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,11 +703,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LOG</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -733,6 +743,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ROS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Typora</a>
               </li>
              
@@ -741,15 +755,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ROS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数电</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -761,11 +771,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">buildroot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -773,7 +779,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">buildroot</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -793,7 +803,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,15 +815,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Bootloader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">uboot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Ubuntu2004</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">全志H3</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -825,7 +831,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">全志H3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机组成</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -837,15 +851,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">实习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -857,10 +867,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">年终总结</a>
               </li>
              
@@ -869,7 +875,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">格言</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习路线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -877,15 +883,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">格言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">谷歌</a>
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
             
             <div class="clearfix"></div>
